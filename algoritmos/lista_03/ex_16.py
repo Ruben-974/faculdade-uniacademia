@@ -11,7 +11,6 @@ if number > 0:
         print(f'1/{i+1}', end=' + ')
         if i == number:
             print(f'1/{i + 1}')
-            testee
 
 else:
     print('Value invalid!')

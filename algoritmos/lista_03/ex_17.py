@@ -10,5 +10,5 @@ for i in range(10):
     else:
         not_interval_counter += 1
 
-print(interval_counter)
-print(not_interval_counter)
+print(f'Dentro do intervado de 10 e 20: {interval_counter}')
+print(f'Fora do intervado de 10 e 20: {not_interval_counter}')

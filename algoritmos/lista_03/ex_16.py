@@ -3,15 +3,11 @@
 # S = 1 + 1/2 + 1/3 + 1/4 + ... + 1/n
 # O algoritmo deve escrever cada termo gerado e o valor final de S.
 
-number = int(input('Enter a positive number: '))
-
-if number > 0:
-
-    for i in range(number+1):
-        print(f'1/{i+1}', end=' + ')
-        if i == number:
-            print(f'1/{i + 1}')
-            testee
-
-else:
-    print('Value invalid!')
+n = int(input("Digite um numero: "))
+if n > 0:
+    s = 0
+    for i in range(1, n + 1):
+        termo = 1 / i
+        print(f"Termo = {termo:.2f}")
+        s = s + termo
+print(f"S = {s:.2f}")

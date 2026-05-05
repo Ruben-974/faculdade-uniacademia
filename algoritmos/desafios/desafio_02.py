@@ -1,6 +1,8 @@
 # JOGO DA FORCA
 
-palavra = 'ABC'
+# CRIANDO VARIAVEIS
+
+palavra = 'ALGORITMOS'
 letras_jogadas = incognita = ''
 chances = 6
 continuar = True
@@ -12,56 +14,71 @@ f'\n|   {perna_e} {perna_d} ')
 
 while continuar:
 
+    # VERIFICA SE O USUARIO PERDEU
+
     if chances == 0:
-        print('VOCÊ PERDEU')
+        print('\n\033[31mVOCÊ PERDEU!\033[0m')
         continuar = False
 
     else:
 
+        # VERIFICA SE O USUARIO VENCEU
+
         if incognita == palavra:
-            print('VOCÊ VENCEU!')
+            print('\n\033[32mVOCÊ VENCEU!\033[0m')
             continuar = False
     
         else:
+
+            # PEDE UM LETRA AO USUARIO E REINICIA A VARIAVEL INCOGNITA
 
             incognita = ''
 
             letra = input('\nDigite uma letra: ').upper()
 
-            if letra not in palavra and letra not in letras_jogadas:
-                chances -= 1
-                if chances == 5:
-                    cabeca = 'O'
-                if chances == 4:
-                    tronco = '|'
-                if chances == 3:
-                    braco_e = '/'
-                if chances == 2:
-                    braco_d = '\\'
-                if chances == 1:
-                    perna_e = '/'
-                if chances == 0:
-                    perna_d = '\\'
-                
-                stick_man = (f'______'
-                            f'\n|    {cabeca}'
-                            f'\n|   {braco_e}{tronco}{braco_d}'
-                            f'\n|   {perna_e} {perna_d} ')
-                    
+            if len(letra) > 1:
+                print('\n\033[33mDIGITE UMA LETRA POR VEZ!\033[0m')
 
-            if letra in letras_jogadas:
-                print('LETRA JA JOGADA')
             else:
-                letras_jogadas += letra
 
-            print(stick_man)
-            print(f'LETRAS JOGADAS: {letras_jogadas} - CHANCES RESTANTES: {chances}')
+                # ESTRURA O STICK MAN DE ACORDO COM OS ERROS
 
-            for i in range(len(palavra)):
-                if palavra[i] in letras_jogadas:
-                    incognita += palavra[i]
+                if letra not in palavra and letra not in letras_jogadas:
+                    chances -= 1
+                    if chances == 5:
+                        cabeca = 'O'
+                    if chances == 4:
+                        tronco = '|'
+                    if chances == 3:
+                        braco_e = '/'
+                    if chances == 2:
+                        braco_d = '\\'
+                    if chances == 1:
+                        perna_e = '/'
+                    if chances == 0:
+                        perna_d = '\\'
+                    
+                    stick_man = (f'______'
+                                f'\n|    {cabeca}'
+                                f'\n|   {braco_e}{tronco}{braco_d}'
+                                f'\n|   {perna_e} {perna_d} ')
+
+                # VERIFICA SE A LETRA JA FOI JOGADA, SE NAO, ADICIONA NO CONJUNTO DE LETRAS
+
+                if letra in letras_jogadas:
+                    print('\n\033[33mLETRA JA JOGADA\033[0m')
                 else:
-                    incognita += '_'
-            
-            print(incognita)
+                    letras_jogadas += letra
+
+                # VERIFICA QUAIS LETRAS O USUARIO JA ACERTOU, E QUAIS AINDA NAO, SALVANDO NA VARIAVEL INCOGNITA
+
+                for i in range(len(palavra)):
+                    if palavra[i] in letras_jogadas:
+                        incognita += palavra[i]
+                    else:
+                        incognita += '_'
+
+            # MOSTRA O STICK MAN
+                
+            print(stick_man + '   ' + incognita)
 

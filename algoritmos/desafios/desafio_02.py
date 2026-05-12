@@ -2,11 +2,13 @@
 
 # CRIANDO VARIAVEIS
 
-palavra = 'ALGORITMOS'
+palavra = 'METAVERSO'
 letras_jogadas =  ''
 incognita = len(palavra)*'_'
+
 chances = 6
 cabeca = tronco = braco_d = braco_e = perna_d = perna_e = ' '
+
 stick_man = (f'\n______'
 f'\n|    {cabeca}'
 f'\n|   {braco_e}{tronco}{braco_d}'

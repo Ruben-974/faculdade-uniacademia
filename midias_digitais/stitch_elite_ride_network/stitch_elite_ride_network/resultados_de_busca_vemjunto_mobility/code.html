@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#341100",
+                        "surface": "#f8f9ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#424754",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "inverse-primary": "#adc6ff",
+                        "on-secondary-container": "#5c2400",
+                        "surface-bright": "#f8f9ff",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#004395",
+                        "on-tertiary-fixed": "#002113",
+                        "tertiary": "#006947",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#eff4ff",
+                        "surface-variant": "#d3e4fe",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#e5eeff",
+                        "secondary-fixed-dim": "#ffb690",
+                        "secondary-container": "#fd761a",
+                        "surface-container-high": "#dce9ff",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#f5fff6",
+                        "surface-container-highest": "#d3e4fe",
+                        "secondary-fixed": "#ffdbca",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "secondary": "#9d4300",
+                        "inverse-surface": "#213145",
+                        "surface-dim": "#cbdbf5",
+                        "primary-container": "#2170e4",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-primary-fixed": "#001a42",
+                        "on-secondary-fixed-variant": "#783200",
+                        "outline": "#727785",
+                        "on-background": "#0b1c30",
+                        "primary": "#0058be",
+                        "tertiary-container": "#00855b",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-surface": "#0b1c30",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c2c6d6",
+                        "primary-fixed-dim": "#adc6ff",
+                        "primary-fixed": "#d8e2ff",
+                        "on-primary-container": "#fefcff",
+                        "surface-tint": "#005ac2",
+                        "background": "#f8f9ff",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "grid_columns": "12",
+                        "margin": "20px",
+                        "sm": "12px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "display": ["Plus Jakarta Sans"],
+                        "caption": ["Plus Jakarta Sans"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "h1": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "display": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "caption": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "h2": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "h1": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .ride-card-shadow { shadow: 0px 4px 20px rgba(0, 0, 0, 0.05); }
+    </style>
+</head>
+<body class="bg-background text-on-background">
+<!-- TopAppBar Component -->
+<header class="bg-surface shadow-sm sticky top-0 z-50">
+<div class="flex justify-between items-center px-margin py-md w-full max-w-7xl mx-auto">
+<div class="text-h2 font-display font-bold text-primary">VemJunto</div>
+<nav class="hidden md:flex items-center gap-lg">
+<a class="text-primary border-b-2 border-primary pb-1 font-display text-body-md hover:text-primary transition-colors" href="#">Buscar Carona</a>
+<a class="text-on-surface-variant font-display text-body-md hover:text-primary transition-colors" href="#">Oferecer Carona</a>
+</nav>
+<div class="flex items-center gap-md">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-margin py-lg grid grid-cols-1 md:grid-cols-12 gap-lg">
+<!-- Search Filters (SideBar Context) -->
+<aside class="md:col-span-3 space-y-lg">
+<div class="bg-surface-container-low rounded-xl p-md shadow-md">
+<h3 class="font-display text-h2 text-primary mb-md">Filtros</h3>
+<!-- Horário -->
+<div class="mb-lg">
+<label class="block font-display text-label-md text-on-surface mb-sm">Horário de Saída</label>
+<div class="space-y-sm">
+<label class="flex items-center gap-sm text-body-md cursor-pointer group">
+<input class="rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="group-hover:text-primary transition-colors">Manhã (06:00 - 12:00)</span>
+</label>
+<label class="flex items-center gap-sm text-body-md cursor-pointer group">
+<input class="rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="group-hover:text-primary transition-colors">Tarde (12:00 - 18:00)</span>
+</label>
+<label class="flex items-center gap-sm text-body-md cursor-pointer group">
+<input class="rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="group-hover:text-primary transition-colors">Noite (18:00 - 00:00)</span>
+</label>
+</div>
+</div>
+<!-- Preço -->
+<div class="mb-lg">
+<label class="block font-display text-label-md text-on-surface mb-sm">Preço Máximo</label>
+<input class="w-full h-2 bg-surface-variant rounded-lg appearance-none cursor-pointer accent-primary" type="range"/>
+<div class="flex justify-between text-caption text-on-surface-variant mt-2">
+<span>R$ 15</span>
+<span>R$ 150</span>
+</div>
+</div>
+<!-- Tipo de Carro -->
+<div class="mb-lg">
+<label class="block font-display text-label-md text-on-surface mb-sm">Tipo de Carro</label>
+<div class="flex flex-wrap gap-xs">
+<button class="px-sm py-xs bg-primary text-on-primary rounded-full text-caption">Econômico</button>
+<button class="px-sm py-xs bg-surface-variant text-on-surface-variant rounded-full text-caption hover:bg-primary-fixed transition-colors">Premium</button>
+<button class="px-sm py-xs bg-surface-variant text-on-surface-variant rounded-full text-caption hover:bg-primary-fixed transition-colors">Compartilhado</button>
+</div>
+</div>
+<button class="w-full py-md bg-primary text-on-primary font-display font-bold rounded-xl active:scale-95 transition-transform">
+                    Aplicar Filtros
+                </button>
+</div>
+<!-- Savings Insight Card -->
+<div class="bg-tertiary-container text-on-tertiary-container rounded-xl p-md">
+<div class="flex items-center gap-sm mb-sm">
+<span class="material-symbols-outlined" data-icon="energy_savings_leaf">energy_savings_leaf</span>
+<h4 class="font-display font-bold">Dica de Economia</h4>
+</div>
+<p class="text-caption">Viajar de carona para este destino é <span class="font-bold">65% mais barato</span> que passagens de ônibus convencionais nesta semana.</p>
+</div>
+</aside>
+<!-- Search Results -->
+<section class="md:col-span-9">
+<div class="mb-lg flex justify-between items-end">
+<div>
+<h1 class="font-display text-h1 text-on-background">Caronas para São Paulo</h1>
+<p class="text-body-md text-on-surface-variant">24 caronas disponíveis para amanhã, 15 de Outubro</p>
+</div>
+<div class="hidden md:block">
+<select class="bg-surface border-outline text-on-surface rounded-lg text-label-md focus:border-primary">
+<option>Mais baratas primeiro</option>
+<option>Saída mais cedo</option>
+<option>Melhor avaliação</option>
+</select>
+</div>
+</div>
+<!-- Results Grid/List -->
+<div class="space-y-md">
+<!-- Ride Card 1: Featured/Economical -->
+<article class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant hover:shadow-xl transition-shadow flex flex-col md:flex-row gap-lg relative">
+<div class="absolute top-md right-md bg-secondary-container text-on-secondary-container px-sm py-xs rounded-lg font-display font-bold text-h2">
+                        R$ 45
+                    </div>
+<div class="flex flex-col items-center gap-xs min-w-[120px]">
+<img alt="Motorista" class="w-16 h-16 rounded-full object-cover border-2 border-primary" data-alt="A close-up portrait of a friendly-looking middle-aged man with a warm smile, wearing a casual denim shirt. The background is a soft-focus interior of a modern car with natural daylight streaming through the window. The lighting is high-key and optimistic, reflecting a safe and reliable community travel atmosphere in a bright light-mode UI style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwezc4AwCB3rQuF8NVbGvSZGjLwZBDdhohvzD5cnfDA7Ht1OJBdEIMriyWG6We3AxhI5l3WIhXhPZnBDVYkyvAkXU-lIZkM7TaXJSVuxzvUeYQJZ_C9VkiyIEJpz9FoJWaunZV6z3tNekNVdMc8zk_mxLrkI2GSXcxQDSUC5Ck2wQBVUr3Bx38BwFAu-uZe-qyznYhJb5hArbIaifgRVPEabxLkWvrje2Z_u8pgnOiZ4A20mNRr-1wlSBdAdSaOwAbADxO6083Y6Br"/>
+<div class="flex items-center gap-xs">
+<span class="font-display text-label-md">Ricardo M.</span>
+<span class="material-symbols-outlined text-tertiary text-[16px]" data-icon="verified" data-weight="fill">verified</span>
+</div>
+<div class="flex items-center text-secondary-container">
+<span class="material-symbols-outlined text-[14px]" data-icon="star" data-weight="fill">star</span>
+<span class="text-caption font-bold ml-1">4.9 (124)</span>
+</div>
+</div>
+<div class="flex-grow grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="space-y-sm">
+<div class="flex items-start gap-sm">
+<div class="flex flex-col items-center">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<div class="w-[2px] h-8 bg-outline-variant"></div>
+<div class="w-3 h-3 border-2 border-primary rounded-full"></div>
+</div>
+<div class="space-y-3">
+<div>
+<p class="text-caption text-on-surface-variant leading-none">08:00</p>
+<p class="font-display font-bold text-body-md">Campinas, Terminal Central</p>
+</div>
+<div>
+<p class="text-caption text-on-surface-variant leading-none">09:30</p>
+<p class="font-display font-bold text-body-md">São Paulo, Barra Funda</p>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col justify-between">
+<div class="flex flex-wrap gap-xs">
+<span class="px-sm py-1 bg-surface-container text-on-surface-variant text-caption rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="smoke_free">smoke_free</span> Não fumante
+                                </span>
+<span class="px-sm py-1 bg-surface-container text-on-surface-variant text-caption rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="pets">pets</span> Animais OK
+                                </span>
+<span class="px-sm py-1 bg-surface-container text-on-surface-variant text-caption rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="directions_car">directions_car</span> Toyota Corolla
+                                </span>
+</div>
+<div class="mt-md flex items-center justify-between">
+<p class="text-caption text-tertiary font-bold">2 assentos livres</p>
+<button class="bg-primary text-on-primary px-lg py-sm rounded-xl font-display font-bold hover:opacity-90 transition-opacity">Reservar</button>
+</div>
+</div>
+</div>
+</article>
+<!-- Ride Card 2: Pro/High Rating -->
+<article class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant hover:shadow-xl transition-shadow flex flex-col md:flex-row gap-lg relative">
+<div class="absolute top-md right-md bg-secondary-container text-on-secondary-container px-sm py-xs rounded-lg font-display font-bold text-h2">
+                        R$ 38
+                    </div>
+<div class="flex flex-col items-center gap-xs min-w-[120px]">
+<img alt="Motorista" class="w-16 h-16 rounded-full object-cover border-2 border-primary" data-alt="A professional headshot of a young woman with long dark hair and a confident, friendly expression. She is wearing a smart-casual blazer. The background is a vibrant city street at sunset with warm orange and golden light creating a bokeh effect. The overall aesthetic is professional, reliable, and optimistic, fitting the modern community travel brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUFCcCBa0HbBgtbdbn9tNTKHVWV4YPFoRt6mnzPWkFiFDoDjwinXRF4PUqnqnERyteRXaLA_Czoj2Foh3S3CApd_gm73U2m4274Hc4pCz2YelXyrIdS8Vw_ggZ7TqWZeYD3Wvg9Rj91K2UcWhvPQwEVhpuiDE6mTS7b_a3RBm9-a23zffjbj7zdpR2hXnO6NUa6ua7TVPx6awCCR92r4VZWB-GasbVP9EhaDR_g4KvOC7yF4DOxfltG-nPNXbrOr-NxkwyQM2lbv3n"/>
+<div class="flex items-center gap-xs">
+<span class="font-display text-label-md">Ana Julia P.</span>
+<span class="material-symbols-outlined text-tertiary text-[16px]" data-icon="verified" data-weight="fill">verified</span>
+</div>
+<div class="flex items-center text-secondary-container">
+<span class="material-symbols-outlined text-[14px]" data-icon="star" data-weight="fill">star</span>
+<span class="text-caption font-bold ml-1">5.0 (42)</span>
+</div>
+</div>
+<div class="flex-grow grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="space-y-sm">
+<div class="flex items-start gap-sm">
+<div class="flex flex-col items-center">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<div class="w-[2px] h-8 bg-outline-variant"></div>
+<div class="w-3 h-3 border-2 border-primary rounded-full"></div>
+</div>
+<div class="space-y-3">
+<div>
+<p class="text-caption text-on-surface-variant leading-none">10:30</p>
+<p class="font-display font-bold text-body-md">Sorocaba, Rodoviária</p>
+</div>
+<div>
+<p class="text-caption text-on-surface-variant leading-none">12:15</p>
+<p class="font-display font-bold text-body-md">São Paulo, Av. Paulista</p>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col justify-between">
+<div class="flex flex-wrap gap-xs">
+<span class="px-sm py-1 bg-surface-container text-on-surface-variant text-caption rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="music_note">music_note</span> Boa música
+                                </span>
+<span class="px-sm py-1 bg-surface-container text-on-surface-variant text-caption rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="ac_unit">ac_unit</span> Ar condicionado
+                                </span>
+</div>
+<div class="mt-md flex items-center justify-between">
+<p class="text-caption text-error font-bold">Apenas 1 assento!</p>
+<button class="bg-primary text-on-primary px-lg py-sm rounded-xl font-display font-bold hover:opacity-90 transition-opacity">Reservar</button>
+</div>
+</div>
+</div>
+</article>
+<!-- Ride Card 3: Budget/Common -->
+<article class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant hover:shadow-xl transition-shadow flex flex-col md:flex-row gap-lg relative">
+<div class="absolute top-md right-md bg-secondary-container text-on-secondary-container px-sm py-xs rounded-lg font-display font-bold text-h2">
+                        R$ 32
+                    </div>
+<div class="flex flex-col items-center gap-xs min-w-[120px]">
+<img alt="Motorista" class="w-16 h-16 rounded-full object-cover border-2 border-outline-variant" data-alt="A portrait of a cheerful young man with a beard and glasses, looking directly at the camera with an authentic and trustworthy expression. He is outdoors in a leafy park setting with soft, diffused morning light. The visual style is natural and approachable, using a clean color palette of earthy tones and soft greens to emphasize the human-first community feel of the interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzIdp2bs15SXXPc7DETO8sDDz0UWX7KnI7RVyOyWJ6eKskDmLkK7us9BOvoMmn3QhjDrSCBSdct21eMZqU4GX8kB8yeUkToRETTD-rMH4eIm83yCUilyiIdu3n-i9SoxR5Gt9wT9THSvtn14ayDPrxNCfxGS5_LCq3jQKqzLPWmDFsCHUDWlDC4EXzSUBlirmAHogAI-NLU_Ffyc9Zbf60YHh4Z6Y-K41lXgg11-wuRENwwyFiph83y4dvmoI0NSYdfbIFKlfd0OQ2"/>
+<div class="flex items-center gap-xs">
+<span class="font-display text-label-md">Marcos T.</span>
+</div>
+<div class="flex items-center text-on-surface-variant opacity-60">
+<span class="material-symbols-outlined text-[14px]" data-icon="star" data-weight="fill">star</span>
+<span class="text-caption font-bold ml-1">4.7 (15)</span>
+</div>
+</div>
+<div class="flex-grow grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="space-y-sm">
+<div class="flex items-start gap-sm">
+<div class="flex flex-col items-center">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<div class="w-[2px] h-8 bg-outline-variant"></div>
+<div class="w-3 h-3 border-2 border-primary rounded-full"></div>
+</div>
+<div class="space-y-3">
+<div>
+<p class="text-caption text-on-surface-variant leading-none">17:45</p>
+<p class="font-display font-bold text-body-md">Jundiaí, Centro</p>
+</div>
+<div>
+<p class="text-caption text-on-surface-variant leading-none">18:40</p>
+<p class="font-display font-bold text-body-md">São Paulo, Pinheiros</p>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col justify-between">
+<div class="flex flex-wrap gap-xs">
+<span class="px-sm py-1 bg-surface-container text-on-surface-variant text-caption rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="eco">eco</span> Econômico
+                                </span>
+</div>
+<div class="mt-md flex items-center justify-between">
+<p class="text-caption text-tertiary font-bold">3 assentos livres</p>
+<button class="bg-primary text-on-primary px-lg py-sm rounded-xl font-display font-bold hover:opacity-90 transition-opacity">Reservar</button>
+</div>
+</div>
+</div>
+</article>
+</div>
+<!-- Empty State / Load More -->
+<div class="mt-xl text-center">
+<button class="text-primary font-display font-bold flex items-center gap-sm mx-auto hover:underline">
+                    Ver mais caronas disponíveis
+                    <span class="material-symbols-outlined" data-icon="expand_more">expand_more</span>
+</button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface shadow-[0_-2px_10px_rgba(0,0,0,0.05)] px-margin py-xs flex justify-around items-center z-50">
+<button class="flex flex-col items-center gap-xs text-primary">
+<span class="material-symbols-outlined" data-icon="search" data-weight="fill">search</span>
+<span class="text-caption font-bold">Buscar</span>
+</button>
+<button class="flex flex-col items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
+<span class="text-caption">Viagens</span>
+</button>
+<button class="flex flex-col items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+<span class="text-caption">Oferecer</span>
+</button>
+<button class="flex flex-col items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+<span class="text-caption">Chat</span>
+</button>
+</nav>
+<div class="pb-24 md:pb-0"></div>
+</body></html>

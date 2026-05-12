@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#341100",
+                    "surface": "#f8f9ff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface-variant": "#424754",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "inverse-primary": "#adc6ff",
+                    "on-secondary-container": "#5c2400",
+                    "surface-bright": "#f8f9ff",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#004395",
+                    "on-tertiary-fixed": "#002113",
+                    "tertiary": "#006947",
+                    "error-container": "#ffdad6",
+                    "surface-container-low": "#eff4ff",
+                    "surface-variant": "#d3e4fe",
+                    "on-error-container": "#93000a",
+                    "surface-container": "#e5eeff",
+                    "secondary-fixed-dim": "#ffb690",
+                    "secondary-container": "#fd761a",
+                    "surface-container-high": "#dce9ff",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#f5fff6",
+                    "surface-container-highest": "#d3e4fe",
+                    "secondary-fixed": "#ffdbca",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "secondary": "#9d4300",
+                    "inverse-surface": "#213145",
+                    "surface-dim": "#cbdbf5",
+                    "primary-container": "#2170e4",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "on-primary-fixed": "#001a42",
+                    "on-secondary-fixed-variant": "#783200",
+                    "outline": "#727785",
+                    "on-background": "#0b1c30",
+                    "primary": "#0058be",
+                    "tertiary-container": "#00855b",
+                    "tertiary-fixed": "#6ffbbe",
+                    "on-surface": "#0b1c30",
+                    "error": "#ba1a1a",
+                    "outline-variant": "#c2c6d6",
+                    "primary-fixed-dim": "#adc6ff",
+                    "primary-fixed": "#d8e2ff",
+                    "on-primary-container": "#fefcff",
+                    "surface-tint": "#005ac2",
+                    "background": "#f8f9ff",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "lg": "24px",
+                    "xs": "4px",
+                    "md": "16px",
+                    "xl": "32px",
+                    "grid_columns": "12",
+                    "margin": "20px",
+                    "sm": "12px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "display": ["Plus Jakarta Sans"],
+                    "caption": ["Plus Jakarta Sans"],
+                    "h2": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "h1": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "label-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "display": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "caption": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "h2": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "h1": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      body { background-color: #f8f9ff; font-family: 'Plus Jakarta Sans', sans-serif; }
+      .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+      .glass-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<header class="bg-surface shadow-sm sticky top-0 z-50">
+<div class="flex justify-between items-center px-margin py-md w-full max-w-7xl mx-auto">
+<h1 class="text-h2 font-display font-bold text-primary">VemJunto</h1>
+<nav class="hidden md:flex gap-lg items-center">
+<a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Buscar Carona</a>
+<a class="font-display text-body-md text-primary border-b-2 border-primary pb-1" href="#">Oferecer Carona</a>
+<div class="flex items-center gap-md ml-md">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</nav>
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-margin py-xl grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<section class="lg:col-span-7 flex flex-col gap-lg">
+<div class="flex flex-col gap-xs">
+<h2 class="font-display text-h1 text-on-background">Compartilhe sua viagem</h2>
+<p class="font-display text-body-lg text-on-surface-variant">Ajude outros viajantes e economize dividindo os custos do combustível.</p>
+</div>
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-lg border border-outline-variant/30">
+<form class="flex flex-col gap-lg">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="flex flex-col gap-xs">
+<label class="font-display text-label-md text-on-surface-variant">Ponto de Partida</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="my_location">my_location</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface rounded-lg border border-outline-variant focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none" placeholder="Cidade ou endereço" type="text"/>
+</div>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-display text-label-md text-on-surface-variant">Destino Final</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="location_on">location_on</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface rounded-lg border border-outline-variant focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none" placeholder="Para onde você vai?" type="text"/>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<div class="flex flex-col gap-xs">
+<label class="font-display text-label-md text-on-surface-variant">Data da Viagem</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="calendar_month">calendar_month</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface rounded-lg border border-outline-variant focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none" type="date"/>
+</div>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-display text-label-md text-on-surface-variant">Vagas Disponíveis</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="group">group</span>
+<select class="w-full pl-10 pr-4 py-3 bg-surface rounded-lg border border-outline-variant focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none appearance-none">
+<option>1 vaga</option>
+<option>2 vagas</option>
+<option>3 vagas</option>
+<option>4 vagas</option>
+</select>
+</div>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-display text-label-md text-on-surface-variant">Contribuição por pessoa</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="payments">payments</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface rounded-lg border border-outline-variant focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none" placeholder="R$ 0,00" type="text"/>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-display text-label-md text-on-surface-variant">Preferências e Detalhes</label>
+<textarea class="w-full p-4 bg-surface rounded-lg border border-outline-variant focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none resize-none" placeholder="Ex: Sairei do centro, bagagem leve permitida..." rows="3"></textarea>
+</div>
+<div class="flex flex-wrap gap-sm">
+<span class="px-md py-xs bg-surface-container-high rounded-full font-display text-caption text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]" data-icon="smoke_free">smoke_free</span> Não fumante
+                        </span>
+<span class="px-md py-xs bg-surface-container-high rounded-full font-display text-caption text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]" data-icon="pets">pets</span> Aceita pets
+                        </span>
+<span class="px-md py-xs bg-surface-container-high rounded-full font-display text-caption text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]" data-icon="music_note">music_note</span> Música liberada
+                        </span>
+</div>
+<button class="w-full bg-primary text-on-primary font-display font-bold py-4 rounded-xl shadow-lg hover:opacity-90 active:scale-95 transition-all flex justify-center items-center gap-md" type="submit">
+<span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
+                        Publicar Carona
+                    </button>
+</form>
+</div>
+</section>
+<aside class="lg:col-span-5 flex flex-col gap-lg">
+<div class="relative h-[300px] rounded-2xl overflow-hidden shadow-md">
+<img alt="Rota de viagem" class="w-full h-full object-cover" data-alt="A cinematic, high-angle shot of a car driving through a scenic highway winding through lush green hills during a golden hour sunset. The lighting is warm and optimistic, evoking a sense of adventure and community connection. The style is modern and clean, aligned with a premium travel application focused on shared experiences and reliable transportation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFfdQO0fkKkaqPZY8bqAi8HoB5zfVYuHo9oeZfhvCNeLeS4Hg1LnAHzHhPBpCYRO07FJ1_TTgOpubnE4Sm3ztVttxUYGDWW8ds8ta9B5UxXYUmc5y9nVxaSUCPtY1G6VlFXRN90IyLKJQYE7GP6OzDrtk6GFVbdz2fbtkZmhKBqDNTKumRbaDqV5S4T7puwd2AhGSXo5KkDDENtw-k6YgSiUDlBDGB2h7Ye5gyibU8P39qyJax8BxGbi2xdjLNqkE-ySAJP5ataJAj"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-background/60 to-transparent flex flex-col justify-end p-lg">
+<p class="text-on-primary font-display text-label-md">Seu trajeto ajuda a comunidade</p>
+<h3 class="text-on-primary font-display text-h2">Economia Colaborativa</h3>
+</div>
+</div>
+<div class="bg-secondary-container/10 p-lg rounded-2xl border border-secondary/20 flex flex-col gap-md">
+<div class="flex items-center gap-md text-secondary">
+<span class="material-symbols-outlined text-[32px]" data-icon="tips_and_updates">tips_and_updates</span>
+<h4 class="font-display text-h2 font-bold">Dica de Preço</h4>
+</div>
+<p class="font-display text-body-md text-on-surface">Para esta rota, a maioria dos motoristas sugere entre <span class="font-bold text-secondary">R$ 25 - R$ 40</span>. Isso garante que as despesas sejam divididas de forma justa para todos.</p>
+</div>
+<div class="flex flex-col gap-md">
+<h4 class="font-display text-label-md text-on-surface-variant uppercase tracking-wider">Por que oferecer carona?</h4>
+<div class="grid grid-cols-1 gap-sm">
+<div class="bg-surface-container-lowest p-md rounded-xl flex items-center gap-md shadow-sm">
+<div class="w-10 h-10 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" data-icon="eco">eco</span>
+</div>
+<div>
+<p class="font-display text-label-md text-on-surface">Menos CO2</p>
+<p class="font-display text-caption text-on-surface-variant">Ajude o meio ambiente tirando carros da rua.</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-md rounded-xl flex items-center gap-md shadow-sm">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="forum">forum</span>
+</div>
+<div>
+<p class="font-display text-label-md text-on-surface">Novas Conexões</p>
+<p class="font-display text-caption text-on-surface-variant">Conheça pessoas incríveis no seu caminho.</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-md rounded-xl flex items-center gap-md shadow-sm">
+<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+</div>
+<div>
+<p class="font-display text-label-md text-on-surface">Segurança Total</p>
+<p class="font-display text-caption text-on-surface-variant">Perfis verificados e avaliações reais.</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</main>
+<footer class="bg-surface-container-lowest border-t border-outline-variant/30 mt-xl py-lg">
+<div class="max-w-7xl mx-auto px-margin flex flex-col md:flex-row justify-between items-center gap-md">
+<p class="font-display text-caption text-on-surface-variant">© 2024 VemJunto - Conectando destinos e pessoas.</p>
+<div class="flex gap-lg">
+<a class="font-display text-caption text-on-surface-variant hover:text-primary transition-colors" href="#">Termos de Uso</a>
+<a class="font-display text-caption text-on-surface-variant hover:text-primary transition-colors" href="#">Segurança</a>
+<a class="font-display text-caption text-on-surface-variant hover:text-primary transition-colors" href="#">Suporte</a>
+</div>
+</div>
+</footer>
+</body></html>

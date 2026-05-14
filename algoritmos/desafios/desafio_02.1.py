@@ -1,9 +1,9 @@
-# JOGO DA FORCA
-
-# CRIANDO VARIAVEIS
+# JOGO DA FORCA - MODO TRAPAÇA (EVIL HANGMAN)
+# Versão com recursos básicos (sem enumerate, lambda, max)
 
 from random import choice
 
+# Lista de palavras (5 letras, sem repetições triplas)
 palavras = [
     "achar", "acham", "achas", "aspas",
     "babam", "babar", "babas", "bagas", "bamba", "banal", "barba", "barca", "barra", "basta", "batas", "braca", "brama",
@@ -68,9 +68,14 @@ palavras = [
     "puxam", "luxam", "fixam", "mixam", "boxam", "coxam", "roxam", "pixam", "taxam", "faxam"
 ]
 
-palavra = choice(palavras).upper()
-letras_jogadas =  ''
-incognita = len(palavra)*'_'
+TAM = 5
+candidatas = []                # Lista de palavras ainda possíveis
+for p in palavras:
+    if len(p) == TAM:          # SÓ ADICIONA SE TIVER 5 LETRAS
+        candidatas.append(p.upper())
+
+letras_jogadas = ''            # String com letras já tentadas (evitamos set)
+mascara = ['_'] * TAM          # O que é exibido ao jogador
 
 chances = 6
 cabeca = tronco = braco_d = braco_e = perna_d = perna_e = ' '
@@ -78,93 +83,105 @@ cabeca = tronco = braco_d = braco_e = perna_d = perna_e = ' '
 stick_man = (f'\n______'
 f'\n|    {cabeca}'
 f'\n|   {braco_e}{tronco}{braco_d}'
-f'\n|   {perna_e} {perna_d}')
+f'\n|   {perna_e} {perna_d} ')
 
-while incognita != palavra and chances != 0:
+# Função para desenhar o stickman conforme as chances
+def atualiza_stickman():
+    global cabeca, tronco, braco_e, braco_d, perna_e, perna_d, stick_man
+    if chances == 5: cabeca = 'O'
+    elif chances == 4: tronco = '|'
+    elif chances == 3: braco_e = '/'
+    elif chances == 2: braco_d = '\\'
+    elif chances == 1: perna_e = '/'
+    elif chances == 0: perna_d = '\\'
+    stick_man = (f'\n______'
+                f'\n|    {cabeca}'
+                f'\n|   {braco_e}{tronco}{braco_d}'
+                f'\n|   {perna_e} {perna_d} ')
 
-    # MOSTRA STICK MAN
+# Loop principal
+while '_' in mascara and chances > 0:
+    # Exibe estado atual
+    linha_mascara = ''
+    for letra in mascara:
+        linha_mascara += letra + ' '
+    print(stick_man + '   ' + linha_mascara, 'Letras Jogadas:', letras_jogadas)
 
-    print(stick_man + '   ' + incognita)
+    letra = input('\nDigite uma letra: ').upper().strip()
 
-    letra = input('\nDigite uma letra: ').upper()
+    # Validação
+    if len(letra) != 1 or not letra.isalpha():
+        print('\n\033[33mDIGITE APENAS UMA LETRA VÁLIDA!\033[0m')
+        continue
 
-    if len(letra) != 1:
-        print('\n\033[33mDIGITE APENAS LETRA POR VEZ!\033[0m')
+    # Verifica se já foi jogada (usando string)
+    if letra in letras_jogadas:
+        print('\n\033[33mLETRA JÁ JOGADA\033[0m')
+        continue
 
-    else:
+    letras_jogadas += letra
 
-        save = palavras[:]
-
-        if incognita == len(palavra)*'_':
-
-            for i in palavras[:]:
-                if letra.lower() in i:
-                    palavras.remove(i)
-            
-            if len(palavras) == 0:
-                palavras = save[:]
-
-            palavra = choice(palavras).upper()       
-
-        print(palavras)
-        print(palavra)
-
-        incognita = ''
-
-        # ESTRUTURA O STICK MAN DE ACORDO COM OS ERROS
-
-        if letra not in palavra and letra not in letras_jogadas:
-            chances -= 1
-            if chances == 5:
-                cabeca = 'O'
-            if chances == 4:
-                tronco = '|'
-            if chances == 3:
-                braco_e = '/'
-            if chances == 2:
-                braco_d = '\\'
-            if chances == 1:
-                perna_e = '/'
-            if chances == 0:
-                perna_d = '\\'
-            
-            stick_man = (f'\n______'
-                        f'\n|    {cabeca}'
-                        f'\n|   {braco_e}{tronco}{braco_d}'
-                        f'\n|   {perna_e} {perna_d} ')
-
-        # VERIFICA SE A LETRA JA FOI JOGADA, SE NAO, ADICIONA NO CONJUNTO DE LETRAS
-
-        if letra in letras_jogadas:
-            print('\n\033[33mLETRA JA JOGADA\033[0m')
-        else:
-            letras_jogadas += letra
-            print(letras_jogadas)
-
-        # ESTRUTURA A VARIAVEL INCOGNITA PARA QUE APAREÇA SOMENTE AS LETRAS QUE O USUARIO ACERTOU
-
-        for i in range(len(palavra)):
-            if palavra[i] in letras_jogadas:
-                incognita += palavra[i]
+    # Agrupa as palavras candidatas em famílias de acordo com a letra chutada
+    familias = {}
+    for palavra in candidatas:
+        padrao = []
+        for i in range(TAM):
+            if palavra[i] == letra:
+                padrao.append(letra)
             else:
-                incognita += '_'
+                padrao.append('_')
+        chave = ''
+        for c in padrao:
+            chave += c
+        if chave not in familias:
+            familias[chave] = []
+        familias[chave].append(palavra)
 
-        if incognita != len(palavra)*'_':
+    # Escolhe a maior família (sem usar max e lambda)
+    melhor_chave = None
+    maior_tamanho = -1
+    for chave in familias:
+        tamanho = len(familias[chave])
+        if tamanho > maior_tamanho:
+            maior_tamanho = tamanho
+            melhor_chave = chave
 
-            for p in palavras[:]:
-                comp = ''
-                for i in range(len(p)):
-                    if incognita[i] == p[i].upper():
-                        comp += p[i].upper()
-                    else:
-                        comp += '_'
-                if comp != incognita:
-                    palavras.remove(p)
-                print(f'compração: {comp}, {p}')
+    candidatas = familias[melhor_chave]
 
-print(stick_man + '   ' + incognita)
+    # Atualiza a máscara com a nova informação
+    mascara_antes = []
+    for c in mascara:
+        mascara_antes.append(c)   # cópia manual
 
-if incognita == palavra:
+    for i in range(TAM):
+        if melhor_chave[i] != '_':
+            mascara[i] = melhor_chave[i]
+
+    # Se a máscara não mudou, é porque a letra NÃO está na palavra (erro)
+    mudou = False
+    for i in range(TAM):
+        if mascara[i] != mascara_antes[i]:
+            mudou = True
+            break
+
+    if not mudou:
+        chances -= 1
+        atualiza_stickman()
+        print(f'\nA letra {letra} não está na palavra. Você perdeu uma vida.')
+    else:
+        print(f'\nA letra {letra} está na palavra!')
+
+# Fim do jogo
+linha_mascara = ''
+for letra in mascara:
+    linha_mascara += letra + ' '
+print(stick_man + '   ' + linha_mascara, 'Letras Jogadas:', letras_jogadas)
+
+if '_' not in mascara:
     print('\n\033[32mVOCÊ VENCEU!\033[0m')
 else:
-    print('\n\033[31mVOCÊ PERDEU!\033[0m')
+    if len(candidatas) > 0:
+        palavra_final = choice(candidatas)
+    else:
+        palavra_final = '?????'
+    print(f'\n\033[31mVOCÊ PERDEU! A palavra era {palavra_final}\033[0m')

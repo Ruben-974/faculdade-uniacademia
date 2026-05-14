@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabor & Saber - Blog de Gastronomia</title>
+    <style>
+        :root {
+            --bg: #faf8f5;
+            --white: #ffffff;
+            --primary: #8B3A2A;
+            --primary-light: #a04e3b;
+            --accent: #c07a3c;
+            --accent-light: #e8a75a;
+            --text: #2c2420;
+            --text-light: #5c4f47;
+            --text-lighter: #7a6e65;
+            --border: #e5ddd6;
+            --card-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+            --card-hover-shadow: 0 8px 30px rgba(0, 0, 0, 0.13);
+            --radius: 12px;
+            --radius-sm: 8px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-heading: 'Georgia', 'Times New Roman', serif;
+            --font-body: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            --whatsapp-green: #25D366;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ========== HEADER ========== */
+        header {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.04);
+        }
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 24px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            white-space: nowrap;
+        }
+        .logo span {
+            color: var(--accent);
+        }
+        .logo small {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 400;
+            color: var(--text-lighter);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        nav {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+        nav a:hover,
+        nav a.active {
+            background: var(--primary);
+            color: #fff;
+        }
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--primary);
+            padding: 4px 8px;
+        }
+
+        /* ========== MAIN ========== */
+        main {
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px 40px;
+            width: 100%;
+        }
+        .page-section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .page-section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ========== HERO BANNER ========== */
+        .hero {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin: 24px 0 32px;
+            height: 380px;
+            background: linear-gradient(135deg, #3a1f14 0%, #6b3a2a 40%, #8b4a35 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.55;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #fff;
+            padding: 20px 40px;
+            max-width: 700px;
+        }
+        .hero-content h1 {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+            letter-spacing: -0.5px;
+        }
+        .hero-content p {
+            font-size: 1.25rem;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+            opacity: 0.95;
+        }
+        .hero-content .hero-btn {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 12px 28px;
+            background: var(--accent);
+            color: #fff;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+        .hero-content .hero-btn:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        /* ========== SECTION TITLES ========== */
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--primary);
+            margin: 32px 0 8px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        .section-subtitle {
+            color: var(--text-lighter);
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        /* ========== CARDS GRID ========== */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            margin: 20px 0;
+        }
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+        }
+        .card:hover {
+            box-shadow: var(--card-hover-shadow);
+            transform: translateY(-4px);
+        }
+        .card-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            display: block;
+            background: #e8ddd4;
+        }
+        .card-body {
+            padding: 16px 18px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-body .card-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .card-body h3 {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            color: var(--text);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+        .card-body p {
+            font-size: 0.88rem;
+            color: var(--text-lighter);
+            flex: 1;
+            margin-bottom: 8px;
+        }
+        .card-body .read-more {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            align-self: flex-start;
+        }
+        .card-body .read-more:hover {
+            text-decoration: underline;
+        }
+
+        /* ========== ABOUT SECTION (HOME) ========== */
+        .about-home {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+        .about-home img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 4px solid var(--accent-light);
+        }
+        .about-home-text h3 {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+        .about-home-text p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* ========== NEWSLETTER ========== */
+        .newsletter-box {
+            background: linear-gradient(135deg, #f5ebe0 0%, #fdf6ee 100%);
+            border: 2px dashed var(--accent-light);
+            border-radius: var(--radius);
+            padding: 30px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        .newsletter-box h3 {
+            font-family: var(--font-heading);
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+        .newsletter-box .newsletter-form {
+            display: flex;
+            gap: 10px;
+            max-width: 450px;
+            margin: 16px auto 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .newsletter-box input[type="email"] {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 16px;
+            border: 2px solid var(--border);
+            border-radius: 25px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition);
+        }
+        .newsletter-box input[type="email"]:focus {
+            border-color: var(--accent);
+        }
+        .newsletter-box button {
+            padding: 12px 24px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+        .newsletter-box button:hover {
+            background: var(--primary-light);
+        }
+
+        /* ========== SOCIAL ICONS ========== */
+        .social-icons {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            margin: 16px 0;
+            flex-wrap: wrap;
+        }
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        .social-icons a:hover {
+            background: var(--accent);
+            transform: scale(1.08);
+        }
+
+        /* ========== CONTACT PAGE ========== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            margin-top: 20px;
+        }
+        .contact-info {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 28px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border);
+        }
+        .contact-info h3 {
+            font-family: var(--font-heading);
+            color: var(--primary);
+            margin-bottom: 14px;
+            font-size: 1.3rem;
+        }
+        .contact-info p {
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+        .contact-info .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .contact-info .contact-icon {
+            font-size: 1.4rem;
+            min-width: 30px;
+            text-align: center;
+        }
+        .map-container {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border);
+            min-height: 350px;
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 350px;
+            border: 0;
+        }
+
+        /* ========== SCHEDULE PAGE ========== */
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            margin-top: 20px;
+        }
+        .schedule-table th,
+        .schedule-table td {
+            padding: 14px 18px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        .schedule-table th {
+            background: var(--primary);
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+        .schedule-table tr:hover td {
+            background: #fdf8f4;
+        }
+        .schedule-table .day-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        .schedule-img {
+            width: 100%;
+            max-height: 280px;
+            object-fit: cover;
+            border-radius: var(--radius);
+            margin: 10px 0 20px;
+        }
+
+        /* ========== MODAL ========== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.open {
+            display: flex;
+        }
+        .modal {
+            background: var(--white);
+            border-radius: var(--radius);
+            max-width: 720px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 30px 28px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            animation: modalIn 0.35s ease;
+        }
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.92) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        .modal-close {
+            position: sticky;
+            top: 0;
+            float: right;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: -20px;
+        }
+        .modal-close:hover {
+            background: #5c1e14;
+            transform: rotate(90deg);
+        }
+        .modal h2 {
+            font-family: var(--font-heading);
+            color: var(--primary);
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            padding-right: 40px;
+        }
+        .modal .modal-img {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: var(--radius-sm);
+            margin-bottom: 16px;
+        }
+        .modal h3 {
+            font-family: var(--font-heading);
+            color: var(--accent);
+            margin: 16px 0 6px;
+        }
+        .modal ul,
+        .modal ol {
+            margin-left: 20px;
+            margin-bottom: 12px;
+        }
+        .modal li {
+            margin-bottom: 4px;
+            color: var(--text-light);
+        }
+        .modal p {
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+        .modal blockquote {
+            border-left: 4px solid var(--accent);
+            padding-left: 16px;
+            margin: 14px 0;
+            color: var(--text-lighter);
+            font-style: italic;
+            background: #fdf9f5;
+            padding: 10px 16px;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        }
+        .modal .recipe-meta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+            color: var(--text-lighter);
+            margin-bottom: 12px;
+        }
+        .modal .recipe-meta span {
+            background: #f5ebe0;
+            padding: 4px 12px;
+            border-radius: 15px;
+        }
+
+        /* ========== WHATSAPP FLOATING ========== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 1500;
+            background: var(--whatsapp-green);
+            color: #fff;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: var(--transition);
+            font-size: 1.6rem;
+            font-weight: bold;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 26px rgba(37, 211, 102, 0.55);
+        }
+        .whatsapp-tooltip {
+            position: fixed;
+            bottom: 90px;
+            right: 30px;
+            background: #fff;
+            color: var(--text);
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            box-shadow: var(--card-shadow);
+            z-index: 1499;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            white-space: nowrap;
+        }
+        .whatsapp-float:hover+.whatsapp-tooltip,
+        .whatsapp-tooltip.visible {
+            opacity: 1;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: #2c1f18;
+            color: #cbb8a8;
+            text-align: center;
+            padding: 24px;
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+        footer a {
+            color: var(--accent-light);
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 900px) {
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+            .hero {
+                height: 260px;
+            }
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            .hero-content p {
+                font-size: 1rem;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .header-inner {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            nav {
+                gap: 2px;
+            }
+            nav a {
+                padding: 6px 10px;
+                font-size: 0.82rem;
+            }
+        }
+        @media (max-width: 600px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+            .hero {
+                height: 220px;
+            }
+            .hero-content h1 {
+                font-size: 1.5rem;
+            }
+            .hero-content p {
+                font-size: 0.85rem;
+            }
+            .hero-content .hero-btn {
+                padding: 10px 20px;
+                font-size: 0.85rem;
+            }
+            nav {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: var(--white);
+                border-radius: var(--radius-sm);
+                box-shadow: var(--card-shadow);
+                padding: 8px;
+            }
+            nav.open {
+                display: flex;
+            }
+            .hamburger {
+                display: block;
+            }
+            .about-home {
+                flex-direction: column;
+                text-align: center;
+            }
+            .about-home img {
+                margin: 0 auto;
+            }
+            .modal {
+                padding: 20px 16px;
+                max-width: 95vw;
+            }
+            .schedule-table {
+                font-size: 0.78rem;
+            }
+            .schedule-table th,
+            .schedule-table td {
+                padding: 8px 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== HEADER ==================== -->
+    <header>
+        <div class="header-inner">
+            <a href="#" class="logo" onclick="navigateTo('home')" title="Sabor & Saber">
+                Sabor &amp; Saber
+                <small>Blog de Gastronomia</small>
+            </a>
+            <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
+            <nav id="mainNav">
+                <a href="#" class="active" data-page="home" onclick="navigateTo('home')">Home</a>
+                <a href="#" data-page="receitas" onclick="navigateTo('receitas')">Receitas</a>
+                <a href="#" data-page="sobre" onclick="navigateTo('sobre')">Sobre</a>
+                <a href="#" data-page="contato" onclick="navigateTo('contato')">Contato</a>
+                <a href="#" data-page="cronograma" onclick="navigateTo('cronograma')">Cronograma</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main>
+
+        <!-- HOME -->
+        <section class="page-section active" id="page-home">
+            <!-- Hero Banner -->
+            <div class="hero">
+                <img class="hero-img" src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=1200&h=600&fit=crop&auto=format" alt="Cozinha com pratos deliciosos" loading="eager">
+                <div class="hero-content">
+                    <h1>Sabores que Contam Histórias</h1>
+                    <p>Receitas, técnicas, cultura e curiosidades do mundo da gastronomia.</p>
+                    <a href="#" class="hero-btn" onclick="navigateTo('receitas')">Explorar Receitas</a>
+                </div>
+            </div>
+
+            <!-- Descrição -->
+            <p style="text-align:center; color: var(--text-lighter); font-size: 1.05rem; max-width: 700px; margin: 0 auto 10px;">
+                Bem-vindo ao <strong>Sabor &amp; Saber</strong>! Aqui você encontra receitas testadas e aprovadas, artigos sobre
+                história da culinária, técnicas de cozinha e curiosidades que vão ampliar seu repertório gastronômico.
+            </p>
+            <div class="social-icons">
+                <a href="#" title="Instagram">&#128247;</a>
+                <a href="#" title="Facebook">&#128214;</a>
+                <a href="#" title="Pinterest">&#128278;</a>
+                <a href="#" title="YouTube">&#9654;</a>
+            </div>
+
+            <!-- Posts Recentes (6 artigos temáticos) -->
+            <h2 class="section-title">Posts Recentes</h2>
+            <p class="section-subtitle">Artigos em destaque sobre gastronomia</p>
+            <div class="cards-grid" id="recent-posts-grid">
+                <!-- Card 1: Unidades de Medida -->
+                <div class="card" onclick="openModal('modal-medidas')">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&h=400&fit=crop&auto=format" alt="Utensílios de medição" loading="lazy">
+                    <div class="card-body">
+                        <span class="card-tag">Técnica</span>
+                        <h3>Como Usar Unidades de Medida</h3>
+                        <p>Aprenda a medir ingredientes corretamente para o sucesso das suas receitas.</p>
+                        <span class="read-more">Ler artigo &rarr;</span>
+                    </div>
+                </div>
+                <!-- Card 2: História do Sudeste -->
+                <div class="card" onclick="openModal('modal-sudeste')">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1601924582970-9238bc898d95?w=400&h=400&fit=crop&auto=format" alt="Comida brasileira" loading="lazy">
+                    <div class="card-body">
+                        <span class="card-tag">História</span>
+                        <h3>História da Gastronomia do Sudeste</h3>
+                        <p>A rica mistura de tradições indígenas, africanas e europeias na culinária regional.</p>
+                        <span class="read-more">Ler artigo &rarr;</span>
+                    </div>
+                </div>
+                <!-- Card 3: Culinária Francesa -->
+                <div class="card" onclick="openModal('modal-francesa')">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1603073163308-9654c3fb70b5?w=400&h=400&fit=crop&auto=format" alt="Culinária francesa" loading="lazy">
+                    <div class="card-body">
+                        <span class="card-tag">Curiosidades</span>
+                        <h3>Curiosidades Históricas da Culinária Francesa</h3>
+                        <p>Patrimônio da humanidade, queijos famosos e a origem surpreendente do croissant.</p>
+                        <span class="read-more">Ler artigo &rarr;</span>
+                    </div>
+                </div>
+                <!-- Card 4: Técnicas Japonesas -->
+                <div class="card" onclick="openModal('modal-japonesa')">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=400&h=400&fit=crop&auto=format" alt="Culinária japonesa" loading="lazy">
+                    <div class="card-body">
+                        <span class="card-tag">Técnica</span>
+                        <h3>Técnicas Japonesas na Culinária (Washoku)</h3>
+                        <p>Precisão, estética e respeito ao alimento na cozinha tradicional japonesa.</p>
+                        <span class="read-more">Ler artigo &rarr;</span>
+                    </div>
+                </div>
+                <!-- Card 5: Gastronomia e Geopolítica -->
+                <div class="card" onclick="openModal('modal-geopolitica')">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=400&h=400&fit=crop&auto=format" alt="Banquete diplomático" loading="lazy">
+                    <div class="card-body">
+                        <span class="card-tag">Análise</span>
+                        <h3>Gastronomia e Geopolítica</h3>
+                        <p>Como a comida se tornou ferramenta de soft power e diplomacia internacional.</p>
+                        <span class="read-more">Ler artigo &rarr;</span>
+                    </div>
+                </div>
+                <!-- Card 6: Agrotóxicos e Transgênicos -->
+                <div class="card" onclick="openModal('modal-agrotoxicos')">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1595475207225-428b62bda831?w=400&h=400&fit=crop&auto=format" alt="Agricultura sustentável" loading="lazy">
+                    <div class="card-body">
+                        <span class="card-tag">Conscientização</span>
+                        <h3>Agrotóxicos e Transgênicos</h3>
+                        <p>Riscos dos pesticidas e OGM na alimentação e a importância de escolhas conscientes.</p>
+                        <span class="read-more">Ler artigo &rarr;</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção Sobre na Home -->
+            <div class="about-home">
+                <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=300&h=300&fit=crop&auto=format" alt="Equipe do blog" loading="lazy">
+                <div class="about-home-text">
+                    <h3>Sobre Nós</h3>
+                    <p>Somos apaixonados por gastronomia e acreditamos que cozinhar é um ato de amor, cultura e ciência.
+                        O <strong>Sabor &amp; Saber</strong> nasceu para compartilhar conhecimento, receitas testadas e
+                        histórias fascinantes do universo culinário. Junte-se a nós nessa jornada de descobertas!</p>
+                </div>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="newsletter-box">
+                <h3>&#128234; Assine Nossa Newsletter</h3>
+                <p>Receba receitas exclusivas e novidades diretamente no seu e-mail.</p>
+                <form class="newsletter-form" onsubmit="alert('Inscrição realizada com sucesso!'); return false;">
+                    <input type="email" placeholder="Seu melhor e-mail" required>
+                    <button type="submit">Inscrever-se</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- RECEITAS PAGE -->
+        <section class="page-section" id="page-receitas">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&h=400&fit=crop&auto=format" alt="Vários pratos deliciosos" style="width:100%;max-height:320px;object-fit:cover;border-radius:var(--radius);margin-top:20px;" loading="lazy">
+            <h2 class="section-title">Nossas Receitas</h2>
+            <p class="section-subtitle">Encontre receitas organizadas por categoria. Cada prato foi testado e fotografado com cuidado para garantir o melhor resultado na sua cozinha. Use os filtros abaixo ou navegue pela grade de receitas.</p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;">
+                <span style="background:var(--primary);color:#fff;padding:8px 16px;border-radius:20px;font-size:0.85rem;cursor:pointer;">Todas</span>
+                <span style="background:#e5ddd6;color:var(--text);padding:8px 16px;border-radius:20px;font-size:0.85rem;cursor:pointer;">Pratos Principais</span>
+                <span style="background:#e5ddd6;color:var(--text);padding:8px 16px;border-radius:20px;font-size:0.85rem;cursor:pointer;">Lanches</span>
+                <span style="background:#e5ddd6;color:var(--text);padding:8px 16px;border-radius:20px;font-size:0.85rem;cursor:pointer;">Acompanhamentos</span>
+                <span style="background:#e5ddd6;color:var(--text);padding:8px 16px;border-radius:20px;font-size:0.85rem;cursor:pointer;">Sopas</span>
+            </div>
+            <div class="cards-grid" id="receitas-grid">
+                <!-- Receita 1: Moqueca Capixaba -->
+                <div class="card" onclick="openModal('modal-receita1')">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=400&h=400&fit=crop&auto=format" alt="Moqueca Capixaba" loading="lazy">
+                    <div class="card-body"><span class="card-tag">Prato Principal</span><h3>Moqueca Capixaba Clássica</h3><p>A autêntica moqueca do Espírito Santo, sem leite de coco, com urucum e coentro.</p><span class="read-more">Ver receita &rarr;</span></div>
+                </div>
+                <!-- Receita 2: Pão de Queijo -->
+                <div class="card" onclick="openModal('modal-receita2')">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1626803775151-61d756612f97?w=400&h=400&fit=crop&auto=format" alt="Pão de Queijo" loading="lazy">
+                    <div class="card-body"><span class="card-tag">Lanche</span><h3>Pão de Queijo Mineiro</h3><p>Tradicional receita mineira com polvilho azedo e queijo meia-cura.</p><span class="read-more">Ver receita &rarr;</span></div>
+                </div>
+                <!-- Receita 3: Sushi Caseiro -->
+                <div class="card" onclick="openModal('modal-receita3')">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=400&h=400&fit=crop&auto=format" alt="Sushi Caseiro" loading="lazy">
+                    <div class="card-body"><span class="card-tag">Prato Principal</span><h3>Sushi Caseiro</h3><p>Aprenda a fazer sushi em casa com técnicas simples e ingredientes frescos.</p><span class="read-more">Ver receita &rarr;</span></div>
+                </div>
+                <!-- Receita 4: Frango com Quiabo -->
+                <div class="card" onclick="openModal('modal-receita4')">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=400&h=400&fit=crop&auto=format" alt="Frango com Quiabo" loading="lazy">
+                    <div class="card-body"><span class="card-tag">Prato Principal</span><h3>Frango com Quiabo</h3><p>Clássico da culinária mineira, com frango dourado e quiabo sem baba.</p><span class="read-more">Ver receita &rarr;</span></div>
+                </div>
+                <!-- Receita 5: Tempurá de Legumes -->
+                <div class="card" onclick="openModal('modal-receita5')">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1615361200141-f45040f367be?w=400&h=400&fit=crop&auto=format" alt="Tempurá de Legumes" loading="lazy">
+                    <div class="card-body"><span class="card-tag">Acompanhamento</span><h3>Tempurá de Legumes</h3><p>Massa leve e crocante no estilo japonês para legumes frescos.</p><span class="read-more">Ver receita &rarr;</span></div>
+                </div>
+                <!-- Receita 6: Feijoada Completa -->
+                <div class="card" onclick="openModal('modal-receita6')">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1601924583542-f0a67c6a7a4d?w=400&h=400&fit=crop&auto=format" alt="Feijoada" loading="lazy">
+                    <div class="card-body"><span class="card-tag">Prato Principal</span><h3>Feijoada Completa</h3><p>A clássica feijoada brasileira com cortes especiais e acompanhamentos.</p><span class="read-more">Ver receita &rarr;</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SOBRE PAGE -->
+        <section class="page-section" id="page-sobre">
+            <h2 class="section-title">Quem Somos</h2>
+            <div class="about-home" style="margin-top:16px;">
+                <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=300&h=300&fit=crop&auto=format" alt="Nossa equipe" loading="lazy">
+                <div class="about-home-text">
+                    <h3>Nossa História</h3>
+                    <p>O <strong>Sabor &amp; Saber</strong> nasceu em 2018, fruto da paixão de três amigos — Ana (chef), Carlos (historiador) e Mariana (nutricionista) — por gastronomia em todas as suas dimensões. Acreditamos que a comida vai muito além do prato: é cultura, memória afetiva, ciência e arte. Nosso blog reúne receitas testadas, artigos sobre história da alimentação e reflexões sobre sustentabilidade.</p>
+                    <p>Já publicamos mais de 300 conteúdos e contamos com uma comunidade engajada de leitores que compartilham do nosso amor pela boa mesa.</p>
+                </div>
+            </div>
+            <!-- Vídeo YouTube -->
+            <h3 style="font-family:var(--font-heading);color:var(--primary);margin-top:28px;">&#127916; Conheça Nossa Cozinha</h3>
+            <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:var(--radius);margin-top:12px;box-shadow:var(--card-shadow);">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:var(--radius);" allowfullscreen loading="lazy" title="Vídeo institucional do blog Sabor & Saber"></iframe>
+            </div>
+            <p style="text-align:center;color:var(--text-lighter);margin-top:10px;font-size:0.9rem;">Assista ao vídeo e veja os bastidores da nossa cozinha editorial.</p>
+        </section>
+
+        <!-- CONTATO PAGE -->
+        <section class="page-section" id="page-contato">
+            <img src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1200&h=350&fit=crop&auto=format" alt="Atendimento" style="width:100%;max-height:280px;object-fit:cover;border-radius:var(--radius);margin-top:20px;" loading="lazy">
+            <h2 class="section-title">Fale Conosco</h2>
+            <p class="section-subtitle">Estamos aqui para ouvir você. Confira nossos canais de atendimento.</p>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Informações de Contato</h3>
+                    <div class="contact-item"><span class="contact-icon">&#128205;</span> Rua dos Sabores, 456 — Bairro Gourmet, São Paulo/SP, CEP 01415-000</div>
+                    <div class="contact-item"><span class="contact-icon">&#128222;</span> (11) 3456-7890</div>
+                    <div class="contact-item"><span class="contact-icon">&#128241;</span> WhatsApp: (11) 98765-4321</div>
+                    <div class="contact-item"><span class="contact-icon">&#9993;</span> contato@saboresaber.com.br</div>
+                    <a href="https://wa.me/5511987654321" target="_blank" rel="noopener" style="display:inline-block;margin-top:14px;padding:12px 20px;background:#25D366;color:#fff;border-radius:25px;text-decoration:none;font-weight:600;transition:var(--transition);">&#128172; Falar no WhatsApp</a>
+                </div>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.197584181!2d-46.656587884476!3d-23.561354184683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8da0aa315%3A0xd59f9431f2c9776a!2sAv.%20Paulista%2C%20S%C3%A3o%20Paulo%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1700000000000" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa de localização"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- CRONOGRAMA PAGE -->
+        <section class="page-section" id="page-cronograma">
+            <img class="schedule-img" src="https://images.unsplash.com/photo-1506784365847-bbad939e9335?w=1200&h=400&fit=crop&auto=format" alt="Calendário e planejamento" loading="lazy">
+            <h2 class="section-title">Cronograma Editorial</h2>
+            <p class="section-subtitle">Planejamento de publicações do blog. Consistência é a chave para um conteúdo de qualidade. Segundo a <em>RD Station</em>, um calendário editorial bem estruturado "inclui toda a programação da estratégia de conteúdo", registrando datas, temas e formatos de cada post.</p>
+            <table class="schedule-table">
+                <thead>
+                    <tr><th>Dia da Semana</th><th>Tipo de Conteúdo</th><th>Descrição</th><th>Horário</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><span class="day-badge">Segunda-feira</span></td><td>Receita da Semana</td><td>Publicação de receita testada com foto e passo a passo</td><td>09:00</td></tr>
+                    <tr><td><span class="day-badge">Terça-feira</span></td><td>Artigo Técnico</td><td>Dicas de técnicas culinárias, medidas, utensílios</td><td>10:00</td></tr>
+                    <tr><td><span class="day-badge">Quarta-feira</span></td><td>História &amp; Cultura</td><td>Posts sobre história da gastronomia regional e mundial</td><td>10:00</td></tr>
+                    <tr><td><span class="day-badge">Quinta-feira</span></td><td>Curiosidades</td><td>Fatos interessantes, recordes e peculiaridades culinárias</td><td>11:00</td></tr>
+                    <tr><td><span class="day-badge">Sexta-feira</span></td><td>Especial / Temático</td><td>Conteúdo especial: sustentabilidade, geopolítica, tendências</td><td>09:00</td></tr>
+                    <tr><td><span class="day-badge">Sábado</span></td><td>Newsletter</td><td>Resumo semanal enviado aos assinantes</td><td>08:00</td></tr>
+                    <tr><td><span class="day-badge">Domingo</span></td><td>Dica Rápida</td><td>Dica curta nas redes sociais (stories, reels)</td><td>10:00</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:16px;color:var(--text-lighter);font-size:0.9rem;">&#128197; Temas mensais especiais são planejados na última semana de cada mês. Exemplo: "Mês da Culinária Italiana" em setembro, "Semana da Alimentação Sustentável" em outubro.</p>
+        </section>
+
+    </main>
+
+    <!-- ==================== MODAIS (12) ==================== -->
+    <!-- Modal: Unidades de Medida -->
+    <div class="modal-overlay" id="modal-medidas">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('modal-medidas')">&times;</button>
+            <h2>Como Usar Unidades de Medida</h2>
+            <img class="modal-img" src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=700&h=350&fit=crop&auto=format" alt="Utensílios de medição" loading="lazy">
+            <p>No universo culinário, as medidas desempenham um papel crucial na precisão e no sucesso das receitas. Um erro de proporção pode arruinar até mesmo o prato mais simples.</p>
+            <blockquote>"Entender e aplicar corretamente as medidas na cozinha é fundamental para o sucesso de qualquer prato."</blockquote>
+            <h3>Diferenças entre Sistemas</h3>
+            <p>No Brasil, utiliza-se o sistema métrico (gramas, mililitros). Já em países como os Estados Unidos, é comum o uso de xícaras e colheres como medidas padrão. Uma xícara americana equivale a aproximadamente 240 ml, enquanto no Brasil pode variar entre 200 e 250 ml dependendo da região.</p>
+            <h3>Dicas Práticas</h3>
+            <ul>
+                <li>Use sempre uma balança digital para ingredientes secos — é muito mais preciso.</li>
+                <li>Para líquidos, utilize copos medidores transparentes com marcações.</li>
+                <li>Farinhas devem ser medidas "niveladas", sem compactar.</li>
+                <li>Manteiga em tabletes geralmente vem com marcações de gramas na embalagem.</li>
+            </ul>
+            <h3>Tabela Rápida de Conversão</h3>
+            <ul>
+                <li>1 xícara (US) ≈ 240 ml</li>
+                <li>1 colher de sopa ≈ 15 ml</li>
+                <li>1 colher de chá ≈ 5 ml</li>
+                <li>1 onça (oz) ≈ 28 gramas</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Modal: História do Sudeste -->
+    <div class="modal-overlay" id="modal-sudeste">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('modal-sudeste')">&times;</button>
+            <h2>História da Gastronomia do Sudeste</h2>
+            <img class="modal-img" src="https://images.unsplash.com/photo-1601924582970-9238bc898d95?w=700&h=350&fit=crop&auto=format" alt="Comida brasileira regional" loading="lazy">
+            <p>A culinária do Sudeste do Brasil é marcada pela variedade de ingredientes como mandioca, milho, feijão e carne bovina, resultado da rica miscigenação cultural que moldou a região.</p>
+            <blockquote>"A miscigenação cultural... criou uma gastronomia autêntica, que reflete a riqueza cultural e histórica da região."</blockquote>
+            <h3>Influências</h3>
+            <p>Indígenas trouxeram o uso da mandioca, do milho e de ervas nativas. Africanos introduziram o quiabo, o azeite de dendê e técnicas de preparo. Europeus (portugueses e italianos) acrescentaram o trigo, vinhos e embutidos.</p>
+            <h3>Pratos Típicos</h3>
+            <ul>
+                <li><strong>Frango com Quiabo</strong> — clássico mineiro servido com angu.</li>
+                <li><strong>Pão de Queijo</strong> — ícone de Minas Gerais, feito com polvilho e queijo.</li>
+                <li><strong>Feijoada</strong> — embora nacional, tem fortes raízes no Sudeste.</li>
+                <li><strong>Moqueca Capixaba</strong> — do Espírito Santo, preparada com peixe, urucum e coentro.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Modal: Culinária Francesa -->
+    <div class="modal-overlay" id="modal-francesa">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('modal-francesa')">&times;</button>
+            <h2>Curiosidades Históricas da Culinária Francesa</h2>
+            <img class="modal-img" src="https://images.unsplash.com/photo-1603073163308-9654c3fb70b5?w=700&h=350&fit=crop&auto=format" alt="Culinária francesa" loading="lazy">
+            <p>A gastronomia francesa é tão marcante que foi nomeada <strong>patrimônio cultural intangível da humanidade</strong> pela UNESCO em 2010, reconhecendo sua influência global e tradição secular.</p>
+            <blockquote>"Os franceses são um dos maiores produtores de queijo do mundo — quase um bilhão de toneladas por ano — e são conhecidos como o 'país dos 360 tipos de queijos'."</blockquote>
+            <h3>Curiosidades</h3>
+            <ul>
+                <li><strong>O croissant não é francês:</strong> sua origem remonta ao <em>kipferl</em> austríaco, popularizado na França por Maria Antonieta.</li>
+                <li><strong>Refeições por curso:</strong> a tradição de entrada, prato principal e sobremesa em sequência é herança da <em>haute cuisine</em> francesa do século XIX.</li>
+                <li>O guia Michelin nasceu na França como um folheto para motoristas e se tornou a maior autoridade em restaurantes do mundo.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Modal: Técnicas Japonesas -->
+    <div class="modal-overlay" id="modal-japonesa">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('modal-japonesa')">&times;</button>
+            <h2>Técnicas Japonesas na Culinária (Washoku)</h2>
+            <img class="modal-img" src="https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=700&h=350&fit=crop&auto=format" alt="Culinária japonesa tradicional" loading="lazy">
+            <p>A cozinha tradicional japonesa, ou <em>washoku</em>, é marcada por uma precisão quase ritualística em suas técnicas de preparo, refletindo profundo respeito ao alimento e à sazonalidade.</p>
+            <blockquote>"A habilidade no corte fino de peixes para sushi exige anos de prática e sensibilidade."</blockquote>
+            <h3>Técnicas Fundamentais</h3>
+            <ul>
+                <li><strong>Corte de peixes (sushi/sashimi):</strong> exige facas específicas e domínio da inclinação correta.</li>
+                <li><strong>Cozimento a vapor (mushimono):</strong> preserva nutrientes e realça sabores naturais.</li>
+                <li><strong>Tempurá:</strong> fritura leve com massa gelada para máxima crocância.</li>
+                <li><strong>Fermentados:</strong> missô e shoyu são bases do <em>umami</em> japonês.</li>
+                <li><strong>Caldo dashi:</strong> preparado com kombu (alga) e katsuobushi (flocos de bonito), essencial para sopas e molhos.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Modal: Gastronomia e Geopolítica -->
+    <div class="modal-overlay" id="modal-geopolitica">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('modal-geopolitica')">&times;</button>
+            <h2>Gastronomia e Geopolítica</h2>
+            <img class="modal-img" src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=700&h=350&fit=crop&auto=format" alt="Banquete diplomático" loading="lazy">
+            <p>A diplomacia gastronômica e a gastrodiplomacia tornaram-se ferramentas importantes para líderes mundiais fecharem acordos internacionais e promoverem a imagem de seus países.</p>
+            <blockquote>"Países como Peru, França, Itália, Tailândia e Coreia do Sul fizeram de seus pratos típicos um recurso para construção de uma boa imagem no mundo."</blockquote>
+            <h3>Soft Power à Mesa</h3>
+            <p>Em banquetes oficiais, chefes de Estado fecham acordos e promovem suas gastronomias, evitando conflitos e fortalecendo laços diplomáticos. A comida funciona como uma linguagem universal que transcende barreiras políticas.</p>
+            <ul>
+                <li>O Peru investiu pesado na promoção do ceviche e da culinária andina.</li>
+                <li>A Tailândia lançou o programa "Global Thai" para expandir restaurantes tailandeses no exterior.</li>
+                <li>A Coreia do Sul usou o <em>hallyu</em> (onda coreana) para popularizar o kimchi e o bulgogi.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Modal: Agrotóxicos e Transgênicos -->
+    <div class="modal-overlay" id="modal-agrotoxicos">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('modal-agrotoxicos')">&times;</button>
+            <h2>Conscientização sobre Agrotóxicos e Transgênicos</h2>
+            <img class="modal-img" src="https://images.unsplash.com/photo-1595475207225-428b62bda831?w=700&h=350&fit=crop&auto=format" alt="Agricultura sustentável" loading="lazy">
+            <p>Especialistas alertam sobre os riscos do consumo de alimentos cultivados com pesticidas, que impõem riscos à saúde e ao meio ambiente. Grande parte da produção agrícola brasileira já é transgênica.</p>
+            <blockquote>"A ciência ainda não é capaz de prever todos os riscos, mas já há evidências de que esses produtos aumentam alergias e casos de câncer."</blockquote>
+            <h3>O Que Fazer?</h3>
+            <ul>
+                <li>Prefira alimentos orgânicos certificados sempre que possível.</li>
+                <li>Leia os rótulos: produtos com selo "Livre de Transgênicos" são identificáveis.</li>
+                <li>Lave bem frutas e verduras com solução de água e vinagre.</li>
+                <li>Apoie feiras locais e agricultura familiar.</li>
+            </ul>
+            <p>O princípio da precaução deve guiar nossas escolhas alimentares, priorizando a saúde a longo prazo.</p>
+        </div>
+    </div>
+
+    <!-- Modal Receita 1: Moqueca Capixaba -->
+    <div class="modal-overlay" id="modal-receita1">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('modal-receita1')">&times;</button>
+            <h2>Moqueca Capixaba Clássica</h2>
+            <img class="modal-img" src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=700&h=350&fit=crop&auto=format" alt="Moqueca Capixaba" loading="lazy">
+            <div class="recipe-meta"><span>&#9202; Prep: 20 min</span><span>&#128293; Cozimento: 35 min</span><span>&#127869; Porções: 4</span></div>
+            <p>A autêntica moqueca do Espírito Santo, preparada sem leite de coco e sem azeite de dendê — diferentemente da versão baiana. O sabor vem do urucum, coentro fresco e peixe de qualidade.</p>
+            <h3>Ingredientes</h3>
+            <ul>
+                <li>1 kg de peixe firme (robalo ou badejo) em postas</li>
+                <li>Suco de 2 limões</li>
+                <li>3 dentes de alho picados</li>
+                <li>4 tomates maduros em rodelas</li>
+                <li>2 cebolas grandes em rodelas</li>
+                <li>1 pimentão verde em rodelas</li>
+                <li>2 colheres (sopa) de urucum (colorau)</li>
+                <li>1 maço de coentro fresco picado</li>
+                <li>Azeite de oliva extravirgem</li>
+                <li>Sal e pimenta-do-reino a gosto</li>
+            </ul>
+            <h3>Modo de Preparo</h3>
+            <ol>
+                <li>Tempere as postas de peixe com limão, alho, sal e pimenta. Deixe marinar por 20 minutos.</li>
+                <li>Em uma panela de barro, faça uma camada de cebola, tomate e pimentão. Regue com azeite.</li>
+                <li>Disponha as postas de peixe por cima e cubra com mais camadas de legumes.</li>
+                <li>Polvilhe o urucum e o coentro sobre tudo.</li>
+                <li>Tampe e cozinhe em fogo baixo por 30-35 minutos, sem mexer.</li>
+                <li>Sirva com arroz branco e pirão feito com o caldo da moqueca.</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Modal Receita 2: Pão de Queijo -->
+    <div class="modal-overlay" id="modal-receita2">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('modal-receita2')">&times;</button>
+            <h2>Pão de Queijo Mineiro</h2>
+            <img class="modal-img" src="https://images.unsplash.com/photo-1626803775151-61d756612f97?w=700&h=350&fit=crop&auto=format" alt="Pão de Queijo" loading="lazy">
+            <div class="recipe-meta"><span>&#9202; Prep: 15 min</span><span>&#128293; Forno: 25 min</span><span>&#127869; Rende: 30 unidades</span></div>
+            <h3>Ingredientes</h3>
+            <ul>
+                <li>500g de polvilho azedo</li>
+                <li>250ml de leite integral</li>
+                <li>125ml de óleo vegetal</li>
+                <li>2 ovos grandes</li>
+                <li>250g de queijo meia-cura ralado</li>
+                <li>1 colher (chá) de sal</li>
+            </ul>
+            <h3>Modo de Preparo</h3>
+            <ol>
+                <li>Ferva o leite com o óleo e o sal. Despeje sobre o polvilho e misture bem.</li>
+                <li>Deixe esfriar um pouco e adicione os ovos, um a um, sovando a massa.</li>
+                <li>Incorpore o queijo ralado até obter uma massa homogênea.</li>
+                <li>Unte as mãos com óleo e modele bolinhas.</li>
+                <li>Asse em forno pré-aquecido a 180°C por cerca de 25 minutos, até dourar.</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Modal Receita 3: Sushi Caseiro -->
+    <div class="modal-overlay" id="modal-receita3">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('modal-receita3')">&times;</button>
+            <h2>Sushi Caseiro</h2>
+            <img class="modal-img" src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=700&h=350&fit=crop&auto=format" alt="Sushi Caseiro" loading="lazy">
+            <div class="recipe-meta"><span>&#9202; Prep: 40 min</span><span>&#127869; Porções: 4</span></div>
+            <h3>Ingredientes</h3>
+            <ul>
+                <li>2 xícaras de arroz japonês (tipo sushi)</li>
+                <li>3 colheres (sopa) de vinagre de arroz</li>
+                <li>1 colher (chá) de açúcar</li>
+                <li>1/2 colher (chá) de sal</li>
+                <li>Folhas de nori (alga)</li>
+                <li>Salmão fresco fatiado</li>
+                <li>Pepino em tiras</li>
+                <li>Cream cheese (opcional)</li>
+                <li>Shoyu, gengibre e wasabi para servir</li>
+            </ul>
+            <h3>Modo de Preparo</h3>
+            <ol>
+                <li>Cozinhe o arroz conforme instruções. Misture o vinagre, açúcar e sal aquecidos.</li>
+                <li>Com o arroz morno, espalhe sobre a folha de nori sobre uma esteira.</li>
+                <li>Disponha o salmão, pepino e cream cheese no centro.</li>
+                <li>Enrole firmemente com a esteira e corte em fatias com faca molhada.</li>
+                <li>Sirva com shoyu, gengibre e wasabi.</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Modal Receita 4: Frango com Quiabo -->
+    <div class="modal-overlay" id="modal-receita4">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('modal-receita4')">&times;</button>
+            <h2>Frango com Quiabo</h2>
+            <img class="modal-img" src="https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=700&h=350&fit=crop&auto=format" alt="Frango com Quiabo" loading="lazy">
+            <div class="recipe-meta"><span>&#9202; Prep: 20 min</span><span>&#128293; Cozimento: 45 min</span><span>&#127869; Porções: 4</span></div>
+            <h3>Ingredientes</h3>
+            <ul>
+                <li>1 kg de frango em pedaços</li>
+                <li>500g de quiabo fresco</li>
+                <li>2 cebolas médias picadas</li>
+                <li>4 dentes de alho</li>
+                <li>2 tomates picados</li>
+                <li>Suco de 1 limão</li>
+                <li>Óleo, sal e pimenta</li>
+            </ul>
+            <h3>Modo de Preparo</h3>
+            <ol>
+                <li>Tempere o frango com limão, alho e sal. Doure em óleo quente e reserve.</li>
+                <li>Lave e seque bem os quiabos. Corte em rodelas e refogue rapidamente para soltar a baba.</li>
+                <li>Na mesma panela, refogue cebola e tomate. Volte o frango e adicione água.</li>
+                <li>Cozinhe por 30 min. Acrescente o quiabo e cozinhe mais 10 min.</li>
+                <li>Sirva com angu ou arroz branco.</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Modal Receita 5: Tempurá de Legumes -->
+    <div class="modal-overlay" id="modal-receita5">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('modal-receita5')">&times;</button>
+            <h2>Tempurá de Legumes</h2>
+            <img class="modal-img" src="https://images.unsplash.com/photo-1615361200141-f45040f367be?w=700&h=350&fit=crop&auto=format" alt="Tempurá de Legumes" loading="lazy">
+            <div class="recipe-meta"><span>&#9202; Prep: 15 min</span><span>&#128293; Fritura: 3 min/lote</span><span>&#127869; Porções: 4</span></div>
+            <h3>Ingredientes</h3>
+            <ul>
+                <li>1 xícara de farinha de trigo</li>
+                <li>1/2 xícara de amido de milho</li>
+                <li>1 xícara de água gelada com gás</li>
+                <li>1 ovo gelado</li>
+                <li>Legumes variados (cenoura, abobrinha, brócolis, batata-doce)</li>
+                <li>Óleo para fritar</li>
+            </ul>
+            <h3>Modo de Preparo</h3>
+            <ol>
+                <li>Misture rapidamente a farinha, o amido, o ovo e a água gelada (a massa deve ficar com grumos).</li>
+                <li>Aqueça o óleo a 170°C.</li>
+                <li>Passe os legumes na massa e frite por 2-3 minutos até dourar.</li>
+                <li>Escorra em papel-toalha e sirva com molho tentsuyu.</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Modal Receita 6: Feijoada -->
+    <div class="modal-overlay" id="modal-receita6">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('modal-receita6')">&times;</button>
+            <h2>Feijoada Completa</h2>
+            <img class="modal-img" src="https://images.unsplash.com/photo-1601924583542-f0a67c6a7a4d?w=700&h=350&fit=crop&auto=format" alt="Feijoada" loading="lazy">
+            <div class="recipe-meta"><span>&#9202; Prep: 30 min</span><span>&#128293; Cozimento: 2h</span><span>&#127869; Porções: 8</span></div>
+            <h3>Ingredientes</h3>
+            <ul>
+                <li>1 kg de feijão preto</li>
+                <li>500g de carne-seca</li>
+                <li>300g de costelinha defumada</li>
+                <li>200g de linguiça calabresa</li>
+                <li>200g de paio</li>
+                <li>2 folhas de louro</li>
+                <li>Alho, cebola, óleo</li>
+                <li>Laranja, couve e farofa para acompanhar</li>
+            </ul>
+            <h3>Modo de Preparo</h3>
+            <ol>
+                <li>Deixe as carnes salgadas de molho por 12h, trocando a água.</li>
+                <li>Cozinhe o feijão com as carnes e louro por cerca de 1h30.</li>
+                <li>Refogue alho e cebola e junte ao feijão para engrossar o caldo.</li>
+                <li>Sirva com arroz, couve refogada, farofa e rodelas de laranja.</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- ==================== WHATSAPP FLOATING ==================== -->
+    <a href="https://wa.me/5511987654321" target="_blank" rel="noopener" class="whatsapp-float" title="Fale conosco no WhatsApp">&#128172;</a>
+    <div class="whatsapp-tooltip" id="whatsappTooltip">Fale conosco no WhatsApp!</div>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <p>&copy; 2026 <strong>Sabor &amp; Saber</strong> — Blog de Gastronomia. Todos os direitos reservados.</p>
+        <p style="font-size:0.8rem;margin-top:4px;">Desenvolvido com &#10084; para amantes da boa culinária. | <a href="#" onclick="navigateTo('contato')">Contato</a></p>
+    </footer>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script>
+        // Navegação entre páginas
+        function navigateTo(pageName) {
+            // Esconde todas as seções
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+            // Mostra a seção alvo
+            const target = document.getElementById('page-' + pageName);
+            if (target) target.classList.add('active');
+            // Atualiza links ativos no menu
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+            const navLink = document.querySelector('nav a[data-page="' + pageName + '"]');
+            if (navLink) navLink.classList.add('active');
+            // Fecha menu mobile se aberto
+            const nav = document.getElementById('mainNav');
+            if (nav.classList.contains('open')) nav.classList.remove('open');
+            // Scroll ao topo
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Fecha qualquer modal aberto
+            document.querySelectorAll('.modal-overlay.open').forEach(m => m.classList.remove('open'));
+            document.body.style.overflow = '';
+        }
+
+        // Toggle menu mobile
+        function toggleMenu() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('open');
+        }
+
+        // Abrir modal
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('open');
+                document.body.style.overflow = 'hidden';
+                // Scroll ao topo do modal
+                const modalContent = modal.querySelector('.modal');
+                if (modalContent) modalContent.scrollTop = 0;
+            }
+        }
+
+        // Fechar modal
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Fechar modal ao clicar fora
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal-overlay')) {
+                e.target.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Fechar modal com tecla ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal-overlay.open').forEach(m => {
+                    m.classList.remove('open');
+                });
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Mostrar/esconder tooltip do WhatsApp
+        const whatsappFloat = document.querySelector('.whatsapp-float');
+        const whatsappTooltip = document.getElementById('whatsappTooltip');
+        if (whatsappFloat && whatsappTooltip) {
+            whatsappFloat.addEventListener('mouseenter', () => whatsappTooltip.classList.add('visible'));
+            whatsappFloat.addEventListener('mouseleave', () => {
+                setTimeout(() => whatsappTooltip.classList.remove('visible'), 400);
+            });
+            // Mostrar tooltip por 5 segundos ao carregar
+            setTimeout(() => {
+                whatsappTooltip.classList.add('visible');
+                setTimeout(() => whatsappTooltip.classList.remove('visible'), 5000);
+            }, 1500);
+        }
+
+        // Inicialização: garantir que Home está ativa
+        document.addEventListener('DOMContentLoaded', function() {
+            navigateTo('home');
+        });
+    </script>
+</body>
+</html>

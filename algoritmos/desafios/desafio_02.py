@@ -18,7 +18,7 @@ while incognita != palavra and chances != 0:
 
     # MOSTRA STICK MAN
 
-    print(stick_man + '   ' + incognita)
+    print(stick_man + '   ' + incognita, 'Letras Jogadas:', letras_jogadas)
 
     letra = input('\nDigite uma letra: ').upper()
 
@@ -66,7 +66,7 @@ while incognita != palavra and chances != 0:
             else:
                 incognita += '_'
 
-print(stick_man + '   ' + incognita)
+print(stick_man + '   ' + incognita, 'Letras Jogadas:', letras_jogadas)
 
 if incognita == palavra:
     print('\n\033[32mVOCÊ VENCEU!\033[0m')

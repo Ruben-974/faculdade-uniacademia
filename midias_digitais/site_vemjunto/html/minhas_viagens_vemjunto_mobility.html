@@ -1,0 +1,358 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error": "#ffffff",
+                      "tertiary-fixed": "#6ffbbe",
+                      "primary-fixed": "#d8e2ff",
+                      "tertiary": "#006947",
+                      "on-surface-variant": "#424754",
+                      "primary-fixed-dim": "#adc6ff",
+                      "surface-container-high": "#dce9ff",
+                      "on-tertiary": "#ffffff",
+                      "on-background": "#0b1c30",
+                      "background": "#f8f9ff",
+                      "tertiary-container": "#00855b",
+                      "on-secondary-fixed-variant": "#783200",
+                      "on-primary-fixed": "#001a42",
+                      "on-primary-container": "#fefcff",
+                      "inverse-surface": "#213145",
+                      "on-secondary-container": "#5c2400",
+                      "on-tertiary-container": "#f5fff6",
+                      "on-secondary-fixed": "#341100",
+                      "on-tertiary-fixed": "#002113",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary-fixed-variant": "#004395",
+                      "outline": "#727785",
+                      "on-primary": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "surface-container-low": "#eff4ff",
+                      "inverse-on-surface": "#eaf1ff",
+                      "surface-tint": "#005ac2",
+                      "inverse-primary": "#adc6ff",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "surface-bright": "#f8f9ff",
+                      "secondary-fixed": "#ffdbca",
+                      "secondary-container": "#fd761a",
+                      "on-surface": "#0b1c30",
+                      "primary": "#0058be",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "error-container": "#ffdad6",
+                      "surface-variant": "#d3e4fe",
+                      "surface-dim": "#cbdbf5",
+                      "secondary-fixed-dim": "#ffb690",
+                      "on-error-container": "#93000a",
+                      "primary-container": "#2170e4",
+                      "surface-container": "#e5eeff",
+                      "secondary": "#9d4300",
+                      "surface": "#f8f9ff",
+                      "surface-container-highest": "#d3e4fe",
+                      "outline-variant": "#c2c6d6",
+                      "error": "#ba1a1a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "xl": "32px",
+                      "grid_columns": "12",
+                      "sm": "12px",
+                      "gutter": "16px",
+                      "margin": "20px",
+                      "md": "16px",
+                      "lg": "24px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "label-md": ["Plus Jakarta Sans"],
+                      "body-lg": ["Plus Jakarta Sans"],
+                      "h1": ["Plus Jakarta Sans"],
+                      "display": ["Plus Jakarta Sans"],
+                      "h2": ["Plus Jakarta Sans"],
+                      "caption": ["Plus Jakarta Sans"],
+                      "body-md": ["Plus Jakarta Sans"]
+              },
+              "fontSize": {
+                      "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "h1": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "display": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "h2": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "caption": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+      </script>
+<style data-stitch-cursor=""></style><style data-stitch-scroll-lock=""></style></head>
+<body class="bg-background text-on-surface font-body-md">
+<!-- TopAppBar -->
+<header class="bg-surface shadow-sm sticky top-0 z-50">
+<div class="flex justify-between items-center px-margin py-md w-full max-w-7xl mx-auto">
+<a class="text-h2 font-display font-bold text-primary" href="index.html">VemJunto</a>
+<nav class="hidden md:flex items-center gap-lg">
+<a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors" href="index.html">Buscar Carona</a>
+<a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors" href="oferecer_carona_vemjunto_mobility_1.html">Oferecer Carona</a>
+<a class="font-display text-body-md text-primary border-b-2 border-primary pb-1 transition-colors" href="minhas_viagens_vemjunto_mobility.html">Minhas Viagens</a>
+</nav>
+<div class="flex items-center gap-md">
+<div class="relative group">
+<button class="text-on-surface-variant hover:text-primary transition-colors relative flex items-center p-2" aria-label="Notificações">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-surface"></span>
+</button>
+<div class="absolute right-0 mt-0 w-80 bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant/20 hidden group-hover:block z-[60] py-md before:content-[''] before:absolute before:-top-4 before:left-0 before:w-full before:h-4">
+<div class="px-md pb-sm border-b border-outline-variant/10">
+<p class="font-display text-label-md font-bold text-on-background">Notificações</p>
+</div>
+<div class="max-h-64 overflow-y-auto">
+<div class="px-md py-sm hover:bg-surface-container-low transition-colors cursor-pointer border-b border-outline-variant/5">
+<p class="font-display text-caption text-primary mb-1">Viagem Confirmada</p>
+<p class="font-display text-body-md text-on-surface-variant">Sua reserva para Campinas foi aceita por Ricardo.</p>
+<span class="font-display text-[10px] text-outline">Há 5 min</span>
+</div>
+<div class="px-md py-sm hover:bg-surface-container-low transition-colors cursor-pointer border-b border-outline-variant/5">
+<p class="font-display text-caption text-primary mb-1">Nova Mensagem</p>
+<p class="font-display text-body-md text-on-surface-variant">Ricardo: "Oi! Estarei no ponto às 08:20."</p>
+<span class="font-display text-[10px] text-outline">Há 1 hora</span>
+</div>
+</div>
+<a href="notifica_es_vemjunto.html" class="block text-center pt-sm text-primary font-display text-caption hover:underline">Ver todas</a>
+</div>
+</div>
+<div class="relative group">
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center p-2" aria-label="Menu de Perfil">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+<div class="absolute right-0 mt-0 w-48 bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant/20 hidden group-hover:block z-[60] py-sm before:content-[''] before:absolute before:-top-4 before:left-0 before:w-full before:h-4">
+<a href="perfil_do_usu_rio_vemjunto.html" class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors"><span class="material-symbols-outlined text-[20px] text-outline">person</span><span class="font-display text-body-md text-on-surface">Meu Perfil</span></a>
+<a href="#" class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[20px] text-outline">settings</span>
+<span class="font-display text-body-md text-on-surface">Configurações</span>
+</a>
+<div class="my-sm border-t border-outline-variant/10"></div>
+<a href="#" class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors text-error">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+<span class="font-display text-body-md">Sair</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</header>
+<div class="flex w-full min-h-[calc(100vh-72px)] relative">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col gap-md p-md w-64 sticky top-[72px] h-[calc(100vh-72px)] bg-surface-container-low border-r border-outline-variant">
+<div class="mb-lg">
+<h3 class="text-h2 font-display font-bold text-primary">Meu Painel</h3>
+<p class="text-on-surface-variant font-caption">Bem-vindo de volta!</p>
+</div>
+<nav class="flex flex-col gap-xs">
+<a class="bg-primary-container text-on-primary-container rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="minhas_viagens_vemjunto_mobility.html">
+<span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
+<span class="font-display text-label-md">Minhas Viagens</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="chat_com_localiza_o_ao_vivo_vemjunto.html">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+<span class="font-display text-label-md">Mensagens</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="configura_es_e_pagamento_vemjunto_mobility.html">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-display text-label-md">Configurações</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="perfil_do_usu_rio_vemjunto.html">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-display text-label-md">Perfil</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-display text-label-md">Ajuda</span>
+</a>
+</nav>
+<a href="oferecer_carona_vemjunto_mobility_1.html" class="mt-auto bg-secondary text-on-secondary rounded-full py-4 px-6 font-display text-label-md flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shadow-md">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+    Nova Carona
+</a>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 p-margin md:p-xl overflow-y-auto">
+<header class="mb-lg">
+<h1 class="font-display text-h1 text-on-background">Minhas Viagens</h1>
+<p class="text-on-surface-variant mt-xs">Gerencie suas caronas confirmadas e veja seu histórico.</p>
+</header>
+<!-- Tabs Section -->
+<section class="mb-lg border-b border-outline-variant flex gap-xl">
+<button class="pb-md border-b-2 border-primary text-primary font-label-md">Próximas Viagens</button>
+<button class="pb-md text-on-surface-variant hover:text-primary font-label-md">Viagens Passadas</button>
+</section>
+<!-- Layout: Bento Grid Style for Rides -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Active Trip Card (Featured) -->
+<article class="lg:col-span-12 bg-white rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] overflow-hidden border border-surface-variant flex flex-col md:flex-row">
+<div class="md:w-1/3 h-48 md:h-auto relative">
+<img class="w-full h-full object-cover" alt="A wide-angle landscape shot of a modern highway bridge crossing a scenic valley during a bright sunny day. The lighting is vibrant and high-key, emphasizing the feeling of travel and progress. The surrounding hills are lush and green under a clear blue sky, reflecting a sense of reliability and vitality within a modern transportation context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8drUYipfvE9klpWrrg5kz59nbgqqYGZbYKtG45Pt-e6KME3aigTYyzHWwM3AQ6sJaKhQoSdbhDhKE9GRkGaN8ec9EWqlaarI9u84pxZy1y6wRC5fe0Gfs6zxiaXBRbY0Zg7h1xJMZrfbUl9Rc7wWVqUldCqhmQS_b4I7XsOA2CEF5kWoJOgJ_h9UBgSR7EioiT2kfH0SC20E4dDjlWZ8t_2Bk0QZd3KHHW0tUmIqftukbc04Kp264Pqtsr1wR1D_UaNLpGd8FztFh">
+<div class="absolute top-md right-md bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label-md text-caption shadow-sm">
+                            R$ 35,00
+                        </div>
+</div>
+<div class="p-lg flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-sm">
+<span class="bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full text-caption font-label-md">Em andamento</span>
+<span class="text-on-surface-variant text-caption font-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="event">event</span> Hoje, 14:30
+                                </span>
+</div>
+<div class="flex items-center gap-md mb-md">
+<div class="flex flex-col items-center gap-1">
+<div class="w-3 h-3 rounded-full border-2 border-primary bg-white"></div>
+<div class="w-0.5 h-8 bg-outline-variant"></div>
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="font-h2 text-primary">São Paulo, SP</div>
+<div class="font-h2 text-primary">Campinas, SP</div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between mt-md pt-md border-t border-surface-variant">
+<div class="flex items-center gap-3">
+<img alt="Motorista" class="w-10 h-10 rounded-full border-2 border-tertiary-fixed" alt="Close-up portrait of a trustworthy male driver with a friendly expression, wearing a casual polo shirt. The lighting is soft and even, highlighting a professional and community-focused atmosphere. Behind him, the blurred interior of a clean, modern car is visible, suggesting a safe and reliable travel experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-olV7TobpsFWM6M65AQdCZVY2vjZgQ3-_-sUWyuaFfaEHU-w9p4Y1V4f83PVuw-vXH72cWE9rBazLXJmDi3OUajsSAYHW9KyVHUHKJ9E21JbmmdkUhH_pgnAoV_5gMr-PlVQKzzgfZ4NoJEZXd8_J8cfb6g5KWWaPtCtDLNzRnmR-_Jp2P83cUxNtkuFqu50KL4DOEyHWw0lsbxTeT9PRns8-_XUtcib3C_reNp-dU9E6gSRN_9rp-uP1e3wVEzX09SWeSt1oQvSC">
+<div>
+<p class="font-label-md text-on-surface">Ricardo Alves</p>
+<p class="text-caption text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span> Motorista Verificado
+                                    </p>
+</div>
+</div>
+<div class="flex gap-2">
+<a class="px-4 py-2 border border-primary text-primary font-label-md rounded-lg hover:bg-primary-fixed transition-colors" href="detalhes_da_viagem_com_seguran_a_vemjunto.html">Ver Detalhes</a>
+<a class="px-4 py-2 bg-primary text-on-primary font-label-md rounded-lg hover:opacity-90 transition-opacity" href="{{DATA:SCREEN:SCREEN_22}}">Acompanhar</a>
+</div>
+</div>
+</div>
+</article>
+<!-- Future Trip 1 -->
+<article class="lg:col-span-6 bg-white rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-surface-variant p-lg flex flex-col gap-md">
+<div class="flex justify-between items-start">
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 rounded-full text-caption font-label-md">Confirmada</span>
+<div class="text-right">
+<p class="text-on-surface-variant text-caption font-label-md">Amanhã, 08:00</p>
+<p class="font-h2 text-secondary">R$ 42,00</p>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="flex flex-col items-center gap-1">
+<div class="w-2 h-2 rounded-full bg-outline"></div>
+<div class="w-0.5 h-6 bg-outline-variant"></div>
+<div class="w-2 h-2 rounded-full bg-outline"></div>
+</div>
+<div class="flex flex-col gap-1">
+<p class="font-label-md text-on-surface">São José dos Campos, SP</p>
+<p class="font-label-md text-on-surface">Rio de Janeiro, RJ</p>
+</div>
+</div>
+<div class="flex items-center justify-between mt-auto pt-md border-t border-surface-variant">
+<div class="flex items-center gap-2">
+<img alt="Passageiro" class="w-8 h-8 rounded-full" alt="A portrait of a cheerful young woman with a vibrant personality, looking directly at the camera with a bright smile. The lighting is energetic and natural, set in a pleasant outdoor environment. The overall aesthetic is warm and approachable, representing a friendly passenger in a community carpooling network." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlpUTlRMHVwNv6T6V0PCeojswoy7Be6GswkNGDz_bLlihqh70Y04yo2hlvqN4--VzYXZBBgBu67ezKRQIRxoW6GHqt40V_aPd-42r7eeFMMM4jWp1Mbikh8js3M7jYsQHTJ3G8Io_3WFxh7FmgqpHJ2o5nrUzSCSS6_dsq_9wcMiToaQsAN3YDOuXJkuS8EXcdXQL5-_rJMjqThjFxWUfAiyNBtMraO7EBHzW9aaEjb7ZBLpdDhjdRVAt2CabzubAVMaSwpwL4VFKe">
+<span class="font-label-md text-on-surface">Fernanda Lima</span>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-error hover:bg-error-container rounded-lg transition-colors">
+<span class="material-symbols-outlined" data-icon="cancel">cancel</span>
+</button>
+<a class="px-4 py-2 bg-surface-variant text-primary font-label-md rounded-lg hover:bg-primary-fixed transition-colors" href="{{DATA:SCREEN:SCREEN_19}}">Detalhes</a>
+</div>
+</div>
+</article>
+<!-- Future Trip 2 -->
+<article class="lg:col-span-6 bg-white rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-surface-variant p-lg flex flex-col gap-md">
+<div class="flex justify-between items-start">
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 rounded-full text-caption font-label-md">Confirmada</span>
+<div class="text-right">
+<p class="text-on-surface-variant text-caption font-label-md">25 Out, 19:15</p>
+<p class="font-h2 text-secondary">R$ 15,00</p>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="flex flex-col items-center gap-1">
+<div class="w-2 h-2 rounded-full bg-outline"></div>
+<div class="w-0.5 h-6 bg-outline-variant"></div>
+<div class="w-2 h-2 rounded-full bg-outline"></div>
+</div>
+<div class="flex flex-col gap-1">
+<p class="font-label-md text-on-surface">Curitiba, PR</p>
+<p class="font-label-md text-on-surface">Joinville, SC</p>
+</div>
+</div>
+<div class="flex items-center justify-between mt-auto pt-md border-t border-surface-variant">
+<div class="flex items-center gap-2">
+<img alt="Motorista" class="w-8 h-8 rounded-full" alt="A portrait of a confident and friendly man in his early 30s, featuring a neat beard and a professional yet casual look. The lighting is bright and optimistic, with a clean background that suggests an urban setting. This image conveys trust and reliability for a community-based ride-sharing application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA29Eyvp1gTR8CJ0uoiH2g-ro3eJnqLqJvs7LM9hd_bidK2tYNORAGnF-nGsb8VZh_eWvYu9gwxeTMDiAXLFTsZ6NjOiGB6nPlG9trRCdQyVzCXNzPe8sHuNDbVLCXN6uFJnfmq1HDL3YhC0RkFOlek1mWpHGhpvjsUUZZ2nx-n9A_-P5GhkV9zuzPv212Eq0N6lcjFrf8UfeXy58fUjrO4U6WTzyl9jUTJbkDVRuQZEnny3gQgsBIJhcIRVJ69xRhghCEGFTYoIQQm">
+<span class="font-label-md text-on-surface">Marcos Silva</span>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-error hover:bg-error-container rounded-lg transition-colors">
+<span class="material-symbols-outlined" data-icon="cancel">cancel</span>
+</button>
+<a class="px-4 py-2 bg-surface-variant text-primary font-label-md rounded-lg hover:bg-primary-fixed transition-colors" href="{{DATA:SCREEN:SCREEN_19}}">Detalhes</a>
+</div>
+</div>
+</article>
+<!-- Information Section -->
+<div class="lg:col-span-12 bg-surface-container-high rounded-xl p-lg flex flex-col md:flex-row items-center gap-lg">
+<div class="bg-primary text-on-primary p-4 rounded-full">
+<span class="material-symbols-outlined text-[32px]" data-icon="info">info</span>
+</div>
+<div class="flex-1 text-center md:text-left">
+<h4 class="font-h2 text-on-background">Precisa alterar algo?</h4>
+<p class="text-on-surface-variant">Você pode cancelar sua carona sem custos até 12 horas antes da partida programada. Para alterações urgentes, use o chat direto com o motorista.</p>
+</div>
+<a class="bg-primary-container text-on-primary-container px-6 py-3 rounded-full font-label-md shadow-sm hover:opacity-90 transition-opacity" href="{{DATA:SCREEN:SCREEN_17}}">Central de Ajuda</a>
+</div>
+</div>
+</main>
+</div>
+<!-- Mobile Bottom NavBar -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface shadow-2xl flex justify-around items-center py-sm z-50 border-t border-outline-variant/30">
+<a class="flex flex-col items-center gap-1 text-primary" href="minhas_viagens_vemjunto_mobility.html">
+<span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
+<span class="text-caption font-bold">Viagem</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant cursor-pointer" href="resultados_de_busca_organizado_vemjunto_mobility.html">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="text-caption ">Explorar</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="chat_com_localiza_o_ao_vivo_vemjunto.html">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span class="text-caption ">Chat</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant cursor-pointer" href="perfil_do_usu_rio_vemjunto.html">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-caption ">Perfil</span>
+</a>
+</nav>
+<!-- FAB for Mobile -->
+<button class="md:hidden fixed bottom-24 right-margin bg-secondary text-on-secondary w-14 h-14 rounded-full flex items-center justify-center shadow-lg active:scale-95 transition-transform z-40">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+
+
+</body></html>

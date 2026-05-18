@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplos Interativos – Fundamentos ao Cálculo</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #f5f7fa;
+            padding-bottom: 40px;
+        }
+
+        /* ========== CABEÇALHO ========== */
+        header {
+            background: linear-gradient(135deg, #1e3799, #0c7cba);
+            color: white;
+            padding: 12px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-area h1 {
+            font-size: 1.3em;
+            white-space: nowrap;
+        }
+        .logo-icon { font-size: 1.8em; }
+
+        /* ========== NAVEGAÇÃO DESKTOP ========== */
+        .nav-desktop {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
+        }
+        .nav-desktop a, .nav-desktop .dropdown-btn {
+            background: rgba(255,255,255,0.12);
+            color: white;
+            padding: 7px 12px;
+            border-radius: 18px;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: 0.2s;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+        .nav-desktop a:hover, .nav-desktop .dropdown-btn:hover {
+            background: rgba(255,255,255,0.28);
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: #fff;
+            min-width: 210px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 1001;
+            padding: 5px 0;
+            right: 0;
+        }
+        .dropdown-content a {
+            color: #2c3e50;
+            padding: 8px 16px;
+            display: block;
+            border-radius: 0;
+            font-size: 0.88em;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .dropdown-content a:hover { background: #ecf0f1; }
+        .dropdown:hover .dropdown-content { display: block; }
+
+        /* ========== MENU HAMBURGUER (MOBILE) ========== */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            background: none;
+            border: none;
+            padding: 5px;
+            z-index: 1100;
+        }
+        .hamburger span {
+            width: 26px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(30, 55, 153, 0.97);
+            z-index: 1050;
+            flex-direction: column;
+            padding: 25px 20px;
+            gap: 10px;
+            overflow-y: auto;
+        }
+        .mobile-menu.active {
+            display: flex;
+        }
+        .mobile-menu a, .mobile-menu .mobile-dropdown-btn {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+            padding: 10px 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            display: block;
+            background: none;
+            border: none;
+            text-align: left;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .mobile-submenu {
+            display: none;
+            padding-left: 20px;
+            gap: 6px;
+            flex-direction: column;
+        }
+        .mobile-submenu.open { display: flex; }
+        .mobile-submenu a {
+            font-size: 0.95em;
+            border-bottom: none;
+            padding: 6px 8px;
+        }
+
+        /* ========== CONTEÚDO ========== */
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .intro {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-size: 0.95em;
+        }
+
+        /* ========== SEÇÕES COLAPSÁVEIS ========== */
+        .section {
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        .section-header {
+            background: #ecf0f1;
+            padding: 13px 18px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            font-weight: bold;
+            font-size: 1.05em;
+            color: #1e3799;
+            transition: 0.2s;
+        }
+        .section-header:hover { background: #d5dbdb; }
+        .section-header .arrow {
+            font-size: 1.2em;
+            transition: transform 0.3s;
+        }
+        .section.open .section-header .arrow {
+            transform: rotate(90deg);
+        }
+        .section-body {
+            display: none;
+            padding: 15px 20px;
+        }
+        .section.open .section-body { display: block; }
+
+        .subsection { margin-bottom: 20px; }
+        .subsection h3 {
+            color: #16a085;
+            border-bottom: 2px solid #d5f5e3;
+            padding-bottom: 4px;
+            margin-bottom: 10px;
+        }
+        .example-box {
+            background: #fdfefe;
+            border: 1px solid #bdc3c7;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 6px;
+        }
+        .solution {
+            background: #e8f8f5;
+            border-left: 4px solid #1abc9c;
+            padding: 8px 12px;
+            margin: 8px 0 0 0;
+            font-size: 0.95em;
+        }
+        table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+        th, td { border: 1px solid #bdc3c7; padding: 6px 10px; text-align: left; }
+        th { background: #3498db; color: white; }
+
+        /* ========== BOTÃO VOLTAR AO TOPO ========== */
+        .back-to-top {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #1e3799;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            font-size: 1.4em;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            display: none;
+            transition: 0.3s;
+            z-index: 900;
+        }
+        .back-to-top:hover { background: #0c7cba; }
+
+        /* ========== RESPONSIVO ========== */
+        @media (max-width: 768px) {
+            .nav-desktop { display: none; }
+            .hamburger { display: flex; }
+            header {
+                padding: 10px 16px;
+            }
+            .logo-area h1 {
+                font-size: 1.1em;
+            }
+            .container {
+                padding: 0 12px;
+            }
+            .section-header {
+                font-size: 0.95em;
+                padding: 10px 14px;
+            }
+            .section-body {
+                padding: 12px 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-area">
+            <span class="logo-icon">📘</span>
+            <h1>Matemática – Fundamentos ao Cálculo</h1>
+        </div>
+        <!-- Menu Desktop -->
+        <nav class="nav-desktop" id="navDesktop">
+            <a href="#secao1" onclick="openSection('secao1')">1. Conjuntos</a>
+            <div class="dropdown">
+                <button class="dropdown-btn">2. Produtos/Fatoração ▾</button>
+                <div class="dropdown-content">
+                    <a href="#sub2-1" onclick="openSection('secao2')">2.1 Soma pela diferença</a>
+                    <a href="#sub2-2" onclick="openSection('secao2')">2.2 Quadrado</a>
+                    <a href="#sub2-3" onclick="openSection('secao2')">2.3 Cubo</a>
+                    <a href="#sub2-4" onclick="openSection('secao2')">2.4 Fatoração</a>
+                    <a href="#sub2-5" onclick="openSection('secao2')">2.5 Fator comum</a>
+                    <a href="#sub2-6" onclick="openSection('secao2')">2.6 Trinômios</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropdown-btn">3. Polinômios ▾</button>
+                <div class="dropdown-content">
+                    <a href="#sub3-1" onclick="openSection('secao3')">3.1 Operações</a>
+                    <a href="#sub3-2" onclick="openSection('secao3')">3.2 Divisão</a>
+                    <a href="#sub3-3" onclick="openSection('secao3')">3.3 D'Alembert</a>
+                    <a href="#sub3-4" onclick="openSection('secao3')">3.4 Frações</a>
+                </div>
+            </div>
+            <a href="#secao4" onclick="openSection('secao4')">4. Funções</a>
+            <div class="dropdown">
+                <button class="dropdown-btn">5. Limites ▾</button>
+                <div class="dropdown-content">
+                    <a href="#sub5-1" onclick="openSection('secao5')">5.1 Substituição</a>
+                    <a href="#sub5-2" onclick="openSection('secao5')">5.2 Radicais</a>
+                    <a href="#sub5-3" onclick="openSection('secao5')">5.3 Infinitos</a>
+                </div>
+            </div>
+            <a href="#secao6" onclick="openSection('secao6')">6. Continuidade</a>
+            <div class="dropdown">
+                <button class="dropdown-btn">7. Assíntotas ▾</button>
+                <div class="dropdown-content">
+                    <a href="#sub7-1" onclick="openSection('secao7')">7.1 Verticais</a>
+                    <a href="#sub7-2" onclick="openSection('secao7')">7.2 Horizontais</a>
+                </div>
+            </div>
+            <a href="#secao8" onclick="openSection('secao8')">8. Def. Derivada</a>
+            <div class="dropdown">
+                <button class="dropdown-btn">9. Regras ▾</button>
+                <div class="dropdown-content">
+                    <a href="#sub9-1" onclick="openSection('secao9')">9.1 Potência</a>
+                    <a href="#sub9-2" onclick="openSection('secao9')">9.2 Produto</a>
+                    <a href="#sub9-3" onclick="openSection('secao9')">9.3 Quociente</a>
+                </div>
+            </div>
+            <a href="#secao10" onclick="openSection('secao10')">10. Deriv. Ponto</a>
+        </nav>
+        <!-- Botão Hamburguer -->
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <!-- Menu Mobile -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#secao1" onclick="closeMobileMenu(); openSection('secao1')">1. Conjuntos e Intervalos</a>
+        <button class="mobile-dropdown-btn" onclick="toggleMobileSub('submenu2')">2. Produtos Notáveis e Fatoração ▾</button>
+        <div class="mobile-submenu" id="submenu2">
+            <a href="#sub2-1" onclick="closeMobileMenu(); openSection('secao2')">2.1 Soma pela diferença</a>
+            <a href="#sub2-2" onclick="closeMobileMenu(); openSection('secao2')">2.2 Quadrado</a>
+            <a href="#sub2-3" onclick="closeMobileMenu(); openSection('secao2')">2.3 Cubo</a>
+            <a href="#sub2-4" onclick="closeMobileMenu(); openSection('secao2')">2.4 Fatoração</a>
+            <a href="#sub2-5" onclick="closeMobileMenu(); openSection('secao2')">2.5 Fator comum</a>
+            <a href="#sub2-6" onclick="closeMobileMenu(); openSection('secao2')">2.6 Trinômios</a>
+        </div>
+        <button class="mobile-dropdown-btn" onclick="toggleMobileSub('submenu3')">3. Polinômios ▾</button>
+        <div class="mobile-submenu" id="submenu3">
+            <a href="#sub3-1" onclick="closeMobileMenu(); openSection('secao3')">3.1 Operações</a>
+            <a href="#sub3-2" onclick="closeMobileMenu(); openSection('secao3')">3.2 Divisão</a>
+            <a href="#sub3-3" onclick="closeMobileMenu(); openSection('secao3')">3.3 D'Alembert</a>
+            <a href="#sub3-4" onclick="closeMobileMenu(); openSection('secao3')">3.4 Frações</a>
+        </div>
+        <a href="#secao4" onclick="closeMobileMenu(); openSection('secao4')">4. Teoria de Funções</a>
+        <button class="mobile-dropdown-btn" onclick="toggleMobileSub('submenu5')">5. Limites ▾</button>
+        <div class="mobile-submenu" id="submenu5">
+            <a href="#sub5-1" onclick="closeMobileMenu(); openSection('secao5')">5.1 Substituição/Fatoração</a>
+            <a href="#sub5-2" onclick="closeMobileMenu(); openSection('secao5')">5.2 Radicais</a>
+            <a href="#sub5-3" onclick="closeMobileMenu(); openSection('secao5')">5.3 Infinitos</a>
+        </div>
+        <a href="#secao6" onclick="closeMobileMenu(); openSection('secao6')">6. Continuidade</a>
+        <button class="mobile-dropdown-btn" onclick="toggleMobileSub('submenu7')">7. Assíntotas ▾</button>
+        <div class="mobile-submenu" id="submenu7">
+            <a href="#sub7-1" onclick="closeMobileMenu(); openSection('secao7')">7.1 Verticais</a>
+            <a href="#sub7-2" onclick="closeMobileMenu(); openSection('secao7')">7.2 Horizontais</a>
+        </div>
+        <a href="#secao8" onclick="closeMobileMenu(); openSection('secao8')">8. Definição de Derivada</a>
+        <button class="mobile-dropdown-btn" onclick="toggleMobileSub('submenu9')">9. Regras de Derivação ▾</button>
+        <div class="mobile-submenu" id="submenu9">
+            <a href="#sub9-1" onclick="closeMobileMenu(); openSection('secao9')">9.1 Potência/Soma</a>
+            <a href="#sub9-2" onclick="closeMobileMenu(); openSection('secao9')">9.2 Produto</a>
+            <a href="#sub9-3" onclick="closeMobileMenu(); openSection('secao9')">9.3 Quociente</a>
+        </div>
+        <a href="#secao10" onclick="closeMobileMenu(); openSection('secao10')">10. Derivada em Ponto</a>
+    </div>
+
+    <div class="container">
+        <div class="intro">
+            <p>🔍 <strong>Dois exemplos resolvidos</strong> para cada tópico. Clique nas seções para expandir. Use o menu para navegação rápida. Em dispositivos móveis, toque no ícone ☰.</p>
+        </div>
+
+        <!-- 1. CONJUNTOS E INTERVALOS -->
+        <div class="section" id="secao1">
+            <div class="section-header" onclick="toggleSection(this)">
+                1. Conjuntos e Intervalos <span class="arrow">▶</span>
+            </div>
+            <div class="section-body">
+                <div class="subsection">
+                    <h3>1.1 Operações com conjuntos finitos</h3>
+                    <div class="example-box"><strong>Ex 1:</strong> A={2,4,6}, B={1,2,3,4}. Determine A∪B, A∩B, A−B.<div class="solution">A∪B={1,2,3,4,6}; A∩B={2,4}; A−B={6}</div></div>
+                    <div class="example-box"><strong>Ex 2:</strong> C={−2,0,1,5}, D={0,1,3,5,7}. C∩D e D−C.<div class="solution">C∩D={0,1,5}; D−C={3,7}</div></div>
+                </div>
+                <div class="subsection">
+                    <h3>1.2 Notação de intervalos reais</h3>
+                    <div class="example-box"><strong>Ex 1:</strong> [−3,2[ em notação de conjunto.<div class="solution">{x∈ℝ | −3 ≤ x < 2}</div></div>
+                    <div class="example-box"><strong>Ex 2:</strong> {x∈ℝ | x > 5} como intervalo.<div class="solution">]5, ∞[</div></div>
+                </div>
+                <div class="subsection">
+                    <h3>1.3 Operações com intervalos na reta real</h3>
+                    <div class="example-box"><strong>Ex 1:</strong> A=[0,5], B=]2,7[. A∪B.<div class="solution">[0,7[</div></div>
+                    <div class="example-box"><strong>Ex 2:</strong> A=]−∞,3], B=[1,4[. A∩B.<div class="solution">[1,3]</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. PRODUTOS NOTÁVEIS E FATORAÇÃO -->
+        <div class="section" id="secao2">
+            <div class="section-header" onclick="toggleSection(this)">
+                2. Produtos Notáveis e Fatoração <span class="arrow">▶</span>
+            </div>
+            <div class="section-body">
+                <div class="subsection" id="sub2-1"><h3>2.1 Produto da soma pela diferença</h3>
+                    <div class="example-box"><strong>Ex 1:</strong> (x+6)(x−6)<div class="solution">x²−36</div></div>
+                    <div class="example-box"><strong>Ex 2:</strong> (3a−2b)(3a+2b)<div class="solution">9a²−4b²</div></div>
+                </div>
+                <div class="subsection" id="sub2-2"><h3>2.2 Quadrado da soma e da diferença</h3>
+                    <div class="example-box"><strong>Ex 1:</strong> (2x+5)²<div class="solution">4x²+20x+25</div></div>
+                    <div class="example-box"><strong>Ex 2:</strong> (y−3)²<div class="solution">y²−6y+9</div></div>
+                </div>
+                <div class="subsection" id="sub2-3"><h3>2.3 Cubo da soma e da diferença</h3>
+                    <div class="example-box"><strong>Ex 1:</strong> (x+2)³<div class="solution">x³+6x²+12x+8</div></div>
+                    <div class="example-box"><strong>Ex 2:</strong> (2a−1)³<div class="solution">8a³−12a²+6a−1</div></div>
+                </div>
+                <div class="subsection" id="sub2-4"><h3>2.4 Fatoração por produtos notáveis</h3>
+                    <div class="example-box"><strong>Ex 1:</strong> 9x²−25<div class="solution">(3x−5)(3x+5)</div></div>
+                    <div class="example-box"><strong>Ex 2:</strong> x²+10x+25<div class="solution">(x+5)²</div></div>
+                </div>
+                <div class="subsection" id="sub2-5"><h3>2.5 Fator comum e agrupamento</h3>
+                    <div class="example-box"><strong>Ex 1:</strong> 12x³−18x²<div class="solution">6x²(2x−3)</div></div>
+                    <div class="example-box"><strong>Ex 2:</strong> ax+ay+bx+by<div class="solution">(x+y)(a+b)</div></div>
+                </div>
+                <div class="subsection" id="sub2-6"><h3>2.6 Trinômios do 2º grau</h3>
+                    <div class="example-box"><strong>Ex 1:</strong> x²−5x+6<div class="solution">(x−2)(x−3)</div></div>
+                    <div class="example-box"><strong>Ex 2:</strong> 2x²+3x−2<div class="solution">(2x−1)(x+2)</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. POLINÔMIOS -->
+        <div class="section" id="secao3">
+            <div class="section-header" onclick="toggleSection(this)">
+                3. Polinômios <span class="arrow">▶</span>
+            </div>
+            <div class="section-body">
+                <div class="subsection" id="sub3-1"><h3>3.1 Operações</h3>
+                    <div class="example-box"><strong>Ex 1:</strong> (3x²+2x−1)+(x²−4x+5)<div class="solution">4x²−2x+4</div></div>
+                    <div class="example-box"><strong>Ex 2:</strong> (2x+1)(x²−x+3)<div class="solution">2x³−x²+5x+3</div></div>
+                </div>
+                <div class="subsection" id="sub3-2"><h3>3.2 Divisão (Briot-Ruffini / chave)</h3>
+                    <div class="example-box"><strong>Ex 1:</strong> (x²−3x+2) ÷ (x−1)<div class="solution">Q: x−2, R:0</div></div>
+                    <div class="example-box"><strong>Ex 2:</strong> (2x³+3x²−5) ÷ (x+2)<div class="solution">Q: 2x²−x+2, R:−9</div></div>
+                </div>
+                <div class="subsection" id="sub3-3"><h3>3.3 Teorema de D'Alembert</h3>
+                    <div class="example-box"><strong>Ex 1:</strong> Resto de (x³−4x+2) ÷ (x−2)<div class="solution">P(2)=2</div></div>
+                    <div class="example-box"><strong>Ex 2:</strong> Resto de (x²+5x+6) ÷ (x+3)<div class="solution">P(−3)=0</div></div>
+                </div>
+                <div class="subsection" id="sub3-4"><h3>3.4 Simplificação de frações algébricas</h3>
+                    <div class="example-box"><strong>Ex 1:</strong> (x²−4)/(x−2)<div class="solution">x+2, x≠2</div></div>
+                    <div class="example-box"><strong>Ex 2:</strong> (x²+3x−4)/(x²−1)<div class="solution">(x+4)/(x+1), x≠1,−1</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. FUNÇÕES -->
+        <div class="section" id="secao4">
+            <div class="section-header" onclick="toggleSection(this)">
+                4. Teoria de Funções <span class="arrow">▶</span>
+            </div>
+            <div class="section-body">
+                <div class="subsection"><h3>4.1 Conceito e representações</h3>
+                    <div class="example-box"><strong>Ex 1:</strong> Diagrama A={1,2}→B={3,4} com 1→3, 2→3 é função?<div class="solution">Sim, cada elemento de A tem uma única imagem.</div></div>
+                    <div class="example-box"><strong>Ex 2:</strong> y² = x define função de x em y?<div class="solution">Não, pois para x=4, y=±2.</div></div>
+                </div>
+                <div class="subsection"><h3>4.2 Teste da reta vertical e crescimento</h3>
+                    <div class="example-box"><strong>Ex 1:</strong> Gráfico de y=x² passa no teste da reta vertical?<div class="solution">Sim.</div></div>
+                    <div class="example-box"><strong>Ex 2:</strong> Intervalo onde f(x)=x² é crescente.<div class="solution">x > 0.</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. LIMITES -->
+        <div class="section" id="secao5">
+            <div class="section-header" onclick="toggleSection(this)">
+                5. Limites <span class="arrow">▶</span>
+            </div>
+            <div class="section-body">
+                <div class="subsection" id="sub5-1"><h3>5.1 Limites por substituição e fatoração</h3>
+                    <div class="example-box"><strong>Ex 1:</strong> lim<sub>x→2</sub> (x²−4)/(x−2)<div class="solution">4</div></div>
+                    <div class="example-box"><strong>Ex 2:</strong> lim<sub>x→3</sub> (x²−9)/(x−3)<div class="solution">6</div></div>
+                </div>
+                <div class="subsection" id="sub5-2"><h3>5.2 Limites com radicais (racionalização)</h3>
+                    <div class="example-box"><strong>Ex 1:</strong> lim<sub>x→0</sub> (√(x+4)−2)/x<div class="solution">1/4</div></div>
+                    <div class="example-box"><strong>Ex 2:</strong> lim<sub>x→0</sub> x/(√(x+9)−3)<div class="solution">6</div></div>
+                </div>
+                <div class="subsection" id="sub5-3"><h3>5.3 Limites no infinito e limites infinitos</h3>
+                    <div class="example-box"><strong>Ex 1:</strong> lim<sub>x→∞</sub> (3x²+2)/(x²−1)<div class="solution">3</div></div>
+                    <div class="example-box"><strong>Ex 2:</strong> lim<sub>x→2⁺</sub> 1/(x−2)<div class="solution">+∞ (assíntota vertical)</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. CONTINUIDADE -->
+        <div class="section" id="secao6">
+            <div class="section-header" onclick="toggleSection(this)">
+                6. Continuidade <span class="arrow">▶</span>
+            </div>
+            <div class="section-body">
+                <div class="example-box"><strong>Ex 1:</strong> f(x)=(x²−1)/(x−1) em x=1?<div class="solution">Descontínua removível (limite =2).</div></div>
+                <div class="example-box"><strong>Ex 2:</strong> f(x)={ x+1 se x<2; 4 se x≥2 } em x=2?<div class="solution">Descontínua (salto).</div></div>
+            </div>
+        </div>
+
+        <!-- 7. ASSÍNTOTAS -->
+        <div class="section" id="secao7">
+            <div class="section-header" onclick="toggleSection(this)">
+                7. Assíntotas <span class="arrow">▶</span>
+            </div>
+            <div class="section-body">
+                <div class="subsection" id="sub7-1"><h3>7.1 Assíntotas verticais</h3>
+                    <div class="example-box"><strong>Ex 1:</strong> f(x)=2/(x−5)<div class="solution">x=5</div></div>
+                    <div class="example-box"><strong>Ex 2:</strong> f(x)=(x+1)/(x²−1) → 1/(x−1)<div class="solution">x=1 (vertical), x=−1 removível</div></div>
+                </div>
+                <div class="subsection" id="sub7-2"><h3>7.2 Assíntotas horizontais</h3>
+                    <div class="example-box"><strong>Ex 1:</strong> f(x)=(4x²+1)/(2x²−3)<div class="solution">y=2</div></div>
+                    <div class="example-box"><strong>Ex 2:</strong> f(x)=5/(x²+1)<div class="solution">y=0</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. DEFINIÇÃO DE DERIVADA -->
+        <div class="section" id="secao8">
+            <div class="section-header" onclick="toggleSection(this)">
+                8. Definição de Derivada <span class="arrow">▶</span>
+            </div>
+            <div class="section-body">
+                <div class="example-box"><strong>Ex 1:</strong> f(x)=x² → f'(x) pela definição<div class="solution">2x</div></div>
+                <div class="example-box"><strong>Ex 2:</strong> f(x)=3x+4<div class="solution">3</div></div>
+            </div>
+        </div>
+
+        <!-- 9. REGRAS DE DERIVAÇÃO -->
+        <div class="section" id="secao9">
+            <div class="section-header" onclick="toggleSection(this)">
+                9. Regras de Derivação <span class="arrow">▶</span>
+            </div>
+            <div class="section-body">
+                <div class="subsection" id="sub9-1"><h3>9.1 Potência, constante, soma</h3>
+                    <div class="example-box"><strong>Ex 1:</strong> f(x)=4x³−2x+7 → f'(x)<div class="solution">12x²−2</div></div>
+                    <div class="example-box"><strong>Ex 2:</strong> g(x)=5x⁴+3x²−x+10<div class="solution">20x³+6x−1</div></div>
+                </div>
+                <div class="subsection" id="sub9-2"><h3>9.2 Regra do produto</h3>
+                    <div class="example-box"><strong>Ex 1:</strong> (x²+1)(3x−2)<div class="solution">9x²−4x+3</div></div>
+                    <div class="example-box"><strong>Ex 2:</strong> 2x(x³−x)<div class="solution">8x³−4x</div></div>
+                </div>
+                <div class="subsection" id="sub9-3"><h3>9.3 Regra do quociente</h3>
+                    <div class="example-box"><strong>Ex 1:</strong> (x+1)/(x−1)<div class="solution">−2/(x−1)²</div></div>
+                    <div class="example-box"><strong>Ex 2:</strong> x²/(x+3)<div class="solution">(x²+6x)/(x+3)²</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 10. DERIVADA EM PONTO -->
+        <div class="section" id="secao10">
+            <div class="section-header" onclick="toggleSection(this)">
+                10. Derivada em um Ponto e Aplicações <span class="arrow">▶</span>
+            </div>
+            <div class="section-body">
+                <div class="example-box"><strong>Ex 1:</strong> f(x)=x²+3x, f'(2)<div class="solution">7</div></div>
+                <div class="example-box"><strong>Ex 2:</strong> f(x)=√x, f'(9)<div class="solution">1/6</div></div>
+            </div>
+        </div>
+
+    </div>
+
+    <button class="back-to-top" id="backBtn" title="Voltar ao topo">⬆</button>
+
+    <script>
+        // Expandir/contrair seções
+        function toggleSection(header) {
+            const section = header.parentElement;
+            section.classList.toggle('open');
+        }
+        // Abrir seção programaticamente
+        function openSection(id) {
+            const sec = document.getElementById(id);
+            if (sec) sec.classList.add('open');
+        }
+
+        // Menu hamburguer mobile
+        const hamburger = document.getElementById('hamburgerBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+        function closeMobileMenu() {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+        }
+        // Submenus mobile
+        function toggleMobileSub(id) {
+            const sub = document.getElementById(id);
+            sub.classList.toggle('open');
+        }
+
+        // Botão voltar ao topo
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('backBtn');
+            btn.style.display = window.scrollY > 400 ? 'block' : 'none';
+        });
+        document.getElementById('backBtn').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

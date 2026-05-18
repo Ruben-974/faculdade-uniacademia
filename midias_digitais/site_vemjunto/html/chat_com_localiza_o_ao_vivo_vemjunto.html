@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-
-<html lang="pt-BR"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -106,86 +103,95 @@
         }
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
     </style>
-</head>
+<style data-stitch-cursor=""></style><style data-stitch-scroll-lock=""></style></head>
 <body class="bg-background text-on-background">
 <!-- TopAppBar Shell Component -->
-<header class="bg-surface shadow-sm border-b-0 sticky top-0 z-50">
+<header class="bg-surface shadow-sm sticky top-0 z-50">
 <div class="flex justify-between items-center px-margin py-md w-full max-w-7xl mx-auto">
-<h1 class="text-h2 font-display font-bold text-primary">VemJunto</h1>
+<a class="text-h2 font-display font-bold text-primary" href="index.html">VemJunto</a>
 <nav class="hidden md:flex items-center gap-lg">
-<a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Buscar Carona</a>
-<a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Oferecer Carona</a>
+<a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors" href="index.html">Buscar Carona</a>
+<a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors" href="oferecer_carona_vemjunto_mobility_1.html">Oferecer Carona</a>
+<a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors" href="minhas_viagens_vemjunto_mobility.html">Minhas Viagens</a>
 </nav>
 <div class="flex items-center gap-md">
-<button class="p-xs text-on-surface-variant hover:bg-surface-variant rounded-full">
+<div class="relative group">
+<button class="text-on-surface-variant hover:text-primary transition-colors relative flex items-center p-2" aria-label="Notificações">
 <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-surface"></span>
 </button>
-<div class="h-10 w-10 rounded-full overflow-hidden border-2 border-primary-container">
-<img alt="Avatar do usuário" class="w-full h-full object-cover" data-alt="A high-quality studio portrait of a friendly young man with a warm smile. The lighting is soft and professional, highlighting his approachable nature. He has short groomed hair and is wearing a simple casual shirt. The background is a clean, neutral gradient of soft blues and whites, maintaining a modern and trustworthy aesthetic consistent with a community-focused travel app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBteBgzO1fEI-uS0VGYxzsUY2tw9FlcdUkJM7mjOVvh2tK_8vhH5GdC79ZUg87Ws5uJYydNvEoKGWox_EKAIgmTXBWOMBF2nsg3hSHdGQ89mD_Y42LC4YvqBI09cw9J1qQ0CJFfPfj04r7YZC-P-5k6e5vbGgHhHrxL-z-9PNjl2vkI2BiaaGvNnZFU8_OoTDHLEqKPWD_t52nNPTCOdMJmi0da4ud9iXBOsYY3sLDn-4yG9J5B1ZqEfjpmCkoaGan2PD2UOAyg1SaL"/>
+<div class="absolute right-0 mt-0 w-80 bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant/20 hidden group-hover:block z-[60] py-md before:content-[''] before:absolute before:-top-4 before:left-0 before:w-full before:h-4">
+<div class="px-md pb-sm border-b border-outline-variant/10">
+<p class="font-display text-label-md font-bold text-on-background">Notificações</p>
+</div>
+<div class="max-h-64 overflow-y-auto">
+<div class="px-md py-sm hover:bg-surface-container-low transition-colors cursor-pointer border-b border-outline-variant/5">
+<p class="font-display text-caption text-primary mb-1">Viagem Confirmada</p>
+<p class="font-display text-body-md text-on-surface-variant">Sua reserva para Campinas foi aceita por Ricardo.</p>
+<span class="font-display text-[10px] text-outline">Há 5 min</span>
+</div>
+<div class="px-md py-sm hover:bg-surface-container-low transition-colors cursor-pointer border-b border-outline-variant/5">
+<p class="font-display text-caption text-primary mb-1">Nova Mensagem</p>
+<p class="font-display text-body-md text-on-surface-variant">Ricardo: "Oi! Estarei no ponto às 08:20."</p>
+<span class="font-display text-[10px] text-outline">Há 1 hora</span>
+</div>
+</div>
+<a href="notifica_es_vemjunto.html" class="block text-center pt-sm text-primary font-display text-caption hover:underline">Ver todas</a>
+</div>
+</div>
+<div class="relative group">
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center p-2" aria-label="Menu de Perfil">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+<div class="absolute right-0 mt-0 w-48 bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant/20 hidden group-hover:block z-[60] py-sm before:content-[''] before:absolute before:-top-4 before:left-0 before:w-full before:h-4">
+<a href="perfil_do_usu_rio_vemjunto.html" class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors"><span class="material-symbols-outlined text-[20px] text-outline">person</span><span class="font-display text-body-md text-on-surface">Meu Perfil</span></a>
+<a href="#" class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[20px] text-outline">settings</span>
+<span class="font-display text-body-md text-on-surface">Configurações</span>
+</a>
+<div class="my-sm border-t border-outline-variant/10"></div>
+<a href="#" class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors text-error">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+<span class="font-display text-body-md">Sair</span>
+</a>
+</div>
 </div>
 </div>
 </div>
 </header>
-<main class="max-w-7xl mx-auto flex h-[calc(100vh-80px)] overflow-hidden">
+<main class="w-full flex h-[calc(100vh-80px)] overflow-hidden">
 <!-- SideNavBar / Sidebar Conversation List -->
-<aside class="w-full md:w-80 lg:w-96 flex flex-col border-r border-outline-variant bg-surface-container-low">
-<!-- Sidebar Header -->
-<div class="p-md bg-surface-container-low flex flex-col gap-sm">
-<div class="flex justify-between items-center">
-<h2 class="font-display text-h2 text-primary">Mensagens</h2>
-<button class="bg-primary text-on-primary rounded-full p-2 flex items-center justify-center">
-<span class="material-symbols-outlined" data-icon="edit_square">edit_square</span>
-</button>
+<aside class="hidden md:flex flex-col gap-md p-md w-64 sticky top-[72px] h-[calc(100vh-72px)] bg-surface-container-low border-r border-outline-variant">
+<div class="mb-lg">
+<h3 class="text-h2 font-display font-bold text-primary">Meu Painel</h3>
+<p class="text-on-surface-variant font-caption">Bem-vindo de volta!</p>
 </div>
-<div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
-<input class="w-full pl-10 pr-4 py-2 bg-surface rounded-xl border-none focus:ring-2 focus:ring-primary-container text-body-md" placeholder="Buscar conversas..." type="text"/>
-</div>
-</div>
-<!-- Conversations List -->
-<div class="flex-1 overflow-y-auto">
-<!-- Active Conversation Item -->
-<div class="bg-primary-container text-on-primary-container p-md flex gap-md cursor-pointer transition-all border-l-4 border-primary">
-<div class="relative">
-<img alt="Ana Silva" class="w-12 h-12 rounded-full object-cover shadow-sm" data-alt="A professional headshot of a smiling woman with a vibrant and trustworthy personality. She is photographed in natural daylight with a soft-focus urban park background. Her expression is welcoming and confident, perfectly capturing the spirit of a reliable ride-share community member. The image is bright and clean with a modern light-mode feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgM6Ftn2WjK1hkzxrADqkfMc5C1hDxurYXSSgNwsaArAx71tnW9zNulu_VE01qAC4nx2epYo2v7FinOhZQh65bCW2PEWk50eOmd8yfg3aPnO11ZP441nyYRfuSoa2SbON-7t3GCqc1PDGASyXySVgO_2W-FdYFNlTtOIyTWuSxGI3FN3QgVGsQJLPWmsFbwwUmbWjsDDDqO-0OnJY9q-_wlOOXyiDzYJFZHNAeSB3eT52uwkM_NYkL3MH7m_cHK9w5JeAN6WxFUHU"/>
-<span class="absolute bottom-0 right-0 w-3 h-3 bg-tertiary border-2 border-primary-container rounded-full"></span>
-</div>
-<div class="flex-1 min-w-0">
-<div class="flex justify-between items-baseline">
-<span class="font-label-md text-label-md truncate">Ana Silva</span>
-<span class="text-caption font-caption opacity-80">14:20</span>
-</div>
-<p class="text-caption font-caption mb-1">São Paulo para Campinas</p>
-<p class="text-body-md font-body-md truncate opacity-90 font-medium">Combinado! Te espero no posto às 18h.</p>
-</div>
-</div>
-<!-- Inactive Conversation Item -->
-<div class="hover:bg-surface-variant p-md flex gap-md cursor-pointer transition-all border-b border-outline-variant/30">
-<img alt="Carlos Oliveira" class="w-12 h-12 rounded-full object-cover" data-alt="A casual but clear portrait of a middle-aged man with a friendly demeanor. He is wearing a simple polo shirt and standing in a sun-drenched outdoor setting. The lighting is warm and natural, creating a sense of reliability and human connection. The image style is realistic and approachable, suitable for a trusted peer-to-peer carpooling platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_Z3a6DCy-YxWXXNOUgAKlqD2dN5wnIIu6_airGQlEq7LLkwPNofLiqLHcO5cRVo1pLFfhQFRuKMzr5mTl31jfuwlFdJjZj-Iumb_FuYd5vuZ6BQr8y4gGs9_UwBWYmOoigUNW9uqSpl03YmFjz7MAGi7tHxPzccSlM7oHsOLS9CtqMCRyf4Uzi2sHMOb9jDC-hgczP84aL_EAg0YOpOIxu0QJlkJgFL5HE3y36_bXMmPlzbQvXSpH55ePL_VT62pk6JGlWnL-1a2S"/>
-<div class="flex-1 min-w-0">
-<div class="flex justify-between items-baseline">
-<span class="font-label-md text-label-md text-on-surface truncate">Carlos Oliveira</span>
-<span class="text-caption font-caption text-outline">Ontem</span>
-</div>
-<p class="text-caption font-caption text-on-surface-variant mb-1">Curitiba para Joinville</p>
-<p class="text-body-md font-body-md text-on-surface-variant truncate">Obrigado pela carona, Carlos!</p>
-</div>
-</div>
-<!-- Inactive Conversation Item -->
-<div class="hover:bg-surface-variant p-md flex gap-md cursor-pointer transition-all border-b border-outline-variant/30">
-<div class="relative">
-<img alt="Bruno Santos" class="w-12 h-12 rounded-full object-cover" data-alt="A bright and friendly portrait of a young man wearing glasses. He has an expressive and cheerful face, set against a clean, modern interior with soft natural light streaming in. The overall atmosphere is positive and safe, reinforcing the community trust of the VemJunto app. The color palette is composed of soft blues and crisp whites." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzIlBjximqxdLCikuGrKc2BHttxQ2R5a01YR-V6Cl8j3jxp0VeK2p95Om1N9uhPJBDse8lajrXBYi_93TO9mEG-ms2BnWPacRyzVDunZjYxHXdl-Z4wOhBmh9robIC5SIjWdPmKpesJR1dR-n6mIMwGEXrrH8SafrwzzbiVbe03V2Z-yqaB2-OjlqA7axKWy_1HKQtCLSX0dd2XEY9ZD24yESFNLdovvLhoAzkfMqbLbbSoun1uX4zd3CJZ6rzK6Wa2DzIHC7gXdPl"/>
-</div>
-<div class="flex-1 min-w-0">
-<div class="flex justify-between items-baseline">
-<span class="font-label-md text-label-md text-on-surface truncate">Bruno Santos</span>
-<span class="text-caption font-caption text-outline">Terça</span>
-</div>
-<p class="text-caption font-caption text-on-surface-variant mb-1">Rio para Niterói</p>
-<p class="text-body-md font-body-md text-on-surface-variant truncate">Tem espaço para uma mochila grande?</p>
-</div>
-</div>
-</div>
+<nav class="flex flex-col gap-xs">
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="minhas_viagens_vemjunto_mobility.html">
+<span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
+<span class="font-display text-label-md">Minhas Viagens</span>
+</a>
+<a class="bg-primary-container text-on-primary-container rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="chat_com_localiza_o_ao_vivo_vemjunto.html">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+<span class="font-display text-label-md">Mensagens</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="configura_es_e_pagamento_vemjunto_mobility.html">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-display text-label-md">Configurações</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="perfil_do_usu_rio_vemjunto.html">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-display text-label-md">Perfil</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-display text-label-md">Ajuda</span>
+</a>
+</nav>
+<a href="oferecer_carona_vemjunto_mobility_1.html" class="mt-auto bg-secondary text-on-secondary rounded-full py-4 px-6 font-display text-label-md flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shadow-md">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+    Nova Carona
+</a>
 </aside>
 <!-- Main Chat Window -->
 <section class="flex-1 flex flex-col bg-background">
@@ -197,7 +203,7 @@
 </button>
 <div class="flex items-center gap-sm">
 <div class="relative">
-<img alt="Ana Silva" class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqdrkShxpEwfo97oNbYn-oJ5oBbV7jruvesx1i9BhmRl_DskYK14c3Rmg1LUs0VGgacr3S0P2hmp7-z2MUBz6JZuVLJLfC7oUgZh03MvKIEIi5bL2QRcDV-9izRtH_ckE_uTnQ-JuLdmv9fRmqj3on0blLLYbC5H0L40-f858tqEAVDIHbQ7IRCplRhZeOa_PpTJfrkwkaETAwY-jSjCcTkU1mehIz7bf623Y66EEs55FXXEzRxllA0AUn_U5Yw8RGKGzrS0jw6nc5"/>
+<img alt="Ana Silva" class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqdrkShxpEwfo97oNbYn-oJ5oBbV7jruvesx1i9BhmRl_DskYK14c3Rmg1LUs0VGgacr3S0P2hmp7-z2MUBz6JZuVLJLfC7oUgZh03MvKIEIi5bL2QRcDV-9izRtH_ckE_uTnQ-JuLdmv9fRmqj3on0blLLYbC5H0L40-f858tqEAVDIHbQ7IRCplRhZeOa_PpTJfrkwkaETAwY-jSjCcTkU1mehIz7bf623Y66EEs55FXXEzRxllA0AUn_U5Yw8RGKGzrS0jw6nc5">
 <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-tertiary border-2 border-surface rounded-full"></span>
 </div>
 <div>
@@ -211,9 +217,9 @@
 <span class="text-caption font-caption text-on-surface-variant uppercase tracking-wider">Viagem em andamento</span>
 <span class="font-label-md text-label-md text-secondary">São Paulo → Campinas</span>
 </div>
-<button class="p-sm text-on-surface-variant hover:bg-surface-variant rounded-full">
+<a class="p-sm text-on-surface-variant hover:bg-surface-variant rounded-full flex items-center justify-center" href="SCREEN_19">
 <span class="material-symbols-outlined" data-icon="info">info</span>
-</button>
+</a>
 <button class="p-sm text-on-surface-variant hover:bg-surface-variant rounded-full">
 <span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
 </button>
@@ -263,9 +269,9 @@
 </div>
 <!-- Location Attachment Message -->
 <div class="flex flex-col items-end self-end max-w-[80%]">
-<div class="bg-primary text-on-primary p-xs rounded-2xl rounded-tr-none shadow-md overflow-hidden">
+<a class="bg-primary text-on-primary p-xs rounded-2xl rounded-tr-none shadow-md overflow-hidden block hover:opacity-95 transition-opacity" href="SCREEN_22">
 <div class="w-full h-40 bg-surface-variant relative">
-<img alt="Mapa do ponto de encontro" class="w-full h-full object-cover" data-location="São Paulo, Barra Funda" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoka7h1Y4C0-d2i6RFZeJ2AGkHBgYQTlivhuafgQVPq8lqZFEiwJtEa7rSwVfiXpLm7wbt9bURpLXZ_US-KbD2miub91zTwdNnsY2yhj4GPVcTcjww27EtJ9iGq2SeV4-Ez9cxx_jvt5UmQyptsPHHsEMkBRgDxOdpCFO4GiWZs0BkzIcmrEA2OyC_okna2k_QU4ZylUhV0CPgoe38iPR3lKOIjAnhZ9_lB4FcOejursiUaKycIvoueaAXvE-m9ZTo9WVhZZLuYEci"/>
+<img alt="Mapa do ponto de encontro" class="w-full h-full object-cover" data-location="São Paulo, Barra Funda" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoka7h1Y4C0-d2i6RFZeJ2AGkHBgYQTlivhuafgQVPq8lqZFEiwJtEa7rSwVfiXpLm7wbt9bURpLXZ_US-KbD2miub91zTwdNnsY2yhj4GPVcTcjww27EtJ9iGq2SeV4-Ez9cxx_jvt5UmQyptsPHHsEMkBRgDxOdpCFO4GiWZs0BkzIcmrEA2OyC_okna2k_QU4ZylUhV0CPgoe38iPR3lKOIjAnhZ9_lB4FcOejursiUaKycIvoueaAXvE-m9ZTo9WVhZZLuYEci">
 <div class="absolute inset-0 flex items-center justify-center">
 <span class="material-symbols-outlined text-error text-[40px] drop-shadow-md" data-icon="location_on" data-weight="fill" style="font-variation-settings: 'FILL' 1;">location_on</span>
 </div>
@@ -274,10 +280,23 @@
 <p class="font-label-md text-label-md">Terminal Barra Funda</p>
 <p class="text-caption opacity-90">Acesso pela Rua Tagipuru</p>
 </div>
-</div>
+</a>
 <span class="text-caption font-caption text-outline mt-xs mr-1">10:21</span>
 </div>
 <!-- Active Conversation Text -->
+<div class="flex justify-center my-md">
+<div class="bg-tertiary-container/10 border border-tertiary/20 text-tertiary px-lg py-sm rounded-2xl flex flex-col items-center gap-base shadow-sm max-w-sm">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[20px] animate-pulse" data-icon="sensors">sensors</span>
+<span class="font-label-md text-label-md uppercase tracking-tight">Localização Compartilhada</span>
+</div>
+<p class="text-caption text-center">O motorista iniciou o compartilhamento de localização em tempo real.</p>
+<a class="mt-xs flex items-center gap-xs bg-tertiary text-on-tertiary px-md py-xs rounded-full font-label-md hover:bg-tertiary/90 transition-colors shadow-md" href="SCREEN_22">
+<span class="material-symbols-outlined text-[18px]" data-icon="explore">explore</span>
+                            Acompanhar motorista ao vivo
+                        </a>
+</div>
+</div>
 <div class="flex flex-col items-start max-w-[80%]">
 <div class="bg-surface-container-high text-on-surface p-md rounded-2xl rounded-tl-none shadow-sm">
 <p class="text-body-md font-body-md">Combinado! Te espero no posto às 18h.</p>
@@ -308,7 +327,9 @@
 </section>
 </main>
 <!-- FAB for New Conversation (Mobile only context) -->
-<button class="md:hidden fixed bottom-6 right-6 bg-secondary-container text-on-secondary-container w-14 h-14 rounded-2xl shadow-xl flex items-center justify-center z-50">
+<a href="chat_com_localiza_o_ao_vivo_vemjunto.html" class="md:hidden fixed bottom-6 right-6 bg-secondary-container text-on-secondary-container w-14 h-14 rounded-2xl shadow-xl flex items-center justify-center z-50" style="display: inline-block; text-align: center;">
 <span class="material-symbols-outlined text-[28px]" data-icon="chat">chat</span>
-</button>
+</a>
+
+
 </body></html>

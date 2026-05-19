@@ -8,13 +8,12 @@ def contarImpar(n1, n2):
         n1 = n2
         n2 = n3
 
-    for i in range(n1, n2):
-        if i % 2 == 0:
+    for i in range(n1, n2+1):
+        if i % 2 != 0:
+            print(i)
             cont += 1
 
     return cont
-
-
 
 
 num1 = int(input('Digite o 1º número: '))
@@ -23,3 +22,4 @@ impares = contarImpar(num1, num2)
 
 
 print(f'Entre {num1} e {num2} existem {impares} números ímpares')
+

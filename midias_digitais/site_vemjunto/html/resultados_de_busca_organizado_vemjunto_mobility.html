@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="pt-BR"><head>
+﻿<!DOCTYPE html><html lang="pt-BR"><head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -138,13 +138,13 @@
 <a href="notifica_es_vemjunto.html" class="block text-center pt-sm text-primary font-display text-caption hover:underline">Ver todas</a>
 </div>
 </div>
-<div class="relative group">
-<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center p-2" aria-label="Menu de Perfil">
+<div class="relative group hidden md:block">
+<a href="perfil_do_usu_rio_vemjunto.html" class="text-on-surface-variant hover:text-primary transition-colors flex items-center p-2" aria-label="Menu de Perfil">
 <span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
-</button>
+</a>
 <div class="absolute right-0 mt-0 w-48 bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant/20 hidden group-hover:block z-[60] py-sm before:content-[''] before:absolute before:-top-4 before:left-0 before:w-full before:h-4">
 <a href="perfil_do_usu_rio_vemjunto.html" class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors"><span class="material-symbols-outlined text-[20px] text-outline">person</span><span class="font-display text-body-md text-on-surface">Meu Perfil</span></a>
-<a href="#" class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors">
+<a href="configura_es_e_pagamento_vemjunto_mobility.html" class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors">
 <span class="material-symbols-outlined text-[20px] text-outline">settings</span>
 <span class="font-display text-body-md text-on-surface">Configurações</span>
 </a>
@@ -161,9 +161,14 @@
 <div class="flex w-full min-h-[calc(100vh-72px)]">
 <!-- Search Filters (SideBar Context) -->
 <aside class="hidden md:flex flex-col gap-md p-md w-64 sticky top-[72px] h-[calc(100vh-72px)] bg-surface-container-low border-r border-outline-variant">
-<div class="mb-lg">
+<div class="mb-lg flex justify-between items-start">
+<div>
 <h3 class="text-h2 font-display font-bold text-primary">Meu Painel</h3>
 <p class="text-on-surface-variant font-caption">Bem-vindo de volta!</p>
+</div>
+<button class="md:hidden text-on-surface-variant p-1" onclick="toggleMobileMenu()">
+<span class="material-symbols-outlined">close</span>
+</button>
 </div>
 <nav class="flex flex-col gap-xs">
 <a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="minhas_viagens_vemjunto_mobility.html">
@@ -187,9 +192,9 @@
 <span class="font-display text-label-md">Ajuda</span>
 </a>
 </nav>
-<a href="oferecer_carona_vemjunto_mobility_1.html" class="mt-auto bg-secondary text-on-secondary rounded-full py-4 px-6 font-display text-label-md flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shadow-md">
-<span class="material-symbols-outlined" data-icon="add">add</span>
-    Nova Carona
+<a href="oferecer_carona_vemjunto_mobility_1.html" class="mt-auto bg-primary text-on-primary rounded-xl py-3 px-4 font-display text-label-md flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shadow-md">
+<span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
+Oferecer Carona
 </a>
 </aside>
 <!-- Search Results -->
@@ -356,27 +361,59 @@
 </button>
 </div>
 </main>
-</div>
-<!-- BottomNavBar (Mobile Only) -->
-<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface shadow-2xl flex justify-around items-center py-sm z-50 border-t border-outline-variant/30">
-<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="minhas_viagens_vemjunto_mobility.html">
-<span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
-<span class="text-caption ">Viagem</span>
+</div><!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface shadow-2xl flex justify-around items-center pt-sm pb-safe z-50 border-t border-outline-variant/30">
+<a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="minhas_viagens_vemjunto_mobility.html">
+<span class="material-symbols-outlined text-[22px]" data-icon="directions_car">directions_car</span>
+<span class="text-[10px] font-medium">Viagem</span>
 </a>
-<a class="flex flex-col items-center gap-1 text-primary cursor-pointer" href="resultados_de_busca_organizado_vemjunto_mobility.html">
-<span class="material-symbols-outlined" data-icon="explore">explore</span>
-<span class="text-caption font-bold">Explorar</span>
+<a class="flex flex-col items-center gap-0.5 text-primary px-2 py-1" href="index.html">
+<span class="material-symbols-outlined text-[22px]" data-icon="explore">explore</span>
+<span class="text-[10px] font-medium">Explorar</span>
 </a>
-<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="chat_com_localiza_o_ao_vivo_vemjunto.html">
-<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
-<span class="text-caption ">Chat</span>
+<a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="oferecer_carona_vemjunto_mobility_1.html">
+<span class="material-symbols-outlined text-[22px]" data-icon="add_circle">add_circle</span>
+<span class="text-[10px] font-medium">Oferecer</span>
 </a>
-<a class="flex flex-col items-center gap-1 text-on-surface-variant cursor-pointer" href="perfil_do_usu_rio_vemjunto.html">
-<span class="material-symbols-outlined" data-icon="person">person</span>
-<span class="text-caption ">Perfil</span>
+<a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="chat_com_localiza_o_ao_vivo_vemjunto.html">
+<span class="material-symbols-outlined text-[22px]" data-icon="chat_bubble">chat_bubble</span>
+<span class="text-[10px] font-medium">Chat</span>
+</a>
+<a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="perfil_do_usu_rio_vemjunto.html">
+<span class="material-symbols-outlined text-[22px]" data-icon="person">person</span>
+<span class="text-[10px] font-medium">Perfil</span>
 </a>
 </nav>
-<div class="pb-24 md:pb-0"></div>
-
-
+<div class="pb-20 md:pb-0"></div>
+<script>
+function toggleNotif(e) {
+    e.stopPropagation();
+    document.getElementById('notif-dropdown').classList.toggle('hidden');
+    const pd = document.getElementById('profile-dropdown');
+    if (pd) pd.classList.add('hidden');
+}
+function toggleProfile(e) {
+    e.stopPropagation();
+    document.getElementById('profile-dropdown').classList.toggle('hidden');
+    document.getElementById('notif-dropdown').classList.add('hidden');
+}
+document.addEventListener('click', function() {
+    const nd = document.getElementById('notif-dropdown');
+    const pd = document.getElementById('profile-dropdown');
+    if (nd) nd.classList.add('hidden');
+    if (pd) pd.classList.add('hidden');
+});
+function toggleMobileMenu() {
+    const aside = document.querySelector('aside');
+    if (aside) {
+        aside.classList.toggle('hidden');
+        aside.classList.toggle('fixed');
+        aside.classList.toggle('inset-y-0');
+        aside.classList.toggle('left-0');
+        aside.classList.toggle('z-[100]');
+        aside.classList.toggle('shadow-2xl');
+        document.body.classList.toggle('overflow-hidden');
+    }
+}
+</script>
 </body></html>

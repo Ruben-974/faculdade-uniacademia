@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html class="light" lang="pt-BR"><head>
 <meta charset="utf-8"/>
@@ -106,65 +106,56 @@
     </style>
 </head>
 <body class="bg-background text-on-background min-h-screen">
-<!-- SideNavBar (Authority: JSON & Style Guidance) -->
-<aside class="hidden md:flex flex-col gap-md p-md w-64 sticky top-[72px] h-[calc(100vh-72px)] bg-surface-container-low border-r border-outline-variant">
-<div class="mb-lg">
-<h3 class="text-h2 font-display font-bold text-primary">Meu Painel</h3>
-<p class="text-on-surface-variant font-caption">Bem-vindo de volta!</p>
-</div>
-<nav class="flex flex-col gap-xs">
-<a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="minhas_viagens_vemjunto_mobility.html">
-<span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
-<span class="font-display text-label-md">Minhas Viagens</span>
-</a>
-<a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="chat_com_localiza_o_ao_vivo_vemjunto.html">
-<span class="material-symbols-outlined" data-icon="chat">chat</span>
-<span class="font-display text-label-md">Mensagens</span>
-</a>
-<a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="configura_es_e_pagamento_vemjunto_mobility.html">
-<span class="material-symbols-outlined" data-icon="settings">settings</span>
-<span class="font-display text-label-md">Configurações</span>
-</a>
-<a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="perfil_do_usu_rio_vemjunto.html">
-<span class="material-symbols-outlined" data-icon="person">person</span>
-<span class="font-display text-label-md">Perfil</span>
-</a>
-<a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="#">
-<span class="material-symbols-outlined" data-icon="help">help</span>
-<span class="font-display text-label-md">Ajuda</span>
-</a>
+<header class="bg-surface shadow-sm sticky top-0 z-50">
+<div class="flex justify-between items-center px-margin py-md w-full max-w-7xl mx-auto">
+<a class="text-h2 font-display font-bold text-primary" href="index.html">VemJunto</a>
+<nav class="hidden md:flex items-center gap-lg">
+<a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors" href="index.html">Buscar Carona</a>
+<a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors" href="oferecer_carona_vemjunto_mobility_1.html">Oferecer Carona</a>
+<a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors" href="minhas_viagens_vemjunto_mobility.html">Minhas Viagens</a>
 </nav>
-<a href="oferecer_carona_vemjunto_mobility_1.html" class="mt-auto bg-secondary text-on-secondary rounded-full py-4 px-6 font-display text-label-md flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shadow-md">
-<span class="material-symbols-outlined" data-icon="add">add</span>
-    Nova Carona
-</a>
-</aside>
-<!-- Main Content Area -->
-<main class="pl-64 min-h-screen flex flex-col">
-<!-- TopAppBar (Authority: JSON) -->
-<header class="flex justify-between items-center px-lg py-md w-full sticky top-0 z-40 bg-surface dark:bg-on-background shadow-sm">
 <div class="flex items-center gap-md">
-<div class="relative">
-<input class="bg-surface-container-low border-none rounded-full px-xl py-xs w-64 text-body-md focus:ring-2 focus:ring-primary" placeholder="Search" type="text"/>
-<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
-</div>
-</div>
-<div class="flex items-center gap-lg">
-<div class="flex items-center gap-md">
-<button class="p-base rounded-full hover:bg-surface-variant text-primary dark:text-inverse-primary relative cursor-pointer active:scale-95 duration-200">
+<div class="relative group">
+<button class="text-on-surface-variant hover:text-primary transition-colors relative flex items-center p-2" aria-label="Notificações">
 <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
-<span class="absolute top-1 right-1 w-2.5 h-2.5 bg-secondary rounded-full border-2 border-surface"></span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-surface"></span>
 </button>
-<a href="chat_com_localiza_o_ao_vivo_vemjunto.html" class="p-base rounded-full hover:bg-surface-variant text-primary dark:text-inverse-primary cursor-pointer active:scale-95 duration-200" style="display: inline-block; text-align: center;">
-<span class="material-symbols-outlined" data-icon="chat">chat</span>
+<div class="absolute right-0 mt-0 w-80 bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant/20 hidden group-hover:block z-[60] py-md before:content-[''] before:absolute before:-top-4 before:left-0 before:w-full before:h-4">
+<div class="px-md pb-sm border-b border-outline-variant/10">
+<p class="font-display text-label-md font-bold text-on-background">Notificações</p>
+</div>
+<div class="max-h-64 overflow-y-auto">
+<div class="px-md py-sm hover:bg-surface-container-low transition-colors cursor-pointer border-b border-outline-variant/5">
+<p class="font-display text-caption text-primary mb-1">Viagem Confirmada</p>
+<p class="font-display text-body-md text-on-surface-variant">Sua reserva para Campinas foi aceita por Ricardo.</p>
+<span class="font-display text-[10px] text-outline">Há 5 min</span>
+</div>
+<div class="px-md py-sm hover:bg-surface-container-low transition-colors cursor-pointer border-b border-outline-variant/5">
+<p class="font-display text-caption text-primary mb-1">Nova Mensagem</p>
+<p class="font-display text-body-md text-on-surface-variant">Ricardo: "Oi! Estarei no ponto às 08:20."</p>
+<span class="font-display text-[10px] text-outline">Há 1 hora</span>
+</div>
+</div>
+<a href="notifica_es_vemjunto.html" class="block text-center pt-sm text-primary font-display text-caption hover:underline">Ver todas</a>
+</div>
+</div>
+<div class="relative group hidden md:block">
+<a href="perfil_do_usu_rio_vemjunto.html" class="text-on-surface-variant hover:text-primary transition-colors flex items-center p-2" aria-label="Menu de Perfil">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</a>
+<div class="absolute right-0 mt-0 w-48 bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant/20 hidden group-hover:block z-[60] py-sm before:content-[''] before:absolute before:-top-4 before:left-0 before:w-full before:h-4">
+<a href="perfil_do_usu_rio_vemjunto.html" class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors"><span class="material-symbols-outlined text-[20px] text-outline">person</span><span class="font-display text-body-md text-on-surface">Meu Perfil</span></a>
+<a href="configura_es_e_pagamento_vemjunto_mobility.html" class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[20px] text-outline">settings</span>
+<span class="font-display text-body-md text-on-surface">Configurações</span>
+</a>
+<div class="my-sm border-t border-outline-variant/10"></div>
+<a href="#" class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors text-error">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+<span class="font-display text-body-md">Sair</span>
 </a>
 </div>
-<div class="flex items-center gap-md pl-md border-l border-outline-variant">
-<div class="text-right hidden lg:block">
-<p class="font-label-md text-label-md">Ricardo Oliveira</p>
-<p class="font-caption text-caption text-on-surface-variant">Level 4 Rider</p>
 </div>
-<img alt="User profile photo" class="w-10 h-10 rounded-full object-cover border-2 border-primary-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOoqvqKd6sCPx1mjOYFeTeOZwJhI44c4xhQOkfUgvfwsAWPmtivE7XLWInQM0UeSV9hAtOnjd_ZvpdVQz6-DD6U_7Dxly_dumA4LfJ5qaYnxw1Gk9Xl4Vy5Nh1FAYdjSyfjuZYV6R9GVOgLfxuevz6mqEo-5BRQQImVq6bsuUj870PT-ypmdas6qSNxTdq4I_jpQrsYdyPdWyjZ6CweRLTnWZvklZnogeeO1z53K7lW3DTzs9tbclFEP2T3VNl7hW4pU3aXRkm5tfM"/>
 </div>
 </div>
 </header>
@@ -248,19 +239,62 @@
 </div>
 </div>
 </section>
-<!-- Footer (Authority: JSON) -->
-<footer class="mt-auto border-t border-outline-variant dark:border-outline bg-surface-container-highest dark:bg-on-background flex flex-col md:flex-row justify-between items-center px-lg py-xl w-full gap-md">
-<div class="flex flex-col items-center md:items-start gap-xs">
-<h2 class="text-h2 font-h1 text-on-surface dark:text-inverse-on-surface leading-none">VemJunto</h2>
-<p class="font-caption text-caption text-on-surface-variant opacity-80">© 2024 VemJunto. Shared Purpose, Neighborly Trust.</p>
-</div>
-<div class="flex gap-lg">
-<a class="font-caption text-caption text-on-surface-variant dark:text-outline-variant hover:underline hover:text-primary transition-all cursor-pointer" href="#">About Us</a>
-<a class="font-caption text-caption text-on-surface-variant dark:text-outline-variant hover:underline hover:text-primary transition-all cursor-pointer" href="#">Safety</a>
-<a class="font-caption text-caption text-on-surface-variant dark:text-outline-variant hover:underline hover:text-primary transition-all cursor-pointer" href="#">Terms of Service</a>
-<a class="font-caption text-caption text-on-surface-variant dark:text-outline-variant hover:underline hover:text-primary transition-all cursor-pointer" href="#">Privacy Policy</a>
-<a class="font-caption text-caption text-on-surface-variant dark:text-outline-variant hover:underline hover:text-primary transition-all cursor-pointer" href="#">Contact</a>
-</div>
-</footer>
+
 </main>
+</main>
+</div><!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface shadow-2xl flex justify-around items-center pt-sm pb-safe z-50 border-t border-outline-variant/30">
+<a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="minhas_viagens_vemjunto_mobility.html">
+<span class="material-symbols-outlined text-[22px]" data-icon="directions_car">directions_car</span>
+<span class="text-[10px] font-medium">Viagem</span>
+</a>
+<a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="index.html">
+<span class="material-symbols-outlined text-[22px]" data-icon="explore">explore</span>
+<span class="text-[10px] font-medium">Explorar</span>
+</a>
+<a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="oferecer_carona_vemjunto_mobility_1.html">
+<span class="material-symbols-outlined text-[22px]" data-icon="add_circle">add_circle</span>
+<span class="text-[10px] font-medium">Oferecer</span>
+</a>
+<a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="chat_com_localiza_o_ao_vivo_vemjunto.html">
+<span class="material-symbols-outlined text-[22px]" data-icon="chat_bubble">chat_bubble</span>
+<span class="text-[10px] font-medium">Chat</span>
+</a>
+<a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="perfil_do_usu_rio_vemjunto.html">
+<span class="material-symbols-outlined text-[22px]" data-icon="person">person</span>
+<span class="text-[10px] font-medium">Perfil</span>
+</a>
+</nav>
+<div class="pb-20 md:pb-0"></div>
+<script>
+function toggleNotif(e) {
+    e.stopPropagation();
+    document.getElementById('notif-dropdown').classList.toggle('hidden');
+    const pd = document.getElementById('profile-dropdown');
+    if (pd) pd.classList.add('hidden');
+}
+function toggleProfile(e) {
+    e.stopPropagation();
+    document.getElementById('profile-dropdown').classList.toggle('hidden');
+    document.getElementById('notif-dropdown').classList.add('hidden');
+}
+document.addEventListener('click', function() {
+    const nd = document.getElementById('notif-dropdown');
+    const pd = document.getElementById('profile-dropdown');
+    if (nd) nd.classList.add('hidden');
+    if (pd) pd.classList.add('hidden');
+});
+function toggleMobileMenu() {
+    const aside = document.querySelector('aside');
+    if (aside) {
+        aside.classList.toggle('hidden');
+        aside.classList.toggle('fixed');
+        aside.classList.toggle('inset-y-0');
+        aside.classList.toggle('left-0');
+        aside.classList.toggle('z-[100]');
+        aside.classList.toggle('shadow-2xl');
+        document.body.classList.toggle('overflow-hidden');
+    }
+}
+</script>
 </body></html>

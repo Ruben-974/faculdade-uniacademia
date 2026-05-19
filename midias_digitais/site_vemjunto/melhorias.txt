@@ -1,1 +1,1 @@
-1 - Retirar rodape da pagina de notificações
+1 - ajustar vazio na pagina perfil

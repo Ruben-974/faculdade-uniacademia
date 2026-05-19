@@ -163,7 +163,7 @@
 </div>
 </div>
 </header>
-<div class="flex">
+<div class="flex w-full min-h-[calc(100vh-80px)]">
 <!-- SideNavBar -->
 <aside class="hidden md:flex flex-col gap-md p-md w-64 sticky top-[72px] h-[calc(100vh-72px)] bg-surface-container-low border-r border-outline-variant">
 <div class="mb-lg flex justify-between items-start">
@@ -196,16 +196,17 @@
 <span class="material-symbols-outlined" data-icon="help">help</span>
 <span class="font-display text-label-md">Ajuda</span>
 </a>
-</nav>
-<a href="oferecer_carona_vemjunto_mobility_1.html" class="mt-auto bg-primary text-on-primary rounded-xl py-3 px-4 font-display text-label-md flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shadow-md">
-<span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
-Oferecer Carona
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="oferecer_carona_vemjunto_mobility_1.html">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+<span class="font-display text-label-md">Oferecer Carona</span>
 </a>
+</nav>
 </aside>
 <!-- Main Content Canvas -->
-<main class="flex-1 p-margin md:p-xl max-w-6xl mx-auto">
+<main class="flex-1 p-margin md:p-xl">
+<section class="w-full space-y-lg">
 <!-- Profile Header Card -->
-<section class="bg-surface-container-lowest rounded-xl p-lg shadow-sm mb-lg flex flex-col md:flex-row gap-lg items-start md:items-center">
+<div class="bg-surface-container-lowest rounded-xl p-lg shadow-sm mb-lg flex flex-col md:flex-row gap-lg items-start md:items-center">
 <div class="relative">
 <div class="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-surface-container overflow-hidden">
 <img alt="Ricardo Oliveira" class="w-full h-full object-cover" alt="Close-up portrait of Ricardo Oliveira, a 30-year-old Brazilian man with an approachable and reliable expression. He has short dark hair and is wearing a simple casual polo shirt. The lighting is bright and warm, reflecting a friendly and community-oriented personality in a light-mode UI design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2ZP6Cy-h3axkAxf1khFnsAPc2CpZR8vfPYPatSnVlzYJ8dLTH1OaTQ050t1u_ecfDRdtbugqHdeibkQLKzUxSJ4UCFFDeniTryfgYmi930H27sg56LkC2JWEOLDCbltEYeeuao0OoJylVnRMeBumXgW0ZoOIgFmGlgQzoGemadkWvIZS9WcU5Rtwf0EGw7jVthzZSDs8aMIt407Cn_jyvfwgyEcW97PBehGKaxr_EovJkVovRhuBlegJHHDFs45h5BnHKVojrlZ-f"/>
@@ -243,7 +244,8 @@ Oferecer Carona
 <button class="flex-1 md:flex-initial py-md px-lg bg-surface-container-high text-primary font-label-md text-label-md rounded-xl hover:bg-surface-container-highest transition-colors">Message</button>
 <button class="flex-1 md:flex-initial py-md px-lg bg-primary text-on-primary font-label-md text-label-md rounded-xl hover:opacity-90 transition-opacity">Request Ride</button>
 </div>
-</section>
+</div>
+</div>
 <!-- Grid Layout for Details -->
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
 <!-- Left Column (Bio & Preferences) -->

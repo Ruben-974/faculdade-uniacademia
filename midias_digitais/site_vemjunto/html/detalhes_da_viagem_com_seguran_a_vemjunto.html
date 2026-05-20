@@ -1,332 +1,397 @@
-﻿<!DOCTYPE html><html lang="pt-BR"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "on-secondary-fixed": "#341100",
-                    "surface": "#f8f9ff",
-                    "surface-container-lowest": "#ffffff",
-                    "on-surface-variant": "#424754",
-                    "on-secondary": "#ffffff",
-                    "inverse-on-surface": "#eaf1ff",
-                    "inverse-primary": "#adc6ff",
-                    "on-secondary-container": "#5c2400",
-                    "surface-bright": "#f8f9ff",
-                    "on-tertiary": "#ffffff",
-                    "on-primary-fixed-variant": "#004395",
-                    "on-tertiary-fixed": "#002113",
-                    "tertiary": "#006947",
-                    "error-container": "#ffdad6",
-                    "surface-container-low": "#eff4ff",
-                    "surface-variant": "#d3e4fe",
-                    "on-error-container": "#93000a",
-                    "surface-container": "#e5eeff",
-                    "secondary-fixed-dim": "#ffb690",
-                    "secondary-container": "#fd761a",
-                    "surface-container-high": "#dce9ff",
-                    "on-primary": "#ffffff",
-                    "on-tertiary-container": "#f5fff6",
-                    "surface-container-highest": "#d3e4fe",
-                    "secondary-fixed": "#ffdbca",
-                    "tertiary-fixed-dim": "#4edea3",
-                    "secondary": "#9d4300",
-                    "inverse-surface": "#213145",
-                    "surface-dim": "#cbdbf5",
-                    "primary-container": "#2170e4",
-                    "on-tertiary-fixed-variant": "#005236",
-                    "on-primary-fixed": "#001a42",
-                    "on-secondary-fixed-variant": "#783200",
-                    "outline": "#727785",
-                    "on-background": "#0b1c30",
-                    "primary": "#0058be",
-                    "tertiary-container": "#00855b",
-                    "tertiary-fixed": "#6ffbbe",
-                    "on-surface": "#0b1c30",
-                    "error": "#ba1a1a",
-                    "outline-variant": "#c2c6d6",
-                    "primary-fixed-dim": "#adc6ff",
-                    "primary-fixed": "#d8e2ff",
-                    "on-primary-container": "#fefcff",
-                    "surface-tint": "#005ac2",
-                    "background": "#f8f9ff",
-                    "on-error": "#ffffff"
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="../css/tailwind.css" rel="stylesheet">
+    <link href="../css/fonts.css" rel="stylesheet">
+    
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#341100",
+                        "surface": "#f8f9ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#424754",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "inverse-primary": "#adc6ff",
+                        "on-secondary-container": "#5c2400",
+                        "surface-bright": "#f8f9ff",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#004395",
+                        "on-tertiary-fixed": "#002113",
+                        "tertiary": "#006947",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#eff4ff",
+                        "surface-variant": "#d3e4fe",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#e5eeff",
+                        "secondary-fixed-dim": "#ffb690",
+                        "secondary-container": "#fd761a",
+                        "surface-container-high": "#dce9ff",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#f5fff6",
+                        "surface-container-highest": "#d3e4fe",
+                        "secondary-fixed": "#ffdbca",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "secondary": "#9d4300",
+                        "inverse-surface": "#213145",
+                        "surface-dim": "#cbdbf5",
+                        "primary-container": "#2170e4",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-primary-fixed": "#001a42",
+                        "on-secondary-fixed-variant": "#783200",
+                        "outline": "#727785",
+                        "on-background": "#0b1c30",
+                        "primary": "#0058be",
+                        "tertiary-container": "#00855b",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-surface": "#0b1c30",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c2c6d6",
+                        "primary-fixed-dim": "#adc6ff",
+                        "primary-fixed": "#d8e2ff",
+                        "on-primary-container": "#fefcff",
+                        "surface-tint": "#005ac2",
+                        "background": "#f8f9ff",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "grid_columns": "12",
+                        "margin": "20px",
+                        "sm": "12px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "display": ["Plus Jakarta Sans"],
+                        "caption": ["Plus Jakarta Sans"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "h1": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "display": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "h2": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "h1": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "600" }]
+                    }
+                },
             },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "base": "8px",
-                    "lg": "24px",
-                    "xs": "4px",
-                    "md": "16px",
-                    "xl": "32px",
-                    "grid_columns": "12",
-                    "margin": "20px",
-                    "sm": "12px",
-                    "gutter": "16px"
-            },
-            "fontFamily": {
-                    "display": ["Plus Jakarta Sans"],
-                    "caption": ["Plus Jakarta Sans"],
-                    "h2": ["Plus Jakarta Sans"],
-                    "body-lg": ["Plus Jakarta Sans"],
-                    "h1": ["Plus Jakarta Sans"],
-                    "body-md": ["Plus Jakarta Sans"],
-                    "label-md": ["Plus Jakarta Sans"]
-            },
-            "fontSize": {
-                    "display": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                    "caption": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
-                    "h2": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                    "h1": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                    "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "600"}]
-            }
-          },
-        },
-      }
+        }
     </script>
-<style>
+    <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    </style>
-<style data-stitch-cursor=""></style><style data-stitch-scroll-lock=""></style></head>
-<body class="bg-background text-on-background min-h-screen">
-<header class="bg-surface shadow-sm sticky top-0 z-50">
-<div class="flex justify-between items-center px-margin py-md w-full max-w-7xl mx-auto">
-<a class="text-h2 font-display font-bold text-primary" href="index.html">VemJunto</a>
-<nav class="hidden md:flex items-center gap-lg">
-<a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors" href="index.html">Buscar Carona</a>
-<a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors" href="oferecer_carona_vemjunto_mobility_1.html">Oferecer Carona</a>
-<a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors" href="minhas_viagens_vemjunto_mobility.html">Minhas Viagens</a>
-</nav>
-<div class="flex items-center gap-md">
-<div class="relative group">
-<button class="text-on-surface-variant hover:text-primary transition-colors relative flex items-center p-2" aria-label="Notificações">
-<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
-<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-surface"></span>
-</button>
-<div class="absolute right-0 mt-0 w-80 bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant/20 hidden group-hover:block z-[60] py-md before:content-[''] before:absolute before:-top-4 before:left-0 before:w-full before:h-4">
-<div class="px-md pb-sm border-b border-outline-variant/10">
-<p class="font-display text-label-md font-bold text-on-background">Notificações</p>
-</div>
-<div class="max-h-64 overflow-y-auto">
-<div class="px-md py-sm hover:bg-surface-container-low transition-colors cursor-pointer border-b border-outline-variant/5">
-<p class="font-display text-caption text-primary mb-1">Viagem Confirmada</p>
-<p class="font-display text-body-md text-on-surface-variant">Sua reserva para Campinas foi aceita por Ricardo.</p>
-<span class="font-display text-[10px] text-outline">Há 5 min</span>
-</div>
-<div class="px-md py-sm hover:bg-surface-container-low transition-colors cursor-pointer border-b border-outline-variant/5">
-<p class="font-display text-caption text-primary mb-1">Nova Mensagem</p>
-<p class="font-display text-body-md text-on-surface-variant">Ricardo: "Oi! Estarei no ponto às 08:20."</p>
-<span class="font-display text-[10px] text-outline">Há 1 hora</span>
-</div>
-</div>
-<a href="notifica_es_vemjunto.html" class="block text-center pt-sm text-primary font-display text-caption hover:underline">Ver todas</a>
-</div>
-</div>
-<div class="relative group hidden md:block">
-<a href="perfil_do_usu_rio_vemjunto.html" class="text-on-surface-variant hover:text-primary transition-colors flex items-center p-2" aria-label="Menu de Perfil">
-<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
-</a>
-<div class="absolute right-0 mt-0 w-48 bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant/20 hidden group-hover:block z-[60] py-sm before:content-[''] before:absolute before:-top-4 before:left-0 before:w-full before:h-4">
-<a href="perfil_do_usu_rio_vemjunto.html" class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors"><span class="material-symbols-outlined text-[20px] text-outline">person</span><span class="font-display text-body-md text-on-surface">Meu Perfil</span></a>
-<a href="configura_es_e_pagamento_vemjunto_mobility.html" class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors">
-<span class="material-symbols-outlined text-[20px] text-outline">settings</span>
-<span class="font-display text-body-md text-on-surface">Configurações</span>
-</a>
-<div class="my-sm border-t border-outline-variant/10"></div>
-<a href="#" class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors text-error">
-<span class="material-symbols-outlined text-[20px]">logout</span>
-<span class="font-display text-body-md">Sair</span>
-</a>
-</div>
-</div>
-</div>
-</div>
-</header>
-<div class="flex w-full min-h-[calc(100vh-72px)]">
-<aside class="hidden md:flex flex-col gap-md p-md w-64 sticky top-[72px] h-[calc(100vh-72px)] bg-surface-container-low border-r border-outline-variant">
-<div class="mb-lg flex justify-between items-start">
-<div>
-<h3 class="text-h2 font-display font-bold text-primary">Meu Painel</h3>
-<p class="text-on-surface-variant font-caption">Bem-vindo de volta!</p>
-</div>
-<button class="md:hidden text-on-surface-variant p-1" onclick="toggleMobileMenu()">
-<span class="material-symbols-outlined">close</span>
-</button>
-</div>
-<nav class="flex flex-col gap-xs">
-<a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="minhas_viagens_vemjunto_mobility.html">
-<span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
-<span class="font-display text-label-md">Minhas Viagens</span>
-</a>
-<a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="chat_com_localiza_o_ao_vivo_vemjunto.html">
-<span class="material-symbols-outlined" data-icon="chat">chat</span>
-<span class="font-display text-label-md">Mensagens</span>
-</a>
-<a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="configura_es_e_pagamento_vemjunto_mobility.html">
-<span class="material-symbols-outlined" data-icon="settings">settings</span>
-<span class="font-display text-label-md">Configurações</span>
-</a>
-<a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="perfil_do_usu_rio_vemjunto.html">
-<span class="material-symbols-outlined" data-icon="person">person</span>
-<span class="font-display text-label-md">Perfil</span>
-</a>
-<a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="#">
-<span class="material-symbols-outlined" data-icon="help">help</span>
-<span class="font-display text-label-md">Ajuda</span>
-</a>
-<a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="oferecer_carona_vemjunto_mobility_1.html">
-<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
-<span class="font-display text-label-md">Oferecer Carona</span>
-</a>
-</nav>
-</aside>
-<main class="flex-grow px-margin py-lg grid grid-cols-1 md:grid-cols-12 gap-lg">
-<div class="md:col-span-8 flex flex-col gap-lg">
-<section class="bg-surface-container-lowest rounded-xl p-lg shadow-sm border border-outline-variant/20">
-<div class="flex flex-col md:flex-row md:items-center justify-between gap-md mb-lg">
-<div class="flex flex-col gap-xs">
-<span class="font-display text-label-md text-primary uppercase tracking-wider">12 de Outubro • 08:30</span>
-<h1 class="font-display text-h1 text-on-background">São Paulo para Campinas</h1>
-</div>
-<div class="bg-secondary-container text-on-secondary-container px-lg py-sm rounded-full font-display text-h2 self-start md:self-center">
-                    R$ 35,00
-                </div>
-</div>
-<div class="relative flex flex-col gap-lg pl-8">
-<div class="absolute left-[11px] top-2 bottom-2 w-[2px] bg-outline-variant"></div>
-<div class="relative">
-<div class="absolute -left-[29px] top-1 w-4 h-4 rounded-full border-4 border-primary bg-white"></div>
-<p class="font-display text-body-lg font-bold text-on-background">São Paulo, SP</p>
-<p class="font-display text-body-md text-on-surface-variant">Estação Barra Funda</p>
-</div>
-<div class="relative">
-<div class="absolute -left-[29px] top-1 w-4 h-4 rounded-full border-4 border-secondary bg-white"></div>
-<p class="font-display text-body-lg font-bold text-on-background">Campinas, SP</p>
-<p class="font-display text-body-md text-on-surface-variant">Rodoviária de Campinas</p>
-</div>
-</div>
-</section>
-<section class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-outline-variant/20 h-64 md:h-80 relative">
-<img alt="Mapa da Rota" class="w-full h-full object-cover" alt="A clean, minimalist vector map of the route between São Paulo and Campinas with a bright blue line tracing the path. The aesthetic is modern and friendly, using a light mode palette of soft whites and cool grays, with vibrant primary blue accents for the trajectory. The lighting is digital and crisp, emphasizing clarity and movement." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBRlZ79VA9bpYe8z91jAZb-MA6eePQgLH9WrnaYWaM8bgd0_Nex3xrZU1YPlC7OSezlIo-7VN4G5ZwD2awus7B2daYF9QNLrTCxWc5bdViQsVpLHdp-Lww9bnkLp8xXYglj3xKZIJa9PaH8WoSqWevH-i1XTD_jPlvssvgsqIUMZ2dkRboZcEqaIqzfg0JFkFG1elqVEB29s-JuMzSg-QapNDxUR-s7A-M_3LyBo-1pM7XYP_nzPO6L6XoFUd4lwg-7YARmvUsryzm">
-<div class="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm px-md py-sm rounded-lg border border-outline-variant shadow-sm flex items-center gap-sm">
-<span class="material-symbols-outlined text-primary" data-icon="map">map</span>
-<span class="font-display text-label-md">Visualização detalhada</span>
-</div>
-</section>
-<section class="grid grid-cols-1 sm:grid-cols-3 gap-md">
-<div class="bg-surface-container-low p-md rounded-xl flex items-center gap-md border border-outline-variant/10">
-<span class="material-symbols-outlined text-primary-container" data-icon="smoke_free">smoke_free</span>
-<span class="font-display text-label-md">Não fumante</span>
-</div>
-<div class="bg-surface-container-low p-md rounded-xl flex items-center gap-md border border-outline-variant/10">
-<span class="material-symbols-outlined text-primary-container" data-icon="pets">pets</span>
-<span class="font-display text-label-md">Pets aceitos</span>
-</div>
-<div class="bg-surface-container-low p-md rounded-xl flex items-center gap-md border border-outline-variant/10">
-<span class="material-symbols-outlined text-primary-container" data-icon="music_note">music_note</span>
-<span class="font-display text-label-md">Playlist calma</span>
-</div>
-</section>
-<section class="bg-surface-container-lowest rounded-xl p-lg shadow-sm border border-outline-variant/20 flex flex-col md:flex-row items-center justify-between gap-lg">
-<div class="flex items-center gap-lg">
-<div class="bg-tertiary-container/10 p-md rounded-full text-tertiary-container">
-<span class="material-symbols-outlined text-[32px]" data-icon="security">security</span>
-</div>
-<div>
-<h3 class="font-display text-body-lg font-bold text-on-background">Segurança da Viagem</h3>
-<p class="font-display text-body-md text-on-surface-variant flex items-center gap-xs">
-<span class="material-symbols-outlined text-[16px] text-tertiary-container" style="font-variation-settings: 'FILL' 1;">fiber_manual_record</span>
-                        Monitoramento em Tempo Real ativo
-                    </p>
-</div>
-</div>
-<button class="bg-surface-container-high hover:bg-surface-container-highest text-primary font-display text-label-md px-lg py-sm rounded-lg transition-colors flex items-center gap-sm" onclick="window.location.href='#configuracoes'">
-<span class="material-symbols-outlined text-[20px]">share_reviews</span>
-                Ativar Compartilhamento com Contatos de Confiança
-            </button>
-</section>
-</div>
 
-</main>
-</div>
-<footer class="mt-xl border-t border-outline-variant/10 py-lg bg-surface">
-<div class="max-w-7xl mx-auto px-margin flex flex-col md:flex-row justify-between items-center gap-md">
-<div class="text-on-surface-variant font-display text-caption">© 2024 VemJunto. Criando conexões em cada trajeto.</div>
-<div class="flex gap-lg">
-<a class="text-on-surface-variant font-display text-caption hover:text-primary" href="#">Ajuda</a>
-<a class="text-on-surface-variant font-display text-caption hover:text-primary" href="#">Termos</a>
-<a class="text-on-surface-variant font-display text-caption hover:text-primary" href="#">Privacidade</a>
-</div>
-</div>
-</footer><!-- BottomNavBar (Mobile Only) -->
-<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface shadow-2xl flex justify-around items-center pt-sm pb-safe z-50 border-t border-outline-variant/30">
-<a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="minhas_viagens_vemjunto_mobility.html">
-<span class="material-symbols-outlined text-[22px]" data-icon="directions_car">directions_car</span>
-<span class="text-[10px] font-medium">Viagem</span>
-</a>
-<a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="index.html">
-<span class="material-symbols-outlined text-[22px]" data-icon="explore">explore</span>
-<span class="text-[10px] font-medium">Explorar</span>
-</a>
-<a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="oferecer_carona_vemjunto_mobility_1.html">
-<span class="material-symbols-outlined text-[22px]" data-icon="add_circle">add_circle</span>
-<span class="text-[10px] font-medium">Oferecer</span>
-</a>
-<a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="chat_com_localiza_o_ao_vivo_vemjunto.html">
-<span class="material-symbols-outlined text-[22px]" data-icon="chat_bubble">chat_bubble</span>
-<span class="text-[10px] font-medium">Chat</span>
-</a>
-<a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="perfil_do_usu_rio_vemjunto.html">
-<span class="material-symbols-outlined text-[22px]" data-icon="person">person</span>
-<span class="text-[10px] font-medium">Perfil</span>
-</a>
-</nav>
-<div class="pb-20 md:pb-0"></div>
-<script>
-function toggleNotif(e) {
-    e.stopPropagation();
-    document.getElementById('notif-dropdown').classList.toggle('hidden');
-    const pd = document.getElementById('profile-dropdown');
-    if (pd) pd.classList.add('hidden');
-}
-function toggleProfile(e) {
-    e.stopPropagation();
-    document.getElementById('profile-dropdown').classList.toggle('hidden');
-    document.getElementById('notif-dropdown').classList.add('hidden');
-}
-document.addEventListener('click', function() {
-    const nd = document.getElementById('notif-dropdown');
-    const pd = document.getElementById('profile-dropdown');
-    if (nd) nd.classList.add('hidden');
-    if (pd) pd.classList.add('hidden');
-});
-function toggleMobileMenu() {
-    const aside = document.querySelector('aside');
-    if (aside) {
-        aside.classList.toggle('hidden');
-        aside.classList.toggle('fixed');
-        aside.classList.toggle('inset-y-0');
-        aside.classList.toggle('left-0');
-        aside.classList.toggle('z-[100]');
-        aside.classList.toggle('shadow-2xl');
-        document.body.classList.toggle('overflow-hidden');
-    }
-}
-</script>
-</body></html>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+    <style data-stitch-cursor=""></style>
+    <style data-stitch-scroll-lock=""></style>
+</head>
+
+<body class="bg-background text-on-background min-h-screen">
+    <header class="bg-surface shadow-sm sticky top-0 z-50">
+        <div class="flex justify-between items-center px-margin py-md w-full max-w-7xl mx-auto">
+            <a class="text-h2 font-display font-bold text-primary" href="index.html">VemJunto</a>
+            <nav class="hidden md:flex items-center gap-lg">
+                <a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors"
+                    href="index.html">Buscar Carona</a>
+                <a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors"
+                    href="oferecer_carona_vemjunto_mobility_1.html">Oferecer Carona</a>
+                <a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors"
+                    href="minhas_viagens_vemjunto_mobility.html">Minhas Viagens</a>
+            </nav>
+            <div class="flex items-center gap-md">
+                <div class="relative group">
+                    <button
+                        class="text-on-surface-variant hover:text-primary transition-colors relative flex items-center p-2"
+                        aria-label="Notificações">
+                        <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+                        <span
+                            class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-surface"></span>
+                    </button>
+                    <div
+                        class="absolute right-0 mt-0 w-80 bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant/20 hidden group-hover:block z-[60] py-md before:content-[''] before:absolute before:-top-4 before:left-0 before:w-full before:h-4">
+                        <div class="px-md pb-sm border-b border-outline-variant/10">
+                            <p class="font-display text-label-md font-bold text-on-background">Notificações</p>
+                        </div>
+                        <div class="max-h-64 overflow-y-auto">
+                            <div
+                                class="px-md py-sm hover:bg-surface-container-low transition-colors cursor-pointer border-b border-outline-variant/5">
+                                <p class="font-display text-caption text-primary mb-1">Viagem Confirmada</p>
+                                <p class="font-display text-body-md text-on-surface-variant">Sua reserva para Campinas
+                                    foi aceita por Ricardo.</p>
+                                <span class="font-display text-[10px] text-outline">Há 5 min</span>
+                            </div>
+                            <div
+                                class="px-md py-sm hover:bg-surface-container-low transition-colors cursor-pointer border-b border-outline-variant/5">
+                                <p class="font-display text-caption text-primary mb-1">Nova Mensagem</p>
+                                <p class="font-display text-body-md text-on-surface-variant">Ricardo: "Oi! Estarei no
+                                    ponto às 08:20."</p>
+                                <span class="font-display text-[10px] text-outline">Há 1 hora</span>
+                            </div>
+                        </div>
+                        <a href="notifica_es_vemjunto.html"
+                            class="block text-center pt-sm text-primary font-display text-caption hover:underline">Ver
+                            todas</a>
+                    </div>
+                </div>
+                <div class="relative group hidden md:block">
+                    <a href="perfil_do_usu_rio_vemjunto.html"
+                        class="text-on-surface-variant hover:text-primary transition-colors flex items-center p-2"
+                        aria-label="Menu de Perfil">
+                        <span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+                    </a>
+                    <div
+                        class="absolute right-0 mt-0 w-48 bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant/20 hidden group-hover:block z-[60] py-sm before:content-[''] before:absolute before:-top-4 before:left-0 before:w-full before:h-4">
+                        <a href="perfil_do_usu_rio_vemjunto.html"
+                            class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors"><span
+                                class="material-symbols-outlined text-[20px] text-outline">person</span><span
+                                class="font-display text-body-md text-on-surface">Meu Perfil</span></a>
+                        <a href="configura_es_e_pagamento_vemjunto_mobility.html"
+                            class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors">
+                            <span class="material-symbols-outlined text-[20px] text-outline">settings</span>
+                            <span class="font-display text-body-md text-on-surface">Configurações</span>
+                        </a>
+                        <div class="my-sm border-t border-outline-variant/10"></div>
+                        <a href="#"
+                            class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors text-error">
+                            <span class="material-symbols-outlined text-[20px]">logout</span>
+                            <span class="font-display text-body-md">Sair</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="flex w-full min-h-[calc(100vh-72px)]">
+        <aside
+            class="hidden md:flex flex-col gap-md p-md w-64 sticky top-[72px] h-[calc(100vh-72px)] bg-surface-container-low border-r border-outline-variant">
+            <div class="mb-lg flex justify-between items-start">
+                <div>
+                    <h3 class="text-h2 font-display font-bold text-primary">Meu Painel</h3>
+                    <p class="text-on-surface-variant font-caption">Bem-vindo de volta!</p>
+                </div>
+                <button class="md:hidden text-on-surface-variant p-1" onclick="toggleMobileMenu()">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <nav class="flex flex-col gap-xs">
+                <a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all"
+                    href="minhas_viagens_vemjunto_mobility.html">
+                    <span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
+                    <span class="font-display text-label-md">Minhas Viagens</span>
+                </a>
+                <a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all"
+                    href="chat_com_localiza_o_ao_vivo_vemjunto.html">
+                    <span class="material-symbols-outlined" data-icon="chat">chat</span>
+                    <span class="font-display text-label-md">Mensagens</span>
+                </a>
+                <a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all"
+                    href="configura_es_e_pagamento_vemjunto_mobility.html">
+                    <span class="material-symbols-outlined" data-icon="settings">settings</span>
+                    <span class="font-display text-label-md">Configurações</span>
+                </a>
+                <a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all"
+                    href="perfil_do_usu_rio_vemjunto.html">
+                    <span class="material-symbols-outlined" data-icon="person">person</span>
+                    <span class="font-display text-label-md">Perfil</span>
+                </a>
+                <a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all"
+                    href="#">
+                    <span class="material-symbols-outlined" data-icon="help">help</span>
+                    <span class="font-display text-label-md">Ajuda</span>
+                </a>
+                <a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all"
+                    href="oferecer_carona_vemjunto_mobility_1.html">
+                    <span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+                    <span class="font-display text-label-md">Oferecer Carona</span>
+                </a>
+            </nav>
+        </aside>
+        <main class="flex-grow px-margin py-lg grid grid-cols-1 md:grid-cols-12 gap-lg">
+            <div class="md:col-span-8 flex flex-col gap-lg">
+                <section class="bg-surface-container-lowest rounded-xl p-lg shadow-sm border border-outline-variant/20">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-md mb-lg">
+                        <div class="flex flex-col gap-xs">
+                            <span class="font-display text-label-md text-primary uppercase tracking-wider">12 de Outubro
+                                • 08:30</span>
+                            <h1 class="font-display text-h1 text-on-background">São Paulo para Campinas</h1>
+                        </div>
+                        <div
+                            class="bg-secondary-container text-on-secondary-container px-lg py-sm rounded-full font-display text-h2 self-start md:self-center">
+                            R$ 35,00
+                        </div>
+                    </div>
+                    <div class="relative flex flex-col gap-lg pl-8">
+                        <div class="absolute left-[11px] top-2 bottom-2 w-[2px] bg-outline-variant"></div>
+                        <div class="relative">
+                            <div
+                                class="absolute -left-[29px] top-1 w-4 h-4 rounded-full border-4 border-primary bg-white">
+                            </div>
+                            <p class="font-display text-body-lg font-bold text-on-background">São Paulo, SP</p>
+                            <p class="font-display text-body-md text-on-surface-variant">Estação Barra Funda</p>
+                        </div>
+                        <div class="relative">
+                            <div
+                                class="absolute -left-[29px] top-1 w-4 h-4 rounded-full border-4 border-secondary bg-white">
+                            </div>
+                            <p class="font-display text-body-lg font-bold text-on-background">Campinas, SP</p>
+                            <p class="font-display text-body-md text-on-surface-variant">Rodoviária de Campinas</p>
+                        </div>
+                    </div>
+                </section>
+                <section
+                    class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-outline-variant/20 h-64 md:h-80 relative">
+                    <img alt="Mapa da Rota" class="w-full h-full object-cover"
+                        alt="A clean, minimalist vector map of the route between São Paulo and Campinas with a bright blue line tracing the path. The aesthetic is modern and friendly, using a light mode palette of soft whites and cool grays, with vibrant primary blue accents for the trajectory. The lighting is digital and crisp, emphasizing clarity and movement."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBRlZ79VA9bpYe8z91jAZb-MA6eePQgLH9WrnaYWaM8bgd0_Nex3xrZU1YPlC7OSezlIo-7VN4G5ZwD2awus7B2daYF9QNLrTCxWc5bdViQsVpLHdp-Lww9bnkLp8xXYglj3xKZIJa9PaH8WoSqWevH-i1XTD_jPlvssvgsqIUMZ2dkRboZcEqaIqzfg0JFkFG1elqVEB29s-JuMzSg-QapNDxUR-s7A-M_3LyBo-1pM7XYP_nzPO6L6XoFUd4lwg-7YARmvUsryzm">
+                    <div
+                        class="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm px-md py-sm rounded-lg border border-outline-variant shadow-sm flex items-center gap-sm">
+                        <span class="material-symbols-outlined text-primary" data-icon="map">map</span>
+                        <span class="font-display text-label-md">Visualização detalhada</span>
+                    </div>
+                </section>
+                <section class="grid grid-cols-1 sm:grid-cols-3 gap-md">
+                    <div
+                        class="bg-surface-container-low p-md rounded-xl flex items-center gap-md border border-outline-variant/10">
+                        <span class="material-symbols-outlined text-primary-container"
+                            data-icon="smoke_free">smoke_free</span>
+                        <span class="font-display text-label-md">Não fumante</span>
+                    </div>
+                    <div
+                        class="bg-surface-container-low p-md rounded-xl flex items-center gap-md border border-outline-variant/10">
+                        <span class="material-symbols-outlined text-primary-container" data-icon="pets">pets</span>
+                        <span class="font-display text-label-md">Pets aceitos</span>
+                    </div>
+                    <div
+                        class="bg-surface-container-low p-md rounded-xl flex items-center gap-md border border-outline-variant/10">
+                        <span class="material-symbols-outlined text-primary-container"
+                            data-icon="music_note">music_note</span>
+                        <span class="font-display text-label-md">Playlist calma</span>
+                    </div>
+                </section>
+                <section
+                    class="bg-surface-container-lowest rounded-xl p-lg shadow-sm border border-outline-variant/20 flex flex-col md:flex-row items-center justify-between gap-lg">
+                    <div class="flex items-center gap-lg">
+                        <div class="bg-tertiary-container/10 p-md rounded-full text-tertiary-container">
+                            <span class="material-symbols-outlined text-[32px]" data-icon="security">security</span>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-body-lg font-bold text-on-background">Segurança da Viagem</h3>
+                            <p class="font-display text-body-md text-on-surface-variant flex items-center gap-xs">
+                                <span class="material-symbols-outlined text-[16px] text-tertiary-container"
+                                    style="font-variation-settings: 'FILL' 1;">fiber_manual_record</span>
+                                Monitoramento em Tempo Real ativo
+                            </p>
+                        </div>
+                    </div>
+                    <button
+                        class="bg-surface-container-high hover:bg-surface-container-highest text-primary font-display text-label-md px-lg py-sm rounded-lg transition-colors flex items-center gap-sm"
+                        onclick="window.location.href='#configuracoes'">
+                        <span class="material-symbols-outlined text-[20px]">share_reviews</span>
+                        Ativar Compartilhamento com Contatos de Confiança
+                    </button>
+                </section>
+            </div>
+
+        </main>
+    </div>
+    <footer class="mt-xl border-t border-outline-variant/10 py-lg bg-surface">
+        <div class="max-w-7xl mx-auto px-margin flex flex-col md:flex-row justify-between items-center gap-md">
+            <div class="text-on-surface-variant font-display text-caption">© 2024 VemJunto. Criando conexões em cada
+                trajeto.</div>
+            <div class="flex gap-lg">
+                <a class="text-on-surface-variant font-display text-caption hover:text-primary" href="#">Ajuda</a>
+                <a class="text-on-surface-variant font-display text-caption hover:text-primary" href="#">Termos</a>
+                <a class="text-on-surface-variant font-display text-caption hover:text-primary" href="#">Privacidade</a>
+            </div>
+        </div>
+    </footer><!-- BottomNavBar (Mobile Only) -->
+    <nav
+        class="md:hidden fixed bottom-0 left-0 right-0 bg-surface shadow-2xl flex justify-around items-center pt-sm pb-safe z-50 border-t border-outline-variant/30">
+        <a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1"
+            href="minhas_viagens_vemjunto_mobility.html">
+            <span class="material-symbols-outlined text-[22px]" data-icon="directions_car">directions_car</span>
+            <span class="text-[10px] font-medium">Viagem</span>
+        </a>
+        <a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1"
+            href="index.html">
+            <span class="material-symbols-outlined text-[22px]" data-icon="explore">explore</span>
+            <span class="text-[10px] font-medium">Explorar</span>
+        </a>
+        <a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1"
+            href="oferecer_carona_vemjunto_mobility_1.html">
+            <span class="material-symbols-outlined text-[22px]" data-icon="add_circle">add_circle</span>
+            <span class="text-[10px] font-medium">Oferecer</span>
+        </a>
+        <a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1"
+            href="chat_com_localiza_o_ao_vivo_vemjunto.html">
+            <span class="material-symbols-outlined text-[22px]" data-icon="chat_bubble">chat_bubble</span>
+            <span class="text-[10px] font-medium">Chat</span>
+        </a>
+        <a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1"
+            href="perfil_do_usu_rio_vemjunto.html">
+            <span class="material-symbols-outlined text-[22px]" data-icon="person">person</span>
+            <span class="text-[10px] font-medium">Perfil</span>
+        </a>
+    </nav>
+    <div class="pb-20 md:pb-0"></div>
+    <script>
+        function toggleNotif(e) {
+            e.stopPropagation();
+            document.getElementById('notif-dropdown').classList.toggle('hidden');
+            const pd = document.getElementById('profile-dropdown');
+            if (pd) pd.classList.add('hidden');
+        }
+        function toggleProfile(e) {
+            e.stopPropagation();
+            document.getElementById('profile-dropdown').classList.toggle('hidden');
+            document.getElementById('notif-dropdown').classList.add('hidden');
+        }
+        document.addEventListener('click', function () {
+            const nd = document.getElementById('notif-dropdown');
+            const pd = document.getElementById('profile-dropdown');
+            if (nd) nd.classList.add('hidden');
+            if (pd) pd.classList.add('hidden');
+        });
+        function toggleMobileMenu() {
+            const aside = document.querySelector('aside');
+            if (aside) {
+                aside.classList.toggle('hidden');
+                aside.classList.toggle('fixed');
+                aside.classList.toggle('inset-y-0');
+                aside.classList.toggle('left-0');
+                aside.classList.toggle('z-[100]');
+                aside.classList.toggle('shadow-2xl');
+                document.body.classList.toggle('overflow-hidden');
+            }
+        }
+    </script>
+</body>
+
+</html>

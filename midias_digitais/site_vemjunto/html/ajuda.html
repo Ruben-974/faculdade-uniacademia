@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries">
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <title>Central de Ajuda - VemJunto</title>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#fefcff",
+                        "secondary-container": "#fd761a",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#adc6ff",
+                        "surface": "#f8f9ff",
+                        "on-background": "#0b1c30",
+                        "surface-container": "#e5eeff",
+                        "primary-fixed": "#d8e2ff",
+                        "surface-variant": "#d3e4fe",
+                        "on-secondary-container": "#5c2400",
+                        "background": "#f8f9ff",
+                        "surface-bright": "#f8f9ff",
+                        "on-primary-fixed": "#001a42",
+                        "inverse-on-surface": "#eaf1ff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed-variant": "#004395",
+                        "surface-container-low": "#eff4ff",
+                        "on-tertiary-container": "#f5fff6",
+                        "surface-container-high": "#dce9ff",
+                        "outline": "#727785",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#c2c6d6",
+                        "secondary-fixed": "#ffdbca",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#213145",
+                        "on-secondary-fixed": "#341100",
+                        "tertiary": "#006947",
+                        "primary-fixed-dim": "#adc6ff",
+                        "on-secondary-fixed-variant": "#783200",
+                        "surface-tint": "#005ac2",
+                        "secondary": "#9d4300",
+                        "primary-container": "#2170e4",
+                        "tertiary-container": "#00855b",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-surface-variant": "#424754",
+                        "on-surface": "#0b1c30",
+                        "surface-dim": "#cbdbf5",
+                        "primary": "#0058be",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#ffb690",
+                        "on-tertiary-fixed": "#002113"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xl": "32px",
+                        "base": "8px",
+                        "lg": "24px",
+                        "sm": "12px",
+                        "grid_columns": "12",
+                        "md": "16px",
+                        "margin": "20px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "h1": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "caption": ["Plus Jakarta Sans"],
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "h2": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+                        "h1": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "display": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary {
+            list-style: none;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+    <!-- TopNavBar -->
+    <header class="bg-surface shadow-sm sticky top-0 z-50">
+        <div class="flex justify-between items-center px-margin py-md w-full max-w-7xl mx-auto">
+            <a class="text-h2 font-display font-bold text-primary" href="index.html">VemJunto</a>
+            <nav class="hidden md:flex items-center gap-lg">
+                <a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors" href="resultados_de_busca_organizado_vemjunto_mobility.html">Buscar Carona</a>
+                <a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors" href="oferecer_carona_vemjunto_mobility_1.html">Oferecer Carona</a>
+                <a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors" href="minhas_viagens_vemjunto_mobility.html">Minhas Viagens</a>
+            </nav>
+            <div class="flex items-center gap-md">
+                <div class="relative group">
+                    <button class="text-on-surface-variant hover:text-primary transition-colors relative flex items-center p-2" aria-label="Notificações">
+                        <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+                        <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-surface"></span>
+                    </button>
+                    <div class="absolute right-0 mt-0 w-80 bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant/20 hidden group-hover:block z-[60] py-md before:content-[''] before:absolute before:-top-4 before:left-0 before:w-full before:h-4">
+                        <div class="px-md pb-sm border-b border-outline-variant/10">
+                            <p class="font-display text-label-md font-bold text-on-background">Notificações</p>
+                        </div>
+                        <div class="max-h-64 overflow-y-auto">
+                            <div class="px-md py-sm hover:bg-surface-container-low transition-colors cursor-pointer border-b border-outline-variant/5">
+                                <p class="font-display text-caption text-primary mb-1">Viagem Confirmada</p>
+                                <p class="font-display text-body-md text-on-surface-variant">Sua reserva para Campinas foi aceita por Ricardo.</p>
+                                <span class="font-display text-[10px] text-outline">Há 5 min</span>
+                            </div>
+                            <div class="px-md py-sm hover:bg-surface-container-low transition-colors cursor-pointer border-b border-outline-variant/5">
+                                <p class="font-display text-caption text-primary mb-1">Nova Mensagem</p>
+                                <p class="font-display text-body-md text-on-surface-variant">Ricardo: "Oi! Estarei no ponto às 08:20."</p>
+                                <span class="font-display text-[10px] text-outline">Há 1 hora</span>
+                            </div>
+                        </div>
+                        <a href="notifica_es_vemjunto.html" class="block text-center pt-sm text-primary font-display text-caption hover:underline">Ver todas</a>
+                    </div>
+                </div>
+                <div class="relative group hidden md:block">
+                    <a href="perfil_do_usu_rio_vemjunto.html" class="text-on-surface-variant hover:text-primary transition-colors flex items-center p-2" aria-label="Menu de Perfil">
+                        <span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+                    </a>
+                    <div class="absolute right-0 mt-0 w-48 bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant/20 hidden group-hover:block z-[60] py-sm before:content-[''] before:absolute before:-top-4 before:left-0 before:w-full before:h-4">
+                        <a href="perfil_do_usu_rio_vemjunto.html" class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors"><span class="material-symbols-outlined text-[20px] text-outline">person</span><span class="font-display text-body-md text-on-surface">Meu Perfil</span></a>
+                        <a href="configura_es_e_pagamento_vemjunto_mobility.html" class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors">
+                            <span class="material-symbols-outlined text-[20px] text-outline">settings</span>
+                            <span class="font-display text-body-md text-on-surface">Configurações</span>
+                        </a>
+                        <div class="my-sm border-t border-outline-variant/10"></div>
+                        <a href="#" class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors text-error">
+                            <span class="material-symbols-outlined text-[20px]">logout</span>
+                            <span class="font-display text-body-md">Sair</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex w-full min-h-[calc(100vh-80px)]">
+        <!-- SideNavBar -->
+        <aside class="hidden md:flex flex-col w-64 sticky top-[72px] h-[calc(100vh-72px)] bg-surface-container-low border-r border-outline-variant">
+            <!-- Top Section: Header & Main Navigation -->
+            <div class="p-md flex-shrink-0">
+                <div class="mb-lg flex justify-between items-start">
+                    <div>
+                        <h3 class="text-h2 font-display font-bold text-primary">Meu Painel</h3>
+                        <p class="text-on-surface-variant font-caption">Bem-vindo de volta!</p>
+                    </div>
+                    <button class="md:hidden text-on-surface-variant p-1" onclick="toggleMobileMenu()">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                </div>
+                <nav class="flex flex-col gap-xs">
+                    <a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="resultados_de_busca_organizado_vemjunto_mobility.html">
+                        <span class="material-symbols-outlined" data-icon="directions_car">search</span>
+                        <span class="font-display text-label-md">Buscar Carona</span>
+                    </a>
+                    <a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="oferecer_carona_vemjunto_mobility_1.html">
+                        <span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+                        <span class="font-display text-label-md">Oferecer Carona</span>
+                    </a>
+                    <a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="minhas_viagens_vemjunto_mobility.html">
+                        <span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
+                        <span class="font-display text-label-md">Minhas Viagens</span>
+                    </a>
+                    <a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="chat_com_localiza_o_ao_vivo_vemjunto.html">
+                        <span class="material-symbols-outlined" data-icon="chat">chat</span>
+                        <span class="font-display text-label-md">Mensagens</span>
+                    </a>
+                    <a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="configura_es_e_pagamento_vemjunto_mobility.html">
+                        <span class="material-symbols-outlined" data-icon="settings">settings</span>
+                        <span class="font-display text-label-md">Configurações</span>
+                    </a>
+                    <a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="perfil_do_usu_rio_vemjunto.html">
+                        <span class="material-symbols-outlined" data-icon="person">person</span>
+                        <span class="font-display text-label-md">Perfil</span>
+                    </a>
+                    <a class="bg-primary-container text-on-primary-container rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="ajuda_vemjunto.html">
+                        <span class="material-symbols-outlined" data-icon="help">help</span>
+                        <span class="font-display text-label-md">Ajuda</span>
+                    </a>
+                </nav>
+            </div>
+
+            <!-- Spacer to push bottom content down -->
+            <div class="flex-1"></div>
+
+            <!-- Bottom Section: User Summary Card -->
+            <div class="p-md flex-shrink-0 border-t border-outline-variant/20">
+            </div>
+        </aside>
+
+        <!-- Main Content Canvas -->
+        <main class="flex-1 p-margin md:p-xl">
+            <section class="w-full space-y-lg max-w-4xl mx-auto">
+
+                <!-- Page Header -->
+                <div class="bg-surface-container-lowest rounded-xl p-lg shadow-sm">
+                    <div class="flex items-center gap-md mb-sm">
+                        <div class="w-14 h-14 bg-primary-container rounded-full flex items-center justify-center flex-shrink-0">
+                            <span class="material-symbols-outlined text-primary text-[32px]" style="font-variation-settings: 'FILL' 1;">help</span>
+                        </div>
+                        <div>
+                            <h1 class="font-h1 text-h1 text-on-background">Central de Ajuda</h1>
+                            <p class="text-on-surface-variant font-body-md text-body-md">Como podemos ajudar você hoje?</p>
+                        </div>
+                    </div>
+                    <!-- Search Bar -->
+                    <div class="relative mt-lg">
+                        <span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline">search</span>
+                        <input class="w-full pl-12 pr-md py-md bg-surface-container rounded-xl border border-outline-variant/30 font-body-md text-body-md text-on-background placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all" placeholder="Pesquise por tópicos de ajuda..." type="text" />
+                    </div>
+                </div>
+
+                <!-- Quick Help Categories -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-md">
+                    <a href="#primeiros-passos" class="bg-surface-container-lowest rounded-xl p-md shadow-sm hover:shadow-md transition-all text-center group cursor-pointer border border-transparent hover:border-primary/20">
+                        <div class="w-12 h-12 bg-tertiary-container rounded-full flex items-center justify-center mx-auto mb-sm group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-tertiary text-[28px]">rocket_launch</span>
+                        </div>
+                        <span class="font-label-md text-label-md text-on-background">Primeiros Passos</span>
+                    </a>
+                    <a href="#carona" class="bg-surface-container-lowest rounded-xl p-md shadow-sm hover:shadow-md transition-all text-center group cursor-pointer border border-transparent hover:border-primary/20">
+                        <div class="w-12 h-12 bg-primary-container rounded-full flex items-center justify-center mx-auto mb-sm group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-primary text-[28px]">directions_car</span>
+                        </div>
+                        <span class="font-label-md text-label-md text-on-background">Caronas</span>
+                    </a>
+                    <a href="#pagamento" class="bg-surface-container-lowest rounded-xl p-md shadow-sm hover:shadow-md transition-all text-center group cursor-pointer border border-transparent hover:border-primary/20">
+                        <div class="w-12 h-12 bg-secondary-container rounded-full flex items-center justify-center mx-auto mb-sm group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-on-secondary text-[28px]">payments</span>
+                        </div>
+                        <span class="font-label-md text-label-md text-on-background">Pagamentos</span>
+                    </a>
+                    <a href="#seguranca" class="bg-surface-container-lowest rounded-xl p-md shadow-sm hover:shadow-md transition-all text-center group cursor-pointer border border-transparent hover:border-primary/20">
+                        <div class="w-12 h-12 bg-error-container rounded-full flex items-center justify-center mx-auto mb-sm group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-error text-[28px]">shield</span>
+                        </div>
+                        <span class="font-label-md text-label-md text-on-background">Segurança</span>
+                    </a>
+                </div>
+
+                <!-- FAQ Accordion Sections -->
+                <div class="space-y-lg">
+
+                    <!-- Section: Primeiros Passos -->
+                    <div id="primeiros-passos" class="bg-surface-container-lowest rounded-xl p-lg shadow-sm scroll-mt-28">
+                        <div class="flex items-center gap-sm mb-lg">
+                            <span class="material-symbols-outlined text-tertiary text-[28px]">rocket_launch</span>
+                            <h2 class="font-h2 text-h2 text-on-background">Primeiros Passos</h2>
+                        </div>
+                        <div class="space-y-sm">
+                            <details class="group border border-outline-variant/20 rounded-xl overflow-hidden">
+                                <summary class="flex items-center justify-between p-md cursor-pointer hover:bg-surface-container-low transition-colors font-label-md text-label-md text-on-background list-none">
+                                    Como criar uma conta no VemJunto?
+                                    <span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform">expand_more</span>
+                                </summary>
+                                <div class="px-md pb-md text-on-surface-variant font-body-md text-body-md leading-relaxed">
+                                    <p>Para criar sua conta, basta clicar em "Entrar" no canto superior direito e selecionar "Criar conta". Você pode se cadastrar usando seu e-mail, Google ou Facebook. Após preencher seus dados básicos e verificar seu e-mail, sua conta estará pronta para uso!</p>
+                                </div>
+                            </details>
+                            <details class="group border border-outline-variant/20 rounded-xl overflow-hidden">
+                                <summary class="flex items-center justify-between p-md cursor-pointer hover:bg-surface-container-low transition-colors font-label-md text-label-md text-on-background list-none">
+                                    Como completar a verificação do meu perfil?
+                                    <span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform">expand_more</span>
+                                </summary>
+                                <div class="px-md pb-md text-on-surface-variant font-body-md text-body-md leading-relaxed">
+                                    <p>Acesse seu perfil e clique em "Verificar identidade". Você precisará enviar uma foto do seu documento oficial (RG ou CNH) e uma selfie para confirmação. O processo leva até 24 horas e garante mais segurança para toda a comunidade.</p>
+                                </div>
+                            </details>
+                            <details class="group border border-outline-variant/20 rounded-xl overflow-hidden">
+                                <summary class="flex items-center justify-between p-md cursor-pointer hover:bg-surface-container-low transition-colors font-label-md text-label-md text-on-background list-none">
+                                    Posso usar o VemJunto em mais de um dispositivo?
+                                    <span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform">expand_more</span>
+                                </summary>
+                                <div class="px-md pb-md text-on-surface-variant font-body-md text-body-md leading-relaxed">
+                                    <p>Sim! Sua conta pode ser acessada de qualquer dispositivo. Basta fazer login com seu e-mail e senha. Seus dados, viagens e mensagens são sincronizados automaticamente em todos os dispositivos.</p>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <!-- Section: Caronas -->
+                    <div id="carona" class="bg-surface-container-lowest rounded-xl p-lg shadow-sm scroll-mt-28">
+                        <div class="flex items-center gap-sm mb-lg">
+                            <span class="material-symbols-outlined text-primary text-[28px]">directions_car</span>
+                            <h2 class="font-h2 text-h2 text-on-background">Caronas</h2>
+                        </div>
+                        <div class="space-y-sm">
+                            <details class="group border border-outline-variant/20 rounded-xl overflow-hidden">
+                                <summary class="flex items-center justify-between p-md cursor-pointer hover:bg-surface-container-low transition-colors font-label-md text-label-md text-on-background list-none">
+                                    Como reservar uma carona?
+                                    <span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform">expand_more</span>
+                                </summary>
+                                <div class="px-md pb-md text-on-surface-variant font-body-md text-body-md leading-relaxed">
+                                    <p>Na página "Buscar Carona", insira sua origem e destino, selecione a data e horário desejados e clique em "Buscar". Os resultados mostrarão as caronas disponíveis. Escolha a que melhor se adequa, confira os detalhes do motorista e clique em "Reservar Vaga".</p>
+                                </div>
+                            </details>
+                            <details class="group border border-outline-variant/20 rounded-xl overflow-hidden">
+                                <summary class="flex items-center justify-between p-md cursor-pointer hover:bg-surface-container-low transition-colors font-label-md text-label-md text-on-background list-none">
+                                    Como oferecer uma carona?
+                                    <span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform">expand_more</span>
+                                </summary>
+                                <div class="px-md pb-md text-on-surface-variant font-body-md text-body-md leading-relaxed">
+                                    <p>Clique em "Oferecer Carona" na navegação principal. Preencha as informações da viagem: origem, destino, data, horário, número de vagas disponíveis e valor por passageiro. Você também pode definir preferências como permitir música, pets ou fumar.</p>
+                                </div>
+                            </details>
+                            <details class="group border border-outline-variant/20 rounded-xl overflow-hidden">
+                                <summary class="flex items-center justify-between p-md cursor-pointer hover:bg-surface-container-low transition-colors font-label-md text-label-md text-on-background list-none">
+                                    Posso cancelar uma reserva?
+                                    <span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform">expand_more</span>
+                                </summary>
+                                <div class="px-md pb-md text-on-surface-variant font-body-md text-body-md leading-relaxed">
+                                    <p>Sim. Acesse "Minhas Viagens", encontre a reserva desejada e clique em "Cancelar". O cancelamento é gratuito até 24 horas antes da viagem. Após esse prazo, poderá ser cobrada uma taxa de cancelamento. O reembolso é processado em até 5 dias úteis.</p>
+                                </div>
+                            </details>
+                            <details class="group border border-outline-variant/20 rounded-xl overflow-hidden">
+                                <summary class="flex items-center justify-between p-md cursor-pointer hover:bg-surface-container-low transition-colors font-label-md text-label-md text-on-background list-none">
+                                    Como funciona o sistema de avaliações?
+                                    <span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform">expand_more</span>
+                                </summary>
+                                <div class="px-md pb-md text-on-surface-variant font-body-md text-body-md leading-relaxed">
+                                    <p>Após cada viagem, motoristas e passageiros podem se avaliar mutuamente com estrelas (1 a 5) e deixar um comentário. As avaliações ajudam a construir confiança na comunidade e são visíveis nos perfis dos usuários.</p>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <!-- Section: Pagamentos -->
+                    <div id="pagamento" class="bg-surface-container-lowest rounded-xl p-lg shadow-sm scroll-mt-28">
+                        <div class="flex items-center gap-sm mb-lg">
+                            <span class="material-symbols-outlined text-secondary text-[28px]">payments</span>
+                            <h2 class="font-h2 text-h2 text-on-background">Pagamentos</h2>
+                        </div>
+                        <div class="space-y-sm">
+                            <details class="group border border-outline-variant/20 rounded-xl overflow-hidden">
+                                <summary class="flex items-center justify-between p-md cursor-pointer hover:bg-surface-container-low transition-colors font-label-md text-label-md text-on-background list-none">
+                                    Quais são as formas de pagamento aceitas?
+                                    <span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform">expand_more</span>
+                                </summary>
+                                <div class="px-md pb-md text-on-surface-variant font-body-md text-body-md leading-relaxed">
+                                    <p>Aceitamos cartões de crédito e débito (Visa, Mastercard, Elo, American Express), Pix e saldo na carteira VemJunto. O pagamento é processado de forma segura pela nossa plataforma e o motorista recebe o valor em até 2 dias úteis após a viagem.</p>
+                                </div>
+                            </details>
+                            <details class="group border border-outline-variant/20 rounded-xl overflow-hidden">
+                                <summary class="flex items-center justify-between p-md cursor-pointer hover:bg-surface-container-low transition-colors font-label-md text-label-md text-on-background list-none">
+                                    Como adicionar saldo na carteira VemJunto?
+                                    <span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform">expand_more</span>
+                                </summary>
+                                <div class="px-md pb-md text-on-surface-variant font-body-md text-body-md leading-relaxed">
+                                    <p>Vá até "Configurações &gt; Pagamento" e clique em "Adicionar Saldo". Escolha o valor desejado e a forma de pagamento. O saldo fica disponível imediatamente para ser usado em suas próximas caronas.</p>
+                                </div>
+                            </details>
+                            <details class="group border border-outline-variant/20 rounded-xl overflow-hidden">
+                                <summary class="flex items-center justify-between p-md cursor-pointer hover:bg-surface-container-low transition-colors font-label-md text-label-md text-on-background list-none">
+                                    Como solicitar reembolso?
+                                    <span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform">expand_more</span>
+                                </summary>
+                                <div class="px-md pb-md text-on-surface-variant font-body-md text-body-md leading-relaxed">
+                                    <p>Se você cancelou uma reserva dentro do prazo ou teve algum problema com a viagem, acesse "Minhas Viagens", selecione a viagem em questão e clique em "Solicitar Reembolso". Nossa equipe analisará o caso em até 48 horas.</p>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <!-- Section: Segurança -->
+                    <div id="seguranca" class="bg-surface-container-lowest rounded-xl p-lg shadow-sm scroll-mt-28">
+                        <div class="flex items-center gap-sm mb-lg">
+                            <span class="material-symbols-outlined text-error text-[28px]">shield</span>
+                            <h2 class="font-h2 text-h2 text-on-background">Segurança</h2>
+                        </div>
+                        <div class="space-y-sm">
+                            <details class="group border border-outline-variant/20 rounded-xl overflow-hidden">
+                                <summary class="flex items-center justify-between p-md cursor-pointer hover:bg-surface-container-low transition-colors font-label-md text-label-md text-on-background list-none">
+                                    Como o VemJunto garante minha segurança?
+                                    <span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform">expand_more</span>
+                                </summary>
+                                <div class="px-md pb-md text-on-surface-variant font-body-md text-body-md leading-relaxed">
+                                    <p>Todos os usuários passam por verificação de identidade. Motoristas têm seus documentos (CNH) e veículos verificados. Além disso, contamos com chat integrado, compartilhamento de localização ao vivo durante as viagens e um botão de emergência que notifica nossa equipe de suporte 24 horas.</p>
+                                </div>
+                            </details>
+                            <details class="group border border-outline-variant/20 rounded-xl overflow-hidden">
+                                <summary class="flex items-center justify-between p-md cursor-pointer hover:bg-surface-container-low transition-colors font-label-md text-label-md text-on-background list-none">
+                                    O que fazer em caso de emergência durante a viagem?
+                                    <span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform">expand_more</span>
+                                </summary>
+                                <div class="px-md pb-md text-on-surface-variant font-body-md text-body-md leading-relaxed">
+                                    <p>Durante a viagem, você verá um botão de "Emergência" na tela de acompanhamento. Ao pressioná-lo, nossa equipe de suporte será alertada imediatamente com sua localização em tempo real. Também recomendamos sempre compartilhar sua rota com amigos ou familiares.</p>
+                                </div>
+                            </details>
+                            <details class="group border border-outline-variant/20 rounded-xl overflow-hidden">
+                                <summary class="flex items-center justify-between p-md cursor-pointer hover:bg-surface-container-low transition-colors font-label-md text-label-md text-on-background list-none">
+                                    Como denunciar um usuário?
+                                    <span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform">expand_more</span>
+                                </summary>
+                                <div class="px-md pb-md text-on-surface-variant font-body-md text-body-md leading-relaxed">
+                                    <p>Se você teve uma experiência negativa, acesse o perfil do usuário e clique em "Denunciar". Descreva o ocorrido e nossa equipe de moderação analisará o caso. Também é possível denunciar através do chat ou da página da viagem em "Minhas Viagens".</p>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Still Need Help Card -->
+                <div class="bg-primary-container rounded-xl p-lg shadow-sm text-center">
+                    <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-md">
+                        <span class="material-symbols-outlined text-on-primary text-[36px]" style="font-variation-settings: 'FILL' 1;">headset_mic</span>
+                    </div>
+                    <h2 class="font-h2 text-h2 text-on-primary-container mb-sm">Ainda precisa de ajuda?</h2>
+                    <p class="text-on-primary-container/80 font-body-md text-body-md mb-lg max-w-md mx-auto">
+                        Nossa equipe de suporte está pronta para ajudar você de segunda a domingo, das 6h às 23h.
+                    </p>
+                    <div class="flex flex-wrap gap-md justify-center">
+                        <a href="chat_com_localiza_o_ao_vivo_vemjunto.html" class="px-lg py-md bg-primary text-on-primary font-label-md text-label-md rounded-xl hover:opacity-90 transition-opacity flex items-center gap-sm">
+                            <span class="material-symbols-outlined text-[20px]">chat</span>
+                            Chat ao Vivo
+                        </a>
+                        <a href="mailto:suporte@vemjunto.com.br" class="px-lg py-md bg-surface-container-lowest text-primary font-label-md text-label-md rounded-xl hover:bg-surface-container-high transition-colors flex items-center gap-sm border border-primary/20">
+                            <span class="material-symbols-outlined text-[20px]">mail</span>
+                            Enviar E-mail
+                        </a>
+                        <a href="tel:08001234567" class="px-lg py-md bg-surface-container-lowest text-primary font-label-md text-label-md rounded-xl hover:bg-surface-container-high transition-colors flex items-center gap-sm border border-primary/20">
+                            <span class="material-symbols-outlined text-[20px]">call</span>
+                            0800 123-4567
+                        </a>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+    </div>
+
+    <!-- BottomNavBar (Mobile Only) -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface shadow-2xl flex justify-around items-center pt-sm pb-safe z-50 border-t border-outline-variant/30">
+        <a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="minhas_viagens_vemjunto_mobility.html">
+            <span class="material-symbols-outlined text-[22px]" data-icon="directions_car">directions_car</span>
+            <span class="text-[10px] font-medium">Viagem</span>
+        </a>
+        <a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="index.html">
+            <span class="material-symbols-outlined text-[22px]" data-icon="explore">explore</span>
+            <span class="text-[10px] font-medium">Explorar</span>
+        </a>
+        <a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="oferecer_carona_vemjunto_mobility_1.html">
+            <span class="material-symbols-outlined text-[22px]" data-icon="add_circle">add_circle</span>
+            <span class="text-[10px] font-medium">Oferecer</span>
+        </a>
+        <a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="chat_com_localiza_o_ao_vivo_vemjunto.html">
+            <span class="material-symbols-outlined text-[22px]" data-icon="chat_bubble">chat_bubble</span>
+            <span class="text-[10px] font-medium">Chat</span>
+        </a>
+        <a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="perfil_do_usu_rio_vemjunto.html">
+            <span class="material-symbols-outlined text-[22px]" data-icon="person">person</span>
+            <span class="text-[10px] font-medium">Perfil</span>
+        </a>
+    </nav>
+    <div class="pb-20 md:pb-0"></div>
+
+    <script>
+        function toggleNotif(e) {
+            e.stopPropagation();
+            document.getElementById('notif-dropdown').classList.toggle('hidden');
+            const pd = document.getElementById('profile-dropdown');
+            if (pd) pd.classList.add('hidden');
+        }
+
+        function toggleProfile(e) {
+            e.stopPropagation();
+            document.getElementById('profile-dropdown').classList.toggle('hidden');
+            document.getElementById('notif-dropdown').classList.add('hidden');
+        }
+        document.addEventListener('click', function() {
+            const nd = document.getElementById('notif-dropdown');
+            const pd = document.getElementById('profile-dropdown');
+            if (nd) nd.classList.add('hidden');
+            if (pd) pd.classList.add('hidden');
+        });
+
+        function toggleMobileMenu() {
+            const aside = document.querySelector('aside');
+            if (aside) {
+                aside.classList.toggle('hidden');
+                aside.classList.toggle('fixed');
+                aside.classList.toggle('inset-y-0');
+                aside.classList.toggle('left-0');
+                aside.classList.toggle('z-[100]');
+                aside.classList.toggle('shadow-2xl');
+                document.body.classList.toggle('overflow-hidden');
+            }
+        }
+    </script>
+</body>
+</html>

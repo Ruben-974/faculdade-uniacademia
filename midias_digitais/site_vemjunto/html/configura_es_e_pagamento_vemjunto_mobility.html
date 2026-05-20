@@ -1,501 +1,602 @@
-﻿<!DOCTYPE html><html class="light" lang="pt-BR"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "on-error": "#ffffff",
-                    "tertiary-fixed": "#6ffbbe",
-                    "primary-fixed": "#d8e2ff",
-                    "tertiary": "#006947",
-                    "on-surface-variant": "#424754",
-                    "primary-fixed-dim": "#adc6ff",
-                    "surface-container-high": "#dce9ff",
-                    "on-tertiary": "#ffffff",
-                    "on-background": "#0b1c30",
-                    "background": "#f8f9ff",
-                    "tertiary-container": "#00855b",
-                    "on-secondary-fixed-variant": "#783200",
-                    "on-primary-fixed": "#001a42",
-                    "on-primary-container": "#fefcff",
-                    "inverse-surface": "#213145",
-                    "on-secondary-container": "#5c2400",
-                    "on-tertiary-container": "#f5fff6",
-                    "on-secondary-fixed": "#341100",
-                    "on-tertiary-fixed": "#002113",
-                    "surface-container-lowest": "#ffffff",
-                    "on-primary-fixed-variant": "#004395",
-                    "outline": "#727785",
-                    "on-primary": "#ffffff",
-                    "on-secondary": "#ffffff",
-                    "surface-container-low": "#eff4ff",
-                    "inverse-on-surface": "#eaf1ff",
-                    "surface-tint": "#005ac2",
-                    "inverse-primary": "#adc6ff",
-                    "tertiary-fixed-dim": "#4edea3",
-                    "surface-bright": "#f8f9ff",
-                    "secondary-fixed": "#ffdbca",
-                    "secondary-container": "#fd761a",
-                    "on-surface": "#0b1c30",
-                    "primary": "#0058be",
-                    "on-tertiary-fixed-variant": "#005236",
-                    "error-container": "#ffdad6",
-                    "surface-variant": "#d3e4fe",
-                    "surface-dim": "#cbdbf5",
-                    "secondary-fixed-dim": "#ffb690",
-                    "on-error-container": "#93000a",
-                    "primary-container": "#2170e4",
-                    "surface-container": "#e5eeff",
-                    "secondary": "#9d4300",
-                    "surface": "#f8f9ff",
-                    "surface-container-highest": "#d3e4fe",
-                    "outline-variant": "#c2c6d6",
-                    "error": "#ba1a1a"
+﻿<!DOCTYPE html>
+<html class="light" lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="../css/tailwind.css" rel="stylesheet">
+    <link href="../css/fonts.css" rel="stylesheet">
+    
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "primary-fixed": "#d8e2ff",
+                        "tertiary": "#006947",
+                        "on-surface-variant": "#424754",
+                        "primary-fixed-dim": "#adc6ff",
+                        "surface-container-high": "#dce9ff",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#0b1c30",
+                        "background": "#f8f9ff",
+                        "tertiary-container": "#00855b",
+                        "on-secondary-fixed-variant": "#783200",
+                        "on-primary-fixed": "#001a42",
+                        "on-primary-container": "#fefcff",
+                        "inverse-surface": "#213145",
+                        "on-secondary-container": "#5c2400",
+                        "on-tertiary-container": "#f5fff6",
+                        "on-secondary-fixed": "#341100",
+                        "on-tertiary-fixed": "#002113",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#004395",
+                        "outline": "#727785",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "surface-container-low": "#eff4ff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-tint": "#005ac2",
+                        "inverse-primary": "#adc6ff",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "surface-bright": "#f8f9ff",
+                        "secondary-fixed": "#ffdbca",
+                        "secondary-container": "#fd761a",
+                        "on-surface": "#0b1c30",
+                        "primary": "#0058be",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#d3e4fe",
+                        "surface-dim": "#cbdbf5",
+                        "secondary-fixed-dim": "#ffb690",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#2170e4",
+                        "surface-container": "#e5eeff",
+                        "secondary": "#9d4300",
+                        "surface": "#f8f9ff",
+                        "surface-container-highest": "#d3e4fe",
+                        "outline-variant": "#c2c6d6",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xl": "32px",
+                        "grid_columns": "12",
+                        "sm": "12px",
+                        "gutter": "16px",
+                        "margin": "20px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "h1": ["Plus Jakarta Sans"],
+                        "display": ["Plus Jakarta Sans"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "caption": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "h1": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "display": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "h2": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                },
             },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "xs": "4px",
-                    "xl": "32px",
-                    "grid_columns": "12",
-                    "sm": "12px",
-                    "gutter": "16px",
-                    "margin": "20px",
-                    "md": "16px",
-                    "lg": "24px",
-                    "base": "8px"
-            },
-            "fontFamily": {
-                    "label-md": ["Plus Jakarta Sans"],
-                    "body-lg": ["Plus Jakarta Sans"],
-                    "h1": ["Plus Jakarta Sans"],
-                    "display": ["Plus Jakarta Sans"],
-                    "h2": ["Plus Jakarta Sans"],
-                    "caption": ["Plus Jakarta Sans"],
-                    "body-md": ["Plus Jakarta Sans"]
-            },
-            "fontSize": {
-                    "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
-                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                    "h1": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-                    "display": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                    "h2": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                    "caption": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
-                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
-            }
-          },
-        },
-      }
+        }
     </script>
-<style>
-      .material-symbols-outlined {
-        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-      }
-      .card-shadow {
-        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
-      }
-      @keyframes fadeOut {
-        from { opacity: 1; transform: translateY(0); }
-        to { opacity: 0; transform: translateY(-10px); }
-      }
-      .toast-animation {
-        animation: fadeOut 0.5s ease-in forwards 2.5s;
-      }
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .card-shadow {
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            to {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+        }
+
+        .toast-animation {
+            animation: fadeOut 0.5s ease-in forwards 2.5s;
+        }
     </style>
-<style data-stitch-cursor=""></style><style data-stitch-scroll-lock=""></style></head>
+    <style data-stitch-cursor=""></style>
+    <style data-stitch-scroll-lock=""></style>
+</head>
+
 <body class="bg-background text-on-surface font-body-md">
-<!-- Toast Notification (Hidden by default) -->
-<div class="hidden fixed top-24 left-1/2 -translate-x-1/2 z-[60] bg-tertiary text-on-tertiary px-lg py-sm rounded-full shadow-lg flex items-center gap-2 toast-animation" id="success-toast">
-<span class="material-symbols-outlined">check_circle</span>
-<span class="font-label-md">Alterações salvas com sucesso!</span>
-</div>
-<!-- Password Modal (Hidden by default) -->
-<div class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-on-background/40 backdrop-blur-sm" id="password-modal">
-<div class="bg-surface p-xl rounded-xl card-shadow w-full max-w-md mx-margin">
-<div class="flex justify-between items-center mb-lg">
-<h3 class="text-h2 font-display">Alterar Senha</h3>
-<button class="text-on-surface-variant hover:text-on-surface" onclick="togglePasswordModal()">
-<span class="material-symbols-outlined">close</span>
-</button>
-</div>
-<form class="space-y-md" onsubmit="event.preventDefault(); togglePasswordModal(); showToast();">
-<div class="space-y-xs">
-<label class="font-label-md">Senha Atual</label>
-<input class="w-full bg-surface-container px-md py-sm rounded-lg border-outline-variant outline-none focus:ring-1 focus:ring-primary" placeholder="••••••••" type="password">
-</div>
-<div class="space-y-xs">
-<label class="font-label-md">Nova Senha</label>
-<input class="w-full bg-surface-container px-md py-sm rounded-lg border-outline-variant outline-none focus:ring-1 focus:ring-primary" placeholder="••••••••" type="password">
-</div>
-<div class="space-y-xs">
-<label class="font-label-md">Confirmar Nova Senha</label>
-<input class="w-full bg-surface-container px-md py-sm rounded-lg border-outline-variant outline-none focus:ring-1 focus:ring-primary" placeholder="••••••••" type="password">
-</div>
-<div class="flex gap-md pt-md">
-<button class="flex-1 py-sm rounded-full border border-outline-variant font-label-md" onclick="togglePasswordModal()" type="button">Cancelar</button>
-<button class="flex-1 bg-primary text-on-primary py-sm rounded-full font-label-md" type="submit">Confirmar</button>
-</div>
-</form>
-</div>
-</div>
-<!-- Top Navigation Shell -->
-<header class="bg-surface shadow-sm sticky top-0 z-50">
-<div class="flex justify-between items-center px-margin py-md w-full max-w-7xl mx-auto">
-<a class="text-h2 font-display font-bold text-primary" href="index.html">VemJunto</a>
-<nav class="hidden md:flex items-center gap-lg">
-<a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors" href="resultados_de_busca_organizado_vemjunto_mobility.html">Buscar Carona</a>
-<a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors" href="oferecer_carona_vemjunto_mobility_1.html">Oferecer Carona</a>
-<a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors" href="minhas_viagens_vemjunto_mobility.html">Minhas Viagens</a>
-</nav>
-<div class="flex items-center gap-md">
-<div class="relative group">
-<button class="text-on-surface-variant hover:text-primary transition-colors relative flex items-center p-2" aria-label="Notificações">
-<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
-<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-surface"></span>
-</button>
-<div class="absolute right-0 mt-0 w-80 bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant/20 hidden group-hover:block z-[60] py-md before:content-[''] before:absolute before:-top-4 before:left-0 before:w-full before:h-4">
-<div class="px-md pb-sm border-b border-outline-variant/10">
-<p class="font-display text-label-md font-bold text-on-background">Notificações</p>
-</div>
-<div class="max-h-64 overflow-y-auto">
-<div class="px-md py-sm hover:bg-surface-container-low transition-colors cursor-pointer border-b border-outline-variant/5">
-<p class="font-display text-caption text-primary mb-1">Viagem Confirmada</p>
-<p class="font-display text-body-md text-on-surface-variant">Sua reserva para Campinas foi aceita por Ricardo.</p>
-<span class="font-display text-[10px] text-outline">Há 5 min</span>
-</div>
-<div class="px-md py-sm hover:bg-surface-container-low transition-colors cursor-pointer border-b border-outline-variant/5">
-<p class="font-display text-caption text-primary mb-1">Nova Mensagem</p>
-<p class="font-display text-body-md text-on-surface-variant">Ricardo: "Oi! Estarei no ponto às 08:20."</p>
-<span class="font-display text-[10px] text-outline">Há 1 hora</span>
-</div>
-</div>
-<a href="notifica_es_vemjunto.html" class="block text-center pt-sm text-primary font-display text-caption hover:underline">Ver todas</a>
-</div>
-</div>
-<div class="relative group hidden md:block">
-<a href="perfil_do_usu_rio_vemjunto.html" class="text-on-surface-variant hover:text-primary transition-colors flex items-center p-2" aria-label="Menu de Perfil">
-<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
-</a>
-<div class="absolute right-0 mt-0 w-48 bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant/20 hidden group-hover:block z-[60] py-sm before:content-[''] before:absolute before:-top-4 before:left-0 before:w-full before:h-4">
-<a href="perfil_do_usu_rio_vemjunto.html" class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors"><span class="material-symbols-outlined text-[20px] text-outline">person</span><span class="font-display text-body-md text-on-surface">Meu Perfil</span></a>
-<a href="configura_es_e_pagamento_vemjunto_mobility.html" class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors">
-<span class="material-symbols-outlined text-[20px] text-outline">settings</span>
-<span class="font-display text-body-md text-on-surface">Configurações</span>
-</a>
-<div class="my-sm border-t border-outline-variant/10"></div>
-<a href="#" class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors text-error">
-<span class="material-symbols-outlined text-[20px]">logout</span>
-<span class="font-display text-body-md">Sair</span>
-</a>
-</div>
-</div>
-</div>
-</div>
-</header>
-<main class="w-full flex flex-col md:flex-row min-h-[calc(100vh-80px)]">
-<!-- Side Navigation Shell -->
-<aside class="hidden md:flex flex-col gap-md p-md w-64 sticky top-[72px] h-[calc(100vh-72px)] bg-surface-container-low border-r border-outline-variant">
-<div class="mb-lg flex justify-between items-start">
-<div>
-<h3 class="text-h2 font-display font-bold text-primary">Meu Painel</h3>
-<p class="text-on-surface-variant font-caption">Bem-vindo de volta!</p>
-</div>
-<button class="md:hidden text-on-surface-variant p-1" onclick="toggleMobileMenu()">
-<span class="material-symbols-outlined">close</span>
-</button>
-</div>
-<nav class="flex flex-col gap-xs">
+    <!-- Toast Notification (Hidden by default) -->
+    <div class="hidden fixed top-24 left-1/2 -translate-x-1/2 z-[60] bg-tertiary text-on-tertiary px-lg py-sm rounded-full shadow-lg flex items-center gap-2 toast-animation"
+        id="success-toast">
+        <span class="material-symbols-outlined">check_circle</span>
+        <span class="font-label-md">Alterações salvas com sucesso!</span>
+    </div>
+    <!-- Password Modal (Hidden by default) -->
+    <div class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-on-background/40 backdrop-blur-sm"
+        id="password-modal">
+        <div class="bg-surface p-xl rounded-xl card-shadow w-full max-w-md mx-margin">
+            <div class="flex justify-between items-center mb-lg">
+                <h3 class="text-h2 font-display">Alterar Senha</h3>
+                <button class="text-on-surface-variant hover:text-on-surface" onclick="togglePasswordModal()">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <form class="space-y-md" onsubmit="event.preventDefault(); togglePasswordModal(); showToast();">
+                <div class="space-y-xs">
+                    <label class="font-label-md">Senha Atual</label>
+                    <input
+                        class="w-full bg-surface-container px-md py-sm rounded-lg border-outline-variant outline-none focus:ring-1 focus:ring-primary"
+                        placeholder="••••••••" type="password">
+                </div>
+                <div class="space-y-xs">
+                    <label class="font-label-md">Nova Senha</label>
+                    <input
+                        class="w-full bg-surface-container px-md py-sm rounded-lg border-outline-variant outline-none focus:ring-1 focus:ring-primary"
+                        placeholder="••••••••" type="password">
+                </div>
+                <div class="space-y-xs">
+                    <label class="font-label-md">Confirmar Nova Senha</label>
+                    <input
+                        class="w-full bg-surface-container px-md py-sm rounded-lg border-outline-variant outline-none focus:ring-1 focus:ring-primary"
+                        placeholder="••••••••" type="password">
+                </div>
+                <div class="flex gap-md pt-md">
+                    <button class="flex-1 py-sm rounded-full border border-outline-variant font-label-md"
+                        onclick="togglePasswordModal()" type="button">Cancelar</button>
+                    <button class="flex-1 bg-primary text-on-primary py-sm rounded-full font-label-md"
+                        type="submit">Confirmar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Top Navigation Shell -->
+    <header class="bg-surface shadow-sm sticky top-0 z-50">
+        <div class="flex justify-between items-center px-margin py-md w-full max-w-7xl mx-auto">
+            <a class="text-h2 font-display font-bold text-primary" href="index.html">VemJunto</a>
+            <nav class="hidden md:flex items-center gap-lg">
+                <a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors"
+                    href="resultados_de_busca_organizado_vemjunto_mobility.html">Buscar Carona</a>
+                <a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors"
+                    href="oferecer_carona_vemjunto_mobility_1.html">Oferecer Carona</a>
+                <a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors"
+                    href="minhas_viagens_vemjunto_mobility.html">Minhas Viagens</a>
+            </nav>
+            <div class="flex items-center gap-md">
+                <div class="relative group">
+                    <button
+                        class="text-on-surface-variant hover:text-primary transition-colors relative flex items-center p-2"
+                        aria-label="Notificações">
+                        <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+                        <span
+                            class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-surface"></span>
+                    </button>
+                    <div
+                        class="absolute right-0 mt-0 w-80 bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant/20 hidden group-hover:block z-[60] py-md before:content-[''] before:absolute before:-top-4 before:left-0 before:w-full before:h-4">
+                        <div class="px-md pb-sm border-b border-outline-variant/10">
+                            <p class="font-display text-label-md font-bold text-on-background">Notificações</p>
+                        </div>
+                        <div class="max-h-64 overflow-y-auto">
+                            <div
+                                class="px-md py-sm hover:bg-surface-container-low transition-colors cursor-pointer border-b border-outline-variant/5">
+                                <p class="font-display text-caption text-primary mb-1">Viagem Confirmada</p>
+                                <p class="font-display text-body-md text-on-surface-variant">Sua reserva para Campinas
+                                    foi aceita por Ricardo.</p>
+                                <span class="font-display text-[10px] text-outline">Há 5 min</span>
+                            </div>
+                            <div
+                                class="px-md py-sm hover:bg-surface-container-low transition-colors cursor-pointer border-b border-outline-variant/5">
+                                <p class="font-display text-caption text-primary mb-1">Nova Mensagem</p>
+                                <p class="font-display text-body-md text-on-surface-variant">Ricardo: "Oi! Estarei no
+                                    ponto às 08:20."</p>
+                                <span class="font-display text-[10px] text-outline">Há 1 hora</span>
+                            </div>
+                        </div>
+                        <a href="notifica_es_vemjunto.html"
+                            class="block text-center pt-sm text-primary font-display text-caption hover:underline">Ver
+                            todas</a>
+                    </div>
+                </div>
+                <div class="relative group hidden md:block">
+                    <a href="perfil_do_usu_rio_vemjunto.html"
+                        class="text-on-surface-variant hover:text-primary transition-colors flex items-center p-2"
+                        aria-label="Menu de Perfil">
+                        <span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+                    </a>
+                    <div
+                        class="absolute right-0 mt-0 w-48 bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant/20 hidden group-hover:block z-[60] py-sm before:content-[''] before:absolute before:-top-4 before:left-0 before:w-full before:h-4">
+                        <a href="perfil_do_usu_rio_vemjunto.html"
+                            class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors"><span
+                                class="material-symbols-outlined text-[20px] text-outline">person</span><span
+                                class="font-display text-body-md text-on-surface">Meu Perfil</span></a>
+                        <a href="configura_es_e_pagamento_vemjunto_mobility.html"
+                            class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors">
+                            <span class="material-symbols-outlined text-[20px] text-outline">settings</span>
+                            <span class="font-display text-body-md text-on-surface">Configurações</span>
+                        </a>
+                        <div class="my-sm border-t border-outline-variant/10"></div>
+                        <a href="#"
+                            class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors text-error">
+                            <span class="material-symbols-outlined text-[20px]">logout</span>
+                            <span class="font-display text-body-md">Sair</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="w-full flex flex-col md:flex-row min-h-[calc(100vh-80px)]">
+        <!-- Side Navigation Shell -->
+        <aside
+            class="hidden md:flex flex-col gap-md p-md w-64 sticky top-[72px] h-[calc(100vh-72px)] bg-surface-container-low border-r border-outline-variant">
+            <div class="mb-lg flex justify-between items-start">
+                <div>
+                    <h3 class="text-h2 font-display font-bold text-primary">Meu Painel</h3>
+                    <p class="text-on-surface-variant font-caption">Bem-vindo de volta!</p>
+                </div>
+                <button class="md:hidden text-on-surface-variant p-1" onclick="toggleMobileMenu()">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <nav class="flex flex-col gap-xs">
 
-<a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="resultados_de_busca_organizado_vemjunto_mobility.html">
-<span class="material-symbols-outlined" data-icon="directions_car">search</span>
-<span class="font-display text-label-md">Buscar Carona</span>
-</a>
+                <a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all"
+                    href="resultados_de_busca_organizado_vemjunto_mobility.html">
+                    <span class="material-symbols-outlined" data-icon="directions_car">search</span>
+                    <span class="font-display text-label-md">Buscar Carona</span>
+                </a>
 
-<a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="oferecer_carona_vemjunto_mobility_1.html">
-<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
-<span class="font-display text-label-md">Oferecer Carona</span>
-</a>
-<a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="minhas_viagens_vemjunto_mobility.html">
-<span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
-<span class="font-display text-label-md">Minhas Viagens</span>
-</a>
+                <a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all"
+                    href="oferecer_carona_vemjunto_mobility_1.html">
+                    <span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+                    <span class="font-display text-label-md">Oferecer Carona</span>
+                </a>
+                <a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all"
+                    href="minhas_viagens_vemjunto_mobility.html">
+                    <span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
+                    <span class="font-display text-label-md">Minhas Viagens</span>
+                </a>
 
-<a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="chat_com_localiza_o_ao_vivo_vemjunto.html">
-<span class="material-symbols-outlined" data-icon="chat">chat</span>
-<span class="font-display text-label-md">Mensagens</span>
-</a>
-<a class="bg-primary-container text-on-primary-container rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="configura_es_e_pagamento_vemjunto_mobility.html">
-<span class="material-symbols-outlined" data-icon="settings">settings</span>
-<span class="font-display text-label-md">Configurações</span>
-</a>
-<a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="perfil_do_usu_rio_vemjunto.html">
-<span class="material-symbols-outlined" data-icon="person">person</span>
-<span class="font-display text-label-md">Perfil</span>
-</a>
-<a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="#">
-<span class="material-symbols-outlined" data-icon="help">help</span>
-<span class="font-display text-label-md">Ajuda</span>
-</a>
+                <a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all"
+                    href="chat_com_localiza_o_ao_vivo_vemjunto.html">
+                    <span class="material-symbols-outlined" data-icon="chat">chat</span>
+                    <span class="font-display text-label-md">Mensagens</span>
+                </a>
+                <a class="bg-primary-container text-on-primary-container rounded-xl px-4 py-3 flex items-center gap-3 transition-all"
+                    href="configura_es_e_pagamento_vemjunto_mobility.html">
+                    <span class="material-symbols-outlined" data-icon="settings">settings</span>
+                    <span class="font-display text-label-md">Configurações</span>
+                </a>
+                <a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all"
+                    href="perfil_do_usu_rio_vemjunto.html">
+                    <span class="material-symbols-outlined" data-icon="person">person</span>
+                    <span class="font-display text-label-md">Perfil</span>
+                </a>
+                <a class="text-on-surface-variant hover:bg-surface-variant rounded-xl px-4 py-3 flex items-center gap-3 transition-all"
+                    href="ajuda.html">
+                    <span class="material-symbols-outlined" data-icon="help">help</span>
+                    <span class="font-display text-label-md">Ajuda</span>
+                </a>
 
-</nav>
-</aside>
-<!-- Main Content Canvas -->
-<section class="flex-1 p-margin md:p-xl space-y-lg">
-<div class="flex flex-col gap-xs mb-md">
-<h2 class="font-display text-h1 text-on-surface">Configurações</h2>
-<p class="text-on-surface-variant text-body-md">Gerencie seu perfil, pagamentos e preferências.</p>
-</div>
-<!-- Bento Grid Layout -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
-<!-- Profile Edit Card (Spans 8 cols) -->
-<div class="lg:col-span-8 bg-surface-container-lowest p-lg rounded-xl card-shadow border border-outline-variant/20">
-<div class="flex items-center gap-md mb-lg">
-<div class="relative">
-<img alt="Avatar do usuário" class="w-24 h-24 rounded-full object-cover border-4 border-primary-fixed" alt="Close-up portrait of a smiling young professional man with a clean beard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkNiLORDtnZN8IYtcMlU-AGXyreMZiPHrN7Lb3VF_6aPh8K4R3OlMRb7zlkUpWdEA2x5WQvcyqUWbu2S859XaIdaRUdM1bf0s5gtTRUClMVIJm6oGU8q43sb8C4hQxphOAyyosMgvjid1pQQHbVlA-Mr1knwRSK_Lwl3hWj0txqBEFiZV8vvPoDGmEjojA42TiMvI9_ZEik0kd3oocbJpN4bsq20rysgqIpeAWAIXdKsQbnZUxYEngFgBHAyvZpeE03GGmYCtQqQ-X">
-<button class="absolute bottom-0 right-0 bg-primary text-on-primary p-2 rounded-full shadow-lg">
-<span class="material-symbols-outlined text-[20px]" data-icon="photo_camera">photo_camera</span>
-</button>
-</div>
-<div>
-<h3 class="font-display text-h2 text-on-surface">Dados Pessoais</h3>
-<p class="text-on-surface-variant text-caption">Atualize sua foto e detalhes públicos</p>
-</div>
-</div>
-<form class="grid grid-cols-1 md:grid-cols-2 gap-md" onsubmit="event.preventDefault(); showToast();">
-<div class="space-y-xs">
-<label class="font-label-md text-on-surface">Nome Completo</label>
-<input class="w-full bg-surface-container px-md py-sm rounded-lg border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary transition-all outline-none" type="text" value="Ricardo Oliveira">
-</div>
-<div class="space-y-xs">
-<label class="font-label-md text-on-surface">Email</label>
-<input class="w-full bg-surface-container px-md py-sm rounded-lg border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary transition-all outline-none" type="email" value="ricardo.oliveira@email.com">
-</div>
-<div class="md:col-span-2 space-y-xs">
-<label class="font-label-md text-on-surface">Bio</label>
-<textarea class="w-full bg-surface-container px-md py-sm rounded-lg border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary transition-all outline-none" rows="3">Viajante frequente entre São Paulo e Campinas. Adoro conversar sobre tecnologia e música brasileira!</textarea>
-</div>
-<div class="md:col-span-2 flex justify-end">
-<button class="bg-primary text-on-primary px-lg py-sm rounded-full font-label-md hover:opacity-90 active:scale-95 transition-all" type="submit">Salvar Alterações</button>
-</div>
-</form>
-</div>
-<!-- Travel Preferences Card (Spans 4 cols) -->
-<div class="lg:col-span-4 bg-surface-container-lowest p-lg rounded-xl card-shadow border border-outline-variant/20 flex flex-col">
-<h3 class="font-display text-h2 text-on-surface mb-md">Preferências</h3>
-<div class="space-y-md flex-1">
-<div class="flex items-center justify-between p-sm bg-surface rounded-lg">
-<div class="flex items-center gap-sm">
-<span class="material-symbols-outlined text-primary" data-icon="music_note">music_note</span>
-<span class="font-label-md">Música</span>
-</div>
-<input checked="" class="rounded text-primary focus:ring-primary h-5 w-5" type="checkbox">
-</div>
-<div class="flex items-center justify-between p-sm bg-surface rounded-lg">
-<div class="flex items-center gap-sm">
-<span class="material-symbols-outlined text-primary" data-icon="smoking_rooms">smoking_rooms</span>
-<span class="font-label-md">Fumante</span>
-</div>
-<input class="rounded text-primary focus:ring-primary h-5 w-5" type="checkbox">
-</div>
-<div class="flex items-center justify-between p-sm bg-surface rounded-lg">
-<div class="flex items-center gap-sm">
-<span class="material-symbols-outlined text-primary" data-icon="pets">pets</span>
-<span class="font-label-md">Pets</span>
-</div>
-<input checked="" class="rounded text-primary focus:ring-primary h-5 w-5" type="checkbox">
-</div>
-<div class="flex items-center justify-between p-sm bg-surface rounded-lg">
-<div class="flex items-center gap-sm">
-<span class="material-symbols-outlined text-primary" data-icon="chat_bubble">chat_bubble</span>
-<span class="font-label-md">Conversa</span>
-</div>
-<input checked="" class="rounded text-primary focus:ring-primary h-5 w-5" type="checkbox">
-</div>
-</div>
-<p class="text-caption text-on-surface-variant mt-lg italic">Isso ajuda motoristas e passageiros a conhecerem seu perfil.</p>
-</div>
-<!-- Payment Methods Card (Spans 7 cols) -->
-<div class="lg:col-span-7 bg-surface-container-lowest p-lg rounded-xl card-shadow border border-outline-variant/20">
-<div class="flex justify-between items-center mb-lg">
-<h3 class="font-display text-h2 text-on-surface">Pagamento</h3>
-<button class="text-primary font-label-md flex items-center gap-1 hover:underline">
-<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span> Adicionar novo
+            </nav>
+        </aside>
+        <!-- Main Content Canvas -->
+        <section class="flex-1 p-margin md:p-xl space-y-lg">
+            <div class="flex flex-col gap-xs mb-md">
+                <h2 class="font-display text-h1 text-on-surface">Configurações</h2>
+                <p class="text-on-surface-variant text-body-md">Gerencie seu perfil, pagamentos e preferências.</p>
+            </div>
+            <!-- Bento Grid Layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+                <!-- Profile Edit Card (Spans 8 cols) -->
+                <div
+                    class="lg:col-span-8 bg-surface-container-lowest p-lg rounded-xl card-shadow border border-outline-variant/20">
+                    <div class="flex items-center gap-md mb-lg">
+                        <div class="relative">
+                            <img alt="Avatar do usuário"
+                                class="w-24 h-24 rounded-full object-cover border-4 border-primary-fixed"
+                                alt="Close-up portrait of a smiling young professional man with a clean beard."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkNiLORDtnZN8IYtcMlU-AGXyreMZiPHrN7Lb3VF_6aPh8K4R3OlMRb7zlkUpWdEA2x5WQvcyqUWbu2S859XaIdaRUdM1bf0s5gtTRUClMVIJm6oGU8q43sb8C4hQxphOAyyosMgvjid1pQQHbVlA-Mr1knwRSK_Lwl3hWj0txqBEFiZV8vvPoDGmEjojA42TiMvI9_ZEik0kd3oocbJpN4bsq20rysgqIpeAWAIXdKsQbnZUxYEngFgBHAyvZpeE03GGmYCtQqQ-X">
+                            <button
+                                class="absolute bottom-0 right-0 bg-primary text-on-primary p-2 rounded-full shadow-lg">
+                                <span class="material-symbols-outlined text-[20px]"
+                                    data-icon="photo_camera">photo_camera</span>
+                            </button>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-h2 text-on-surface">Dados Pessoais</h3>
+                            <p class="text-on-surface-variant text-caption">Atualize sua foto e detalhes públicos</p>
+                        </div>
+                    </div>
+                    <form class="grid grid-cols-1 md:grid-cols-2 gap-md"
+                        onsubmit="event.preventDefault(); showToast();">
+                        <div class="space-y-xs">
+                            <label class="font-label-md text-on-surface">Nome Completo</label>
+                            <input
+                                class="w-full bg-surface-container px-md py-sm rounded-lg border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary transition-all outline-none"
+                                type="text" value="Ricardo Oliveira">
+                        </div>
+                        <div class="space-y-xs">
+                            <label class="font-label-md text-on-surface">Email</label>
+                            <input
+                                class="w-full bg-surface-container px-md py-sm rounded-lg border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary transition-all outline-none"
+                                type="email" value="ricardo.oliveira@email.com">
+                        </div>
+                        <div class="md:col-span-2 space-y-xs">
+                            <label class="font-label-md text-on-surface">Bio</label>
+                            <textarea
+                                class="w-full bg-surface-container px-md py-sm rounded-lg border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary transition-all outline-none"
+                                rows="3">Viajante frequente entre São Paulo e Campinas. Adoro conversar sobre tecnologia e música brasileira!</textarea>
+                        </div>
+                        <div class="md:col-span-2 flex justify-end">
+                            <button
+                                class="bg-primary text-on-primary px-lg py-sm rounded-full font-label-md hover:opacity-90 active:scale-95 transition-all"
+                                type="submit">Salvar Alterações</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- Travel Preferences Card (Spans 4 cols) -->
+                <div
+                    class="lg:col-span-4 bg-surface-container-lowest p-lg rounded-xl card-shadow border border-outline-variant/20 flex flex-col">
+                    <h3 class="font-display text-h2 text-on-surface mb-md">Preferências</h3>
+                    <div class="space-y-md flex-1">
+                        <div class="flex items-center justify-between p-sm bg-surface rounded-lg">
+                            <div class="flex items-center gap-sm">
+                                <span class="material-symbols-outlined text-primary"
+                                    data-icon="music_note">music_note</span>
+                                <span class="font-label-md">Música</span>
+                            </div>
+                            <input checked="" class="rounded text-primary focus:ring-primary h-5 w-5" type="checkbox">
+                        </div>
+                        <div class="flex items-center justify-between p-sm bg-surface rounded-lg">
+                            <div class="flex items-center gap-sm">
+                                <span class="material-symbols-outlined text-primary"
+                                    data-icon="smoking_rooms">smoking_rooms</span>
+                                <span class="font-label-md">Fumante</span>
+                            </div>
+                            <input class="rounded text-primary focus:ring-primary h-5 w-5" type="checkbox">
+                        </div>
+                        <div class="flex items-center justify-between p-sm bg-surface rounded-lg">
+                            <div class="flex items-center gap-sm">
+                                <span class="material-symbols-outlined text-primary" data-icon="pets">pets</span>
+                                <span class="font-label-md">Pets</span>
+                            </div>
+                            <input checked="" class="rounded text-primary focus:ring-primary h-5 w-5" type="checkbox">
+                        </div>
+                        <div class="flex items-center justify-between p-sm bg-surface rounded-lg">
+                            <div class="flex items-center gap-sm">
+                                <span class="material-symbols-outlined text-primary"
+                                    data-icon="chat_bubble">chat_bubble</span>
+                                <span class="font-label-md">Conversa</span>
+                            </div>
+                            <input checked="" class="rounded text-primary focus:ring-primary h-5 w-5" type="checkbox">
+                        </div>
+                    </div>
+                    <p class="text-caption text-on-surface-variant mt-lg italic">Isso ajuda motoristas e passageiros a
+                        conhecerem seu perfil.</p>
+                </div>
+                <!-- Payment Methods Card (Spans 7 cols) -->
+                <div
+                    class="lg:col-span-7 bg-surface-container-lowest p-lg rounded-xl card-shadow border border-outline-variant/20">
+                    <div class="flex justify-between items-center mb-lg">
+                        <h3 class="font-display text-h2 text-on-surface">Pagamento</h3>
+                        <button class="text-primary font-label-md flex items-center gap-1 hover:underline">
+                            <span class="material-symbols-outlined text-[18px]" data-icon="add">add</span> Adicionar
+                            novo
                         </button>
-</div>
-<div class="space-y-md">
-<!-- Credit Card -->
-<div class="flex items-center justify-between p-md bg-surface-container-low rounded-xl border border-primary/20">
-<div class="flex items-center gap-md">
-<div class="bg-primary-container p-2 rounded-lg">
-<span class="material-symbols-outlined text-on-primary-container" data-icon="credit_card">credit_card</span>
-</div>
-<div>
-<p class="font-label-md text-on-surface">•••• •••• •••• 4242</p>
-<p class="text-caption text-on-surface-variant">Vencimento 12/28</p>
-</div>
-</div>
-<span class="bg-primary/10 text-primary px-sm py-xs rounded-full text-caption font-bold">PADRáO</span>
-</div>
-<!-- Pix -->
-<div class="flex items-center justify-between p-md bg-surface border border-outline-variant/30 rounded-xl">
-<div class="flex items-center gap-md">
-<div class="bg-tertiary-container p-2 rounded-lg">
-<span class="material-symbols-outlined text-on-tertiary-container" data-icon="payments">payments</span>
-</div>
-<div>
-<p class="font-label-md text-on-surface">Chave Pix Cadastrada</p>
-<p class="text-caption text-on-surface-variant">ricardo.oliveira@email.com</p>
-</div>
-</div>
-<button class="text-on-surface-variant hover:text-primary">
-<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Security Card (Spans 5 cols) -->
-<div class="lg:col-span-5 bg-surface-container-lowest p-lg rounded-xl card-shadow border border-outline-variant/20" id="security-section">
-<h3 class="font-display text-h2 text-on-surface mb-lg">Segurança</h3>
-<div class="space-y-lg">
-<div class="flex items-start gap-md">
-<div class="bg-error-container p-2 rounded-lg">
-<span class="material-symbols-outlined text-on-error-container" data-icon="lock">lock</span>
-</div>
-<div class="flex-1">
-<p class="font-label-md text-on-surface">Alterar Senha</p>
-<p class="text-caption text-on-surface-variant mb-sm">Recomendamos trocar sua senha a cada 3 meses.</p>
-<button class="text-primary font-label-md underline hover:text-primary-container" onclick="togglePasswordModal()">Trocar senha agora</button>
-</div>
-</div>
-<hr class="border-outline-variant/30">
-<div class="flex items-start gap-md">
-<div class="bg-surface-variant p-2 rounded-lg">
-<span class="material-symbols-outlined text-on-surface-variant" data-icon="verified_user">verified_user</span>
-</div>
-<div class="flex-1">
-<p class="font-label-md text-on-surface">Verificação em Duas Etapas</p>
-<p class="text-caption text-on-surface-variant mb-sm">Sua conta está mais segura com o 2FA ativado.</p>
-<div class="flex items-center gap-2">
-<button class="w-8 h-4 bg-tertiary rounded-full relative">
-<div class="absolute right-0.5 top-0.5 w-3 h-3 bg-white rounded-full"></div>
-</button>
-<span class="text-caption text-tertiary font-bold">ATIVADO</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-</main>
-<!-- Mobile Bottom Navigation -->
-<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface shadow-2xl flex justify-around items-center py-sm z-50 border-t border-outline-variant/30">
-<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="minhas_viagens_vemjunto_mobility.html">
-<span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
-<span class="text-caption ">Viagem</span>
-</a>
-<a class="flex flex-col items-center gap-1 text-on-surface-variant cursor-pointer" href="resultados_de_busca_organizado_vemjunto_mobility.html">
-<span class="material-symbols-outlined" data-icon="explore">explore</span>
-<span class="text-caption ">Explorar</span>
-</a>
-<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="chat_com_localiza_o_ao_vivo_vemjunto.html">
-<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
-<span class="text-caption ">Chat</span>
-</a>
-<a class="flex flex-col items-center gap-1 text-primary cursor-pointer" href="perfil_do_usu_rio_vemjunto.html">
-<span class="material-symbols-outlined" data-icon="person">person</span>
-<span class="text-caption font-bold">Perfil</span>
-</a>
-</nav>
-<script>
-    function showToast() {
-        const toast = document.getElementById('success-toast');
-        toast.classList.remove('hidden');
-        setTimeout(() => {
-            toast.classList.add('hidden');
-        }, 3000);
-    }
+                    </div>
+                    <div class="space-y-md">
+                        <!-- Credit Card -->
+                        <div
+                            class="flex items-center justify-between p-md bg-surface-container-low rounded-xl border border-primary/20">
+                            <div class="flex items-center gap-md">
+                                <div class="bg-primary-container p-2 rounded-lg">
+                                    <span class="material-symbols-outlined text-on-primary-container"
+                                        data-icon="credit_card">credit_card</span>
+                                </div>
+                                <div>
+                                    <p class="font-label-md text-on-surface">•••• •••• •••• 4242</p>
+                                    <p class="text-caption text-on-surface-variant">Vencimento 12/28</p>
+                                </div>
+                            </div>
+                            <span
+                                class="bg-primary/10 text-primary px-sm py-xs rounded-full text-caption font-bold">PADRáO</span>
+                        </div>
+                        <!-- Pix -->
+                        <div
+                            class="flex items-center justify-between p-md bg-surface border border-outline-variant/30 rounded-xl">
+                            <div class="flex items-center gap-md">
+                                <div class="bg-tertiary-container p-2 rounded-lg">
+                                    <span class="material-symbols-outlined text-on-tertiary-container"
+                                        data-icon="payments">payments</span>
+                                </div>
+                                <div>
+                                    <p class="font-label-md text-on-surface">Chave Pix Cadastrada</p>
+                                    <p class="text-caption text-on-surface-variant">ricardo.oliveira@email.com</p>
+                                </div>
+                            </div>
+                            <button class="text-on-surface-variant hover:text-primary">
+                                <span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Security Card (Spans 5 cols) -->
+                <div class="lg:col-span-5 bg-surface-container-lowest p-lg rounded-xl card-shadow border border-outline-variant/20"
+                    id="security-section">
+                    <h3 class="font-display text-h2 text-on-surface mb-lg">Segurança</h3>
+                    <div class="space-y-lg">
+                        <div class="flex items-start gap-md">
+                            <div class="bg-error-container p-2 rounded-lg">
+                                <span class="material-symbols-outlined text-on-error-container"
+                                    data-icon="lock">lock</span>
+                            </div>
+                            <div class="flex-1">
+                                <p class="font-label-md text-on-surface">Alterar Senha</p>
+                                <p class="text-caption text-on-surface-variant mb-sm">Recomendamos trocar sua senha a
+                                    cada 3 meses.</p>
+                                <button class="text-primary font-label-md underline hover:text-primary-container"
+                                    onclick="togglePasswordModal()">Trocar senha agora</button>
+                            </div>
+                        </div>
+                        <hr class="border-outline-variant/30">
+                        <div class="flex items-start gap-md">
+                            <div class="bg-surface-variant p-2 rounded-lg">
+                                <span class="material-symbols-outlined text-on-surface-variant"
+                                    data-icon="verified_user">verified_user</span>
+                            </div>
+                            <div class="flex-1">
+                                <p class="font-label-md text-on-surface">Verificação em Duas Etapas</p>
+                                <p class="text-caption text-on-surface-variant mb-sm">Sua conta está mais segura com o
+                                    2FA ativado.</p>
+                                <div class="flex items-center gap-2">
+                                    <button class="w-8 h-4 bg-tertiary rounded-full relative">
+                                        <div class="absolute right-0.5 top-0.5 w-3 h-3 bg-white rounded-full"></div>
+                                    </button>
+                                    <span class="text-caption text-tertiary font-bold">ATIVADO</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Mobile Bottom Navigation -->
+    <nav
+        class="md:hidden fixed bottom-0 left-0 right-0 bg-surface shadow-2xl flex justify-around items-center py-sm z-50 border-t border-outline-variant/30">
+        <a class="flex flex-col items-center gap-1 text-on-surface-variant"
+            href="minhas_viagens_vemjunto_mobility.html">
+            <span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
+            <span class="text-caption ">Viagem</span>
+        </a>
+        <a class="flex flex-col items-center gap-1 text-on-surface-variant cursor-pointer"
+            href="resultados_de_busca_organizado_vemjunto_mobility.html">
+            <span class="material-symbols-outlined" data-icon="explore">explore</span>
+            <span class="text-caption ">Explorar</span>
+        </a>
+        <a class="flex flex-col items-center gap-1 text-on-surface-variant"
+            href="chat_com_localiza_o_ao_vivo_vemjunto.html">
+            <span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+            <span class="text-caption ">Chat</span>
+        </a>
+        <a class="flex flex-col items-center gap-1 text-primary cursor-pointer" href="perfil_do_usu_rio_vemjunto.html">
+            <span class="material-symbols-outlined" data-icon="person">person</span>
+            <span class="text-caption font-bold">Perfil</span>
+        </a>
+    </nav>
+    <script>
+        function showToast() {
+            const toast = document.getElementById('success-toast');
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
 
-    function togglePasswordModal() {
-        const modal = document.getElementById('password-modal');
-        modal.classList.toggle('hidden');
-    }
+        function togglePasswordModal() {
+            const modal = document.getElementById('password-modal');
+            modal.classList.toggle('hidden');
+        }
 
-    // Handle clicks on "Trocar senha agora" from the link/button
-    document.querySelectorAll('a[href="#security-section"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
+        // Handle clicks on "Trocar senha agora" from the link/button
+        document.querySelectorAll('a[href="#security-section"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
         });
-    });
-</script>
+    </script>
 
 
-<script>document.addEventListener('click', function(event) { const notifWrapper = document.getElementById('notifications-wrapper'); const notifDropdown = document.getElementById('notif-dropdown'); if (notifWrapper && !notifWrapper.contains(event.target)) { notifDropdown.classList.add('hidden'); } const profileWrapper = document.getElementById('profile-dropdown-wrapper'); const profileDropdown = document.getElementById('profile-dropdown'); if (profileWrapper && !profileWrapper.contains(event.target)) { profileDropdown.classList.add('hidden'); } });</script><!-- BottomNavBar (Mobile Only) -->
-<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface shadow-2xl flex justify-around items-center pt-sm pb-safe z-50 border-t border-outline-variant/30">
-<a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="minhas_viagens_vemjunto_mobility.html">
-<span class="material-symbols-outlined text-[22px]" data-icon="directions_car">directions_car</span>
-<span class="text-[10px] font-medium">Viagem</span>
-</a>
-<a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="index.html">
-<span class="material-symbols-outlined text-[22px]" data-icon="explore">explore</span>
-<span class="text-[10px] font-medium">Explorar</span>
-</a>
-<a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="oferecer_carona_vemjunto_mobility_1.html">
-<span class="material-symbols-outlined text-[22px]" data-icon="add_circle">add_circle</span>
-<span class="text-[10px] font-medium">Oferecer</span>
-</a>
-<a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="chat_com_localiza_o_ao_vivo_vemjunto.html">
-<span class="material-symbols-outlined text-[22px]" data-icon="chat_bubble">chat_bubble</span>
-<span class="text-[10px] font-medium">Chat</span>
-</a>
-<a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="perfil_do_usu_rio_vemjunto.html">
-<span class="material-symbols-outlined text-[22px]" data-icon="person">person</span>
-<span class="text-[10px] font-medium">Perfil</span>
-</a>
-</nav>
-<div class="pb-20 md:pb-0"></div>
-<script>
-function toggleNotif(e) {
-    e.stopPropagation();
-    document.getElementById('notif-dropdown').classList.toggle('hidden');
-    const pd = document.getElementById('profile-dropdown');
-    if (pd) pd.classList.add('hidden');
-}
-function toggleProfile(e) {
-    e.stopPropagation();
-    document.getElementById('profile-dropdown').classList.toggle('hidden');
-    document.getElementById('notif-dropdown').classList.add('hidden');
-}
-document.addEventListener('click', function() {
-    const nd = document.getElementById('notif-dropdown');
-    const pd = document.getElementById('profile-dropdown');
-    if (nd) nd.classList.add('hidden');
-    if (pd) pd.classList.add('hidden');
-});
-function toggleMobileMenu() {
-    const aside = document.querySelector('aside');
-    if (aside) {
-        aside.classList.toggle('hidden');
-        aside.classList.toggle('fixed');
-        aside.classList.toggle('inset-y-0');
-        aside.classList.toggle('left-0');
-        aside.classList.toggle('z-[100]');
-        aside.classList.toggle('shadow-2xl');
-        document.body.classList.toggle('overflow-hidden');
-    }
-}
-</script>
-</body></html>
+    <script>document.addEventListener('click', function (event) { const notifWrapper = document.getElementById('notifications-wrapper'); const notifDropdown = document.getElementById('notif-dropdown'); if (notifWrapper && !notifWrapper.contains(event.target)) { notifDropdown.classList.add('hidden'); } const profileWrapper = document.getElementById('profile-dropdown-wrapper'); const profileDropdown = document.getElementById('profile-dropdown'); if (profileWrapper && !profileWrapper.contains(event.target)) { profileDropdown.classList.add('hidden'); } });</script>
+    <!-- BottomNavBar (Mobile Only) -->
+    <nav
+        class="md:hidden fixed bottom-0 left-0 right-0 bg-surface shadow-2xl flex justify-around items-center pt-sm pb-safe z-50 border-t border-outline-variant/30">
+        <a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1"
+            href="minhas_viagens_vemjunto_mobility.html">
+            <span class="material-symbols-outlined text-[22px]" data-icon="directions_car">directions_car</span>
+            <span class="text-[10px] font-medium">Viagem</span>
+        </a>
+        <a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1"
+            href="index.html">
+            <span class="material-symbols-outlined text-[22px]" data-icon="explore">explore</span>
+            <span class="text-[10px] font-medium">Explorar</span>
+        </a>
+        <a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1"
+            href="oferecer_carona_vemjunto_mobility_1.html">
+            <span class="material-symbols-outlined text-[22px]" data-icon="add_circle">add_circle</span>
+            <span class="text-[10px] font-medium">Oferecer</span>
+        </a>
+        <a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1"
+            href="chat_com_localiza_o_ao_vivo_vemjunto.html">
+            <span class="material-symbols-outlined text-[22px]" data-icon="chat_bubble">chat_bubble</span>
+            <span class="text-[10px] font-medium">Chat</span>
+        </a>
+        <a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1"
+            href="perfil_do_usu_rio_vemjunto.html">
+            <span class="material-symbols-outlined text-[22px]" data-icon="person">person</span>
+            <span class="text-[10px] font-medium">Perfil</span>
+        </a>
+    </nav>
+    <div class="pb-20 md:pb-0"></div>
+    <script>
+        function toggleNotif(e) {
+            e.stopPropagation();
+            document.getElementById('notif-dropdown').classList.toggle('hidden');
+            const pd = document.getElementById('profile-dropdown');
+            if (pd) pd.classList.add('hidden');
+        }
+        function toggleProfile(e) {
+            e.stopPropagation();
+            document.getElementById('profile-dropdown').classList.toggle('hidden');
+            document.getElementById('notif-dropdown').classList.add('hidden');
+        }
+        document.addEventListener('click', function () {
+            const nd = document.getElementById('notif-dropdown');
+            const pd = document.getElementById('profile-dropdown');
+            if (nd) nd.classList.add('hidden');
+            if (pd) pd.classList.add('hidden');
+        });
+        function toggleMobileMenu() {
+            const aside = document.querySelector('aside');
+            if (aside) {
+                aside.classList.toggle('hidden');
+                aside.classList.toggle('fixed');
+                aside.classList.toggle('inset-y-0');
+                aside.classList.toggle('left-0');
+                aside.classList.toggle('z-[100]');
+                aside.classList.toggle('shadow-2xl');
+                document.body.classList.toggle('overflow-hidden');
+            }
+        }
+    </script>
+</body>
+
+</html>

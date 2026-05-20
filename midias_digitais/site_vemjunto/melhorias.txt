@@ -1,1 +1,13 @@
-1 - ajustar vazio na pagina perfil
+preciso organizar os meus arquivos do meu site, para isso siga o passo a passo:
+
+-1 - analise os arquivos da pasta midias_digitais
+0 - leia todos os arquivos em exessão, entenda a estrutura do site
+1 - apenas altere a pasta midias_digitais
+2 - organize todo conteudo .html em uma pasta html
+3 - organize todo conteudo .css em uma pasta css
+4 - organize todo conteudo .js em uma pasta js
+5 - organize todas as imagens em uma pasta imagens
+6 - link todos os arquivos que agora estão separados
+7 - se possivel baixe as imagens e deixa reservado nos arquivos
+8 - leia o css que esta na nuvem e traga para o projeto
+9 - deixe todos os arquivos inutilizados em uma pasta chamada "analizar"

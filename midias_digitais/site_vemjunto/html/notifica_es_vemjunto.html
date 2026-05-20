@@ -1,13 +1,20 @@
 ﻿<!DOCTYPE html>
 
-<html class="light" lang="pt-BR"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="../css/tailwind.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<html class="light" lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link href="../css/tailwind.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -88,213 +95,272 @@
                         "caption": ["Plus Jakarta Sans"]
                     },
                     "fontSize": {
-                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
-                        "display": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                        "h2": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                        "h1": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-                        "caption": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+                        "display": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "h2": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "h1": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "500" }]
                     }
                 },
             },
         }
     </script>
-<style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
     </style>
 </head>
-<body class="bg-background text-on-background min-h-screen">
-<header class="bg-surface shadow-sm sticky top-0 z-50">
-<div class="flex justify-between items-center px-margin py-md w-full max-w-7xl mx-auto">
-<a class="text-h2 font-display font-bold text-primary" href="index.html">VemJunto</a>
-<nav class="hidden md:flex items-center gap-lg">
-<a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors" href="resultados_de_busca_organizado_vemjunto_mobility.html">Buscar Carona</a>
-<a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors" href="oferecer_carona_vemjunto_mobility_1.html">Oferecer Carona</a>
-<a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors" href="minhas_viagens_vemjunto_mobility.html">Minhas Viagens</a>
-</nav>
-<div class="flex items-center gap-md">
-<div class="relative group">
-<button class="text-on-surface-variant hover:text-primary transition-colors relative flex items-center p-2" aria-label="Notificações">
-<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
-<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-surface"></span>
-</button>
-<div class="absolute right-0 mt-0 w-80 bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant/20 hidden group-hover:block z-[60] py-md before:content-[''] before:absolute before:-top-4 before:left-0 before:w-full before:h-4">
-<div class="px-md pb-sm border-b border-outline-variant/10">
-<p class="font-display text-label-md font-bold text-on-background">Notificações</p>
-</div>
-<div class="max-h-64 overflow-y-auto">
-<div class="px-md py-sm hover:bg-surface-container-low transition-colors cursor-pointer border-b border-outline-variant/5">
-<p class="font-display text-caption text-primary mb-1">Viagem Confirmada</p>
-<p class="font-display text-body-md text-on-surface-variant">Sua reserva para Campinas foi aceita por Ricardo.</p>
-<span class="font-display text-[10px] text-outline">Há 5 min</span>
-</div>
-<div class="px-md py-sm hover:bg-surface-container-low transition-colors cursor-pointer border-b border-outline-variant/5">
-<p class="font-display text-caption text-primary mb-1">Nova Mensagem</p>
-<p class="font-display text-body-md text-on-surface-variant">Ricardo: "Oi! Estarei no ponto às 08:20."</p>
-<span class="font-display text-[10px] text-outline">Há 1 hora</span>
-</div>
-</div>
-<a href="notifica_es_vemjunto.html" class="block text-center pt-sm text-primary font-display text-caption hover:underline">Ver todas</a>
-</div>
-</div>
-<div class="relative group hidden md:block">
-<a href="perfil_do_usu_rio_vemjunto.html" class="text-on-surface-variant hover:text-primary transition-colors flex items-center p-2" aria-label="Menu de Perfil">
-<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
-</a>
-<div class="absolute right-0 mt-0 w-48 bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant/20 hidden group-hover:block z-[60] py-sm before:content-[''] before:absolute before:-top-4 before:left-0 before:w-full before:h-4">
-<a href="perfil_do_usu_rio_vemjunto.html" class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors"><span class="material-symbols-outlined text-[20px] text-outline">person</span><span class="font-display text-body-md text-on-surface">Meu Perfil</span></a>
-<a href="configura_es_e_pagamento_vemjunto_mobility.html" class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors">
-<span class="material-symbols-outlined text-[20px] text-outline">settings</span>
-<span class="font-display text-body-md text-on-surface">Configurações</span>
-</a>
-<div class="my-sm border-t border-outline-variant/10"></div>
-<a href="#" class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors text-error">
-<span class="material-symbols-outlined text-[20px]">logout</span>
-<span class="font-display text-body-md">Sair</span>
-</a>
-</div>
-</div>
-</div>
-</div>
-</header>
-<!-- Canvas Area -->
-<section class="flex-1 p-xl max-w-5xl mx-auto w-full">
-<div class="mb-xl flex items-center justify-between">
-<div>
-<h2 class="font-h1 text-h1 text-on-surface mb-xs">Notificações</h2>
-<p class="font-body-md text-body-md text-on-surface-variant">Fique por dentro das suas caronas e mensagens da comunidade.</p>
-</div>
-<button class="text-primary font-label-md text-label-md hover:underline">Marcar todas como lidas</button>
-</div>
-<!-- Notifications List -->
-<div class="bg-surface-container-lowest rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] overflow-hidden">
-<!-- Notification Item 1: Ride Match -->
-<div class="p-lg flex gap-lg items-start border-b border-outline-variant hover:bg-surface-container-low transition-colors group cursor-pointer">
-<div class="p-md rounded-full bg-primary-container/10 text-primary">
-<span class="material-symbols-outlined" data-icon="directions_car" style="font-variation-settings: 'FILL' 1;">directions_car</span>
-</div>
-<div class="flex-1">
-<div class="flex justify-between items-start mb-xs">
-<h3 class="font-label-md text-label-md text-on-surface">Nova carona encontrada: São Paulo -&gt; Campinas</h3>
-<span class="font-caption text-caption text-on-surface-variant bg-surface-variant px-base py-xs rounded-full">Há 5 min</span>
-</div>
-<p class="font-body-md text-body-md text-on-surface-variant mb-md">Uma nova oferta de carona disponível para o seu trajeto salvo. O motorista Marcos tem ótimas avaliações.</p>
-<div class="flex gap-md">
-<a href="detalhes_da_viagem_com_seguran_a_vemjunto.html" class="bg-primary text-on-primary font-label-md text-label-md px-lg py-xs rounded-lg hover:brightness-110 transition-all" style="display: inline-block; text-align: center;">Ver Detalhes</a>
-<button class="text-primary font-label-md text-label-md px-lg py-xs rounded-lg hover:bg-primary/5 transition-all">Ignorar</button>
-</div>
-</div>
-<div class="w-2 h-2 rounded-full bg-primary self-center"></div>
-</div>
-<!-- Notification Item 2: Message -->
-<div class="p-lg flex gap-lg items-start border-b border-outline-variant hover:bg-surface-container-low transition-colors group cursor-pointer">
-<div class="p-md rounded-full bg-secondary-container/10 text-secondary">
-<span class="material-symbols-outlined" data-icon="chat" style="font-variation-settings: 'FILL' 1;">chat</span>
-</div>
-<div class="flex-1">
-<div class="flex justify-between items-start mb-xs">
-<h3 class="font-label-md text-label-md text-on-surface">Ana Silva enviou uma mensagem</h3>
-<span class="font-caption text-caption text-on-surface-variant">Há 2 horas</span>
-</div>
-<p class="font-body-md text-body-md text-on-surface-variant">"Oi Ricardo! Posso levar uma mochila extra? Vou viajar para o aeroporto amanhã."</p>
-</div>
-<div class="w-2 h-2 rounded-full bg-primary self-center"></div>
-</div>
-<!-- Notification Item 3: Trip Confirmation -->
-<div class="p-lg flex gap-lg items-start border-b border-outline-variant hover:bg-surface-container-low transition-colors group cursor-pointer">
-<div class="p-md rounded-full bg-tertiary-container/10 text-tertiary">
-<span class="material-symbols-outlined" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-</div>
-<div class="flex-1">
-<div class="flex justify-between items-start mb-xs">
-<h3 class="font-label-md text-label-md text-on-surface">Sua carona para amanhã foi confirmada</h3>
-<span class="font-caption text-caption text-on-surface-variant">Hoje, 09:15</span>
-</div>
-<p class="font-body-md text-body-md text-on-surface-variant">Tudo certo! O motorista aceitou sua solicitação. Lembre-se de chegar 5 minutos antes no ponto de encontro.</p>
-</div>
-</div>
-<!-- Notification Item 4: Promotion/Community -->
-<div class="p-lg flex gap-lg items-start hover:bg-surface-container-low transition-colors group cursor-pointer">
-<div class="p-md rounded-full bg-surface-variant text-on-surface-variant">
-<span class="material-symbols-outlined" data-icon="redeem">redeem</span>
-</div>
-<div class="flex-1">
-<div class="flex justify-between items-start mb-xs">
-<h3 class="font-label-md text-label-md text-on-surface">Ganhe créditos indicando amigos</h3>
-<span class="font-caption text-caption text-on-surface-variant">Ontem</span>
-</div>
-<p class="font-body-md text-body-md text-on-surface-variant">Convide novos vizinhos para o VemJunto e ganhe R$10 em créditos na sua próxima viagem confirmada.</p>
-</div>
-</div>
-</div>
-<!-- Featured Promo Banner -->
-<div class="mt-xl relative rounded-xl overflow-hidden h-48 flex items-center bg-primary">
-<img class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay" alt="A cinematic, low-angle shot of a group of diverse young professionals laughing and chatting while sharing a modern electric car ride through a bright, sunlit urban environment. The lighting is warm and optimistic, reflecting a high-key light mode aesthetic. The composition highlights human connection and sustainable urban mobility, using a clean color palette with vibrant blue and orange accents that align with the VemJunto brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbnN07zgcvOkT2EM58rrH6BPti9TAlUKGPBWdurr7HbDY-CSwNvkPKySMJ13UTkIqt_jm9dBezaN3c7t4kpUeaosnvPKczpnwKf6urBbopG3J9YkgAXl_0oR2IH-CsWQt63sXOEjeAz9-ZT53gbASlr-B2EPSZBWl13idm0zVt13OCLL64tgQVkp8I6e2J632Wl6JZQml-6Ko9KqkH0P_RMWIZxReXr0EHn5qSNjb_EYEx7Zd8ZmuM4Mqq67bDe1E0-cckvvjZuxBu"/>
-<div class="relative z-10 px-xl">
-<h3 class="font-h2 text-h2 text-on-primary mb-xs">Viaje com segurança</h3>
-<p class="font-body-md text-body-md text-on-primary/90 max-w-md">Todos os nossos motoristas passam por verificação de documentos e antecedentes para garantir sua tranquilidade.</p>
-<button class="mt-md bg-secondary text-on-secondary font-label-md text-label-md px-lg py-sm rounded-lg hover:brightness-110 shadow-sm transition-all">Saiba mais</button>
-</div>
-</div>
-</section>
 
-</main>
-</main>
-</div><!-- BottomNavBar (Mobile Only) -->
-<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface shadow-2xl flex justify-around items-center pt-sm pb-safe z-50 border-t border-outline-variant/30">
-<a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="minhas_viagens_vemjunto_mobility.html">
-<span class="material-symbols-outlined text-[22px]" data-icon="directions_car">directions_car</span>
-<span class="text-[10px] font-medium">Viagem</span>
-</a>
-<a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="index.html">
-<span class="material-symbols-outlined text-[22px]" data-icon="explore">explore</span>
-<span class="text-[10px] font-medium">Explorar</span>
-</a>
-<a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="oferecer_carona_vemjunto_mobility_1.html">
-<span class="material-symbols-outlined text-[22px]" data-icon="add_circle">add_circle</span>
-<span class="text-[10px] font-medium">Oferecer</span>
-</a>
-<a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="chat_com_localiza_o_ao_vivo_vemjunto.html">
-<span class="material-symbols-outlined text-[22px]" data-icon="chat_bubble">chat_bubble</span>
-<span class="text-[10px] font-medium">Chat</span>
-</a>
-<a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="perfil_do_usu_rio_vemjunto.html">
-<span class="material-symbols-outlined text-[22px]" data-icon="person">person</span>
-<span class="text-[10px] font-medium">Perfil</span>
-</a>
-</nav>
-<div class="pb-20 md:pb-0"></div>
-<script>
-function toggleNotif(e) {
-    e.stopPropagation();
-    document.getElementById('notif-dropdown').classList.toggle('hidden');
-    const pd = document.getElementById('profile-dropdown');
-    if (pd) pd.classList.add('hidden');
-}
-function toggleProfile(e) {
-    e.stopPropagation();
-    document.getElementById('profile-dropdown').classList.toggle('hidden');
-    document.getElementById('notif-dropdown').classList.add('hidden');
-}
-document.addEventListener('click', function() {
-    const nd = document.getElementById('notif-dropdown');
-    const pd = document.getElementById('profile-dropdown');
-    if (nd) nd.classList.add('hidden');
-    if (pd) pd.classList.add('hidden');
-});
-function toggleMobileMenu() {
-    const aside = document.querySelector('aside');
-    if (aside) {
-        aside.classList.toggle('hidden');
-        aside.classList.toggle('fixed');
-        aside.classList.toggle('inset-y-0');
-        aside.classList.toggle('left-0');
-        aside.classList.toggle('z-[100]');
-        aside.classList.toggle('shadow-2xl');
-        document.body.classList.toggle('overflow-hidden');
-    }
-}
-</script>
-</body></html>
+<body class="bg-background text-on-background min-h-screen">
+    <header class="bg-surface shadow-sm sticky top-0 z-50">
+        <div class="flex justify-between items-center px-margin py-md w-full max-w-7xl mx-auto">
+            <a class="text-h2 font-display font-bold text-primary" href="index.html">VemJunto</a>
+            <nav class="hidden md:flex items-center gap-lg">
+                <a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors"
+                    href="resultados_de_busca_organizado_vemjunto_mobility.html">Buscar Carona</a>
+                <a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors"
+                    href="oferecer_carona_vemjunto_mobility_1.html">Oferecer Carona</a>
+                <a class="font-display text-body-md text-on-surface-variant hover:text-primary transition-colors"
+                    href="minhas_viagens_vemjunto_mobility.html">Minhas Viagens</a>
+            </nav>
+            <div class="flex items-center gap-md">
+                <div class="relative group">
+                    <button
+                        class="text-on-surface-variant hover:text-primary transition-colors relative flex items-center p-2"
+                        aria-label="Notificações">
+                        <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+                        <span
+                            class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-surface"></span>
+                    </button>
+                    <div
+                        class="absolute right-0 mt-0 w-80 bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant/20 hidden group-hover:block z-[60] py-md before:content-[''] before:absolute before:-top-4 before:left-0 before:w-full before:h-4">
+                        <div class="px-md pb-sm border-b border-outline-variant/10">
+                            <p class="font-display text-label-md font-bold text-on-background">Notificações</p>
+                        </div>
+                        <div class="max-h-64 overflow-y-auto">
+                            <div
+                                class="px-md py-sm hover:bg-surface-container-low transition-colors cursor-pointer border-b border-outline-variant/5">
+                                <p class="font-display text-caption text-primary mb-1">Viagem Confirmada</p>
+                                <p class="font-display text-body-md text-on-surface-variant">Sua reserva para Campinas
+                                    foi aceita por Ricardo.</p>
+                                <span class="font-display text-[10px] text-outline">Há 5 min</span>
+                            </div>
+                            <div
+                                class="px-md py-sm hover:bg-surface-container-low transition-colors cursor-pointer border-b border-outline-variant/5">
+                                <p class="font-display text-caption text-primary mb-1">Nova Mensagem</p>
+                                <p class="font-display text-body-md text-on-surface-variant">Ricardo: "Oi! Estarei no
+                                    ponto às 08:20."</p>
+                                <span class="font-display text-[10px] text-outline">Há 1 hora</span>
+                            </div>
+                        </div>
+                        <a href="notifica_es_vemjunto.html"
+                            class="block text-center pt-sm text-primary font-display text-caption hover:underline">Ver
+                            todas</a>
+                    </div>
+                </div>
+                <div class="relative group hidden md:block">
+                    <a href="perfil_do_usu_rio_vemjunto.html"
+                        class="text-on-surface-variant hover:text-primary transition-colors flex items-center p-2"
+                        aria-label="Menu de Perfil">
+                        <span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+                    </a>
+                    <div
+                        class="absolute right-0 mt-0 w-48 bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant/20 hidden group-hover:block z-[60] py-sm before:content-[''] before:absolute before:-top-4 before:left-0 before:w-full before:h-4">
+                        <a href="perfil_do_usu_rio_vemjunto.html"
+                            class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors"><span
+                                class="material-symbols-outlined text-[20px] text-outline">person</span><span
+                                class="font-display text-body-md text-on-surface">Meu Perfil</span></a>
+                        <a href="configura_es_e_pagamento_vemjunto_mobility.html"
+                            class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors">
+                            <span class="material-symbols-outlined text-[20px] text-outline">settings</span>
+                            <span class="font-display text-body-md text-on-surface">Configurações</span>
+                        </a>
+                        <div class="my-sm border-t border-outline-variant/10"></div>
+                        <a href="#"
+                            class="flex items-center gap-sm px-md py-sm hover:bg-surface-container-low transition-colors text-error">
+                            <span class="material-symbols-outlined text-[20px]">logout</span>
+                            <span class="font-display text-body-md">Sair</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Canvas Area -->
+    <section class="flex-1 p-xl max-w-5xl mx-auto w-full">
+        <div class="mb-xl flex items-center justify-between">
+            <div>
+                <h2 class="font-h1 text-h1 text-on-surface mb-xs">Notificações</h2>
+                <p class="font-body-md text-body-md text-on-surface-variant">Fique por dentro das suas caronas e
+                    mensagens da comunidade.</p>
+            </div>
+            <button class="text-primary font-label-md text-label-md hover:underline">Marcar todas como lidas</button>
+        </div>
+        <!-- Notifications List -->
+        <div class="bg-surface-container-lowest rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] overflow-hidden">
+            <!-- Notification Item 1: Ride Match -->
+            <div
+                class="p-lg flex gap-lg items-start border-b border-outline-variant hover:bg-surface-container-low transition-colors group cursor-pointer">
+                <div class="p-md rounded-full bg-primary-container/10 text-primary">
+                    <span class="material-symbols-outlined" data-icon="directions_car"
+                        style="font-variation-settings: 'FILL' 1;">directions_car</span>
+                </div>
+                <div class="flex-1">
+                    <div class="flex justify-between items-start mb-xs">
+                        <h3 class="font-label-md text-label-md text-on-surface">Nova carona encontrada: São Paulo -&gt;
+                            Campinas</h3>
+                        <span
+                            class="font-caption text-caption text-on-surface-variant bg-surface-variant px-base py-xs rounded-full">Há
+                            5 min</span>
+                    </div>
+                    <p class="font-body-md text-body-md text-on-surface-variant mb-md">Uma nova oferta de carona
+                        disponível para o seu trajeto salvo. O motorista Marcos tem ótimas avaliações.</p>
+                    <div class="flex gap-md">
+                        <a href="detalhes_da_viagem_com_seguran_a_vemjunto.html"
+                            class="bg-primary text-on-primary font-label-md text-label-md px-lg py-xs rounded-lg hover:brightness-110 transition-all"
+                            style="display: inline-block; text-align: center;">Ver Detalhes</a>
+                        <button
+                            class="text-primary font-label-md text-label-md px-lg py-xs rounded-lg hover:bg-primary/5 transition-all">Ignorar</button>
+                    </div>
+                </div>
+                <div class="w-2 h-2 rounded-full bg-primary self-center"></div>
+            </div>
+            <!-- Notification Item 2: Message -->
+            <div
+                class="p-lg flex gap-lg items-start border-b border-outline-variant hover:bg-surface-container-low transition-colors group cursor-pointer">
+                <div class="p-md rounded-full bg-secondary-container/10 text-secondary">
+                    <span class="material-symbols-outlined" data-icon="chat"
+                        style="font-variation-settings: 'FILL' 1;">chat</span>
+                </div>
+                <div class="flex-1">
+                    <div class="flex justify-between items-start mb-xs">
+                        <h3 class="font-label-md text-label-md text-on-surface">Ana Silva enviou uma mensagem</h3>
+                        <span class="font-caption text-caption text-on-surface-variant">Há 2 horas</span>
+                    </div>
+                    <p class="font-body-md text-body-md text-on-surface-variant">"Oi Ricardo! Posso levar uma mochila
+                        extra? Vou viajar para o aeroporto amanhã."</p>
+                </div>
+                <div class="w-2 h-2 rounded-full bg-primary self-center"></div>
+            </div>
+            <!-- Notification Item 3: Trip Confirmation -->
+            <div
+                class="p-lg flex gap-lg items-start border-b border-outline-variant hover:bg-surface-container-low transition-colors group cursor-pointer">
+                <div class="p-md rounded-full bg-tertiary-container/10 text-tertiary">
+                    <span class="material-symbols-outlined" data-icon="check_circle"
+                        style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                </div>
+                <div class="flex-1">
+                    <div class="flex justify-between items-start mb-xs">
+                        <h3 class="font-label-md text-label-md text-on-surface">Sua carona para amanhã foi confirmada
+                        </h3>
+                        <span class="font-caption text-caption text-on-surface-variant">Hoje, 09:15</span>
+                    </div>
+                    <p class="font-body-md text-body-md text-on-surface-variant">Tudo certo! O motorista aceitou sua
+                        solicitação. Lembre-se de chegar 5 minutos antes no ponto de encontro.</p>
+                </div>
+            </div>
+            <!-- Notification Item 4: Promotion/Community -->
+            <div
+                class="p-lg flex gap-lg items-start hover:bg-surface-container-low transition-colors group cursor-pointer">
+                <div class="p-md rounded-full bg-surface-variant text-on-surface-variant">
+                    <span class="material-symbols-outlined" data-icon="redeem">redeem</span>
+                </div>
+                <div class="flex-1">
+                    <div class="flex justify-between items-start mb-xs">
+                        <h3 class="font-label-md text-label-md text-on-surface">Ganhe créditos indicando amigos</h3>
+                        <span class="font-caption text-caption text-on-surface-variant">Ontem</span>
+                    </div>
+                    <p class="font-body-md text-body-md text-on-surface-variant">Convide novos vizinhos para o VemJunto
+                        e ganhe R$10 em créditos na sua próxima viagem confirmada.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Featured Promo Banner -->
+        <div class="mt-xl relative rounded-xl overflow-hidden h-48 flex items-center bg-primary">
+            <img class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay"
+                alt="A cinematic, low-angle shot of a group of diverse young professionals laughing and chatting while sharing a modern electric car ride through a bright, sunlit urban environment. The lighting is warm and optimistic, reflecting a high-key light mode aesthetic. The composition highlights human connection and sustainable urban mobility, using a clean color palette with vibrant blue and orange accents that align with the VemJunto brand identity."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbnN07zgcvOkT2EM58rrH6BPti9TAlUKGPBWdurr7HbDY-CSwNvkPKySMJ13UTkIqt_jm9dBezaN3c7t4kpUeaosnvPKczpnwKf6urBbopG3J9YkgAXl_0oR2IH-CsWQt63sXOEjeAz9-ZT53gbASlr-B2EPSZBWl13idm0zVt13OCLL64tgQVkp8I6e2J632Wl6JZQml-6Ko9KqkH0P_RMWIZxReXr0EHn5qSNjb_EYEx7Zd8ZmuM4Mqq67bDe1E0-cckvvjZuxBu" />
+            <div class="relative z-10 px-xl">
+                <h3 class="font-h2 text-h2 text-on-primary mb-xs">Viaje com segurança</h3>
+                <p class="font-body-md text-body-md text-on-primary/90 max-w-md">Todos os nossos motoristas passam por
+                    verificação de documentos e antecedentes para garantir sua tranquilidade.</p>
+                <button
+                    class="mt-md bg-secondary text-on-secondary font-label-md text-label-md px-lg py-sm rounded-lg hover:brightness-110 shadow-sm transition-all">Saiba
+                    mais</button>
+            </div>
+        </div>
+    </section>
+
+    </main>
+    </main>
+    </div><!-- BottomNavBar (Mobile Only) -->
+    <nav
+        class="md:hidden fixed bottom-0 left-0 right-0 bg-surface shadow-2xl flex justify-around items-center pt-sm pb-safe z-50 border-t border-outline-variant/30">
+        <a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1"
+            href="minhas_viagens_vemjunto_mobility.html">
+            <span class="material-symbols-outlined text-[22px]" data-icon="directions_car">directions_car</span>
+            <span class="text-[10px] font-medium">Viagem</span>
+        </a>
+        <a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1"
+            href="index.html">
+            <span class="material-symbols-outlined text-[22px]" data-icon="explore">explore</span>
+            <span class="text-[10px] font-medium">Explorar</span>
+        </a>
+        <a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1"
+            href="oferecer_carona_vemjunto_mobility_1.html">
+            <span class="material-symbols-outlined text-[22px]" data-icon="add_circle">add_circle</span>
+            <span class="text-[10px] font-medium">Oferecer</span>
+        </a>
+        <a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1"
+            href="chat_com_localiza_o_ao_vivo_vemjunto.html">
+            <span class="material-symbols-outlined text-[22px]" data-icon="chat_bubble">chat_bubble</span>
+            <span class="text-[10px] font-medium">Chat</span>
+        </a>
+        <a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors px-2 py-1"
+            href="perfil_do_usu_rio_vemjunto.html">
+            <span class="material-symbols-outlined text-[22px]" data-icon="person">person</span>
+            <span class="text-[10px] font-medium">Perfil</span>
+        </a>
+    </nav>
+    <div class="pb-20 md:pb-0"></div>
+    <script>
+        function toggleNotif(e) {
+            e.stopPropagation();
+            document.getElementById('notif-dropdown').classList.toggle('hidden');
+            const pd = document.getElementById('profile-dropdown');
+            if (pd) pd.classList.add('hidden');
+        }
+        function toggleProfile(e) {
+            e.stopPropagation();
+            document.getElementById('profile-dropdown').classList.toggle('hidden');
+            document.getElementById('notif-dropdown').classList.add('hidden');
+        }
+        document.addEventListener('click', function () {
+            const nd = document.getElementById('notif-dropdown');
+            const pd = document.getElementById('profile-dropdown');
+            if (nd) nd.classList.add('hidden');
+            if (pd) pd.classList.add('hidden');
+        });
+        function toggleMobileMenu() {
+            const aside = document.querySelector('aside');
+            if (aside) {
+                aside.classList.toggle('hidden');
+                aside.classList.toggle('fixed');
+                aside.classList.toggle('inset-y-0');
+                aside.classList.toggle('left-0');
+                aside.classList.toggle('z-[100]');
+                aside.classList.toggle('shadow-2xl');
+                document.body.classList.toggle('overflow-hidden');
+            }
+        }
+    </script>
+</body>
+
+</html>

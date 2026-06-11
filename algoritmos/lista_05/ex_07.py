@@ -13,4 +13,4 @@ def limite_caracters(text, letra):
         return palavra
 
 
-print(limite_caracters('paralelepipedo', 'p'))
+print(limite_caracters('paralelepipedo', 'l'))

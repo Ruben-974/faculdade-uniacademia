@@ -1,5 +1,5 @@
 # Implemente uma função que ordene um vetor de inteiros de tamanho 10
-
+"""
 def menor_inteiro(lista):
     menor = lista[0]
     for i in lista:
@@ -20,7 +20,7 @@ def tirar_valor(lista, valor):
     return nova_lista
 
 
-def ordenar_numeros(lista):
+def ordenar(lista):
 
     ordenado = []
 
@@ -32,7 +32,22 @@ def ordenar_numeros(lista):
     
     return ordenado
 
-        
 
 numeros = [10, 9, 7, 11, 15, 7, -8, 0, -4]
-print(ordenar_numeros(numeros))
+print(ordenar(numeros))
+"""
+
+def ordenar(lista):
+     
+    for i in range(len(lista)):
+        for c in range(len(lista)):
+            if lista[i] < lista[c]:
+                aux = lista[i]
+                lista[i] = lista[c]
+                lista[c] = aux
+    
+    return lista
+    
+
+numeros = [10, 9, 7, 11, 15, 7, -8, 0, -4]
+print(ordenar(numeros))

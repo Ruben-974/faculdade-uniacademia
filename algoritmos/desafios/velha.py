@@ -30,7 +30,7 @@ def fazer_jogada(posicao, matriz, simbolo):
     if juiz == True:
 
         for i in range(len(matriz)):
-            for j in range(len(matriz)):
+            for j in range(len(matriz[i])):
                 if matriz[i][j] == posicao:
                     matriz[i][j] = simbolo
                     return matriz, juiz
@@ -38,18 +38,31 @@ def fazer_jogada(posicao, matriz, simbolo):
     return matriz, juiz
 
 
-def verificar_vitoria_CPU(matriz):
+def verificar_vitoria(historico):
 
-    posicao = None
-
+    sequencia_vitoria = [['0', '1', '2'],
+                         ['3', '4', '5'],
+                         ['6', '7', '8'],
+                         ['0', '3', '6'],
+                         ['1', '4', '7'],
+                         ['2', '5', '8'],
+                         ['0', '4', '8'],
+                         ['2', '4', '6']]
     
-
-
-    return posicao
+    for i in range(len(sequencia_vitoria)):
+        cont = 0
+        for j in range(len(historico)):
+            if historico[j] in sequencia_vitoria[i]:
+                cont += 1
+                if cont == 3:
+                    return True
+    
+    return False
 
 
 continuar = True
 msg_juiz = ''
+historico_jogador = []
 
 matriz_tabulheiro = [['0', '1', '2'],
                      ['3', '4', '5'],
@@ -89,4 +102,7 @@ while continuar:
         if msg_juiz != True:
             print(msg_juiz)
         else:
+            historico_jogador.append(jogada_jogador)
 
+            if verificar_vitoria(historico_jogador) is True:
+                print('Juiz: O JOGADOR VENCEU!')

@@ -1,3 +1,8 @@
+from random import randint
+
+print(randint(0, 8))
+
+
 def montar_tabulheiro(matriz):
     tabulheiro = '---------\n'
     for i in range(len(matriz)):
@@ -40,29 +45,79 @@ def fazer_jogada(posicao, matriz, simbolo):
 
 def verificar_vitoria(historico):
 
-    sequencia_vitoria = [['0', '1', '2'],
-                         ['3', '4', '5'],
-                         ['6', '7', '8'],
-                         ['0', '3', '6'],
-                         ['1', '4', '7'],
-                         ['2', '5', '8'],
-                         ['0', '4', '8'],
-                         ['2', '4', '6']]
-    
-    for i in range(len(sequencia_vitoria)):
-        cont = 0
-        for j in range(len(historico)):
-            if historico[j] in sequencia_vitoria[i]:
-                cont += 1
-                if cont == 3:
-                    return True
+    if len(historico) >= 3:
+
+        sequencia_vitoria = [['0', '1', '2'],
+                            ['3', '4', '5'],
+                            ['6', '7', '8'],
+                            ['0', '3', '6'],
+                            ['1', '4', '7'],
+                            ['2', '5', '8'],
+                            ['0', '4', '8'],
+                            ['2', '4', '6']]
+        
+        for i in range(len(sequencia_vitoria)):
+            cont = 0
+            for j in range(len(historico)):
+                if historico[j] in sequencia_vitoria[i]:
+                    cont += 1
+                    if cont == 3:
+                        return True
     
     return False
+
+
+def CPU_jogar(historico_CPU, historico_jogador, matriz, simbolo):
+
+    historico_teste = historico_CPU[:]
+    posicoes = ['0', '2', '6', '8']
+    juiz = None
+
+    if len(historico_teste) == 0:
+
+        for i in posicoes:
+            matriz_teste, juiz = fazer_jogada(i, matriz, simbolo)
+            if juiz is True:
+                return i, matriz_teste
+
+    else:
+
+        if len(historico_jogador) == 1:
+            if historico_CPU[0] == '0':
+                posicoes = ['5', '7']
+            if historico_CPU[0] == '2':
+                posicoes = ['3', '7']
+            if historico_CPU[0] == '6':
+                posicoes = ['1', '5']
+            if historico_CPU[0] == '8':
+                posicoes = ['1', '3']
+
+            for i in posicoes:
+
+                matriz_teste, juiz = fazer_jogada(i, matriz, simbolo)
+                if juiz is True:
+                    return i, matriz_teste
+                
+
+
+
+        else:
+            while juiz != True:
+                gerar = str(randint(0, 8))
+
+                matriz_teste, juiz = fazer_jogada(gerar, matriz, simbolo)
+
+                if juiz is True:
+                    return gerar, matriz_teste
+
+
+
 
 
 continuar = True
 msg_juiz = ''
 historico_jogador = []
+historico_CPU = []
 
 matriz_tabulheiro = [['0', '1', '2'],
                      ['3', '4', '5'],
@@ -88,6 +143,9 @@ print(f'\nSimbolo Jogador: {simbolo_jogador}')
 print(f'Simbolo CPU: {simbolo_CPU}')
 print(f'\nVAMOS COMEÇAR!\n')
 
+#jogada_CPU, matriz_tabulheiro = CPU_jogar(historico_CPU, historico_jogador, matriz_tabulheiro, simbolo_CPU)
+#historico_CPU.append(jogada_CPU)
+
 while continuar:
 
     print(montar_tabulheiro(matriz_tabulheiro))
@@ -106,3 +164,12 @@ while continuar:
 
             if verificar_vitoria(historico_jogador) is True:
                 print('Juiz: O JOGADOR VENCEU!')
+                print(montar_tabulheiro(matriz_tabulheiro))
+                continuar = False
+            else:
+                jogada_CPU, matriz_tabulheiro = CPU_jogar(historico_CPU, historico_jogador, matriz_tabulheiro, simbolo_CPU)
+                historico_CPU.append(jogada_CPU)
+
+
+            
+            

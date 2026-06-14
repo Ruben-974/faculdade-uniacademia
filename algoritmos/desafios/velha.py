@@ -70,9 +70,7 @@ def CPU_jogar(historico_CPU, historico_jogador, matriz, simbolo_CPU, simbolo_jog
     juiz = ''
     posicoes = ['0', '1', '2', '3', '4', '5', '6', '7', '8']
 
-
-
-    # Ganhar
+    # Verifica se vai Ganhar
 
     for i in posicoes:
         if i not in historico_CPU:
@@ -81,15 +79,11 @@ def CPU_jogar(historico_CPU, historico_jogador, matriz, simbolo_CPU, simbolo_jog
                 historico_CPU.pop()
             else:
                 matriz_teste, juiz = fazer_jogada(i, matriz, simbolo_CPU)
-                print(f'Hist Jog: {historico_jogador}')
-                print(f'Hist CPU: {historico_CPU}')
-                print(juiz)
                 historico_CPU.pop()
                 if juiz is True:
                     return i, matriz_teste
-                
-
-    print('N ganha')
+    
+    # Verifica se vai Perder
 
     for i in posicoes:
         if i not in historico_jogador:
@@ -102,8 +96,7 @@ def CPU_jogar(historico_CPU, historico_jogador, matriz, simbolo_CPU, simbolo_jog
                 if juiz is True:
                     return i, matriz_teste
         
-            
-
+    # Jogada Randomica
     
     while juiz != True:
         gerar = str(randint(0, 8))
@@ -114,7 +107,19 @@ def CPU_jogar(historico_CPU, historico_jogador, matriz, simbolo_CPU, simbolo_jog
             return gerar, matriz_teste
 
 
-continuar = True
+def verificar_velha(matriz):
+
+    posicoes = ['0', '1', '2', '3', '4', '5', '6', '7', '8']
+
+    for i in range(len(matriz)):
+        for j in range(len(matriz[i])):
+            if matriz[i][j] in posicoes:
+                return False
+    return True
+
+
+
+continuar_jogo = True
 msg_juiz = ''
 historico_jogador = []
 historico_CPU = []
@@ -122,6 +127,10 @@ historico_CPU = []
 matriz_tabulheiro = [['0', '1', '2'],
                      ['3', '4', '5'],
                      ['6', '7', '8']]
+
+#matriz_tabulheiro = [['x', 'o', 'x'],
+#                     ['o', 'x', 'o'],
+#                     ['o', 'x', 'o']]
 
 print('VAMOS JOGAR O JOGO DA #!')
 print('\nEscolha seu simbolo: x/o')
@@ -147,11 +156,10 @@ print(f'\nVAMOS COMEÇAR!\n')
 
 # CPU COMEÇANDO:
 
-#jogada_CPU, matriz_tabulheiro = CPU_jogar(historico_CPU, historico_jogador, matriz_tabulheiro, simbolo_CPU)
+#jogada_CPU, matriz_tabulheiro = CPU_jogar(historico_CPU, historico_jogador, matriz_tabulheiro, simbolo_CPU, simbolo_jogador)
 #historico_CPU.append(jogada_CPU)
 
-while continuar:
-
+while not verificar_velha(matriz_tabulheiro) and continuar_jogo:
     print(montar_tabulheiro(matriz_tabulheiro))
 
     print('\nEscolha sua posição: ')
@@ -169,18 +177,18 @@ while continuar:
             if verificar_vitoria(historico_jogador) is True:
                 print('Juiz: O JOGADOR VENCEU!')
                 print(montar_tabulheiro(matriz_tabulheiro))
-                continuar = False
+                continuar_jogo = False
             else:
-                print('Historico JOGADOR:', historico_jogador)
-                jogada_CPU, matriz_tabulheiro = CPU_jogar(historico_CPU, historico_jogador, matriz_tabulheiro, simbolo_CPU, simbolo_jogador)
-                print(historico_CPU)
-                print(jogada_CPU)
-                historico_CPU.append(jogada_CPU)
-                print(historico_CPU)
-                if verificar_vitoria(historico_CPU) is True:
-                    print('Juiz: O CPU VENCEU!')
+                if not verificar_velha(matriz_tabulheiro):
+                    jogada_CPU, matriz_tabulheiro = CPU_jogar(historico_CPU, historico_jogador, matriz_tabulheiro, simbolo_CPU, simbolo_jogador)
+                    historico_CPU.append(jogada_CPU)
+                    if verificar_vitoria(historico_CPU) is True:
+                        print('Juiz: O CPU VENCEU!')
+                        print(montar_tabulheiro(matriz_tabulheiro))
+                        continuar_jogo = False
+                else:
+                    print('Juiz: DEU #!')
                     print(montar_tabulheiro(matriz_tabulheiro))
-                    continuar = False
 
 
             

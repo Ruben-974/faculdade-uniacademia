@@ -1,4 +1,4 @@
-from random import randint
+from random import randint, choice
 
 
 def montar_tabulheiro(matriz):
@@ -69,7 +69,56 @@ def CPU_jogar(historico_CPU, historico_jogador, matriz, simbolo_CPU, simbolo_jog
 
     juiz = ''
     posicoes = ['0', '1', '2', '3', '4', '5', '6', '7', '8']
+    quinas = ['0', '2', '6', '8']
+    conjunto_extremidades = [['5', '7'], ['3', '7'], ['1', '5'], ['1', '3']]
+    cont_vitorias = 0
+    
+    
+    # Vericar as proximas duas possiveis do jogador 
+    memory = []
+    for i in posicoes:
+        for j in posicoes:
 
+            if i not in historico_jogador and j not in historico_jogador and i != j and [j, i] not in memory:
+                historico_jogador.append(i)
+                historico_jogador.append(j)
+                print(historico_jogador)
+                memory.append([i, j])
+
+        
+
+                historico_jogador.pop()
+                historico_jogador.pop()
+                    
+        
+
+
+    # Primeira jogada CPU (round 1/2)
+
+    if len(historico_CPU) == 0:
+
+        # Primeira jogada CPU (#round 2)
+
+        if len(historico_jogador) == 1:
+
+            if historico_jogador[0] in ['5', '7']:
+                quinas.remove('0')
+            if historico_jogador[0] in ['3', '7']:
+                quinas.remove('2')
+            if historico_jogador[0] in ['1', '5']:
+                quinas.remove('6')
+            if historico_jogador[0] in ['1', '3']:
+                quinas.remove('8')
+
+
+        for i in range(len(quinas)):
+            quina = choice(quinas)
+            matriz_teste, juiz = fazer_jogada(quina, matriz, simbolo_CPU)
+            if juiz is True:
+                return quina, matriz_teste
+            else: 
+                quinas.remove(quina)
+           
     # Verifica se vai Ganhar
 
     for i in posicoes:
@@ -95,6 +144,27 @@ def CPU_jogar(historico_CPU, historico_jogador, matriz, simbolo_CPU, simbolo_jog
                 matriz_teste, juiz = fazer_jogada(i, matriz, simbolo_CPU)
                 if juiz is True:
                     return i, matriz_teste
+                
+    # Segunda Jogada CPU
+
+    if len(historico_CPU) == 1:
+
+        if historico_CPU[0] == '0':
+            extremidades = ['5', '7']
+        if historico_CPU[0] == '2':
+            extremidades = ['3', '7']
+        if historico_CPU[0] == '6':
+            extremidades = ['1', '5']
+        if historico_CPU[0] == '8':
+            extremidades = ['1', '3']
+        
+        for i in extremidades:
+            extremidade = choice(extremidades)
+            matriz_teste, juiz = fazer_jogada(extremidade, matriz, simbolo_CPU)
+            if juiz is True:
+                return extremidade, matriz_teste
+            else: 
+                extremidades.remove(extremidade)
         
     # Jogada Randomica
     
@@ -186,10 +256,8 @@ while not verificar_velha(matriz_tabulheiro) and continuar_jogo:
                         print('Juiz: O CPU VENCEU!')
                         print(montar_tabulheiro(matriz_tabulheiro))
                         continuar_jogo = False
-                else:
-                    print('Juiz: DEU #!')
-                    print(montar_tabulheiro(matriz_tabulheiro))
 
 
-            
-            
+if verificar_velha(matriz_tabulheiro):       
+    print('Juiz: DEU #!')
+    print(montar_tabulheiro(matriz_tabulheiro))

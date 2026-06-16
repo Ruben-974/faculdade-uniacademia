@@ -1,0 +1,9 @@
+UPs jogo da velha:
+
+
+# 3 - Modo impossivel
+
+1 - Escolha da dificuldade
+2 - Escolha quem começa
+4 - Estetica
+5 - Otimização

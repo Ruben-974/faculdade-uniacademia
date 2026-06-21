@@ -72,6 +72,7 @@ def verificar_vitoria(matriz):
 
     return False
 
+
 def previsao_nivel_um(matriz, simbolo):
 
     for i in range(len(matriz)):
@@ -87,87 +88,35 @@ def previsao_nivel_um(matriz, simbolo):
                 matriz[i][j] = memoria
     return False
 
-def previsao_nivel_dois(matriz, simbolo):
-
-    save = []
-    buscar_chave = []
-
-    for i in range(len(matriz)):
-
-        for j in range(len(matriz)):
-            if matriz[i][j] not in 'xo':
-
-                memoria_1 = matriz[i][j]
-                save.append(matriz[i][j])
-                matriz[i][j] = simbolo
-
-                for k in range(len(matriz)):
-                    for l in range(len(matriz)):
-
-                        if matriz[k][l] not in 'xo':
-
-                            memoria_2 = matriz[k][l]
-                            matriz[k][l] = simbolo
-                            #print(matriz[k][l], save)
-
-                            if memoria_2 not in save:
-
-                                if verificar_vitoria(matriz) != False:
-
-                                    if memoria_1 not in buscar_chave:
-                                        buscar_chave.append(memoria_1)
-                                        buscar_chave.append(memoria_2)
-
-                                        #print(matriz)
-
-                                        #print(memoria_1, memoria_2, buscar_chave)
-
-                                    else:
-                                        matriz[i][j] = memoria_1
-                                        matriz[k][l] = memoria_2
-                                        return memoria_1
-                                   
-                            matriz[k][l] = memoria_2
-                
-                matriz[i][j] = memoria_1
-    
-    return False
-
 
 def jogada_CPU(matriz, simbolo_CPU, simbolo_jogador):
 
     historico_jogador = historico_posicoes(matriz, simbolo_jogador)
     historico_CPU = historico_posicoes(matriz, simbolo_CPU)
-    print(historico_jogador)
+    quinas = ['0', '2', '6', '8']
+    laterais = ['1', '3', '5', '7']
 
     posicao = previsao_nivel_um(matriz, simbolo_CPU)
     if posicao != False:
-        print('Jogada Nivel 1 - CPU')
         return posicao
     
     posicao = previsao_nivel_um(matriz, simbolo_jogador)
     if posicao != False:
-        print('Jogada Nivel 1 - JOG')
         return posicao
 
     if len(historico_jogador) == 1:
-        if '4' in historico_jogador:
-            return choice(['0', '2', '6', '8'])
+        if historico_jogador[0] == '4': # Centro
+            return '0'
         else:
-            for i in range(0, 9):
-                if str(i) in historico_jogador and str(i) in ['0', '2', '6', '8']:
-                    return '4'
-                else:
-                    if str(i) in historico_jogador:
-
-                        if str(i) in '1':
-                            return choice(['0', '2'])
-                        if str(i) == '3':
-                            return choice(['0', '6'])
-                        if str(i) == '5':
-                            return choice(['2', '8'])
-                        if str(i) == '7':
-                            return choice(['6', '8'])
+            if historico_jogador[0] in quinas:
+                return '4'
+            else:
+                if historico_jogador[0] in laterais:
+                    if historico_jogador[0] == '1' or historico_jogador[0] == '3':
+                        return '0'
+                    if historico_jogador[0] == '5' or historico_jogador[0] == '7':
+                        return '8'
+                        
 
     if len(historico_jogador) == 2:
 
@@ -196,19 +145,7 @@ def jogada_CPU(matriz, simbolo_CPU, simbolo_jogador):
                             return '2'
                 
             return '4'
-
-
-
-    # posicao = previsao_nivel_dois(matriz, simbolo_CPU)
-    # if posicao != False:
-    #     print('Jogada Nivel 2 - CPU')
-    #     return posicao
-    
-    # posicao = previsao_nivel_dois(matriz, simbolo_jogador)
-    # if posicao != False:
-    #     print('Jogada Nivel 2 - JOG')
-    #     return posicao
-
+        
     valido = False
 
     while valido is False:
@@ -217,6 +154,7 @@ def jogada_CPU(matriz, simbolo_CPU, simbolo_jogador):
         if valido is True:
             print('Jogada Randomica')
             return posicao
+
 
 def verificar_velha(matriz):
 

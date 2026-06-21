@@ -89,10 +89,10 @@ def previsao_nivel_um(matriz, simbolo):
     return False
 
 
-def jogada_CPU(matriz, simbolo_CPU, simbolo_jogador):
+def jogada_CPU(matriz, simbolo_CPU, simbolo_jogador, historico_jogador, historico_CPU):
 
-    historico_jogador = historico_posicoes(matriz, simbolo_jogador)
-    historico_CPU = historico_posicoes(matriz, simbolo_CPU)
+    print(historico_jogador, historico_CPU)
+
     quinas = ['0', '2', '6', '8']
     laterais = ['1', '3', '5', '7']
 
@@ -165,22 +165,14 @@ def verificar_velha(matriz):
     return True
 
 
-def historico_posicoes(matriz, simbolo):
-    cont = 0
-    historico = []
-
-    for i in range(len(matriz)):
-        for j in range(len(matriz)):
-            if matriz[i][j] == simbolo:
-                historico.append(str(cont))
-            cont += 1
-    return historico
-
 # GERANDO MATRIZ
 
 matriz_tabulheiro = [['0', '1', '2'],
                      ['3', '4', '5'],
                      ['6', '7', '8']]
+
+historico_jogador = []
+historico_CPU = []
 
 # DEFININDO SIMBOLO
 print('Juiz: "Vamos Jogar o Jogo da V#LHA!"')
@@ -215,6 +207,8 @@ while verificar_velha(matriz_tabulheiro) == False and verificar_vitoria(matriz_t
 
     else:
 
+        historico_jogador.append(posicao_jogador)
+
         matriz_tabulheiro = fazer_jogada(posicao_jogador, matriz_tabulheiro, simbolo_jogador)
 
         velha = verificar_velha(matriz_tabulheiro)
@@ -222,7 +216,10 @@ while verificar_velha(matriz_tabulheiro) == False and verificar_vitoria(matriz_t
 
         if velha == False and venceu == False:
 
-            posicao_CPU = jogada_CPU(matriz_tabulheiro, simbolo_CPU, simbolo_jogador)
+            posicao_CPU = jogada_CPU(matriz_tabulheiro, simbolo_CPU, simbolo_jogador, historico_jogador, historico_CPU)
+
+            historico_CPU.append(posicao_CPU)
+
             matriz_tabulheiro = fazer_jogada(posicao_CPU, matriz_tabulheiro, simbolo_CPU)
 
 print(montar_tabulheiro(matriz_tabulheiro, simbolo_CPU, simbolo_jogador), '\n')

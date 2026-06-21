@@ -98,20 +98,20 @@ def jogada_CPU(matriz, simbolo_CPU, simbolo_jogador, historico_jogador, historic
         if historico_jogador[0] == '4':
             return '2'
         else:
-            if historico_CPU[0] == '4' and historico_jogador in [['0', '8'], ['2', '6']]:
+            if historico_CPU[0] == '4' and historico_jogador[0] in quinas and historico_jogador[1] in quinas:
                 return '1'
             else:
                 if historico_jogador[1] in laterais:
-                    if historico_jogador in [['0', '7'], ['2', '3']]:
+                    if historico_jogador[0] in ['0', '2']:
                         return '6'
-                    if historico_jogador in [['2', '7'], ['6', '5']]:
+                    if historico_jogador[0] in ['2', '5']:
                         return '8'
-                    if historico_jogador in [['6', '1'], ['2', '3']]:
+                    if historico_jogador[0] in ['6', '8']:
                         return '0'
-                    if historico_jogador in [['1', '8'], ['0', '5']]:
+                    if historico_jogador[0] in ['8', '0']:
                         return '2'
-                    
-        return '4'
+                
+            return '4'
     
     for i in range(9):
         if str(i) not in historico_CPU + historico_jogador:
@@ -156,7 +156,7 @@ while velha == False and verificar_vitoria(matriz_tabulheiro) == False:
         fazer_jogada(posicao_jogador, matriz_tabulheiro, simbolo_jogador)
         velha = len(historico_jogador + historico_CPU) == 9
 
-        if velha == False:
+        if velha == False and verificar_vitoria(matriz_tabulheiro) == False:
 
             posicao_CPU = jogada_CPU(matriz_tabulheiro, simbolo_CPU, simbolo_jogador, historico_jogador, historico_CPU)
             historico_CPU.append(posicao_CPU)
@@ -169,9 +169,7 @@ print(montar_tabulheiro(matriz_tabulheiro, simbolo_CPU, simbolo_jogador), '\n')
 if velha == True:
     print('Juiz: "Deu Velha!"')
 else:
-    print('Juiz: "O CPU venceu!"')
-
-# Nem implementei o "Juiz: "O jogador venceu!" pq o jogador não vence :) -> Otimização!
-
-
-
+    if verificar_vitoria(matriz_tabulheiro) == simbolo_CPU:
+        print('Juiz: "O CPU venceu!"')
+    else:
+        print('Juiz: "O Jogador venceu!"')

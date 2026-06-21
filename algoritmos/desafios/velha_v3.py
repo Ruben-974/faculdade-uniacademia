@@ -1,43 +1,25 @@
-from random import randint, choice
-
 def montar_tabulheiro(matriz, simbolo_CPU, simbolo_jogador):
     tabulheiro = '\n---------\n'
     for i in range(len(matriz)):
         linha = ''
         for j in range(len(matriz)):
-            
             if matriz[i][j] == simbolo_CPU:
                 linha += f'\033[31m{matriz[i][j]}\033[m'
             if matriz[i][j] == simbolo_jogador:
                 linha += f'\033[34m{matriz[i][j]}\033[m'
             if matriz[i][j] != simbolo_jogador and matriz[i][j] != simbolo_CPU:
                 linha += f'{matriz[i][j]}'
-
             if j != 2:
                 linha += ' | '
         tabulheiro += linha+'\n'
     return tabulheiro + '---------'
 
 
-def validar_jogada(posicao, matriz):
-
-    cont = 0
-    for i in range(len(matriz)):
-        for j in range(len(matriz[i])):
-            if matriz[i][j] in 'xo' and int(posicao) == cont:
-                return False
-            cont += 1
-    return True
-
-
 def fazer_jogada(posicao, matriz, simbolo):
-
     for i in range(len(matriz)):
         for j in range(len(matriz[i])):
             if matriz[i][j] == posicao:
                 matriz[i][j] = simbolo
-                return matriz
-    return matriz
 
 
 def verificar_vitoria(matriz):
@@ -73,13 +55,12 @@ def verificar_vitoria(matriz):
     return False
 
 
-def previsao_nivel_um(matriz, simbolo):
+def previsao(matriz, simbolo):
 
     for i in range(len(matriz)):
 
         for j in range(len(matriz)):
             if matriz[i][j] not in 'xo':
-                
                 memoria = matriz[i][j]
                 matriz[i][j] = simbolo
                 if verificar_vitoria(matriz) != False:
@@ -94,11 +75,11 @@ def jogada_CPU(matriz, simbolo_CPU, simbolo_jogador, historico_jogador, historic
     quinas = ['0', '2', '6', '8']
     laterais = ['1', '3', '5', '7']
 
-    posicao = previsao_nivel_um(matriz, simbolo_CPU)
+    posicao = previsao(matriz, simbolo_CPU)
     if posicao != False:
         return posicao
     
-    posicao = previsao_nivel_um(matriz, simbolo_jogador)
+    posicao = previsao(matriz, simbolo_jogador)
     if posicao != False:
         return posicao
 
@@ -114,20 +95,13 @@ def jogada_CPU(matriz, simbolo_CPU, simbolo_jogador, historico_jogador, historic
                         
 
     if len(historico_jogador) == 2:
-
         if historico_jogador[0] == '4':
             return '2'
-
         else:
-
             if historico_CPU[0] == '4' and historico_jogador in [['0', '8'], ['2', '6']]:
-
                 return '1'
-                
             else:
-
                 if historico_jogador[1] in laterais:
-
                     if historico_jogador in [['0', '7'], ['2', '3']]:
                         return '6'
                     if historico_jogador in [['2', '7'], ['6', '5']]:
@@ -144,17 +118,6 @@ def jogada_CPU(matriz, simbolo_CPU, simbolo_jogador, historico_jogador, historic
             return str(i)
 
 
-def verificar_velha(matriz):
-
-    for i in range(len(matriz)):
-        for j in range(len(matriz[i])):
-            if matriz[i][j] not in 'xo':
-                return False
-    return True
-
-
-# GERANDO MATRIZ
-
 matriz_tabulheiro = [['0', '1', '2'],
                      ['3', '4', '5'],
                      ['6', '7', '8']]
@@ -162,13 +125,12 @@ matriz_tabulheiro = [['0', '1', '2'],
 historico_jogador = []
 historico_CPU = []
 
-# DEFININDO SIMBOLO
+velha = len(historico_jogador + historico_CPU) == 9
+
 print('Juiz: "Vamos Jogar o Jogo da V#LHA!"')
 print('Juiz: "Escolha o seu simbolo! x ou o"')
+
 simbolo_jogador = str(input('Escolha do Jogador: ')).lower()
-#simbolo_jogador = 'o'
-velha = False
-venceu = False
 
 while simbolo_jogador not in 'xo' or len(simbolo_jogador) != 1:
 
@@ -176,50 +138,40 @@ while simbolo_jogador not in 'xo' or len(simbolo_jogador) != 1:
 
     simbolo_jogador = str(input('\nEscolha do Jogador: ')).lower()
 
-# DEFININDO SIMBOLO CPU
-
 simbolo_CPU = 'o'
 if simbolo_jogador == simbolo_CPU:
     simbolo_CPU = 'x'
 
-while verificar_velha(matriz_tabulheiro) == False and verificar_vitoria(matriz_tabulheiro) == False:
+while velha == False and verificar_vitoria(matriz_tabulheiro) == False:
 
     print(montar_tabulheiro(matriz_tabulheiro, simbolo_CPU, simbolo_jogador))
     print('\nJuiz: "Escolha sua posição"')
-
     posicao_jogador = str(input('Escolha do Jogador: '))
 
-    if posicao_jogador not in '012345678' or len(posicao_jogador) != 1 or not validar_jogada(posicao_jogador, matriz_tabulheiro):
-
+    if posicao_jogador not in '012345678' or len(posicao_jogador) != 1 or posicao_jogador in (historico_CPU + historico_jogador):
         print('Juiz: "Escolha uma posição valida!"')
 
     else:
-
         historico_jogador.append(posicao_jogador)
+        fazer_jogada(posicao_jogador, matriz_tabulheiro, simbolo_jogador)
+        velha = len(historico_jogador + historico_CPU) == 9
 
-        matriz_tabulheiro = fazer_jogada(posicao_jogador, matriz_tabulheiro, simbolo_jogador)
-
-        velha = verificar_velha(matriz_tabulheiro)
-        venceu = verificar_vitoria(matriz_tabulheiro)
-
-        if velha == False and venceu == False:
+        if velha == False:
 
             posicao_CPU = jogada_CPU(matriz_tabulheiro, simbolo_CPU, simbolo_jogador, historico_jogador, historico_CPU)
-
             historico_CPU.append(posicao_CPU)
+            fazer_jogada(posicao_CPU, matriz_tabulheiro, simbolo_CPU)
 
-            matriz_tabulheiro = fazer_jogada(posicao_CPU, matriz_tabulheiro, simbolo_CPU)
+            velha = len(historico_jogador + historico_CPU) == 9
 
 print(montar_tabulheiro(matriz_tabulheiro, simbolo_CPU, simbolo_jogador), '\n')
 
 if velha == True:
     print('Juiz: "Deu Velha!"')
 else:
-    if venceu == simbolo_jogador:
-        print(f'Juiz: "O Jogador venceu!"')
-    else:
-        print('Juiz: "O CPU venceu!"')
+    print('Juiz: "O CPU venceu!"')
 
+# Nem implementei o "Juiz: "O jogador venceu!" pq o jogador não vence :) -> Otimização!
 
 
 

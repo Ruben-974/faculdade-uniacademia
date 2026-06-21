@@ -91,8 +91,6 @@ def previsao_nivel_um(matriz, simbolo):
 
 def jogada_CPU(matriz, simbolo_CPU, simbolo_jogador, historico_jogador, historico_CPU):
 
-    print(historico_jogador, historico_CPU)
-
     quinas = ['0', '2', '6', '8']
     laterais = ['1', '3', '5', '7']
 
@@ -105,55 +103,45 @@ def jogada_CPU(matriz, simbolo_CPU, simbolo_jogador, historico_jogador, historic
         return posicao
 
     if len(historico_jogador) == 1:
-        if historico_jogador[0] == '4': # Centro
+        if historico_jogador[0] == '4' or historico_jogador[0] == '1' or historico_jogador[0] == '3':
             return '0'
         else:
             if historico_jogador[0] in quinas:
                 return '4'
             else:
-                if historico_jogador[0] in laterais:
-                    if historico_jogador[0] == '1' or historico_jogador[0] == '3':
-                        return '0'
-                    if historico_jogador[0] == '5' or historico_jogador[0] == '7':
-                        return '8'
+                if historico_jogador[0] == '5' or historico_jogador[0] == '7':
+                    return '8'
                         
 
     if len(historico_jogador) == 2:
 
-        print(historico_jogador, historico_CPU)
-        if '4' in historico_jogador:
-            for i in range(0, 9):
-                if str(i) not in historico_CPU+historico_jogador and str(i) in ['0', '2', '6', '8']:
-                    return str(i)
-        else:
-            for i in range(0, 9):
-                if '4' in historico_CPU:
-                    cont = 0
-                    for j in range(len(historico_jogador)):
-                        if historico_jogador[j] in ['0', '2', '6', '8']:
-                            cont += 1
-                            if cont == 2 and str(i) in ['1', '3', '5', '7']:
-                                return str(i)
-                    if cont != 2:
-                        if historico_jogador == ['0', '7'] or historico_jogador == ['2', '3']:
-                            return '6'
-                        if historico_jogador == ['2', '7'] or historico_jogador == ['6', '5']:
-                            return '8'
-                        if historico_jogador == ['6', '1'] or historico_jogador == ['2', '3']:
-                            return '0'
-                        if historico_jogador == ['1', '8'] or historico_jogador == ['0', '5']:
-                            return '2'
-                
-            return '4'
-        
-    valido = False
+        if historico_jogador[0] == '4':
+            return '2'
 
-    while valido is False:
-        posicao = str(randint(0, 8))
-        valido = validar_jogada(posicao, matriz)
-        if valido is True:
-            print('Jogada Randomica')
-            return posicao
+        else:
+
+            if historico_CPU[0] == '4' and historico_jogador in [['0', '8'], ['2', '6']]:
+
+                return '1'
+                
+            else:
+
+                if historico_jogador[1] in laterais:
+
+                    if historico_jogador in [['0', '7'], ['2', '3']]:
+                        return '6'
+                    if historico_jogador in [['2', '7'], ['6', '5']]:
+                        return '8'
+                    if historico_jogador in [['6', '1'], ['2', '3']]:
+                        return '0'
+                    if historico_jogador in [['1', '8'], ['0', '5']]:
+                        return '2'
+                    
+        return '4'
+    
+    for i in range(9):
+        if str(i) not in historico_CPU + historico_jogador:
+            return str(i)
 
 
 def verificar_velha(matriz):

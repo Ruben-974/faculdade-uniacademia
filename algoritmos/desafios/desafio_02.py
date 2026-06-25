@@ -2,14 +2,13 @@
 
 # CRIANDO VARIAVEIS
 
-palavra = 'METAVERSO'
+palavra = 'MOSQUITO'
 letras_jogadas =  ''
+letras_erradas = ''
 incognita = len(palavra)*'_'
-
 chances = 6
 cabeca = tronco = braco_d = braco_e = perna_d = perna_e = ' '
-
-stick_man = (f'\n______'
+stick_man = (f'______'
 f'\n|    {cabeca}'
 f'\n|   {braco_e}{tronco}{braco_d}'
 f'\n|   {perna_e} {perna_d}')
@@ -18,12 +17,12 @@ while incognita != palavra and chances != 0:
 
     # MOSTRA STICK MAN
 
-    print(stick_man + '   ' + incognita, 'Letras Jogadas:', letras_jogadas)
+    print(stick_man + '   ' + incognita, 'Letras Jogadas:', letras_erradas)
 
     letra = input('\nDigite uma letra: ').upper()
 
-    if len(letra) != 1:
-        print('\n\033[33mDIGITE APENAS LETRA POR VEZ!\033[0m')
+    if len(letra) != 1 or letra not in 'QWERTYUIOPASDFGHJKLZXCVBNM':
+        print('\n\033[33mDIGITE APENAS LETRAS SEM ACENTOS!\033[0m')
 
     else:
 
@@ -46,7 +45,7 @@ while incognita != palavra and chances != 0:
             if chances == 0:
                 perna_d = '\\'
             
-            stick_man = (f'\n______'
+            stick_man = (f'______'
                         f'\n|    {cabeca}'
                         f'\n|   {braco_e}{tronco}{braco_d}'
                         f'\n|   {perna_e} {perna_d} ')
@@ -58,6 +57,9 @@ while incognita != palavra and chances != 0:
         else:
             letras_jogadas += letra
 
+            if letra not in palavra:
+                letras_erradas += letra
+
         # ESTRUTURA A VARIAVEL INCOGNITA PARA QUE APAREÇA SOMENTE AS LETRAS QUE O USUARIO ACERTOU
 
         for i in range(len(palavra)):
@@ -66,7 +68,7 @@ while incognita != palavra and chances != 0:
             else:
                 incognita += '_'
 
-print(stick_man + '   ' + incognita, 'Letras Jogadas:', letras_jogadas)
+print(stick_man + '   ' + incognita, 'Letras Jogadas:', letras_erradas)
 
 if incognita == palavra:
     print('\n\033[32mVOCÊ VENCEU!\033[0m')

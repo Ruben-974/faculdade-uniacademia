@@ -1,0 +1,110 @@
+body{
+    background-color: rgb(194, 129, 255);
+    font-family: 'Courier New', Courier, monospace;
+}
+
+h1{
+    font-size: 50px;
+    color: rgb(190, 2, 2);
+    text-align: center;
+}
+
+h2{
+    color: rgb(68, 2, 190);
+    text-align: center;
+}
+
+p{
+    color: rgb(255, 251, 22);
+}
+
+table{
+    background-color: rgb(91, 91, 255);
+}
+
+form{
+    background-color: rgb(255, 107, 107);
+}
+
+.paragrafo_inicial{
+    background-color: blue;
+}
+
+.demais_paragrafos{
+    background-color: brown;
+}
+
+#titulo_nordica{
+    background-color: yellow;
+}
+
+a:visited{
+    color: green;
+}
+
+a:link{
+    color: black;
+    text-decoration: none;
+}
+
+a:hover{
+    color: blue;
+    font-size: 20px;
+}
+
+.celulas{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+    background-color: pink;
+}
+
+#tabela{
+    background-image: url('https://vcgimenes.com.br/wp-content/uploads/2022/08/Nindales-Dragons-V.C.-Gimenes-Nuckturp-Dragoes-1024x576.jpg');
+    background-repeat: repeat;
+    background-color: orange;
+    font-size: 18px;
+    font-style: italic;
+
+
+}
+
+.p_tabela{
+    background-color: white;
+    color: blue;
+}
+
+.h1_tabela{
+    text-decoration: line-through;
+    color: #8f8fff;
+    background-color: white;
+}
+
+.a_tabela{
+    background-color: white;
+}
+
+.bloco{
+    background-color: white;
+    border: 5px dotted black;
+    margin: 40px 70px;
+    padding: 10px;
+}
+
+.bloco h2{
+    text-decoration: underline;
+}
+
+.bloco p{
+    color: black;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#contato{
+    border: 10px double blue;
+    padding: 5px;
+    margin: 0px 0px;
+}
+
+#contato h2{
+    color: orange;
+}

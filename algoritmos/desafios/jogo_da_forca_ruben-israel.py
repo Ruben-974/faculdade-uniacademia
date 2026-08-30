@@ -1,5 +1,3 @@
-# JOGO DA FORCA
-
 # CRIANDO VARIAVEIS
 
 palavra = 'MOSQUITO'

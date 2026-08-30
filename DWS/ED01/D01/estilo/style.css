@@ -64,11 +64,13 @@ a:hover{
     background-color: orange;
     font-size: 18px;
     font-style: italic;
+    font-weight: bold;
 
 
 }
 
 .p_tabela{
+    text-align: center;
     background-color: white;
     color: blue;
 }
@@ -102,9 +104,15 @@ a:hover{
 #contato{
     border: 10px double blue;
     padding: 5px;
-    margin: 0px 0px;
+    margin: 5px 10px;
 }
 
 #contato h2{
     color: orange;
 }
+
+/*
+border: a linha que delimita o elemento entre margine padding 
+padding: espaço interno entre o conteudo e a borda
+margin: espaço extra entre o elemento e os demais
+*/

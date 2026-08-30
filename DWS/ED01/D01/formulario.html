@@ -15,28 +15,28 @@
         <fieldset>
             <legend>Dados do Usuario</legend>
             <label>Digite seu Nome Completo: </label>
-            <input type="text"><br><br>
+            <input type="text" name="nome"><br><br>
             <label >Digite seu E-mail: </label>
-            <input type="email"><br><br>
+            <input type="email" name="email"><br><br>
             <label>Digite sua Senha: </label>
-            <input type="password"><br><br>
+            <input type="password" name="senha"><br><br>
             <label>Selecione sua data de nascimento: </label>
-            <input type="date"><br><br>
+            <input type="date" name="data"><br><br>
 
             <label>Selecione seu Sexo: </label>
-            <input type="radio" name="rdsexo"><label>Masculino</label>
-            <input type="radio" name="rdsexo"><label>Feminino</label><br><br>
+            <input type="radio" name="sexo"><label>Masculino</label>
+            <input type="radio" name="sexo"><label>Feminino</label><br><br>
 
             <label>Preferencias: </label>
 
-            <input type="checkbox"><label>Games</label>
-            <input type="checkbox"><label>Musica</label>
-            <input type="checkbox"><label>Esportes</label>
-            <input type="checkbox"><label>Arte</label>
-            <input type="checkbox"><label>Leitura</label><br><br>
+            <input type="checkbox" name="prefe"><label>Games</label>
+            <input type="checkbox" name="prefe"><label>Musica</label>
+            <input type="checkbox" name="prefe"><label>Esportes</label>
+            <input type="checkbox" name="prefe"><label>Arte</label>
+            <input type="checkbox" name="prefe"><label>Leitura</label><br><br>
 
             <label>Estado Civil: </label>
-            <select>
+            <select name="estado_civil">
                 <option>Solteiro</option>
                 <option>Casado</option>
                 <option>Divorciado</option>
@@ -44,10 +44,10 @@
             </select><br><br>
 
             <label>Deixe sua opnião: </label><br><br>
-            <textarea name="" id=""></textarea><br><br>
+            <textarea name="opniao"></textarea><br><br>
 
-            <button>Enviar Dados</button>
-            <button>Limpar Dados</button>
+            <button type="submit">Enviar Dados</button>
+            <button type="reset">Limpar Dados</button>
 
         </fieldset>
     </form>

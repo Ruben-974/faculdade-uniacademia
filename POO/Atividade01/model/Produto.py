@@ -23,6 +23,6 @@ class Produto:
         return self.__descricao
 
     def toString(self):
-        return f"Produto[{self.getCodigo()}] - {self.getDescricao()}"
+        return f"Produto[{self.getCodigo()} - {self.getDescricao()}]"
 
         

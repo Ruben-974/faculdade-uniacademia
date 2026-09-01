@@ -37,4 +37,4 @@ class Empresa:
         return self.__cnpj
 
     def toString(self):
-        return f"Empresa[{self.getCodigo()}] - {self.getRazaoSocial()} - {self.getEndereco()} - {self.getCnpj()}"
+        return f"Empresa[{self.getCodigo()} - {self.getRazaoSocial()} - {self.getEndereco()} - {self.getCnpj()}]"

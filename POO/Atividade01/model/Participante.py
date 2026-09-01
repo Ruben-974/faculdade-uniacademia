@@ -30,4 +30,4 @@ class Participante:
         return self.__cnpj
 
     def toString(self):
-        return f"Participante[{self.getCodigo()}] - {self.getRazaoSocial()} - {self.getCnpj()}"
+        return f"Participante[{self.getCodigo()} - {self.getRazaoSocial()} - {self.getCnpj()}]"

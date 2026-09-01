@@ -23,8 +23,8 @@ itemnota2 = ItemNota(2, 9.90, 20, produto2)
 print(itemnota2.toString())
 
 nota1 = Nota(1, '12/03/2005', '278937198-1231', empresa1, participante1)
-nota1.setItens(itemnota1)
-nota1.setItens(itemnota2)
+nota1.addItem(itemnota1)
+nota1.addItem(itemnota2)
 print(nota1.getItens())
 
 print(nota1.toString())

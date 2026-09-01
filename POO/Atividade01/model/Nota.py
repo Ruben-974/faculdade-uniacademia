@@ -37,7 +37,7 @@ class Nota:
     def getParticipante(self):
         return self.__participante
 
-    def setItens(self, itens):
+    def addItem(self, itens):
         self.__itens.append(itens)
 
     def getItens(self):

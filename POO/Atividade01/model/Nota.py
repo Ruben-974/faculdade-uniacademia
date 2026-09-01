@@ -43,5 +43,17 @@ class Nota:
     def getItens(self):
         return self.__itens
 
+    def getVrTotal(self):
+        vrtotal = 0 
+        for c in range(len(self.getItens())):
+            vrtotal += self.getItens()[c].getQuantidade() * self.getItens()[c].getVrUnitario()
+        return vrtotal
+
+    def getDescricao(self):
+        descricoes = []
+        for c in range(len(self.getItens())):
+            descricoes.append(self.getItens()[c].getProduto().getDescricao())
+        return descricoes
+
     def toString(self):
-        return f"Nota[{self.getData()} - {self.getNumero()} - {self.getEmpresa().toString()} - {self.getParticipante().toString()} - {self.getItens()}]"
+        return f"Nota[{self.getData()} - {self.getNumero()} - {self.getEmpresa().toString()} - {self.getParticipante().toString()} - {self.getDescricao()}]"

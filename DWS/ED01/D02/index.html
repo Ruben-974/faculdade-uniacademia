@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja Virtual</title>
+
+<style>
+
+.imagem{
+    width: 200px;
+    height: 200px;
+}
+
+.area-produto{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center
+}
+
+.produto{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(0, 255, 145);
+    margin: 10px;
+    border: 3px solid black;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.produto h3 {
+    color: white;
+    text-align: center;
+    text-shadow: 2px 2px 5px black;
+    margin: 10px 0 0 0;
+}
+
+.botao {
+    background-color: rgb(0, 94, 255);
+    color: white;
+    border: 2px solid black;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    cursor: pointer;
+
+}
+
+.botao:hover {
+    color: black;
+}
+
+.preco {
+    font-size: 9pt;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: red;
+    padding: 8px;
+    color: white;
+}
+
+</style>
+
+</head>
+<body>
+    <div class="area-produto">
+        <div class="produto">
+            <img class="imagem" src="https://http2.mlstatic.com/D_Q_NP_2X_901349-MLB112202824447_052026-T--tenis-olympikus-index-4-caminhada-masculino-leve-original.webp" alt="">
+            <h3 class="nome-produto">Tenis Preto</h3>
+            <p class="preco">Preço: R$149,90</p>
+            <button class="botao">Comprar Agora</button>
+        </div>
+        <div class="produto">
+            <img class="imagem" src="https://images.tcdn.com.br/img/img_prod/809258/calca_brim_pesado_cargo_preta_uniforme_profissional_15_1_d59c8d7912b69dba2cda014d5d0428c1.jpg" alt="">
+            <h3 class="nome-produto">Calça Preta</h3>
+            <p class="preco">Preço: R$229,90</p>
+            <button class="botao">Comprar Agora</button>
+        </div>
+        <div class="produto">
+            <img class="imagem" src="https://acdn-us.mitiendanube.com/stores/001/144/294/products/jaqueta-bomber-g-1-preto-1-e20c9ed571b6899f2217414692367249-1024-1024.webp" alt="">
+            <h3 class="nome-produto">Jaqueta Preta</h3>
+            <p class="preco">Preço: R$389,90</p>
+            <button class="botao">Comprar Agora</button>
+        </div>
+        <div class="produto">
+            <img class="imagem" src="https://img.lojasrenner.com.br/item/541769306/zoom/1.jpg" alt="">
+            <h3 class="nome-produto">Bone Preto</h3>
+            <p class="preco">Preço: R$89,90</p>
+            <button class="botao">Comprar Agora</button>
+        </div>
+
+    </div>
+</body>
+</html>

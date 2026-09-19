@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Aleatório - Módulo 03</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { 
+            background-color: #f4f7f6; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            padding: 20px; 
+            display: flex;
+            justify-content: center;
+        }
+        .quiz-container { 
+            width: 100%;
+            max-width: 700px; 
+            background: white; 
+            padding: 30px; 
+            border-radius: 12px; 
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1); 
+        }
+        .header { 
+            text-align: center; 
+            margin-bottom: 25px; 
+            padding-bottom: 15px; 
+            border-bottom: 3px solid #3498db; 
+        }
+        .header h2 { 
+            color: #2c3e50; 
+            font-size: 1.4rem; 
+            margin: 0; 
+            font-weight: 700;
+        }
+        .header .badge-random {
+            display: inline-block;
+            background-color: #e74c3c;
+            color: white;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 12px;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+        .progress-info { 
+            font-size: 0.95rem; 
+            color: #7f8c8d; 
+            text-align: right; 
+            margin-bottom: 8px; 
+            font-weight: 600;
+        }
+        .progress-bar-custom { 
+            height: 10px; 
+            background-color: #ecf0f1; 
+            border-radius: 6px; 
+            margin-bottom: 30px; 
+            overflow: hidden; 
+        }
+        .progress-fill { 
+            height: 100%; 
+            background-color: #3498db; 
+            width: 0%; 
+            transition: width 0.4s ease; 
+        }
+        .question-title { 
+            font-weight: 600; 
+            color: #2c3e50; 
+            margin-bottom: 20px; 
+            font-size: 1.15rem; 
+            line-height: 1.5;
+        }
+        .question-number {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 5px;
+            margin-right: 8px;
+            font-size: 0.95rem;
+        }
+        .form-check { 
+            margin-bottom: 12px; 
+            padding: 12px 12px 12px 45px; 
+            border: 2px solid #e0e0e0; 
+            border-radius: 8px; 
+            transition: all 0.2s ease; 
+            background: #fafafa; 
+        }
+        .form-check:hover { 
+            background: #f0f8ff; 
+            border-color: #b0d4f1;
+        }
+        .form-check-input { 
+            cursor: pointer; 
+            margin-top: 0.3rem; 
+            transform: scale(1.2);
+        }
+        .form-check-label { 
+            cursor: pointer; 
+            width: 100%; 
+            font-size: 1rem; 
+            color: #34495e;
+        }
+        .correct-answer { 
+            background-color: #d4edda !important; 
+            border-color: #28a745 !important; 
+        }
+        .wrong-answer { 
+            background-color: #f8d7da !important; 
+            border-color: #dc3545 !important; 
+        }
+        .explanation-box { 
+            display: none; 
+            margin-top: 20px; 
+            padding: 20px; 
+            border-radius: 10px; 
+            font-size: 0.95rem; 
+            background-color: #f8f9fa; 
+            border-left: 5px solid #3498db; 
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        .explanation-box .resposta-correta {
+            background-color: #d4edda;
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: inline-block;
+            margin: 5px 0;
+            font-weight: 600;
+            color: #155724;
+        }
+        .explanation-box .resposta-usuario {
+            background-color: #f8d7da;
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: inline-block;
+            margin: 5px 0;
+            font-weight: 600;
+            color: #721c24;
+        }
+        .explanation-box .titulo-explicacao {
+            font-weight: 700;
+            color: #2c3e50;
+            font-size: 1.05rem;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .btn-action { 
+            padding: 14px; 
+            font-weight: bold; 
+            font-size: 1.1rem; 
+            border-radius: 8px; 
+            width: 100%; 
+            margin-top: 25px; 
+            border: none;
+            transition: all 0.3s ease;
+            background-color: #3498db;
+            color: white;
+        }
+        .btn-action:disabled { 
+            background-color: #bdc3c7; 
+            color: #7f8c8d; 
+            cursor: not-allowed;
+        }
+        .btn-action:hover:not(:disabled) {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        .result-screen { 
+            display: none; 
+            text-align: center; 
+            padding: 40px 20px; 
+        }
+        .score-display { 
+            font-size: 4rem; 
+            font-weight: bold; 
+            color: #2c3e50; 
+            margin: 20px 0; 
+        }
+        .result-message {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container" id="quiz-screen">
+    <div class="header">
+        <h2>Módulo 03: CSS Layout e Posicionamento</h2>
+        <div class="badge-random">🎲 Modo Aleatório Ativado</div>
+    </div>
+    
+    <div class="progress-info" id="progress-text">Questão 1 de 50</div>
+    <div class="progress-bar-custom">
+        <div class="progress-fill" id="progress-fill"></div>
+    </div>
+    
+    <div id="question-container"></div>
+    
+    <div class="explanation-box" id="explanation-box"></div>
+    
+    <button class="btn-action" id="btn-action" onclick="handleAction()" disabled>Corrigir Resposta</button>
+</div>
+
+<div class="quiz-container result-screen" id="result-screen">
+    <h2>Quiz Finalizado! 🏆</h2>
+    <div class="score-display" id="final-score">0/50</div>
+    <p class="result-message" id="score-message"></p>
+    <button class="btn-action" onclick="location.reload()">🎲 Jogar Novamente (Nova Ordem)</button>
+</div>
+
+<script>
+    // ============================================
+    // BANCO DE QUESTÕES (50 questões) - Sem números fixos
+    // ============================================
+    const rawQuestions = [
+        { q: "De acordo com o sistema de Grid View do Bootstrap, quantas colunas no máximo uma view pode ter?", options: ["10 colunas", "12 colunas", "16 colunas", "24 colunas"], correct: 1, exp: "O slide 'Sistema de Grid View' afirma que uma view é um grid de no máximo 12 colunas." },
+        { q: "Qual classe é utilizada no Bootstrap para definir o layout em dispositivos de tamanho médio (desktops)?", options: ["col-xs-*", "col-sm-*", "col-md-*", "col-lg-*"], correct: 2, exp: "As classes col-md-* são usadas para dispositivos médios (desktops), conforme o slide sobre Grids responsivas." },
+        { q: "(V ou F) O sistema de Grid do Bootstrap é nativamente responsivo, permitindo definir grids diferentes para cada tipo de resolução.", options: ["Verdadeiro", "Falso"], correct: 0, exp: "Verdadeiro. O slide 'Sistema de Grid View' destaca que os grids são nativamente responsivos, ou seja, se adaptam automaticamente a diferentes tamanhos de tela." },
+        { q: "Se eu quiser criar um layout com 3 colunas iguais em uma tela de desktop, quais classes devo usar?", options: ["col-md-3, col-md-3, col-md-3", "col-md-4, col-md-4, col-md-4", "col-md-6, col-md-6", "col-md-12"], correct: 1, exp: "A soma das colunas deve ser 12. Portanto, 4 + 4 + 4 = 12. (Slide 19, CASO 3)." },
+        { q: "No slide 'Criando uma View', qual combinação de classes cria 2 colunas em telas >= 768px e 4 colunas em telas >= 992px?", options: ["col-sm-6 col-md-3", "col-sm-12 col-md-6", "col-md-6 col-lg-3", "col-xs-6 col-sm-3"], correct: 0, exp: "A classe 'col-sm-6 col-md-3' divide a tela em 2 colunas (6+6=12) em telas pequenas e 4 colunas (3+3+3+3=12) em telas médias." },
+        { q: "De acordo com o slide 25 (CASO 6), qual é a soma das colunas apresentadas na terceira linha?", options: ["3 + 2 + 2 + 5 = 12", "4 + 4 + 4 = 12", "2 + 8 + 2 = 12", "6 + 6 = 12"], correct: 0, exp: "O CASO 6 apresenta uma linha com colunas de largura 3, 2, 2 e 5, totalizando 12." },
+        { q: "Qual classe é usada para dispositivos muito pequenos (celulares)?", options: ["col-xs-*", "col-sm-*", "col-md-*", "col-lg-*"], correct: 0, exp: "A classe col-xs-* é destinada a dispositivos muito pequenos, como celulares." },
+        { q: "(V ou F) No Bootstrap, a soma das classes de coluna dentro de uma mesma 'row' deve sempre ser igual a 12.", options: ["Verdadeiro", "Falso"], correct: 0, exp: "Verdadeiro. O sistema é baseado em 12 colunas. Se a soma ultrapassar 12, as colunas quebrarão para a linha de baixo." },
+        { q: "No slide 25 (CASO 5), qual é a distribuição das colunas?", options: ["6 + 6", "4 + 4 + 4", "2 + 8 + 2", "3 + 3 + 3 + 3"], correct: 2, exp: "O CASO 5 mostra uma coluna de largura 2, uma de largura 8 e outra de largura 2." },
+        { q: "Para telas grandes (>= 1200px), qual classe de grid é utilizada?", options: ["col-xs-*", "col-sm-*", "col-md-*", "col-lg-*"], correct: 3, exp: "A classe col-lg-* é usada para telas grandes." },
+        { q: "Qual a principal diferença entre Box Model e Flexbox?", options: ["Box Model organiza o layout geral, Flexbox define bordas.", "Box Model define a estrutura interna do elemento, Flexbox organiza como vários elementos se posicionam.", "Box Model é para imagens, Flexbox é para textos.", "Não há diferença."], correct: 1, exp: "O Box Model define a estrutura interna (conteúdo, padding, borda e margem) de cada elemento individual. Já o Flexbox é um sistema de alinhamento que organiza como vários elementos se posicionam e dividem o espaço dentro de um recipiente." },
+        { q: "(V ou F) O Flexbox é um sistema de alinhamento que divide o espaço dentro de um recipiente.", options: ["Verdadeiro", "Falso"], correct: 0, exp: "Verdadeiro. O Flexbox organiza como vários elementos se posicionam e dividem o espaço dentro de um recipiente." },
+        { q: "No slide 'Trabalhando com Flexbox', qual classe é usada para o menu lateral esquerdo?", options: ["class='topo'", "class='navegacao'", "class='menuEsquerdo'", "class='rodape'"], correct: 2, exp: "O código mostra <div class=\"menuEsquerdo\"> para o menu lateral esquerdo." },
+        { q: "No layout Flexbox apresentado, qual classe representa o rodapé da página?", options: ["class='topo'", "class='corpo'", "class='conteudo'", "class='rodape'"], correct: 3, exp: "A classe <div class=\"rodape\"> é utilizada para o rodapé." },
+        { q: "Qual é a estrutura hierárquica correta do corpo (body) no slide de Flexbox?", options: ["topo > navegacao > corpo > rodape", "topo > corpo > navegacao > rodape", "corpo > topo > navegacao > rodape", "navegacao > topo > corpo > rodape"], correct: 0, exp: "A ordem no código é: div topo, div navegacao, div corpo (com menuEsquerdo e conteudo) e div rodape." },
+        { q: "Qual classe do Bootstrap é usada para criar um painel (Panel)?", options: ["class='panel panel-default'", "class='box box-default'", "class='card card-default'", "class='container panel'"], correct: 0, exp: "O slide 'Explorando recursos - Panel' mostra <div class=\"panel panel-default\">." },
+        { q: "Para criar um breadcrumb (rastro de navegação), qual estrutura HTML é utilizada?", options: ["<ul class='breadcrumb'>", "<ol class='breadcrumb'>", "<div class='breadcrumb'>", "<nav class='breadcrumb'>"], correct: 1, exp: "O slide mostra <ol class=\"breadcrumb\"> para criar o rastro de navegação." },
+        { q: "Complete o código: <input type='text' class='______' placeholder='Informe seu email'>", options: ["form-input", "form-control", "input-text", "form-group"], correct: 1, exp: "A classe 'form-control' é aplicada ao input para estilização correta no Bootstrap." },
+        { q: "Qual classe é usada para criar um menu dropdown (select) no Bootstrap?", options: ["class='dropdown'", "class='form-control'", "class='select-menu'", "class='form-select'"], correct: 1, exp: "O slide mostra <select class=\"form-control\" name=\"comboestado\">." },
+        { q: "(V ou F) Para criar um grupo de botões de rádio (radio), usa-se a classe 'radio' em uma div e 'type=\"radio\"' no input.", options: ["Verdadeiro", "Falso"], correct: 0, exp: "Verdadeiro. O slide mostra <div class=\"radio\"> e <input type=\"radio\" name=\"optradio\">." },
+        { q: "Como criar um checkbox no Bootstrap?", options: ["<div class='checkbox'><input type='checkbox'></div>", "<input type='checkbox' class='form-check'>", "<div class='form-check'><input type='checkbox'></div>", "<checkbox><input type='check'></checkbox>"], correct: 0, exp: "No slide, a estrutura é <div class=\"checkbox\"> <label> <input type=\"checkbox\" name=\"optcheck\">." },
+        { q: "Complete o código: <______ type='submit' class='btn btn-default'>Salvar</______>", options: ["<input>", "<button>", "<a>", "<div>"], correct: 1, exp: "A tag <button> é usada com type='submit' e class='btn btn-default'." },
+        { q: "No slide sobre Tabelas, qual classe é usada para alternar as cores das linhas (zebrado)?", options: ["table-bordered", "table-hover", "table-striped", "table-condensed"], correct: 2, exp: "A classe 'table-striped' é utilizada para o efeito zebrado na tabela." },
+        { q: "Qual classe é usada no cabeçalho da tabela para um estilo padrão?", options: ["thead-default", "thead-dark", "thead-light", "thead-primary"], correct: 0, exp: "O slide mostra <thead class=\"thead-default\">." },
+        { q: "No slide de Breadcrumbs, qual classe é usada no item ativo?", options: ["class='active'", "class='current'", "class='selected'", "class='disabled'"], correct: 0, exp: "O slide mostra <li class=\"active\">Cadastro</li>." },
+        { q: "Qual classe é usada para criar um painel com corpo (panel-body)?", options: ["panel-heading", "panel-footer", "panel-body", "panel-content"], correct: 2, exp: "O slide mostra <div class=\"panel-body\"> para o conteúdo do painel." },
+        { q: "(V ou F) O componente 'Panel' pode ser usado em conjunto com o sistema de grid (col-md-8, por exemplo).", options: ["Verdadeiro", "Falso"], correct: 0, exp: "Verdadeiro. O slide mostra o painel dentro de uma coluna do grid (<div id='conteudo' class='col-md-8'>)." },
+        { q: "No slide sobre 'Dropdown', qual é o valor do atributo 'name' do select?", options: ["name='comboestado'", "name='estado'", "name='dropdown'", "name='select'"], correct: 0, exp: "O código mostra <select class=\"form-control\" name=\"comboestado\">." },
+        { q: "No slide sobre 'Label + Textfield', qual classe é usada para o label?", options: ["<label>", "<label class='control-label'>", "<label class='form-label'>", "<label class='input-label'>"], correct: 0, exp: "O slide usa a tag <label> simples, sem classe específica no exemplo apresentado." },
+        { q: "No slide sobre 'Checkbox', qual é o valor do atributo 'value' do input para Futebol?", options: ["value='futebol'", "value='Futebol'", "value='fut'", "value='esporte'"], correct: 0, exp: "O código mostra <input type=\"checkbox\" name=\"optcheck\" value=\"futebol\">." },
+        { q: "Qual meta tag é essencial para garantir que o layout seja responsivo em dispositivos móveis?", options: ["meta charset", "meta http-equiv", "meta name='viewport'", "meta description"], correct: 2, exp: "A meta tag viewport é fundamental para o design responsivo, ajustando a largura ao dispositivo." },
+        { q: "Qual arquivo CSS é referenciado no template básico do Bootstrap?", options: ["css/bootstrap.min.css", "css/style.css", "css/bootstrap.css", "css/main.css"], correct: 0, exp: "O template básico faz referência a <link href='css/bootstrap.min.css' rel='stylesheet'>." },
+        { q: "Quais scripts são incluídos no final do body do template básico?", options: ["jQuery e bootstrap.min.js", "jQuery e popper.js", "bootstrap.min.js e main.js", "jQuery e script.js"], correct: 0, exp: "O template inclui jQuery e bootstrap.min.js no final do body." },
+        { q: "(V ou F) O Bootstrap é uma ferramenta 'Mobile First'.", options: ["Verdadeiro", "Falso"], correct: 0, exp: "Verdadeiro. O slide 'O que é o Bootstrap e como ele nos ajuda nisso?' afirma que ele é Mobile First." },
+        { q: "Qual pasta NÃO é mencionada como necessária para integração do Bootstrap no projeto?", options: ["css", "fonts", "js", "images"], correct: 3, exp: "O slide 'Integração com o Projeto' menciona as pastas css, fonts e js. A pasta 'images' não é citada." },
+        { q: "De onde deve ser feito o download do Bootstrap para integração no projeto?", options: ["getbootstrap.com", "bootstrap.com.br", "getbootstrap.com.br", "bootstrap.io"], correct: 0, exp: "O slide indica o link http://getbootstrap.com/ para download." },
+        { q: "(V ou F) O Bootstrap possui documentação detalhada e de fácil entendimento.", options: ["Verdadeiro", "Falso"], correct: 0, exp: "Verdadeiro. Esta é uma das vantagens listadas no slide 16." },
+        { q: "Qual é uma das vantagens do Bootstrap mencionada nos slides?", options: ["Funciona apenas no Chrome.", "Possui componentes suficientes para o desenvolvimento de qualquer site com interface simples.", "Não é otimizado para layouts responsivos.", "Requer conhecimento avançado em JavaScript."], correct: 1, exp: "O slide 16 afirma que ele possui componentes suficientes para o desenvolvimento de qualquer site ou sistema web com interface simples." },
+        { q: "No template básico, qual tag é usada para o título da página?", options: ["<title>", "<header>", "<h1>", "<head>"], correct: 0, exp: "A tag <title>Bootstrap 101 Template</title> é usada no <head>." },
+        { q: "Qual link é fornecido para acessar os componentes do Bootstrap?", options: ["getbootstrap.com/components/", "getbootstrap.com.br/components/", "bootstrap.com/components/", "getbootstrap.com/css/"], correct: 1, exp: "O slide 23 mostra o link http://getbootstrap.com.br/components/." },
+        { q: "Complete o código do Breadcrumb: <li class='______'>Cadastro</li>", options: ["current", "active", "selected", "focus"], correct: 1, exp: "A classe 'active' é usada para indicar a página atual no breadcrumb." },
+        { q: "Complete o código do Grid: <div id='margemesquerda' class='______'>", options: ["col-md-2", "col-md-8", "col-md-12", "col-md-4"], correct: 0, exp: "No slide 17, a margem esquerda é definida com a classe 'col-md-2'." },
+        { q: "No slide 'Criando uma View', qual é a classe da div de conteúdo principal?", options: ["col-md-2", "col-md-8", "col-md-12", "col-md-6"], correct: 1, exp: "A div de conteúdo tem a classe 'col-md-8', ocupando a parte central do grid." },
+        { q: "(V ou F) No slide sobre 'Label + Textfield', o input possui a classe 'form-control' e o placeholder 'Digite seu Nome'.", options: ["Verdadeiro", "Falso"], correct: 0, exp: "Verdadeiro. O código mostra <input type=\"text\" class=\"form-control\" placeholder=\"Digite seu Nome\">." },
+        { q: "No slide sobre 'Radio Button', qual é o valor do atributo 'name' dos inputs?", options: ["name='radio'", "name='optradio'", "name='sexo'", "name='opcao'"], correct: 1, exp: "O código mostra <input type=\"radio\" name=\"optradio\" value=\"masculino\">." },
+        { q: "No slide sobre 'Tabela', qual classe é usada na tag <tr> para indicar que a linha é clicável?", options: ["class='row-click'", "class='clickable-row'", "class='table-row'", "class='link-row'"], correct: 1, exp: "A classe 'clickable-row' é usada na tag <tr> conforme o slide." },
+        { q: "Complete o código do botão de busca: <span class='______ glyphicon-search'></span>", options: ["glyphicon", "fa", "icon", "glyph"], correct: 0, exp: "A classe 'glyphicon' é usada junto com 'glyphicon-search' para ícones no Bootstrap 3." },
+        { q: "No slide 'Explorando recursos - Table', qual classe é usada na tag <table>?", options: ["table table-striped", "table table-bordered", "table table-hover", "table table-condensed"], correct: 0, exp: "O código mostra <table class=\"table table-striped\">." },
+        { q: "No slide 'Criando uma View', qual classe é usada para criar 4 colunas em telas >= 992px?", options: ["col-sm-6", "col-md-3", "col-lg-2", "col-xs-12"], correct: 1, exp: "A classe 'col-md-3' cria 4 colunas (3+3+3+3 = 12) em telas médias (>= 992px)." },
+        { q: "(V ou F) No slide 'Trabalhando com Flexbox', a estrutura HTML possui uma div com a classe 'conteudo' dentro da div 'corpo'.", options: ["Verdadeiro", "Falso"], correct: 0, exp: "Verdadeiro. O código mostra <div class=\"corpo\"> <div class=\"menuEsquerdo\">...</div> <div class=\"conteudo\">...</div> </div>." }
+    ];
+
+    // ============================================
+    // SISTEMA DE ALEATORIEDADE
+    // ============================================
+    function shuffleArray(array) {
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    function prepararQuestoesAleatorias() {
+        const perguntasEmbaralhadas = shuffleArray(rawQuestions);
+        return perguntasEmbaralhadas.map(q => {
+            const textoCorreto = q.options[q.correct];
+            const opcoesEmbaralhadas = shuffleArray(q.options);
+            const novoIndiceCorreto = opcoesEmbaralhadas.indexOf(textoCorreto);
+            return {
+                q: q.q,
+                options: opcoesEmbaralhadas,
+                correct: novoIndiceCorreto,
+                exp: q.exp
+            };
+        });
+    }
+
+    const questions = prepararQuestoesAleatorias();
+
+    // ============================================
+    // LÓGICA DO QUIZ
+    // ============================================
+    let currentIndex = 0;
+    let score = 0;
+    let isAnswered = false;
+
+    const btnAction = document.getElementById('btn-action');
+    const expBox = document.getElementById('explanation-box');
+
+    function loadQuestion() {
+        if (currentIndex >= questions.length) {
+            showResult();
+            return;
+        }
+
+        const q = questions[currentIndex];
+        
+        // Atualiza progresso com numeração sequencial
+        document.getElementById('progress-text').innerText = `Questão ${currentIndex + 1} de ${questions.length}`;
+        document.getElementById('progress-fill').style.width = `${((currentIndex) / questions.length) * 100}%`;
+        
+        btnAction.innerText = "Corrigir Resposta";
+        btnAction.style.backgroundColor = "#3498db";
+        btnAction.disabled = true;
+        expBox.style.display = 'none';
+        expBox.innerHTML = '';
+        isAnswered = false;
+
+        // NUMERAÇÃO SEQUENCIAL DINÂMICA + texto da pergunta
+        let html = `<div class="question-title"><span class="question-number">${currentIndex + 1}</span>${q.q}</div>`;
+        q.options.forEach((opt, i) => {
+            html += `
+                <div class="form-check" id="opt-${i}">
+                    <input class="form-check-input" type="radio" name="question" id="radio-${i}" value="${i}" onchange="enableButton()">
+                    <label class="form-check-label" for="radio-${i}">${opt}</label>
+                </div>
+            `;
+        });
+        
+        document.getElementById('question-container').innerHTML = html;
+    }
+
+    function enableButton() {
+        if (!isAnswered) {
+            btnAction.disabled = false;
+        }
+        document.querySelectorAll('.form-check').forEach(el => {
+            el.classList.remove('correct-answer', 'wrong-answer');
+        });
+    }
+
+    function handleAction() {
+        if (!isAnswered) {
+            checkAnswer();
+        } else {
+            nextQuestion();
+        }
+    }
+
+    function checkAnswer() {
+        const q = questions[currentIndex];
+        const selectedRadio = document.querySelector('input[name="question"]:checked');
+        if (!selectedRadio) return;
+        
+        const selectedOption = parseInt(selectedRadio.value);
+        const isCorrect = selectedOption === q.correct;
+        const respostaCorreta = q.options[q.correct];
+        const respostaUsuario = q.options[selectedOption];
+
+        // Desabilita os radios após a resposta
+        document.querySelectorAll('input[name="question"]').forEach(radio => radio.disabled = true);
+        
+        // Destaca a resposta correta e a errada
+        document.getElementById(`opt-${q.correct}`).classList.add('correct-answer');
+        if (!isCorrect) {
+            document.getElementById(`opt-${selectedOption}`).classList.add('wrong-answer');
+        } else {
+            score++;
+        }
+
+        // Monta a explicação detalhada
+        let explicacaoHTML = '';
+        
+        if (isCorrect) {
+            explicacaoHTML = `
+                <strong style="color: #155724; font-size: 1.1rem;">✔ Você acertou!</strong><br><br>
+                <strong>Resposta correta:</strong> <span class="resposta-correta">"${respostaCorreta}"</span><br><br>
+                <span class="titulo-explicacao">📖 Por que essa é a resposta certa?</span>
+                ${q.exp}
+            `;
+        } else {
+            explicacaoHTML = `
+                <strong style="color: #721c24; font-size: 1.1rem;">✘ Você errou.</strong><br><br>
+                <strong>Sua resposta:</strong> <span class="resposta-usuario">"${respostaUsuario}"</span><br>
+                <strong>Resposta correta:</strong> <span class="resposta-correta">"${respostaCorreta}"</span><br><br>
+                <span class="titulo-explicacao">📖 Por que a resposta certa é essa?</span>
+                ${q.exp}
+            `;
+        }
+        
+        expBox.innerHTML = explicacaoHTML;
+        expBox.style.display = 'block';
+
+        // Muda o botão para "Avançar"
+        btnAction.innerText = "Avançar ➔";
+        btnAction.style.backgroundColor = "#27ae60";
+        isAnswered = true;
+    }
+
+    function nextQuestion() {
+        currentIndex++;
+        loadQuestion();
+    }
+
+    function showResult() {
+        document.getElementById('quiz-screen').style.display = 'none';
+        document.getElementById('result-screen').style.display = 'block';
+        
+        const percent = (score / questions.length) * 100;
+        document.getElementById('final-score').innerText = `${score} / ${questions.length}`;
+        
+        let msg = "";
+        if (percent === 100) msg = "Excelente! Você domina completamente o conteúdo!";
+        else if (percent >= 70) msg = "Muito bom! Você tem um ótimo entendimento, mas revise alguns pontos.";
+        else if (percent >= 50) msg = "Você está no caminho certo, mas precisa revisar os conceitos de Grid e Componentes.";
+        else msg = "Parece que você precisa revisar o conteúdo dos slides com mais atenção. Não desista!";
+        
+        document.getElementById('score-message').innerText = msg;
+    }
+
+    loadQuestion();
+</script>
+
+</body>
+</html>

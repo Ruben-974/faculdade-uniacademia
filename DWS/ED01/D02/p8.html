@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Validação em Tempo Real</title>
+    <style>
+        .invalido {
+            border: 2px solid red;
+            background-color: #ffe6e6;
+        }
+
+        .valido {
+            border: 2px solid green;
+            background-color: #e6ffe6;
+        }
+    </style>
+</head>
+<body>
+
+    <input type="text" id="email">
+    <span id="erroEmail"></span>
+
+    <script>
+        const inputEmail = document.getElementById('email')
+        const erroEmail = document.getElementById('erroEmail')
+
+        inputEmail.addEventListener('input', function () {
+            const valor = inputEmail.value.trim()
+
+            if (valor === '' || !valor.includes('@') || !valor.includes('.')) {
+                inputEmail.classList.add('invalido')
+                inputEmail.classList.remove('valido')
+                erroEmail.textContent = 'E-mail inválido'
+            } else {
+                inputEmail.classList.remove('invalido')
+                inputEmail.classList.add('valido')
+                erroEmail.textContent = ''
+            }
+        })
+    </script>
+
+</body>
+</html>

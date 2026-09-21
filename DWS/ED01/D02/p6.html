@@ -28,7 +28,6 @@
         const inputEmail = document.getElementById('email')
         const inputIdade = document.getElementById('idade')
 
-        // Funções específicas de validação
         function validarNome(nome) {
             return nome.trim().length != 0
         }
@@ -43,7 +42,6 @@
             return numero >= 18 && numero <= 120
         }
 
-        // Função principal do envio
         function validarDados(event) {
             event.preventDefault()
 

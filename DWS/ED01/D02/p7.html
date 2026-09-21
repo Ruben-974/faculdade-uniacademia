@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastros com Array</title>
+</head>
+<body>
+
+    <p>Nome:</p>
+    <input type="text" id="nome">
+    <p>E-mail:</p>
+    <input type="text" id="email"><br>
+    <button id="enviar">Cadastrar</button>
+
+    <p>Lista de Cadastros:</p>
+    <div id="lista"></div>
+
+    <script>
+        const inputNome = document.getElementById('nome')
+        const inputEmail = document.getElementById('email')
+        const botao = document.getElementById('enviar')
+        const lista = document.getElementById('lista')
+
+        const cadastros = []
+
+        function adicionarCadastro() {
+            const nome = inputNome.value.trim()
+            const email = inputEmail.value.trim()
+
+            if (nome === '' || email === '') {
+                alert('Preencha nome e e-mail')
+                return
+            }
+
+            cadastros.push({ nome: nome, email: email })
+
+            mostrarLista()
+        }
+
+        function mostrarLista() {
+
+            const itens = cadastros.map(function (cadastro) {
+                return '<p>' + cadastro.nome + ' - ' + cadastro.email + '</p>'
+            })
+
+            lista.innerHTML = itens.join('')
+        }
+
+        botao.addEventListener('click', adicionarCadastro)
+    </script>
+</body>
+</html>

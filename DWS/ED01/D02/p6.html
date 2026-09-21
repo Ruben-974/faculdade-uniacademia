@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validando Formulario com Funções</title>
+    <style>
+        button {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="formulario">
+        <p>Nome Completo:</p>
+        <input type="text" id="nome">
+        <p>E-mail:</p>
+        <input type="text" id="email">
+        <p>Idade:</p>
+        <input type="text" id="idade"><br>
+        <button id="enviar">Enviar</button>
+    </form>
+
+    <script>
+        const formulario = document.getElementById('formulario')
+        const inputNome = document.getElementById('nome')
+        const inputEmail = document.getElementById('email')
+        const inputIdade = document.getElementById('idade')
+
+        // Funções específicas de validação
+        function validarNome(nome) {
+            return nome.trim().length != 0
+        }
+
+        function validarEmail(email) {
+            const value = email.trim()
+            return value.includes('@') && value.includes('.')
+        }
+
+        function validarIdade(idade) {
+            const numero = Number(idade.trim())
+            return numero >= 18 && numero <= 120
+        }
+
+        // Função principal do envio
+        function validarDados(event) {
+            event.preventDefault()
+
+            const nome = inputNome.value
+            const email = inputEmail.value
+            const idade = inputIdade.value
+
+            if (validarNome(nome) && validarEmail(email) && validarIdade(idade)) {
+                alert('Dados Válidos')
+                formulario.submit()
+            } else {
+                alert('Dados Inválidos')
+            }
+        }
+
+        formulario.addEventListener("submit", validarDados)
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Lateral</title>
+    <style>
+
+        .container-grid {
+            display: grid;
+            grid-template-areas: 'header header header' 
+                                 'princi princi side' 
+                                 'footer footer footer';
+        }
+
+        .container-grid div:nth-child(1) {
+            grid-area: header;
+            background-color: blue;
+
+        }
+        .container-grid div:nth-child(2) {
+            grid-area: princi;
+            background-color: aqua;
+        }
+        .container-grid div:nth-child(3) {
+            grid-area: side;
+            background-color: bisque;
+            
+        }
+        .container-grid div:nth-child(4) {
+            grid-area: footer;
+            background-color: brown;
+        }
+
+        nav {
+            background-color: black;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+            justify-content: flex-end;
+            padding: 10px;
+            gap: 15px;
+        }
+
+        nav li {
+            list-style: none;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            color: blueviolet;
+            text-decoration: underline;
+            
+        }
+
+        .titulo-header {
+            color: white;
+            margin: 20px;
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+    <div class="container-grid">
+
+        <div class="header">
+
+            <h2 class="titulo-header">Modelo Site</h2>
+
+            <nav>
+                <li>
+                    <a href="#">
+                        Inicio
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        Contato
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        Serviços
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        Sobre
+                    </a>
+                </li>
+            </nav>
+
+        </div>
+        <div class="princi">Princi</div>
+        <div class="side">Aside</div>
+        <div class="footer">Footer</div>
+    
+    </div>
+
+</body>
+</html>
+

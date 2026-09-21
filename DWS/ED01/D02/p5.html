@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validando Formulario</title>
+    <style>
+        button {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+ 
+    <form id="formulario">
+        <p>Nome Completo:</p>
+        <input type="text" id="nome">
+        <p>E-mail:</p>
+        <input type="text" id="email"><br>
+        <button id="enviar">Enviar</button>
+    </form>
+
+    <script>
+        const inputNome = document.getElementById('nome')
+        const inputEmail = document.getElementById('email')
+        
+     
+        const formulario = document.getElementById('formulario') 
+
+      
+        function validarDados(event) { 
+            
+            
+            event.preventDefault(); 
+
+            const valueNome = inputNome.value.trim()
+            const valueEmail = inputEmail.value.trim()
+
+            if (valueNome.length != 0 && (valueEmail.includes('@') && valueEmail.includes('.'))) {
+                alert('Dados Validos')
+               
+                formulario.submit() 
+            } 
+            else {
+                alert('Dados invalidos')
+                // O envio já foi cancelado pelo preventDefault, então não faz nada aqui
+            }
+        }
+
+        formulario.addEventListener("submit", validarDados) 
+
+    </script>
+</body>
+</html>

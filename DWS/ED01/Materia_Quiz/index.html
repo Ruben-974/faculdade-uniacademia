@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desenvolvimento Web — Central de Estudos</title>
+    <style>
+        /* ===== RESET E BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf3 100%);
+            min-height: 100vh;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        /* ===== CABEÇALHO ===== */
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: #fff;
+            padding: 60px 20px 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .header h1 {
+            font-size: 2.6em;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+            position: relative;
+        }
+
+        .header h1 span {
+            background: linear-gradient(90deg, #e34c26, #2965f1, #f7df1e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.15em;
+            color: #bdc3c7;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .header .badge {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 6px 18px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            font-size: 0.85em;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #ecf0f1;
+        }
+
+        /* ===== CONTEÚDO PRINCIPAL ===== */
+        .main {
+            max-width: 1200px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 50px 0 30px;
+            font-size: 1.5em;
+            color: #34495e;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #2980b9);
+            margin: 12px auto 0;
+            border-radius: 2px;
+        }
+
+        /* ===== GRID DE CARDS ===== */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 32px 28px;
+            box-shadow: 0 4px 20px rgba(44, 62, 80, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border-top: 5px solid var(--card-color);
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 32px rgba(44, 62, 80, 0.16);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 120px;
+            height: 120px;
+            background: var(--card-color);
+            opacity: 0.06;
+            border-radius: 0 0 0 120px;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover::before {
+            opacity: 0.12;
+        }
+
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #fff;
+            background: var(--card-color);
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-number {
+            font-size: 0.75em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--card-color);
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .card h3 {
+            font-size: 1.3em;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .card p {
+            font-size: 0.92em;
+            color: #7f8c8d;
+            margin-bottom: 22px;
+            flex-grow: 1;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.88em;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .btn-primary {
+            background: var(--card-color);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            filter: brightness(0.9);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: #fff;
+            color: var(--card-color);
+            border-color: var(--card-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--card-color);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* ===== AVISO DE QUIZ INDISPONÍVEL ===== */
+        .quiz-warning {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2c3e50;
+            color: #fff;
+            padding: 14px 24px;
+            border-radius: 10px;
+            font-size: 0.92em;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+            opacity: 0;
+            transition: all 0.35s ease;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quiz-warning.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* ===== RODAPÉ ===== */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #95a5a6;
+            font-size: 0.88em;
+            border-top: 1px solid #dfe6e9;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer strong {
+            color: #34495e;
+        }
+
+        /* ===== RESPONSIVIDADE ===== */
+        @media (max-width: 640px) {
+            .header {
+                padding: 45px 20px 40px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .header p {
+                font-size: 1em;
+            }
+
+            .main {
+                margin-top: -20px;
+            }
+
+            .card {
+                padding: 26px 22px;
+            }
+
+            .card-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== CABEÇALHO ========== -->
+    <header class="header">
+        <h1>Central de Estudos <span>Web</span></h1>
+        <p>Guias completos e quizzes interativos para dominar HTML, CSS, Bootstrap e JavaScript</p>
+        <div class="badge">📚 4 Módulos Disponíveis</div>
+    </header>
+
+    <!-- ========== CONTEÚDO ========== -->
+    <main class="main">
+        <h2 class="section-title">Escolha um Módulo para Estudar</h2>
+
+        <div class="cards-grid">
+
+            <!-- ===== MÓDULO 1 — HTML ===== -->
+            <div class="card" style="--card-color: #e34c26;">
+                <div class="card-icon">H</div>
+                <div class="card-number">Módulo 01</div>
+                <h3>HTML Fundamentos</h3>
+                <p>Estrutura, listas, tabelas, formulários, imagens, links, formatação de texto e introdução à Internet.</p>
+                <div class="card-actions">
+                    <a href="M1_HTML_Fundamentos.html" class="btn btn-primary">
+                        📖 Estudar
+                    </a>
+                    <a href="M1_Quiz.html" class="btn btn-outline quiz-link">
+                        🧠 Quiz
+                    </a>
+                </div>
+            </div>
+
+            <!-- ===== MÓDULO 2 — CSS ===== -->
+            <div class="card" style="--card-color: #2965f1;">
+                <div class="card-icon">C</div>
+                <div class="card-number">Módulo 02</div>
+                <h3>CSS Fundamentos</h3>
+                <p>Sintaxe, seletores, Box Model, cores, tipografia, pseudo-classes e boas práticas de organização.</p>
+                <div class="card-actions">
+                    <a href="M2_CSS_Fundamentos.html" class="btn btn-primary">
+                        📖 Estudar
+                    </a>
+                    <a href="M2_Quiz.html" class="btn btn-outline quiz-link">
+                        🧠 Quiz
+                    </a>
+                </div>
+            </div>
+
+            <!-- ===== MÓDULO 3 — BOOTSTRAP ===== -->
+            <div class="card" style="--card-color: #3498db;">
+                <div class="card-icon">B</div>
+                <div class="card-number">Módulo 03</div>
+                <h3>Bootstrap 3 — Grid e Componentes</h3>
+                <p>Sistema de grid, breakpoints, formulários, componentes de navegação, estrutura base e integração.</p>
+                <div class="card-actions">
+                    <a href="M3_Grid,_Layout_Componentes.html" class="btn btn-primary">
+                        📖 Estudar
+                    </a>
+                    <a href="M3_Quiz.html" class="btn btn-outline quiz-link">
+                        🧠 Quiz
+                    </a>
+                </div>
+            </div>
+
+            <!-- ===== MÓDULO 4 — JAVASCRIPT ===== -->
+            <div class="card" style="--card-color: #f7df1e;">
+                <div class="card-icon" style="color: #2c3e50;">JS</div>
+                <div class="card-number">Módulo 04</div>
+                <h3>JavaScript Fundamentos</h3>
+                <p>Variáveis, tipos, funções, estruturas de controle, DOM, eventos, arrays/objetos e integração com Bootstrap.</p>
+                <div class="card-actions">
+                    <a href="M4_JavaScript_Fundamentos.html" class="btn btn-primary">
+                        📖 Estudar
+                    </a>
+                    <a href="M4_Quiz.html" class="btn btn-outline quiz-link">
+                        🧠 Quiz
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ========== RODAPÉ ========== -->
+    <footer class="footer">
+        <p><strong>Desenvolvimento de Web Sites</strong> — UniAcademia</p>
+        <p>Prof. Jacimar Tavares &amp; Prof. Daves Martins &amp; Prof. Victor Vidigal</p>
+    </footer>
+</body>
+</html>

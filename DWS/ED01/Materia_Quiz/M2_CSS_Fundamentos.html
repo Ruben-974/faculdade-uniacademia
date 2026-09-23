@@ -1,0 +1,2256 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Guia Completo: CSS Fundamentos - Módulo 02</title>
+    <style>
+        /* ===== RESET E ESTILOS GLOBAIS ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background-color: #f4f6f9;
+            padding: 20px;
+        }
+
+        .container-guia {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 40px 50px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* ===== TIPOGRAFIA ===== */
+        h1 {
+            font-size: 2.4em;
+            color: #2c3e50;
+            border-bottom: 4px solid #2965f1;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h1 small {
+            font-size: 0.6em;
+            color: #7f8c8d;
+            display: block;
+            margin-top: 8px;
+        }
+
+        h2 {
+            font-size: 1.9em;
+            color: #2965f1;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        h3 {
+            font-size: 1.5em;
+            color: #34495e;
+            margin-top: 35px;
+            margin-bottom: 15px;
+        }
+
+        h4 {
+            font-size: 1.2em;
+            color: #16a085;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        strong {
+            color: #2c3e50;
+        }
+
+        a {
+            color: #2965f1;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95em;
+            color: #c0392b;
+        }
+
+        pre {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 18px 22px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            font-size: 0.92em;
+            line-height: 1.5;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+            font-size: inherit;
+        }
+
+        /* ===== TABELAS ===== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px 14px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #2965f1;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #eaf2f8;
+        }
+
+        /* ===== ÍNDICE ===== */
+        .indice {
+            background: #ecf0f1;
+            padding: 25px 30px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            border-left: 6px solid #2965f1;
+        }
+
+        .indice h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .indice ol {
+            margin-bottom: 0;
+        }
+
+        .indice a {
+            color: #2965f1;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .indice a:hover {
+            text-decoration: underline;
+            color: #1a5276;
+        }
+
+        /* ===== DESTAQUES ===== */
+        .destaque {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .destaque-vermelho {
+            background: #f8d7da;
+            border-left: 5px solid #dc3545;
+            padding: 15px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .destaque-verde {
+            background: #d4edda;
+            border-left: 5px solid #28a745;
+            padding: 15px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .destaque-azul {
+            background: #d1ecf1;
+            border-left: 5px solid #17a2b8;
+            padding: 15px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .destaque-css {
+            background: #e8f0fe;
+            border-left: 5px solid #2965f1;
+            padding: 15px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        /* ===== DEMONSTRAÇÕES VISUAIS ===== */
+        .demo-box {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .demo-box h5 {
+            font-size: 1em;
+            color: #666;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .box-model-demo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .box-model-visual {
+            background-color: #d1ecf1;
+            padding: 30px;
+            border: 3px dashed #17a2b8;
+            border-radius: 5px;
+            text-align: center;
+            position: relative;
+        }
+
+        .box-model-visual::before {
+            content: "MARGIN";
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75em;
+            font-weight: bold;
+            color: #17a2b8;
+            letter-spacing: 1px;
+        }
+
+        .box-model-border {
+            background-color: #fff3cd;
+            padding: 25px;
+            border: 3px solid #ffc107;
+            text-align: center;
+            position: relative;
+        }
+
+        .box-model-border::before {
+            content: "BORDER";
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75em;
+            font-weight: bold;
+            color: #ffc107;
+            letter-spacing: 1px;
+        }
+
+        .box-model-padding {
+            background-color: #d4edda;
+            padding: 25px;
+            border: 2px dashed #28a745;
+            text-align: center;
+            position: relative;
+        }
+
+        .box-model-padding::before {
+            content: "PADDING";
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75em;
+            font-weight: bold;
+            color: #28a745;
+            letter-spacing: 1px;
+        }
+
+        .box-model-content {
+            background-color: #fff;
+            padding: 20px 40px;
+            border: 2px solid #333;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .border-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .border-item {
+            padding: 15px;
+            text-align: center;
+            font-size: 0.9em;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        .border-solid { border: 4px solid #333; }
+        .border-dotted { border: 4px dotted #333; }
+        .border-dashed { border: 4px dashed #333; }
+        .border-double { border: 4px double #333; }
+        .border-groove { border: 6px groove #666; }
+        .border-ridge { border: 6px ridge #666; }
+        .border-inset { border: 6px inset #666; }
+        .border-outset { border: 6px outset #666; }
+
+        .color-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .color-item {
+            padding: 20px 10px;
+            text-align: center;
+            color: #fff;
+            font-weight: bold;
+            font-size: 0.85em;
+            border-radius: 6px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .link-demo {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .link-demo a:link { color: #FF0000; text-decoration: underline; }
+        .link-demo a:visited { color: #800080; }
+        .link-demo a:hover { color: #00FF00; text-decoration: none; }
+        .link-demo a:active { color: #0000FF; }
+
+        /* ===== RODAPÉ ===== */
+        .rodape-guia {
+            margin-top: 60px;
+            padding-top: 25px;
+            border-top: 2px solid #ecf0f1;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        /* ===== RESPONSIVIDADE ===== */
+        @media (max-width: 768px) {
+            .container-guia {
+                padding: 20px 20px;
+            }
+
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+
+            pre {
+                font-size: 0.82em;
+                padding: 12px 15px;
+            }
+
+            table { font-size: 0.85em; }
+
+            .border-showcase {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-guia">
+
+    <!-- ============================================================ -->
+    <!-- TÍTULO PRINCIPAL -->
+    <!-- ============================================================ -->
+    <h1>🎨 Guia Completo: CSS Fundamentos
+        <small>Módulo 02 — Sintaxe, Seletores, Box Model, Cores e Tipografia</small>
+    </h1>
+
+    <!-- ============================================================ -->
+    <!-- ÍNDICE -->
+    <!-- ============================================================ -->
+    <div class="indice">
+        <h3>📑 Índice</h3>
+        <ol>
+            <li><a href="#topico1">Conceitos Fundamentais e Sintaxe do CSS</a></li>
+            <li><a href="#topico2">Formas de Inserção do CSS e Seletores</a></li>
+            <li><a href="#topico3">Box Model (Modelo de Caixa)</a></li>
+            <li><a href="#topico4">Propriedades de Fundo (Background)</a></li>
+            <li><a href="#topico5">Propriedades de Tipografia e Texto</a></li>
+            <li><a href="#topico6">Propriedade Links e Pseudo-classes</a></li>
+            <li><a href="#topico7">Cores no CSS</a></li>
+            <li><a href="#topico8">Organização, Boas Práticas e Projetos Práticos</a></li>
+        </ol>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- TÓPICO 1 -->
+    <!-- ============================================================ -->
+    <h2 id="topico1">1. Conceitos Fundamentais e Sintaxe do CSS</h2>
+
+    <p>O CSS (Cascading Style Sheets) é uma das três tecnologias fundamentais da web moderna, ao lado do HTML e do JavaScript. Enquanto o HTML define a <strong>estrutura</strong> e o <strong>conteúdo</strong> de uma página, o CSS é responsável por toda a <strong>apresentação visual</strong>: cores, fontes, espaçamentos, layouts, animações e responsividade.</p>
+
+    <h3>1.1 O que é CSS? Definição e Propósito</h3>
+    <p>Conforme apresentado no material, o CSS é um acrônimo para <strong>Cascading Style Sheet</strong>, que em português significa <strong>Folha de Estilo em Cascata</strong>.</p>
+    <ul>
+        <li><strong>Folha de Estilo:</strong> Um documento que contém um conjunto de regras de estilo.</li>
+        <li><strong>Em Cascata:</strong> Refere-se à forma como as regras são aplicadas. Múltiplas folhas de estilo podem ser aplicadas a um mesmo documento, e o navegador resolve conflitos seguindo uma ordem de prioridade.</li>
+    </ul>
+    <p>O material didático define o CSS como um <strong>"conjunto de regras que informa a um programa, responsável pela formatação de um documento, como organizar a página, como posicionar e expor o texto"</strong>. Em outras palavras, o CSS é a linguagem que dita a <strong>apresentação</strong> dos documentos web.</p>
+
+    <div class="destaque-css">
+        <strong>💡 O Princípio da Separação de Responsabilidades:</strong> O CSS surgiu para separar a <strong>estrutura</strong> (HTML) da <strong>apresentação</strong> (CSS), trazendo benefícios como manutenção facilitada, reaproveitamento, acessibilidade e performance.
+    </div>
+
+    <h3>1.2 A Sintaxe do CSS: A Anatomia de uma Regra</h3>
+    <p>A sintaxe do CSS é simples, mas fundamental. Toda regra CSS é composta por duas partes principais: o <strong>Seletor</strong> e a <strong>Declaração</strong>.</p>
+
+    <p><strong>Estrutura Visual:</strong></p>
+    <pre><code>Seletor { propriedade: valor }</code></pre>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Componente</th>
+                <th>Definição</th>
+                <th>Exemplo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Seletor</strong></td>
+                <td>É a tag do elemento da marcação ou uma entidade capaz de definir com precisão em qual lugar da marcação será aplicada a regra CSS.</td>
+                <td><code>p</code>, <code>#titulo</code>, <code>.destaque</code></td>
+            </tr>
+            <tr>
+                <td><strong>Declaração</strong></td>
+                <td>Determina os parâmetros de estilização. É o bloco de código entre chaves <code>{ }</code>.</td>
+                <td><code>{ color: blue; font-size: 16px; }</code></td>
+            </tr>
+            <tr>
+                <td><strong>Propriedade</strong></td>
+                <td>Define qual será a característica do elemento a ser estilizada.</td>
+                <td><code>color</code>, <code>font-size</code>, <code>margin</code></td>
+            </tr>
+            <tr>
+                <td><strong>Valor</strong></td>
+                <td>É a quantificação ou qualificação da propriedade.</td>
+                <td><code>blue</code>, <code>16px</code>, <code>20px</code></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p><strong>Exemplo Prático de uma Regra CSS:</strong></p>
+    <pre><code>p {
+    color: #FF0000;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+}</code></pre>
+
+    <p><strong>Regras de Sintaxe:</strong></p>
+    <ul>
+        <li>Cada declaração termina com <strong>ponto e vírgula (<code>;</code>)</strong>.</li>
+        <li>Os valores são separados da propriedade por <strong>dois pontos (<code>:</code>)</strong>.</li>
+        <li>O bloco de declarações é delimitado por <strong>chaves (<code>{ }</code>)</strong>.</li>
+        <li>O CSS é <strong>case-insensitive</strong> para propriedades e valores, mas é boa prática escrever tudo em minúsculas.</li>
+    </ul>
+
+    <h3>1.3 Seletores em Profundidade</h3>
+
+    <h4>1.3.1 Seletor de Tag (Elemento)</h4>
+    <p>Aplica a regra a <strong>todos</strong> os elementos daquela tag no documento.</p>
+    <pre><code>h1 {
+    color: #00008B;
+    font-size: 48px;
+}</code></pre>
+    <ul>
+        <li><strong>Vantagem:</strong> Simples e rápido para estilos globais.</li>
+        <li><strong>Desvantagem:</strong> Pouco específico, pode afetar elementos indesejados.</li>
+    </ul>
+
+    <h4>1.3.2 Seletor de ID</h4>
+    <p>Usa o atributo <code>id</code> do HTML, precedido pelo símbolo <code>#</code>. O ID é <strong>único</strong>: cada elemento pode ter apenas um ID, e cada página pode ter apenas um elemento com aquele ID.</p>
+    <pre><code>&lt;p id="p_2"&gt;Somente este parágrafo receberá a regra.&lt;/p&gt;</code></pre>
+    <pre><code>#p_2 {
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-size: 16px;
+    color: #FFFFFF;
+    font-weight: bold;
+}</code></pre>
+    <ul>
+        <li><strong>Vantagem:</strong> Alta especificidade, ideal para elementos únicos.</li>
+        <li><strong>Desvantagem:</strong> Não reutilizável.</li>
+    </ul>
+
+    <h4>1.3.3 Seletor de Classe</h4>
+    <p>Usa o atributo <code>class</code> do HTML, precedido por um ponto <code>.</code>. A classe <strong>não é única</strong>: pode ser usada para vários elementos, e um mesmo elemento pode ter várias classes.</p>
+    <pre><code>&lt;p class="p_2"&gt;Este parágrafo receberá o estilo.&lt;/p&gt;
+&lt;p class="p_2"&gt;Este também receberá o mesmo estilo.&lt;/p&gt;</code></pre>
+    <pre><code>.p_2 {
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-size: 16px;
+    color: #FFFFFF;
+    font-weight: bold;
+}</code></pre>
+    <ul>
+        <li><strong>Vantagem:</strong> Reutilizável, flexível e modular.</li>
+        <li><strong>Desvantagem:</strong> Menor especificidade que o ID.</li>
+    </ul>
+
+    <h4>1.3.4 Comparação: ID vs. Classe</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Característica</th>
+                <th>ID (<code>#</code>)</th>
+                <th>Classe (<code>.</code>)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Unicidade</strong></td><td>Único por página</td><td>Reutilizável em vários elementos</td></tr>
+            <tr><td><strong>Uso no HTML</strong></td><td><code>&lt;p id="unico"&gt;</code></td><td><code>&lt;p class="repetivel"&gt;</code></td></tr>
+            <tr><td><strong>Uso no CSS</strong></td><td><code>#unico { }</code></td><td><code>.repetivel { }</code></td></tr>
+            <tr><td><strong>Múltiplos por elemento</strong></td><td>Não (apenas um ID)</td><td>Sim (várias classes)</td></tr>
+            <tr><td><strong>Especificidade</strong></td><td>Alta</td><td>Média</td></tr>
+            <tr><td><strong>Recomendação</strong></td><td>Elementos únicos (layout)</td><td>Estilos repetíveis (componentes)</td></tr>
+        </tbody>
+    </table>
+
+    <h3>1.4 A Natureza "Cascata" do CSS</h3>
+    <p>O termo "Cascading" (Cascata) descreve como o navegador resolve conflitos quando múltiplas regras se aplicam ao mesmo elemento. A cascata segue uma ordem de prioridade:</p>
+    <ol>
+        <li><strong>Origem da Regra:</strong> Estilos do navegador &lt; Estilos do usuário &lt; Estilos do autor.</li>
+        <li><strong>Especificidade:</strong> Inline (<code>style=""</code>) &gt; ID (<code>#</code>) &gt; Classe (<code>.</code>) &gt; Tag (<code>p</code>).</li>
+        <li><strong>Ordem de Declaração:</strong> A regra que vier <strong>por último</strong> no código vence (em caso de empate).</li>
+    </ol>
+
+    <h3>1.5 Formas de Inserção do CSS</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Forma</th>
+                <th>Localização</th>
+                <th>Abrangência</th>
+                <th>Reutilização</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Externo</strong></td><td>Arquivo <code>.css</code> separado</td><td>Várias páginas</td><td>Sim</td></tr>
+            <tr><td><strong>Incorporado</strong></td><td>Tag <code>&lt;style&gt;</code> no <code>&lt;head&gt;</code></td><td>Apenas a página atual</td><td>Não</td></tr>
+            <tr><td><strong>Inline</strong></td><td>Atributo <code>style</code> na tag HTML</td><td>Apenas o elemento atual</td><td>Não</td></tr>
+        </tbody>
+    </table>
+
+    <h3>1.6 Exemplo Completo: HTML + CSS Externo</h3>
+
+    <p><strong>Arquivo <code>index.html</code>:</strong></p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-br"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Meu site!!!&lt;/title&gt;
+    &lt;link rel="stylesheet" type="text/css" href="estilo.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;CSS - Cascading Style Sheets&lt;/h1&gt;
+    &lt;p&gt;Primeiro exemplo de folha de estilo.&lt;/p&gt;
+    &lt;p id="p_2"&gt;Somente o parágrafo com ID receberá a regra.&lt;/p&gt;
+    &lt;p class="destaque"&gt;Este parágrafo tem a classe "destaque".&lt;/p&gt;
+    &lt;p class="destaque"&gt;Este também tem a classe "destaque".&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+    <p><strong>Arquivo <code>estilo.css</code>:</strong></p>
+    <pre><code>/* Estilo para a tag body */
+body {
+    background-color: #00008B;
+    color: #FFFFFF;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Estilo para todas as tags h1 */
+h1 {
+    font-size: 48px;
+    color: #E8E8E8;
+    text-align: center;
+}
+
+/* Estilo para o parágrafo com ID p_2 */
+#p_2 {
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-size: 16px;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+/* Estilo para a classe destaque */
+.destaque {
+    background-color: #FFFF00;
+    color: #000000;
+    padding: 10px;
+    border: 2px solid #FF0000;
+}</code></pre>
+
+    <h3>1.7 Resumo dos Conceitos Fundamentais</h3>
+    <table>
+        <thead>
+            <tr><th>Conceito</th><th>Definição</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>CSS</strong></td><td>Cascading Style Sheets — linguagem de estilo para apresentação de documentos web.</td></tr>
+            <tr><td><strong>Sintaxe</strong></td><td><code>Seletor { propriedade: valor; }</code></td></tr>
+            <tr><td><strong>Seletor</strong></td><td>Define onde o estilo será aplicado (Tag, #ID, .Classe).</td></tr>
+            <tr><td><strong>Declaração</strong></td><td>Bloco de propriedades e valores entre <code>{ }</code>.</td></tr>
+            <tr><td><strong>Propriedade</strong></td><td>Característica a ser estilizada.</td></tr>
+            <tr><td><strong>Valor</strong></td><td>Quantificação ou qualificação da propriedade.</td></tr>
+            <tr><td><strong>ID</strong></td><td>Único por página, alta especificidade, precedido de <code>#</code>.</td></tr>
+            <tr><td><strong>Classe</strong></td><td>Reutilizável, média especificidade, precedida de <code>.</code>.</td></tr>
+            <tr><td><strong>Cascata</strong></td><td>Mecanismo de resolução de conflitos.</td></tr>
+            <tr><td><strong>CSS Externo</strong></td><td>Arquivo <code>.css</code> separado, linkado via <code>&lt;link&gt;</code> (Recomendado).</td></tr>
+            <tr><td><strong>CSS Incorporado</strong></td><td>Dentro da tag <code>&lt;style&gt;</code> no <code>&lt;head&gt;</code>.</td></tr>
+            <tr><td><strong>CSS Inline</strong></td><td>No atributo <code>style</code> da tag HTML.</td></tr>
+        </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- TÓPICO 2 -->
+    <!-- ============================================================ -->
+    <h2 id="topico2">2. Formas de Inserção do CSS e Seletores</h2>
+
+    <p>Uma das grandes vantagens do CSS é a flexibilidade de poder ser inserido no documento HTML de diferentes maneiras. Cada forma de inserção tem seus prós e contras, e a escolha correta impacta diretamente na manutenção, performance e escalabilidade do projeto.</p>
+
+    <h3>2.1 Formas de Inserção do CSS</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Forma</th>
+                <th>Localização</th>
+                <th>Abrangência</th>
+                <th>Reutilização</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Externo</strong></td><td>Arquivo <code>.css</code> separado</td><td>Várias páginas</td><td>Sim</td></tr>
+            <tr><td><strong>Incorporado</strong></td><td>Tag <code>&lt;style&gt;</code> no <code>&lt;head&gt;</code></td><td>Apenas a página atual</td><td>Não</td></tr>
+            <tr><td><strong>Inline</strong></td><td>Atributo <code>style</code> na tag HTML</td><td>Apenas o elemento atual</td><td>Não</td></tr>
+        </tbody>
+    </table>
+
+    <h4>2.1.1 CSS Externo (External CSS)</h4>
+    <p>O CSS Externo é a forma <strong>mais recomendada</strong> e amplamente utilizada em projetos profissionais. As regras de estilo ficam em um <strong>arquivo separado</strong> com extensão <code>.css</code>, e a página HTML faz um <strong>link</strong> para esse arquivo.</p>
+
+    <p><strong>Arquivo <code>index.html</code>:</strong></p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-br"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Meu site!!!&lt;/title&gt;
+    &lt;link rel="stylesheet" type="text/css" href="estilo.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;CSS - Cascading Style Sheets&lt;/h1&gt;
+    &lt;p&gt;Primeiro exemplo de folha de estilo.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+    <p><strong>Arquivo <code>estilo.css</code>:</strong></p>
+    <pre><code>body {
+    background-color: #00008B;
+    color: #FFFFFF;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    font-size: 48px;
+    color: #E8E8E8;
+}</code></pre>
+
+    <p><strong>Análise da tag <code>&lt;link&gt;</code>:</strong></p>
+    <table>
+        <thead>
+            <tr><th>Atributo</th><th>Valor</th><th>Função</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>rel</code></td><td><code>"stylesheet"</code></td><td>Define a relação entre o documento HTML e o arquivo linkado.</td></tr>
+            <tr><td><code>type</code></td><td><code>"text/css"</code></td><td>Especifica o tipo MIME do arquivo (opcional em HTML5).</td></tr>
+            <tr><td><code>href</code></td><td><code>"estilo.css"</code></td><td>O caminho para o arquivo CSS.</td></tr>
+        </tbody>
+    </table>
+
+    <div class="destaque-verde">
+        <strong>✅ Vantagens do CSS Externo:</strong>
+        <ul>
+            <li>Separação total de responsabilidades.</li>
+            <li>Reutilização em todas as páginas do site.</li>
+            <li>Manutenção facilitada (alterar um arquivo afeta todo o site).</li>
+            <li>Cache do navegador (carregamento mais rápido).</li>
+            <li>Código HTML mais limpo.</li>
+            <li>O código CSS fica "escondido" do usuário.</li>
+        </ul>
+    </div>
+
+    <h4>2.1.2 CSS Incorporado (Internal CSS)</h4>
+    <p>O CSS Incorporado é definido dentro da tag <code>&lt;style&gt;</code>, geralmente no <code>&lt;head&gt;</code> do documento HTML. As regras afetam <strong>somente a página atual</strong>.</p>
+
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-br"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;CSS&lt;/title&gt;
+    &lt;style type="text/css"&gt;
+        body {
+            background-color: #FFFF00;
+        }
+        h1 {
+            color: #00008B;
+            font-size: 32px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Exemplo de CSS Incorporado&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+    <div class="destaque-azul">
+        <strong>💡 Quando usar CSS Incorporado:</strong>
+        <ul>
+            <li>Páginas únicas (ex: landing pages) com estilos muito específicos.</li>
+            <li>Prototipagem rápida.</li>
+            <li>Testes e experimentos.</li>
+        </ul>
+    </div>
+
+    <h4>2.1.3 CSS Inline (Inline CSS)</h4>
+    <p>O CSS Inline é aplicado <strong>diretamente no atributo <code>style</code></strong> de uma tag HTML. As regras afetam <strong>somente aquele elemento específico</strong>.</p>
+
+    <pre><code>&lt;p style="color: red; font-size: 20px; font-weight: bold;"&gt;
+    Este parágrafo tem estilo inline.
+&lt;/p&gt;
+
+&lt;h1 style="background-color: #00008B; color: #FFFFFF; text-align: center;"&gt;
+    Título com estilo inline
+&lt;/h1&gt;</code></pre>
+
+    <div class="destaque-vermelho">
+        <strong>⚠️ Desvantagens do CSS Inline:</strong>
+        <ul>
+            <li>Impossível de manter em projetos grandes.</li>
+            <li>Mistura total de responsabilidades.</li>
+            <li>Não reutilizável.</li>
+            <li>Não suporta pseudo-classes (<code>:hover</code>, <code>:focus</code>).</li>
+        </ul>
+    </div>
+
+    <h4>2.1.4 Comparação e Ordem de Prioridade</h4>
+    <p>Quando múltiplas formas de CSS se aplicam ao mesmo elemento, a <strong>cascata</strong> resolve o conflito seguindo esta ordem de prioridade (da menor para a maior):</p>
+    <ol>
+        <li><strong>CSS do Navegador (User Agent):</strong> Estilos padrão do navegador.</li>
+        <li><strong>CSS Externo:</strong> Regras do arquivo <code>.css</code>.</li>
+        <li><strong>CSS Incorporado:</strong> Regras dentro de <code>&lt;style&gt;</code>.</li>
+        <li><strong>CSS Inline:</strong> Regras no atributo <code>style</code>.</li>
+        <li><strong><code>!important</code>:</strong> Sobrescreve tudo.</li>
+    </ol>
+
+    <h3>2.2 Seletores e Atributos HTML</h3>
+
+    <h4>2.2.1 Atributo <code>id</code></h4>
+    <p>O atributo <code>id</code> é usado para identificar <strong>um único elemento</strong> na página. Regras CSS que usam ID são precedidas por <code>#</code>.</p>
+    <ul>
+        <li>Cada elemento pode ter <strong>apenas um</strong> <code>id</code>.</li>
+        <li>Cada página pode ter <strong>apenas um elemento</strong> com aquele <code>id</code>.</li>
+        <li>O <code>id</code> deve ser <strong>único</strong> em todo o documento.</li>
+    </ul>
+
+    <h4>2.2.2 Atributo <code>class</code></h4>
+    <p>O atributo <code>class</code> é usado para agrupar <strong>múltiplos elementos</strong> que compartilham o mesmo estilo. Regras CSS que usam classe são precedidas por <code>.</code>.</p>
+    <ul>
+        <li>Um elemento pode ter <strong>múltiplas classes</strong>: <code>&lt;p class="destaque grande"&gt;</code>.</li>
+        <li>Vários elementos podem ter a <strong>mesma classe</strong>.</li>
+        <li>Uma classe pode ser usada em <strong>diferentes tipos de elementos</strong>.</li>
+    </ul>
+
+    <h4>2.2.3 Especificidade dos Seletores</h4>
+    <table>
+        <thead>
+            <tr><th>Seletor</th><th>Especificidade</th><th>Exemplo</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Inline</strong></td><td>1000</td><td><code>style="color: red;"</code></td></tr>
+            <tr><td><strong>ID</strong></td><td>100</td><td><code>#p_2 { }</code></td></tr>
+            <tr><td><strong>Classe</strong></td><td>10</td><td><code>.destaque { }</code></td></tr>
+            <tr><td><strong>Tag</strong></td><td>1</td><td><code>p { }</code></td></tr>
+            <tr><td><strong>Universal</strong></td><td>0</td><td><code>* { }</code></td></tr>
+        </tbody>
+    </table>
+
+    <h3>2.3 Pseudo-classes de Links</h3>
+    <table>
+        <thead>
+            <tr><th>Pseudo-classe</th><th>Quando se aplica</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>:link</code></td><td>Links <strong>não visitados</strong> pelo usuário.</td></tr>
+            <tr><td><code>:visited</code></td><td>Links <strong>já visitados</strong> pelo usuário.</td></tr>
+            <tr><td><code>:active</code></td><td>Link <strong>ativo</strong> (no momento do clique).</td></tr>
+            <tr><td><code>:hover</code></td><td>Quando o <strong>cursor do mouse está sobre</strong> o link.</td></tr>
+        </tbody>
+    </table>
+
+    <div class="destaque">
+        <strong>📌 Ordem correta (LVHA):</strong> As pseudo-classes devem ser declaradas nesta ordem para funcionar corretamente: <code>:link</code> → <code>:visited</code> → <code>:hover</code> → <code>:active</code>.
+    </div>
+
+    <div class="demo-box">
+        <h5>🎨 Demonstração de Links com Pseudo-classes</h5>
+        <p class="link-demo">
+            <a href="#">Link não visitado (vermelho)</a> |
+            <a href="#">Passe o mouse (verde)</a> |
+            <a href="#">Clique (azul)</a>
+        </p>
+    </div>
+
+    <pre><code>/* Exemplo de código LVHA */
+a {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    color: #FF0000;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+a:link { color: #FF0000; }
+a:visited { color: #800080; }
+a:hover { color: #00FF00; text-decoration: none; }
+a:active { color: #0000FF; }</code></pre>
+
+    <!-- ============================================================ -->
+    <!-- TÓPICO 3 -->
+    <!-- ============================================================ -->
+    <h2 id="topico3">3. Box Model (Modelo de Caixa)</h2>
+
+    <p>O <strong>Box Model</strong> é um dos conceitos mais fundamentais do CSS. Todo elemento HTML renderizado em uma página é tratado pelo navegador como uma <strong>caixa retangular</strong>, e é o Box Model que define como essa caixa é construída.</p>
+
+    <div class="destaque-css">
+        <strong>📌 Definição do Material:</strong> "Os elementos HTML geram uma caixa em sua volta, esta caixa é que chamamos de <strong>BOX MODEL</strong>. Esta caixa é formada por 3 propriedades do elemento: <strong>Margin</strong>, <strong>Padding</strong> e <strong>Border</strong>."
+    </div>
+
+    <h3>3.1 Representação Visual do Box Model</h3>
+    <div class="demo-box">
+        <h5>🔍 Diagrama do Box Model</h5>
+        <div class="box-model-demo">
+            <div class="box-model-visual">
+                <div class="box-model-border">
+                    <div class="box-model-padding">
+                        <div class="box-model-content">Element Content</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p>Quando o navegador renderiza um elemento HTML, ele cria uma <strong>caixa retangular</strong> composta por quatro áreas concêntricas, de dentro para fora:</p>
+    <ol>
+        <li><strong>Content (Conteúdo):</strong> O conteúdo propriamente dito (texto, imagem, vídeo, etc.). Suas dimensões são definidas por <code>width</code> e <code>height</code>.</li>
+        <li><strong>Padding (Preenchimento):</strong> O espaço <strong>interno</strong> entre o conteúdo e a borda. É transparente, mas "empurra" a borda para longe do conteúdo.</li>
+        <li><strong>Border (Borda):</strong> Uma linha que circunda o padding e o conteúdo.</li>
+        <li><strong>Margin (Margem):</strong> O espaço <strong>externo</strong> entre a borda e os elementos vizinhos. É sempre transparente.</li>
+    </ol>
+
+    <h3>3.2 Margin (Margem)</h3>
+    <p>A <strong>margin</strong> é o espaço <strong>externo</strong> ao elemento. É a distância entre a borda de um elemento e os elementos ao seu redor (ou a borda do documento HTML).</p>
+
+    <h4>3.2.1 Sub-propriedades de Margin</h4>
+    <table>
+        <thead>
+            <tr><th>Propriedade</th><th>Descrição</th><th>Exemplo</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>margin-top</code></td><td>Margem superior</td><td><code>margin-top: 20px;</code></td></tr>
+            <tr><td><code>margin-right</code></td><td>Margem direita</td><td><code>margin-right: 10px;</code></td></tr>
+            <tr><td><code>margin-bottom</code></td><td>Margem inferior</td><td><code>margin-bottom: 15px;</code></td></tr>
+            <tr><td><code>margin-left</code></td><td>Margem esquerda</td><td><code>margin-left: 30px;</code></td></tr>
+        </tbody>
+    </table>
+
+    <h4>3.2.2 Shorthand <code>margin</code></h4>
+    <table>
+        <thead>
+            <tr><th>Sintaxe</th><th>Comportamento</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>margin: 10px;</code></td><td>10px em <strong>todos os lados</strong>.</td></tr>
+            <tr><td><code>margin: 10px 20px;</code></td><td>10px em cima/baixo, 20px à esquerda/direita.</td></tr>
+            <tr><td><code>margin: 10px 20px 30px;</code></td><td>10px em cima, 20px lados, 30px embaixo.</td></tr>
+            <tr><td><code>margin: 10px 20px 30px 40px;</code></td><td>TRBL (sentido horário, começando do topo).</td></tr>
+        </tbody>
+    </table>
+
+    <h4>3.2.3 Colapso de Margens (Margin Collapsing)</h4>
+    <p>Quando duas margens verticais se encontram (margem inferior de um elemento + margem superior do próximo), elas <strong>não somam</strong> — a maior delas prevalece.</p>
+    <pre><code>.elemento1 { margin-bottom: 30px; }
+.elemento2 { margin-top: 20px; }</code></pre>
+    <p>A distância entre os dois elementos será <strong>30px</strong> (o maior valor), e não 50px.</p>
+
+    <h3>3.3 Padding (Preenchimento)</h3>
+    <p>O <strong>padding</strong> é o espaço <strong>interno</strong> entre o conteúdo e a borda. É sempre transparente e usa a cor de fundo do elemento.</p>
+
+    <table>
+        <thead>
+            <tr><th>Propriedade</th><th>Descrição</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>padding-top</code></td><td>Padding superior</td></tr>
+            <tr><td><code>padding-right</code></td><td>Padding direito</td></tr>
+            <tr><td><code>padding-bottom</code></td><td>Padding inferior</td></tr>
+            <tr><td><code>padding-left</code></td><td>Padding esquerdo</td></tr>
+        </tbody>
+    </table>
+
+    <h4>3.3.1 Diferença Crucial entre Margin e Padding</h4>
+    <table>
+        <thead>
+            <tr><th>Característica</th><th>Margin</th><th>Padding</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Localização</strong></td><td>Fora da borda</td><td>Dentro da borda</td></tr>
+            <tr><td><strong>Cor de fundo</strong></td><td>Transparente</td><td>Herda a cor de fundo do elemento</td></tr>
+            <tr><td><strong>Colapso</strong></td><td>Sofre colapso vertical</td><td>Não sofre colapso</td></tr>
+            <tr><td><strong>Valores negativos</strong></td><td>Permitidos</td><td><strong>Não permitidos</strong></td></tr>
+            <tr><td><strong>Uso típico</strong></td><td>Espaçamento entre elementos</td><td>Espaçamento interno do elemento</td></tr>
+        </tbody>
+    </table>
+
+    <h3>3.4 Border (Borda)</h3>
+    <p>A <strong>border</strong> é uma linha que circunda o padding e o conteúdo. Diferente de margin e padding, a border <strong>não é transparente</strong> e possui <strong>três propriedades específicas</strong>: largura, estilo e cor.</p>
+
+    <h4>3.4.1 <code>border-width</code> (Largura da Borda)</h4>
+    <table>
+        <thead>
+            <tr><th>Valor</th><th>Descrição</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>thin</code></td><td>Fina (~1px)</td></tr>
+            <tr><td><code>medium</code></td><td>Média (~3px, padrão)</td></tr>
+            <tr><td><code>thick</code></td><td>Grossa (~5px)</td></tr>
+            <tr><td><code>10px</code>, <code>2em</code></td><td>Valor específico em unidades CSS</td></tr>
+        </tbody>
+    </table>
+
+    <h4>3.4.2 <code>border-style</code> (Estilo da Borda)</h4>
+    <table>
+        <thead>
+            <tr><th>Valor</th><th>Descrição</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>none</code></td><td>Sem borda (padrão).</td></tr>
+            <tr><td><code>solid</code></td><td>Linha sólida contínua.</td></tr>
+            <tr><td><code>dotted</code></td><td>Linha pontilhada.</td></tr>
+            <tr><td><code>dashed</code></td><td>Linha tracejada.</td></tr>
+            <tr><td><code>double</code></td><td>Linha dupla.</td></tr>
+            <tr><td><code>groove</code></td><td>Efeito 3D de sulco.</td></tr>
+            <tr><td><code>ridge</code></td><td>Efeito 3D de crista.</td></tr>
+            <tr><td><code>inset</code></td><td>Efeito 3D de afundado.</td></tr>
+            <tr><td><code>outset</code></td><td>Efeito 3D de elevado.</td></tr>
+        </tbody>
+    </table>
+
+    <div class="demo-box">
+        <h5>🎨 Demonstração de Estilos de Borda</h5>
+        <div class="border-showcase">
+            <div class="border-item border-solid">solid</div>
+            <div class="border-item border-dotted">dotted</div>
+            <div class="border-item border-dashed">dashed</div>
+            <div class="border-item border-double">double</div>
+            <div class="border-item border-groove">groove</div>
+            <div class="border-item border-ridge">ridge</div>
+            <div class="border-item border-inset">inset</div>
+            <div class="border-item border-outset">outset</div>
+        </div>
+    </div>
+
+    <h4>3.4.3 Shorthand <code>border</code></h4>
+    <pre><code>border: 2px solid #000080;</code></pre>
+    <ul>
+        <li><code>2px</code>: largura</li>
+        <li><code>solid</code>: estilo</li>
+        <li><code>#000080</code>: cor</li>
+    </ul>
+
+    <h3>3.5 Exemplo Prático Completo (do Material)</h3>
+
+    <pre><code>p {
+    background-color: #D3D3D3;
+    margin: 25px;
+    border: 25px solid #000080;
+    padding: 25px;
+    width: 300px;
+    text-align: center;
+}</code></pre>
+
+    <p><strong>Análise Detalhada:</strong></p>
+    <table>
+        <thead>
+            <tr><th>Propriedade</th><th>Valor</th><th>Efeito</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>background-color</code></td><td><code>#D3D3D3</code></td><td>Fundo cinza claro.</td></tr>
+            <tr><td><code>margin</code></td><td><code>25px</code></td><td>25px de espaço externo em todos os lados.</td></tr>
+            <tr><td><code>border</code></td><td><code>25px solid #000080</code></td><td>Borda de 25px, sólida, azul marinho.</td></tr>
+            <tr><td><code>padding</code></td><td><code>25px</code></td><td>25px de espaço interno.</td></tr>
+            <tr><td><code>width</code></td><td><code>300px</code></td><td>Largura do conteúdo.</td></tr>
+            <tr><td><code>text-align</code></td><td><code>center</code></td><td>Texto centralizado.</td></tr>
+        </tbody>
+    </table>
+
+    <h3>3.6 Box Model em Elementos Inline vs. Block</h3>
+    <table>
+        <thead>
+            <tr><th>Característica</th><th>Block</th><th>Inline</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Largura</strong></td><td>Toda a largura disponível</td><td>Apenas a largura do conteúdo</td></tr>
+            <tr><td><strong>width/height</strong></td><td>Respeitados</td><td>Não respeitados</td></tr>
+            <tr><td><strong>margin-top/bottom</strong></td><td>Funcionam</td><td>Não funcionam</td></tr>
+            <tr><td><strong>Quebra de linha</strong></td><td>Sim</td><td>Não</td></tr>
+        </tbody>
+    </table>
+
+    <h3>3.7 Reset de Box Model e Boas Práticas</h3>
+    <pre><code>* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}</code></pre>
+
+    <div class="destaque-verde">
+        <strong>✅ <code>box-sizing: border-box</code>:</strong> Faz com que <code>width</code> e <code>height</code> incluam padding e border. É considerada uma boa prática universal em projetos modernos.
+    </div>
+
+    <h3>3.8 Resumo do Box Model</h3>
+    <table>
+        <thead>
+            <tr><th>Propriedade</th><th>Descrição</th><th>Afeta o Fundo?</th><th>Valores Negativos?</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Margin</strong></td><td>Espaço externo</td><td>Não (transparente)</td><td>Sim</td></tr>
+            <tr><td><strong>Padding</strong></td><td>Espaço interno</td><td>Sim</td><td>Não</td></tr>
+            <tr><td><strong>Border</strong></td><td>Linha delimitadora</td><td>Sim</td><td>Não</td></tr>
+        </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- TÓPICO 4 -->
+    <!-- ============================================================ -->
+    <h2 id="topico4">4. Propriedades de Fundo (Background)</h2>
+
+    <p>As propriedades de fundo (<em>background</em>) do CSS permitem controlar a aparência da área atrás do conteúdo de um elemento. Com elas, é possível definir cores sólidas, imagens, gradientes, padrões repetidos e posicionamentos precisos.</p>
+
+    <h3>4.1 <code>background-color</code> (Cor de Fundo)</h3>
+    <p>A propriedade <code>background-color</code> define a <strong>cor de fundo</strong> de um elemento.</p>
+
+    <h4>4.1.1 Valores Aceitos</h4>
+    <table>
+        <thead>
+            <tr><th>Formato</th><th>Exemplo</th><th>Descrição</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Hexadecimal</strong></td><td><code>#FF0000</code>, <code>#00008B</code></td><td>Mais comum.</td></tr>
+            <tr><td><strong>Nome da cor</strong></td><td><code>red</code>, <code>blue</code></td><td>140+ cores nomeadas.</td></tr>
+            <tr><td><strong>RGB</strong></td><td><code>rgb(255, 0, 0)</code></td><td>Valores de 0 a 255 por canal.</td></tr>
+            <tr><td><strong>RGBA</strong></td><td><code>rgba(255, 0, 0, 0.5)</code></td><td>Com transparência.</td></tr>
+            <tr><td><strong>HSL</strong></td><td><code>hsl(0, 100%, 50%)</code></td><td>Matiz, saturação, luminosidade.</td></tr>
+            <tr><td><strong>HSLA</strong></td><td><code>hsla(0, 100%, 50%, 0.5)</code></td><td>HSL com transparência.</td></tr>
+        </tbody>
+    </table>
+
+    <h4>4.1.2 Exemplos Práticos (do Material)</h4>
+    <pre><code>body {
+    background-color: #00008B;
+}
+
+h1 {
+    background-color: #006400;
+}</code></pre>
+
+    <div class="color-showcase">
+        <div class="color-item" style="background-color: #00008B;">#00008B</div>
+        <div class="color-item" style="background-color: #006400;">#006400</div>
+        <div class="color-item" style="background-color: #FF0000;">#FF0000</div>
+        <div class="color-item" style="background-color: #FFFF00; color: #333;">#FFFF00</div>
+        <div class="color-item" style="background-color: #D3D3D3; color: #333;">#D3D3D3</div>
+        <div class="color-item" style="background-color: #800080;">#800080</div>
+    </div>
+
+    <h3>4.2 <code>background-image</code> (Imagem de Fundo)</h3>
+    <p>A propriedade <code>background-image</code> permite definir uma ou mais imagens como fundo de um elemento.</p>
+
+    <pre><code>body {
+    background-image: url("ceu.jpg");
+}</code></pre>
+
+    <p><strong>Valores aceitos:</strong></p>
+    <table>
+        <thead>
+            <tr><th>Valor</th><th>Descrição</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>url("caminho")</code></td><td>Caminho relativo ou absoluto para o arquivo.</td></tr>
+            <tr><td><code>none</code></td><td>Nenhuma imagem de fundo (padrão).</td></tr>
+            <tr><td><code>linear-gradient(...)</code></td><td>Gradiente linear (CSS3).</td></tr>
+            <tr><td><code>radial-gradient(...)</code></td><td>Gradiente radial (CSS3).</td></tr>
+        </tbody>
+    </table>
+
+    <h3>4.3 <code>background-repeat</code> (Repetição da Imagem)</h3>
+    <table>
+        <thead>
+            <tr><th>Valor</th><th>Descrição</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>repeat</code></td><td>Repete a imagem nos eixos <strong>X e Y</strong> (padrão).</td></tr>
+            <tr><td><code>repeat-x</code></td><td>Repete apenas no eixo <strong>X</strong> (horizontal).</td></tr>
+            <tr><td><code>repeat-y</code></td><td>Repete apenas no eixo <strong>Y</strong> (vertical).</td></tr>
+            <tr><td><code>no-repeat</code></td><td><strong>Não repete</strong> a imagem.</td></tr>
+        </tbody>
+    </table>
+
+    <pre><code>body {
+    background-image: url("ceu.jpg");
+    background-repeat: repeat-x;
+}</code></pre>
+
+    <h3>4.4 <code>background-position</code> (Posição da Imagem)</h3>
+    <p>A propriedade <code>background-position</code> define <strong>onde</strong> a imagem de fundo é posicionada dentro do elemento.</p>
+
+    <p><strong>Valores por palavra-chave:</strong></p>
+    <table>
+        <thead>
+            <tr><th>Horizontal</th><th>Vertical</th><th>Combinação</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>left</code></td><td><code>top</code></td><td><code>left top</code></td></tr>
+            <tr><td><code>center</code></td><td><code>center</code></td><td><code>center center</code></td></tr>
+            <tr><td><code>right</code></td><td><code>bottom</code></td><td><code>right bottom</code></td></tr>
+        </tbody>
+    </table>
+
+    <pre><code>body {
+    background-image: url("ceu.jpg");
+    background-repeat: no-repeat;
+    background-position: right top;
+}</code></pre>
+
+    <h3>4.5 <code>background-attachment</code> (Fixação da Imagem)</h3>
+    <table>
+        <thead>
+            <tr><th>Valor</th><th>Descrição</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>scroll</code></td><td>A imagem <strong>rola</strong> junto com a página (padrão).</td></tr>
+            <tr><td><code>fixed</code></td><td>A imagem fica <strong>fixa</strong> em relação à viewport.</td></tr>
+        </tbody>
+    </table>
+
+    <pre><code>body {
+    background-image: url("ceu.jpg");
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-attachment: fixed;
+}</code></pre>
+
+    <div class="destaque-azul">
+        <strong>💡 Efeito Parallax:</strong> O <code>background-attachment: fixed</code> é a base do famoso <strong>efeito parallax</strong>, no qual o fundo parece se mover em uma velocidade diferente do conteúdo.
+    </div>
+
+    <h3>4.6 Shorthand <code>background</code></h3>
+    <pre><code>body {
+    background: url("ceu.jpg") no-repeat right top;
+}</code></pre>
+
+    <p><strong>Traduzindo:</strong></p>
+    <ul>
+        <li><code>url("ceu.jpg")</code> → <code>background-image</code></li>
+        <li><code>no-repeat</code> → <code>background-repeat</code></li>
+        <li><code>right top</code> → <code>background-position</code></li>
+    </ul>
+
+    <h3>4.7 Propriedades Adicionais (CSS3)</h3>
+    <table>
+        <thead>
+            <tr><th>Propriedade</th><th>Descrição</th><th>Valores</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>background-size</code></td><td>Tamanho da imagem</td><td><code>auto</code>, <code>cover</code>, <code>contain</code>, <code>100% 100%</code></td></tr>
+            <tr><td><code>background-clip</code></td><td>Recorte do fundo</td><td><code>border-box</code>, <code>padding-box</code>, <code>content-box</code>, <code>text</code></td></tr>
+            <tr><td><code>background-origin</code></td><td>Origem do fundo</td><td><code>padding-box</code>, <code>border-box</code>, <code>content-box</code></td></tr>
+            <tr><td><code>background-blend-mode</code></td><td>Modo de mistura</td><td><code>normal</code>, <code>multiply</code>, <code>screen</code>, <code>overlay</code></td></tr>
+        </tbody>
+    </table>
+
+    <h3>4.8 Tabela-Resumo das Propriedades de Fundo</h3>
+    <table>
+        <thead>
+            <tr><th>Propriedade</th><th>Função</th><th>Valores Principais</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>background-color</code></td><td>Cor de fundo</td><td>hex, rgb, rgba, hsl, nome, transparent</td></tr>
+            <tr><td><code>background-image</code></td><td>Imagem/gradiente</td><td><code>url()</code>, <code>none</code>, <code>linear-gradient()</code></td></tr>
+            <tr><td><code>background-repeat</code></td><td>Repetição</td><td><code>repeat</code>, <code>repeat-x</code>, <code>repeat-y</code>, <code>no-repeat</code></td></tr>
+            <tr><td><code>background-position</code></td><td>Posição</td><td><code>left top</code>, <code>center center</code>, <code>20px 40px</code></td></tr>
+            <tr><td><code>background-attachment</code></td><td>Fixação</td><td><code>scroll</code>, <code>fixed</code>, <code>local</code></td></tr>
+            <tr><td><code>background-size</code></td><td>Tamanho</td><td><code>auto</code>, <code>cover</code>, <code>contain</code></td></tr>
+            <tr><td><code>background</code></td><td>Shorthand</td><td>Todas as anteriores</td></tr>
+        </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- TÓPICO 5 -->
+    <!-- ============================================================ -->
+    <h2 id="topico5">5. Propriedades de Tipografia e Texto</h2>
+
+    <p>A tipografia é um dos pilares do design web. Ela determina como o texto é exibido, lido e percebido pelo usuário. O CSS oferece um conjunto rico de propriedades para controlar todos os aspectos do texto.</p>
+
+    <h3>5.1 <code>font-family</code> (Família de Fontes)</h3>
+    <pre><code>seletor {
+    font-family: "Nome da Fonte", fallback1, fallback2, genérica;
+}</code></pre>
+
+    <p><strong>Exemplo Prático (do Material):</strong></p>
+    <pre><code>p {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}</code></pre>
+
+    <table>
+        <thead>
+            <tr><th>Família</th><th>Descrição</th><th>Exemplos</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><strong><code>serif</code></strong></td><td>Fontes com serifa (traços nas extremidades).</td><td>Times New Roman, Georgia</td></tr>
+            <tr><td><strong><code>sans-serif</code></strong></td><td>Fontes sem serifa. Modernas.</td><td>Arial, Helvetica, Roboto</td></tr>
+            <tr><td><strong><code>monospace</code></strong></td><td>Fontes monoespaçadas.</td><td>Courier New, Consolas</td></tr>
+            <tr><td><strong><code>cursive</code></strong></td><td>Fontes cursivas.</td><td>Brush Script</td></tr>
+            <tr><td><strong><code>fantasy</code></strong></td><td>Fontes decorativas.</td><td>Impact, Papyrus</td></tr>
+        </tbody>
+    </table>
+
+    <h3>5.2 <code>font-size</code> (Tamanho da Fonte)</h3>
+    <table>
+        <thead>
+            <tr><th>Unidade</th><th>Descrição</th><th>Exemplo</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>px</code></td><td>Pixels. Unidade absoluta.</td><td><code>16px</code>, <code>48px</code></td></tr>
+            <tr><td><code>em</code></td><td>Relativo ao <code>font-size</code> do pai.</td><td><code>1.5em</code></td></tr>
+            <tr><td><code>rem</code></td><td>Relativo ao <code>font-size</code> da raiz.</td><td><code>1.5rem</code></td></tr>
+            <tr><td><code>%</code></td><td>Relativo ao <code>font-size</code> do pai.</td><td><code>150%</code></td></tr>
+        </tbody>
+    </table>
+
+    <p><strong>Exemplos Práticos (do Material):</strong></p>
+    <pre><code>h1 {
+    font-size: 48px;
+}
+
+p {
+    font-size: 16px;
+}</code></pre>
+
+    <h3>5.3 <code>font-style</code> (Estilo da Fonte)</h3>
+    <table>
+        <thead>
+            <tr><th>Valor</th><th>Descrição</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>normal</code></td><td>Texto normal (padrão).</td></tr>
+            <tr><td><code>italic</code></td><td>Texto em itálico (fonte itálica verdadeira).</td></tr>
+            <tr><td><code>oblique</code></td><td>Texto inclinado artificialmente.</td></tr>
+        </tbody>
+    </table>
+
+    <pre><code>p {
+    font-style: italic;
+}</code></pre>
+
+    <h3>5.4 <code>font-weight</code> (Peso da Fonte)</h3>
+    <table>
+        <thead>
+            <tr><th>Valor</th><th>Nome</th><th>Descrição</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>100</code></td><td>Thin</td><td>Muito fino</td></tr>
+            <tr><td><code>200</code></td><td>Extra Light</td><td>Extra leve</td></tr>
+            <tr><td><code>300</code></td><td>Light</td><td>Leve</td></tr>
+            <tr><td><code>400</code></td><td>Regular / Normal</td><td>Padrão</td></tr>
+            <tr><td><code>500</code></td><td>Medium</td><td>Médio</td></tr>
+            <tr><td><code>600</code></td><td>Semi Bold</td><td>Seminegrito</td></tr>
+            <tr><td><code>700</code></td><td>Bold</td><td>Negrito</td></tr>
+            <tr><td><code>800</code></td><td>Extra Bold</td><td>Extra negrito</td></tr>
+            <tr><td><code>900</code></td><td>Black</td><td>Preto (mais pesado)</td></tr>
+        </tbody>
+    </table>
+
+    <pre><code>p {
+    font-weight: 900;
+}</code></pre>
+
+    <h3>5.5 <code>color</code> (Cor do Texto)</h3>
+    <pre><code>p {
+    color: #FFFFFF;
+}
+
+h1 {
+    color: #E8E8E8;
+}
+
+a {
+    color: #FF0000;
+}</code></pre>
+
+    <h3>5.6 <code>text-align</code> (Alinhamento do Texto)</h3>
+    <table>
+        <thead>
+            <tr><th>Valor</th><th>Descrição</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>left</code></td><td>Alinha o texto à esquerda (padrão).</td></tr>
+            <tr><td><code>right</code></td><td>Alinha o texto à direita.</td></tr>
+            <tr><td><code>center</code></td><td>Centraliza o texto.</td></tr>
+            <tr><td><code>justify</code></td><td>Justifica o texto.</td></tr>
+        </tbody>
+    </table>
+
+    <pre><code>p {
+    text-align: right;
+}</code></pre>
+
+    <h3>5.7 <code>text-decoration</code> (Decoração do Texto)</h3>
+    <table>
+        <thead>
+            <tr><th>Valor</th><th>Descrição</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>none</code></td><td>Sem decoração (padrão).</td></tr>
+            <tr><td><code>underline</code></td><td>Sublinhado.</td></tr>
+            <tr><td><code>overline</code></td><td>Sobrescrito.</td></tr>
+            <tr><td><code>line-through</code></td><td>Riscado.</td></tr>
+        </tbody>
+    </table>
+
+    <pre><code>h1 {
+    text-decoration: line-through;
+    /* riscado */
+}
+
+h1 {
+    text-decoration: underline;
+    /* sublinhado */
+}
+
+h1 {
+    text-decoration: overline;
+    /* sobrescrito */
+}</code></pre>
+
+    <h3>5.8 <code>text-indent</code> (Indentação do Texto)</h3>
+    <pre><code>p {
+    text-indent: 50px;
+}</code></pre>
+
+    <h3>5.9 Propriedades Complementares de Tipografia</h3>
+    <table>
+        <thead>
+            <tr><th>Propriedade</th><th>Função</th><th>Valores Principais</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>line-height</code></td><td>Altura da linha</td><td><code>1.5</code>, <code>24px</code>, <code>150%</code></td></tr>
+            <tr><td><code>letter-spacing</code></td><td>Espaçamento entre letras</td><td><code>2px</code>, <code>0.1em</code></td></tr>
+            <tr><td><code>word-spacing</code></td><td>Espaçamento entre palavras</td><td><code>4px</code>, <code>0.2em</code></td></tr>
+            <tr><td><code>text-transform</code></td><td>Capitalização</td><td><code>uppercase</code>, <code>lowercase</code>, <code>capitalize</code></td></tr>
+            <tr><td><code>text-shadow</code></td><td>Sombra do texto</td><td><code>2px 2px 4px rgba(0,0,0,0.5)</code></td></tr>
+            <tr><td><code>white-space</code></td><td>Tratamento de espaços</td><td><code>normal</code>, <code>nowrap</code>, <code>pre</code></td></tr>
+        </tbody>
+    </table>
+
+    <h3>5.10 Resumo das Propriedades de Tipografia e Texto</h3>
+    <table>
+        <thead>
+            <tr><th>Propriedade</th><th>Função</th><th>Valores Principais</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>font-family</code></td><td>Família da fonte</td><td><code>"Arial", sans-serif</code></td></tr>
+            <tr><td><code>font-size</code></td><td>Tamanho da fonte</td><td><code>16px</code>, <code>1rem</code>, <code>1.5em</code></td></tr>
+            <tr><td><code>font-style</code></td><td>Estilo da fonte</td><td><code>normal</code>, <code>italic</code>, <code>oblique</code></td></tr>
+            <tr><td><code>font-weight</code></td><td>Peso da fonte</td><td><code>normal</code>, <code>bold</code>, <code>100</code>–<code>900</code></td></tr>
+            <tr><td><code>color</code></td><td>Cor do texto</td><td><code>#FF0000</code>, <code>rgb()</code>, <code>red</code></td></tr>
+            <tr><td><code>text-align</code></td><td>Alinhamento</td><td><code>left</code>, <code>right</code>, <code>center</code>, <code>justify</code></td></tr>
+            <tr><td><code>text-decoration</code></td><td>Decoração</td><td><code>none</code>, <code>underline</code>, <code>overline</code>, <code>line-through</code></td></tr>
+            <tr><td><code>text-indent</code></td><td>Indentação</td><td><code>50px</code>, <code>2em</code>, <code>-20px</code></td></tr>
+        </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- TÓPICO 6 -->
+    <!-- ============================================================ -->
+    <h2 id="topico6">6. Propriedade Links e Pseudo-classes</h2>
+
+    <p>Os links são a espinha dorsal da web. No CSS, os links podem receber todas as personalizações já vistas, mas também possuem <strong>estados</strong> que podem ser estilizados individualmente através de <strong>pseudo-classes</strong>.</p>
+
+    <h3>6.1 O que são Pseudo-classes?</h3>
+    <p>Uma <strong>pseudo-classe</strong> é uma palavra-chave adicionada a um seletor que especifica um <strong>estado especial</strong> do elemento selecionado.</p>
+    <pre><code>seletor:pseudo-classe {
+    propriedade: valor;
+}</code></pre>
+
+    <h3>6.2 As Quatro Pseudo-classes de Links</h3>
+    <table>
+        <thead>
+            <tr><th>Pseudo-classe</th><th>Definição (do Material)</th><th>Quando se aplica</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>:link</code></td><td>Usada para links <strong>não visitados</strong>.</td><td>Estado padrão de um link que o usuário ainda não clicou.</td></tr>
+            <tr><td><code>:visited</code></td><td>Usada para links <strong>visitados</strong>.</td><td>Após o usuário ter clicado no link.</td></tr>
+            <tr><td><code>:active</code></td><td>Usada para links <strong>ativos</strong>.</td><td>No momento exato do clique.</td></tr>
+            <tr><td><code>:hover</code></td><td>Usada quando o <strong>cursor do mouse está sobre o link</strong>.</td><td>Enquanto o mouse permanece sobre o link.</td></tr>
+        </tbody>
+    </table>
+
+    <h3>6.3 A Ordem Correta: LVHA</h3>
+    <div class="destaque">
+        <strong>📌 Ordem correta (LVHA):</strong>
+        <ol>
+            <li><strong>L</strong> — <code>:link</code></li>
+            <li><strong>V</strong> — <code>:visited</code></li>
+            <li><strong>H</strong> — <code>:hover</code></li>
+            <li><strong>A</strong> — <code>:active</code></li>
+        </ol>
+    </div>
+
+    <div class="demo-box">
+        <h5>🎨 Demonstração de Links com Pseudo-classes</h5>
+        <p class="link-demo">
+            <a href="#">Link não visitado (vermelho)</a> |
+            <a href="#">Passe o mouse (verde)</a> |
+            <a href="#">Clique (azul)</a>
+        </p>
+    </div>
+
+    <h3>6.4 Exemplo Completo (LVHA)</h3>
+    <pre><code>/* Estado padrão (todos os links) */
+a {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    text-decoration: underline;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+/* 1. Links não visitados */
+a:link { color: #FF0000; }
+
+/* 2. Links visitados */
+a:visited { color: #800080; }
+
+/* 3. Mouse sobre o link */
+a:hover { color: #00FF00; text-decoration: none; }
+
+/* 4. Link sendo clicado */
+a:active { color: #0000FF; }</code></pre>
+
+    <h3>6.5 Pseudo-classes de Estado de Formulário</h3>
+    <table>
+        <thead>
+            <tr><th>Pseudo-classe</th><th>Descrição</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>:focus</code></td><td>Quando o elemento recebe foco.</td></tr>
+            <tr><td><code>:valid</code></td><td>Quando o valor do input é válido.</td></tr>
+            <tr><td><code>:invalid</code></td><td>Quando o valor do input é inválido.</td></tr>
+            <tr><td><code>:required</code></td><td>Quando o input tem o atributo <code>required</code>.</td></tr>
+            <tr><td><code>:checked</code></td><td>Quando um checkbox ou radio está marcado.</td></tr>
+            <tr><td><code>:disabled</code></td><td>Quando o input está desabilitado.</td></tr>
+            <tr><td><code>:placeholder-shown</code></td><td>Quando o placeholder está visível.</td></tr>
+        </tbody>
+    </table>
+
+    <h3>6.6 Pseudo-classes Estruturais</h3>
+    <table>
+        <thead>
+            <tr><th>Pseudo-classe</th><th>Descrição</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>:first-child</code></td><td>O primeiro filho do elemento pai.</td></tr>
+            <tr><td><code>:last-child</code></td><td>O último filho do elemento pai.</td></tr>
+            <tr><td><code>:nth-child(n)</code></td><td>O enésimo filho (contando do início).</td></tr>
+            <tr><td><code>:nth-last-child(n)</code></td><td>O enésimo filho (contando do fim).</td></tr>
+            <tr><td><code>:first-of-type</code></td><td>O primeiro elemento do seu tipo.</td></tr>
+            <tr><td><code>:last-of-type</code></td><td>O último elemento do seu tipo.</td></tr>
+            <tr><td><code>:only-child</code></td><td>O único filho do elemento pai.</td></tr>
+            <tr><td><code>:empty</code></td><td>Elementos sem filhos.</td></tr>
+            <tr><td><code>:root</code></td><td>O elemento raiz do documento (<code>&lt;html&gt;</code>).</td></tr>
+        </tbody>
+    </table>
+
+    <h4>Fórmula <code>an+b</code> do <code>:nth-child()</code>:</h4>
+    <table>
+        <thead>
+            <tr><th>Fórmula</th><th>Seleciona</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>:nth-child(odd)</code> ou <code>:nth-child(2n+1)</code></td><td>Elementos ímpares (1, 3, 5, ...)</td></tr>
+            <tr><td><code>:nth-child(even)</code> ou <code>:nth-child(2n)</code></td><td>Elementos pares (2, 4, 6, ...)</td></tr>
+            <tr><td><code>:nth-child(3n)</code></td><td>Cada 3º elemento (3, 6, 9, ...)</td></tr>
+            <tr><td><code>:nth-child(3n+1)</code></td><td>1º, 4º, 7º, 10º, ...</td></tr>
+            <tr><td><code>:nth-child(n+4)</code></td><td>Do 4º em diante</td></tr>
+            <tr><td><code>:nth-child(-n+3)</code></td><td>Os 3 primeiros</td></tr>
+        </tbody>
+    </table>
+
+    <h3>6.7 A Pseudo-classe <code>:not()</code> (Negação)</h3>
+    <pre><code>/* Todos os parágrafos, exceto os com classe "destaque" */
+p:not(.destaque) {
+    color: #333333;
+}
+
+/* Todos os links, exceto os que têm a classe "externo" */
+a:not(.externo) {
+    text-decoration: underline;
+}</code></pre>
+
+    <h3>6.8 Pseudo-elementos (Complemento)</h3>
+    <table>
+        <thead>
+            <tr><th>Pseudo-elemento</th><th>Descrição</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>::before</code></td><td>Insere conteúdo antes do elemento.</td></tr>
+            <tr><td><code>::after</code></td><td>Insere conteúdo depois do elemento.</td></tr>
+            <tr><td><code>::first-line</code></td><td>Estiliza a primeira linha de um bloco de texto.</td></tr>
+            <tr><td><code>::first-letter</code></td><td>Estiliza a primeira letra de um bloco de texto.</td></tr>
+            <tr><td><code>::selection</code></td><td>Estiliza o texto selecionado pelo usuário.</td></tr>
+            <tr><td><code>::placeholder</code></td><td>Estiliza o placeholder de um input.</td></tr>
+        </tbody>
+    </table>
+
+    <pre><code>/* Adicionar um ícone antes de um link externo */
+a.externo::after {
+    content: " ↗";
+    font-size: 0.8em;
+    color: #888888;
+}
+
+/* Primeira letra de um parágrafo em destaque (capitular) */
+p::first-letter {
+    font-size: 3em;
+    font-weight: bold;
+    float: left;
+    margin-right: 8px;
+    color: #2C3E50;
+}</code></pre>
+
+    <h3>6.9 Resumo das Pseudo-classes e Pseudo-elementos</h3>
+    <table>
+        <thead>
+            <tr><th>Tipo</th><th>Pseudo-classe/Elemento</th><th>Descrição</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Links</strong></td><td><code>:link</code></td><td>Links não visitados</td></tr>
+            <tr><td></td><td><code>:visited</code></td><td>Links visitados</td></tr>
+            <tr><td></td><td><code>:hover</code></td><td>Mouse sobre o elemento</td></tr>
+            <tr><td></td><td><code>:active</code></td><td>Elemento sendo clicado</td></tr>
+            <tr><td><strong>Formulário</strong></td><td><code>:focus</code></td><td>Elemento com foco</td></tr>
+            <tr><td></td><td><code>:valid</code> / <code>:invalid</code></td><td>Validação</td></tr>
+            <tr><td></td><td><code>:checked</code></td><td>Checkbox/radio marcado</td></tr>
+            <tr><td><strong>Estrutural</strong></td><td><code>:first-child</code> / <code>:last-child</code></td><td>Primeiro/último filho</td></tr>
+            <tr><td></td><td><code>:nth-child(n)</code></td><td>Enésimo filho</td></tr>
+            <tr><td><strong>Negação</strong></td><td><code>:not()</code></td><td>Elementos que não correspondem</td></tr>
+            <tr><td><strong>Pseudo-elementos</strong></td><td><code>::before</code> / <code>::after</code></td><td>Conteúdo antes/depois</td></tr>
+            <tr><td></td><td><code>::first-line</code> / <code>::first-letter</code></td><td>Primeira linha/letra</td></tr>
+            <tr><td></td><td><code>::selection</code></td><td>Texto selecionado</td></tr>
+        </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- TÓPICO 7 -->
+    <!-- ============================================================ -->
+    <h2 id="topico7">7. Cores no CSS</h2>
+
+    <p>As cores são um dos elementos mais poderosos e expressivos do design web. O CSS oferece múltiplos sistemas para definir cores, cada um com suas particularidades, vantagens e casos de uso ideais.</p>
+
+    <h3>7.1 A Importância das Cores no Design Web</h3>
+    <table>
+        <thead>
+            <tr><th>Papel</th><th>Descrição</th><th>Exemplo</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Comunicação</strong></td><td>Transmitem significado e emoção.</td><td>Vermelho = perigo, Verde = sucesso.</td></tr>
+            <tr><td><strong>Hierarquia</strong></td><td>Guiam a atenção para elementos importantes.</td><td>Botão primário azul, secundário cinza.</td></tr>
+            <tr><td><strong>Identidade</strong></td><td>Definem a marca e criam reconhecimento.</td><td>Azul do Facebook, Vermelho do YouTube.</td></tr>
+            <tr><td><strong>Acessibilidade</strong></td><td>Garantem legibilidade e inclusão.</td><td>Contraste texto/fundo adequado.</td></tr>
+            <tr><td><strong>Estética</strong></td><td>Criam harmonia visual e apelo estético.</td><td>Paletas complementares e análogas.</td></tr>
+            <tr><td><strong>Feedback</strong></td><td>Indicam estados e interações.</td><td>Verde = válido, Vermelho = erro.</td></tr>
+        </tbody>
+    </table>
+
+    <h3>7.2 Nomes de Cores (Named Colors)</h3>
+    <p>O CSS oferece <strong>140+ nomes de cores</strong> predefinidos, que podem ser usados diretamente pelo nome.</p>
+
+    <pre><code>p {
+    color: red;
+    background-color: lightblue;
+    border: 1px solid darkgreen;
+}</code></pre>
+
+    <h3>7.3 Hexadecimal (<code>#RRGGBB</code>)</h3>
+    <p>O sistema <strong>hexadecimal</strong> é o mais utilizado no desenvolvimento web. Ele representa cores usando seis dígitos hexadecimais (0-9, A-F) no formato <code>#RRGGBB</code>.</p>
+
+    <table>
+        <thead>
+            <tr><th>Hexadecimal</th><th>Cor</th><th>RGB</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>#FF0000</code></td><td>Vermelho puro</td><td><code>rgb(255, 0, 0)</code></td></tr>
+            <tr><td><code>#00FF00</code></td><td>Verde puro</td><td><code>rgb(0, 255, 0)</code></td></tr>
+            <tr><td><code>#0000FF</code></td><td>Azul puro</td><td><code>rgb(0, 0, 255)</code></td></tr>
+            <tr><td><code>#FFFFFF</code></td><td>Branco</td><td><code>rgb(255, 255, 255)</code></td></tr>
+            <tr><td><code>#000000</code></td><td>Preto</td><td><code>rgb(0, 0, 0)</code></td></tr>
+            <tr><td><code>#00008B</code></td><td>Azul escuro</td><td><code>rgb(0, 0, 139)</code></td></tr>
+            <tr><td><code>#006400</code></td><td>Verde escuro</td><td><code>rgb(0, 100, 0)</code></td></tr>
+        </tbody>
+    </table>
+
+    <h4>7.3.1 Forma Curta (<code>#RGB</code>)</h4>
+    <table>
+        <thead>
+            <tr><th>Forma Longa</th><th>Forma Curta</th><th>Cor</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>#FF0000</code></td><td><code>#F00</code></td><td>Vermelho</td></tr>
+            <tr><td><code>#00FF00</code></td><td><code>#0F0</code></td><td>Verde</td></tr>
+            <tr><td><code>#0000FF</code></td><td><code>#00F</code></td><td>Azul</td></tr>
+            <tr><td><code>#FFFFFF</code></td><td><code>#FFF</code></td><td>Branco</td></tr>
+            <tr><td><code>#000000</code></td><td><code>#000</code></td><td>Preto</td></tr>
+        </tbody>
+    </table>
+
+    <h3>7.4 RGB (<code>rgb()</code>)</h3>
+    <p>O sistema <strong>RGB</strong> (Red, Green, Blue) representa cores através de três canais, cada um variando de <strong>0 a 255</strong>.</p>
+
+    <pre><code>seletor {
+    color: rgb(255, 0, 0);        /* Vermelho puro */
+    background-color: rgb(0, 0, 255); /* Azul puro */
+}</code></pre>
+
+    <h3>7.5 RGBA (<code>rgba()</code>) — RGB com Transparência</h3>
+    <p>O <strong>RGBA</strong> estende o RGB adicionando um <strong>canal alfa</strong> que controla a <strong>opacidade</strong> da cor.</p>
+
+    <pre><code>seletor {
+    color: rgba(255, 0, 0, 0.5);  /* Vermelho com 50% de opacidade */
+}</code></pre>
+
+    <table>
+        <thead>
+            <tr><th>Valor do canal alfa</th><th>Opacidade</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>0.0</code></td><td>Totalmente transparente</td></tr>
+            <tr><td><code>0.25</code></td><td>25% opaco</td></tr>
+            <tr><td><code>0.5</code></td><td>50% opaco</td></tr>
+            <tr><td><code>0.75</code></td><td>75% opaco</td></tr>
+            <tr><td><code>1.0</code></td><td>Totalmente opaco</td></tr>
+        </tbody>
+    </table>
+
+    <h3>7.6 HSL (<code>hsl()</code>) — Matiz, Saturação e Luminosidade</h3>
+    <p>O sistema <strong>HSL</strong> (Hue, Saturation, Lightness) representa cores de forma mais intuitiva para designers.</p>
+
+    <pre><code>seletor {
+    color: hsl(0, 100%, 50%);  /* Vermelho puro */
+}</code></pre>
+
+    <h4>7.6.1 Matiz (Hue)</h4>
+    <table>
+        <thead>
+            <tr><th>Ângulo</th><th>Cor</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>0°</code> / <code>360°</code></td><td>Vermelho</td></tr>
+            <tr><td><code>30°</code></td><td>Laranja</td></tr>
+            <tr><td><code>60°</code></td><td>Amarelo</td></tr>
+            <tr><td><code>120°</code></td><td>Verde</td></tr>
+            <tr><td><code>180°</code></td><td>Ciano</td></tr>
+            <tr><td><code>240°</code></td><td>Azul</td></tr>
+            <tr><td><code>300°</code></td><td>Magenta</td></tr>
+        </tbody>
+    </table>
+
+    <h4>7.6.2 Saturação (Saturation)</h4>
+    <table>
+        <thead>
+            <tr><th>Valor</th><th>Aparência</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>0%</code></td><td>Cinza (sem cor)</td></tr>
+            <tr><td><code>25%</code></td><td>Dessaturado</td></tr>
+            <tr><td><code>50%</code></td><td>Moderado</td></tr>
+            <tr><td><code>75%</code></td><td>Vibrante</td></tr>
+            <tr><td><code>100%</code></td><td>Cor pura, máxima intensidade</td></tr>
+        </tbody>
+    </table>
+
+    <h4>7.6.3 Luminosidade (Lightness)</h4>
+    <table>
+        <thead>
+            <tr><th>Valor</th><th>Aparência</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>0%</code></td><td>Preto</td></tr>
+            <tr><td><code>25%</code></td><td>Escuro</td></tr>
+            <tr><td><code>50%</code></td><td>Cor pura (padrão)</td></tr>
+            <tr><td><code>75%</code></td><td>Claro</td></tr>
+            <tr><td><code>100%</code></td><td>Branco</td></tr>
+        </tbody>
+    </table>
+
+    <h3>7.7 HSLA (<code>hsla()</code>) — HSL com Transparência</h3>
+    <pre><code>seletor {
+    color: hsla(0, 100%, 50%, 0.5);  /* Vermelho com 50% de opacidade */
+}</code></pre>
+
+    <h3>7.8 Gradientes (Cores em Transição)</h3>
+    <pre><code>.linear {
+    background: linear-gradient(to right, #3498DB, #2980B9);
+}
+
+.radial {
+    background: radial-gradient(circle, #FFFFFF, #3498DB);
+}
+
+.conico {
+    background: conic-gradient(#FF0000, #00FF00, #0000FF, #FF0000);
+}</code></pre>
+
+    <h3>7.9 Opacidade (<code>opacity</code>)</h3>
+    <pre><code>.elemento {
+    opacity: 0.5; /* 50% de opacidade */
+}</code></pre>
+
+    <table>
+        <thead>
+            <tr><th>Valor</th><th>Aparência</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>0.0</code></td><td>Totalmente transparente (invisível)</td></tr>
+            <tr><td><code>0.5</code></td><td>50% opaco</td></tr>
+            <tr><td><code>1.0</code></td><td>Totalmente opaco (padrão)</td></tr>
+        </tbody>
+    </table>
+
+    <h3>7.10 Acessibilidade e Contraste de Cores</h3>
+    <p>As diretrizes <strong>WCAG (Web Content Accessibility Guidelines)</strong> definem padrões mínimos de contraste.</p>
+
+    <table>
+        <thead>
+            <tr><th>Nível</th><th>Contraste Mínimo (Texto Normal)</th><th>Contraste Mínimo (Texto Grande)</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>AA</strong></td><td>4.5:1</td><td>3:1</td></tr>
+            <tr><td><strong>AAA</strong></td><td>7:1</td><td>4.5:1</td></tr>
+        </tbody>
+    </table>
+
+    <table>
+        <thead>
+            <tr><th>Combinação</th><th>Contraste</th><th>Conformidade</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Preto (<code>#000</code>) sobre branco (<code>#FFF</code>)</td><td>21:1</td><td>AAA</td></tr>
+            <tr><td>Branco sobre azul escuro (<code>#00008B</code>)</td><td>~12:1</td><td>AAA</td></tr>
+            <tr><td>Cinza (<code>#777</code>) sobre branco</td><td>4.48:1</td><td>Falha AA (por pouco)</td></tr>
+            <tr><td>Amarelo (<code>#FFFF00</code>) sobre branco</td><td>1.07:1</td><td>Falha (ilegível)</td></tr>
+        </tbody>
+    </table>
+
+    <h3>7.11 Variáveis CSS (Custom Properties) para Cores</h3>
+    <pre><code>:root {
+    --cor-primaria: #3498DB;
+    --cor-secundaria: #2ECC71;
+    --cor-perigo: #E74C3C;
+    --cor-aviso: #F39C12;
+    --cor-texto: #333333;
+    --cor-fundo: #FFFFFF;
+}
+
+.botao-primario {
+    background-color: var(--cor-primaria);
+    color: var(--cor-fundo);
+}</code></pre>
+
+    <h3>7.12 Tabela-Resumo dos Formatos de Cores</h3>
+    <table>
+        <thead>
+            <tr><th>Formato</th><th>Sintaxe</th><th>Transparência</th><th>Melhor Uso</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Nome</strong></td><td><code>red</code></td><td>Não</td><td>Prototipagem, testes</td></tr>
+            <tr><td><strong>Hexadecimal</strong></td><td><code>#FF0000</code></td><td>Não</td><td>Padrão web, ferramentas de design</td></tr>
+            <tr><td><strong>RGB</strong></td><td><code>rgb(255, 0, 0)</code></td><td>Não</td><td>Cálculos, APIs</td></tr>
+            <tr><td><strong>RGBA</strong></td><td><code>rgba(255, 0, 0, 0.5)</code></td><td>Sim</td><td>Sombras, overlays, bordas</td></tr>
+            <tr><td><strong>HSL</strong></td><td><code>hsl(0, 100%, 50%)</code></td><td>Não</td><td>Ajustes intuitivos, paletas</td></tr>
+            <tr><td><strong>HSLA</strong></td><td><code>hsla(0, 100%, 50%, 0.5)</code></td><td>Sim</td><td>Design intuitivo com transparência</td></tr>
+            <tr><td><strong>Gradientes</strong></td><td><code>linear-gradient(...)</code></td><td>Sim</td><td>Fundos, botões, efeitos</td></tr>
+        </tbody>
+    </table>
+
+    <h3>7.13 Boas Práticas com Cores</h3>
+    <ol>
+        <li><strong>Defina uma paleta limitada:</strong> 3-5 cores principais + neutras.</li>
+        <li><strong>Use variáveis CSS:</strong> Centralize as cores em <code>:root</code>.</li>
+        <li><strong>Garanta contraste:</strong> Mínimo 4.5:1 para texto normal.</li>
+        <li><strong>Não dependa apenas da cor:</strong> Use ícones, texto e padrões.</li>
+        <li><strong>Considere o daltonismo:</strong> Teste com simuladores.</li>
+        <li><strong>Prefira HSL para variações:</strong> Ajustar a luminosidade é intuitivo.</li>
+        <li><strong>Use RGBA/HSLA para transparências.</strong></li>
+        <li><strong>Considere o modo escuro:</strong> Use <code>prefers-color-scheme</code>.</li>
+    </ol>
+
+    <!-- ============================================================ -->
+    <!-- TÓPICO 8 -->
+    <!-- ============================================================ -->
+    <h2 id="topico8">8. Organização, Boas Práticas e Projetos Práticos</h2>
+
+    <p>Depois de dominar a sintaxe, os seletores, o Box Model, as propriedades de fundo, a tipografia, os links com pseudo-classes e os sistemas de cores, é hora de consolidar todo esse conhecimento em <strong>projetos reais</strong> e aprender a <strong>organizar o código CSS de forma profissional</strong>.</p>
+
+    <h3>8.1 Organização de Arquivos CSS</h3>
+
+    <h4>8.1.1 Estrutura Simples (Projetos Pequenos)</h4>
+    <pre><code>projeto/
+├── index.html
+├── css/
+│   ├── reset.css        → Reset/normalize de estilos padrão
+│   ├── estilo.css       → Estilos principais
+│   └── responsivo.css   → Media queries
+├── js/
+│   └── script.js
+└── imagens/
+    └── (imagens do projeto)</code></pre>
+
+    <pre><code>&lt;head&gt;
+    &lt;link rel="stylesheet" href="css/reset.css"&gt;
+    &lt;link rel="stylesheet" href="css/estilo.css"&gt;
+    &lt;link rel="stylesheet" href="css/responsivo.css"&gt;
+&lt;/head&gt;</code></pre>
+
+    <h4>8.1.2 Estrutura Modular (Projetos Médios/Grandes)</h4>
+    <pre><code>projeto/
+├── index.html
+├── css/
+│   ├── base/
+│   │   ├── _reset.css        → Reset universal
+│   │   ├── _variaveis.css    → Custom properties
+│   │   └── _tipografia.css   → Estilos globais de texto
+│   ├── componentes/
+│   │   ├── _botoes.css
+│   │   ├── _cards.css
+│   │   ├── _formularios.css
+│   │   └── _alertas.css
+│   ├── layout/
+│   │   ├── _header.css
+│   │   ├── _footer.css
+│   │   └── _grid.css
+│   ├── paginas/
+│   │   ├── _home.css
+│   │   └── _contato.css
+│   └── estilo.css            → Arquivo principal
+└── js/
+    └── script.js</code></pre>
+
+    <h3>8.2 Metodologias de Nomenclatura CSS</h3>
+
+    <h4>8.2.1 BEM (Block, Element, Modifier)</h4>
+    <table>
+        <thead>
+            <tr><th>Conceito</th><th>Descrição</th><th>Sintaxe</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Block</strong></td><td>Componente independente e reutilizável.</td><td><code>.card</code>, <code>.botao</code>, <code>.menu</code></td></tr>
+            <tr><td><strong>Element</strong></td><td>Parte de um bloco que não faz sentido sozinha.</td><td><code>.card__titulo</code>, <code>.botao__icone</code></td></tr>
+            <tr><td><strong>Modifier</strong></td><td>Variação de um bloco ou elemento.</td><td><code>.card--destacado</code>, <code>.botao--grande</code></td></tr>
+        </tbody>
+    </table>
+
+    <pre><code>&lt;div class="card card--destacado"&gt;
+    &lt;h2 class="card__titulo"&gt;Título&lt;/h2&gt;
+    &lt;p class="card__texto"&gt;Descrição do card.&lt;/p&gt;
+    &lt;button class="botao botao--primario botao--grande"&gt;
+        &lt;span class="botao__icone"&gt;→&lt;/span&gt;
+        &lt;span class="botao__texto"&gt;Clique aqui&lt;/span&gt;
+    &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+
+    <h4>8.2.2 OOCSS (Object-Oriented CSS)</h4>
+    <p><strong>OOCSS</strong> separa <strong>estrutura</strong> de <strong>aparência</strong> e <strong>conteúdo</strong> de <strong>contêiner</strong>.</p>
+
+    <pre><code>/* Estrutura */
+.largura-50 { width: 50%; }
+.flutuar-esquerda { float: left; }
+
+/* Aparência */
+.borda-azul { border: 1px solid #3498DB; }
+.fundo-cinza { background-color: #F0F0F0; }</code></pre>
+
+    <h4>8.2.3 SMACSS (Scalable and Modular Architecture for CSS)</h4>
+    <table>
+        <thead>
+            <tr><th>Categoria</th><th>Descrição</th><th>Exemplo</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Base</strong></td><td>Estilos padrão de elementos.</td><td><code>body</code>, <code>h1</code>, <code>p</code>, <code>a</code></td></tr>
+            <tr><td><strong>Layout</strong></td><td>Estrutura da página.</td><td><code>.header</code>, <code>.footer</code>, <code>.sidebar</code></td></tr>
+            <tr><td><strong>Módulo</strong></td><td>Componentes reutilizáveis.</td><td><code>.card</code>, <code>.botao</code>, <code>.menu</code></td></tr>
+            <tr><td><strong>Estado</strong></td><td>Estados de interação.</td><td><code>.is-ativo</code>, <code>.is-escondido</code></td></tr>
+            <tr><td><strong>Tema</strong></td><td>Variações visuais.</td><td><code>.tema-escuro</code>, <code>.tema-claro</code></td></tr>
+        </tbody>
+    </table>
+
+    <h3>8.3 Boas Práticas e Convenções</h3>
+
+    <h4>8.3.1 Reset e Normalize</h4>
+    <pre><code>*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+}
+
+input, button, textarea, select {
+    font: inherit;
+}</code></pre>
+
+    <h4>8.3.2 Variáveis CSS (Custom Properties)</h4>
+    <pre><code>:root {
+    /* Cores */
+    --cor-primaria: #3498DB;
+    --cor-secundaria: #2ECC71;
+    --cor-perigo: #E74C3C;
+    --cor-texto: #333333;
+    --cor-fundo: #FFFFFF;
+    --cor-borda: #DDDDDD;
+    
+    /* Tipografia */
+    --fonte-principal: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --tamanho-base: 16px;
+    --altura-linha: 1.6;
+    
+    /* Espaçamento */
+    --espaco-xs: 4px;
+    --espaco-sm: 8px;
+    --espaco-md: 16px;
+    --espaco-lg: 24px;
+    --espaco-xl: 32px;
+    
+    /* Sombras */
+    --sombra-suave: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --sombra-media: 0 4px 12px rgba(0, 0, 0, 0.15);
+    
+    /* Bordas */
+    --raio-sm: 4px;
+    --raio-md: 8px;
+    --raio-pill: 9999px;
+    
+    /* Transições */
+    --transicao-rapida: 0.15s ease;
+    --transicao-media: 0.3s ease;
+}</code></pre>
+
+    <h4>8.3.3 Convenções de Nomenclatura</h4>
+    <table>
+        <thead>
+            <tr><th>Convenção</th><th>Exemplo</th><th>Uso</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>kebab-case</strong></td><td><code>.botao-primario</code></td><td>Padrão CSS</td></tr>
+            <tr><td><strong>camelCase</strong></td><td><code>.botaoPrimario</code></td><td>Evitar em CSS</td></tr>
+            <tr><td><strong>BEM</strong></td><td><code>.botao--primario</code></td><td>Metodologia</td></tr>
+        </tbody>
+    </table>
+
+    <h4>8.3.4 Especificidade Controlada</h4>
+    <table>
+        <thead>
+            <tr><th>Evitar</th><th>Preferir</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>#header .menu li a</code></td><td><code>.menu-link</code></td></tr>
+            <tr><td><code>div &gt; p strong</code></td><td><code>.texto-destaque</code></td></tr>
+            <tr><td><code>!important</code></td><td>Reestruturar o CSS</td></tr>
+        </tbody>
+    </table>
+
+    <h4>8.3.5 Evite <code>!important</code></h4>
+    <div class="destaque-vermelho">
+        <strong>⚠️ <code>!important</code></strong> quebra a cascata natural do CSS e torna a manutenção um pesadelo. Use apenas como último recurso.
+    </div>
+
+    <h3>8.4 Performance e Otimização</h3>
+
+    <h4>8.4.1 Minificação</h4>
+    <pre><code>/* Antes */
+.botao {
+    background-color: #3498DB;
+    color: #FFFFFF;
+    padding: 10px 20px;
+}
+
+/* Depois (minificado) */
+.botao{background-color:#3498DB;color:#FFF;padding:10px 20px}</code></pre>
+
+    <h4>8.4.2 Evite <code>@import</code></h4>
+    <p><code>@import</code> no CSS bloqueia a renderização. Prefira múltiplas tags <code>&lt;link&gt;</code> no HTML ou concatenação no build.</p>
+
+    <h4>8.4.3 Evite Animações em Propriedades Caras</h4>
+    <p>Propriedades como <code>width</code>, <code>height</code>, <code>margin</code> e <code>padding</code> causam <strong>reflow</strong>. Prefira <code>transform</code> e <code>opacity</code>, que são aceleradas pela GPU.</p>
+
+    <pre><code>/* Ruim */
+.botao:hover {
+    width: 120px; /* Causa reflow */
+    height: 50px;
+}
+
+/* Bom */
+.botao:hover {
+    transform: scale(1.1); /* Acelerado pela GPU */
+}</code></pre>
+
+    <h3>8.5 Exercícios Práticos Integradores</h3>
+
+    <h4>Exercício 1: Página de Apresentação Pessoal</h4>
+    <p><strong>Objetivo:</strong> Aplicar tipografia, cores e Box Model.</p>
+    <ul>
+        <li>Um <code>&lt;h1&gt;</code> com o nome da pessoa.</li>
+        <li>Um <code>&lt;p&gt;</code> com uma breve biografia.</li>
+        <li>Uma imagem de perfil circular.</li>
+        <li>Links para redes sociais (GitHub, LinkedIn).</li>
+        <li>Fundo com cor suave.</li>
+        <li>Fontes diferentes para título e corpo.</li>
+    </ul>
+
+    <h4>Exercício 2: Card de Produto</h4>
+    <p><strong>Objetivo:</strong> Aplicar Box Model, cores e pseudo-classes.</p>
+    <ul>
+        <li>Um card com imagem, título, descrição e preço.</li>
+        <li>Botão "Comprar" com hover e active.</li>
+        <li>Borda e sombra no card.</li>
+        <li>Preço antigo riscado (<code>text-decoration: line-through</code>).</li>
+    </ul>
+
+    <h4>Exercício 3: Formulário de Contato Estilizado</h4>
+    <p><strong>Objetivo:</strong> Aplicar formulários, pseudo-classes de estado e cores.</p>
+    <ul>
+        <li>Campos: nome, email, assunto, mensagem.</li>
+        <li>Labels associados aos inputs.</li>
+        <li>Botão de envio.</li>
+        <li>Feedback visual com <code>:focus</code>, <code>:valid</code> e <code>:invalid</code>.</li>
+        <li>Cores de erro (vermelho) e sucesso (verde).</li>
+    </ul>
+
+    <h4>Exercício 4: Página de Artigo com Tipografia</h4>
+    <p><strong>Objetivo:</strong> Aplicar tipografia avançada, cores e Box Model.</p>
+    <ul>
+        <li>Título, subtítulo, autor e data.</li>
+        <li>Parágrafos com <code>text-indent</code>.</li>
+        <li>Citações com <code>blockquote</code>.</li>
+        <li>Código com <code>font-family: monospace</code>.</li>
+        <li>Links com pseudo-classes.</li>
+    </ul>
+
+    <h4>Exercício 5: Página Completa com Header, Main e Footer</h4>
+    <p><strong>Objetivo:</strong> Integrar todos os conceitos em uma página completa.</p>
+    <ul>
+        <li>Header com logo e menu de navegação.</li>
+        <li>Seção hero com imagem de fundo e gradiente.</li>
+        <li>Grid de cards de serviços.</li>
+        <li>Footer com informações de contato.</li>
+        <li>Design responsivo (media queries).</li>
+    </ul>
+
+    <h3>8.6 Checklist de Boas Práticas em CSS</h3>
+    <table>
+        <thead>
+            <tr><th>Item</th><th>Descrição</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>✅ <strong>Reset/Normalize</strong></td><td>Aplicar reset para consistência entre navegadores.</td></tr>
+            <tr><td>✅ <strong>Variáveis CSS</strong></td><td>Centralizar cores, fontes e espaçamentos em <code>:root</code>.</td></tr>
+            <tr><td>✅ <strong>BEM ou metodologia</strong></td><td>Nomenclatura consistente e autoexplicativa.</td></tr>
+            <tr><td>✅ <strong>Baixa especificidade</strong></td><td>Evitar <code>!important</code> e seletores complexos.</td></tr>
+            <tr><td>✅ <strong>Comentários úteis</strong></td><td>Separar seções com cabeçalhos claros.</td></tr>
+            <tr><td>✅ <strong>Mobile First</strong></td><td>Estilos base para mobile, media queries para cima.</td></tr>
+            <tr><td>✅ <strong>Contraste acessível</strong></td><td>Mínimo 4.5:1 para texto normal.</td></tr>
+            <tr><td>✅ <strong>Foco visível</strong></td><td><code>:focus</code> estilizado para navegação por teclado.</td></tr>
+            <tr><td>✅ <strong>Transições suaves</strong></td><td><code>transition</code> em propriedades interativas.</td></tr>
+            <tr><td>✅ <strong>Performance</strong></td><td><code>transform</code>/<code>opacity</code> em vez de <code>width</code>/<code>height</code>.</td></tr>
+            <tr><td>✅ <strong>Minificação</strong></td><td>Comprimir CSS em produção.</td></tr>
+            <tr><td>✅ <strong>Concatenação</strong></td><td>Reduzir número de requisições HTTP.</td></tr>
+            <tr><td>✅ <strong>Modo escuro</strong></td><td>Suporte a <code>prefers-color-scheme</code>.</td></tr>
+            <tr><td>✅ <strong>Impressão</strong></td><td>Media query <code>print</code> para esconder elementos.</td></tr>
+        </tbody>
+    </table>
+
+    <h3>8.7 Considerações Finais sobre CSS</h3>
+    <p>O CSS é uma linguagem aparentemente simples, mas com uma profundidade enorme. Dominar seus fundamentos — <strong>sintaxe, seletores, Box Model, fundos, tipografia, links, cores</strong> — é apenas o começo. O verdadeiro domínio vem da <strong>prática constante</strong>, da <strong>organização do código</strong> e da <strong>busca por boas práticas</strong>.</p>
+
+    <p>Neste Módulo 02, percorremos:</p>
+    <ol>
+        <li><strong>Conceitos Fundamentais e Sintaxe</strong> — O que é CSS, como funciona, sua estrutura.</li>
+        <li><strong>Formas de Inserção e Seletores</strong> — Externo, incorporado, inline; IDs, classes e tags.</li>
+        <li><strong>Box Model</strong> — Margin, padding, border e o dimensionamento de elementos.</li>
+        <li><strong>Propriedades de Fundo</strong> — Cores, imagens, repetição, posição e fixação.</li>
+        <li><strong>Tipografia e Texto</strong> — Fontes, tamanhos, pesos, alinhamento e decoração.</li>
+        <li><strong>Links e Pseudo-classes</strong> — Estados de links, LVHA, pseudo-classes estruturais.</li>
+        <li><strong>Cores</strong> — Nomes, hexadecimal, RGB, RGBA, HSL, HSLA, gradientes e acessibilidade.</li>
+        <li><strong>Organização e Projetos</strong> — Estrutura de arquivos, BEM, performance, projeto completo.</li>
+    </ol>
+
+    <div class="destaque-verde">
+        <strong>✅ Com esse conhecimento, você está preparado para:</strong>
+        <ul>
+            <li>Criar layouts profissionais e responsivos.</li>
+            <li>Manter projetos CSS organizados e escaláveis.</li>
+            <li>Trabalhar em equipe com metodologias consistentes.</li>
+            <li>Avancar para tópicos mais avançados como <strong>Flexbox, Grid, animações, pré-processadores e frameworks</strong>.</li>
+        </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- RODAPÉ -->
+    <!-- ============================================================ -->
+    <div class="rodape-guia">
+        <p><strong>Guia Completo: CSS Fundamentos — Módulo 02</strong></p>
+        <p>Baseado no material didático da disciplina <em>Desenvolvimento de Web Sites</em> — UniAcademia</p>
+        <p>Prof. Jacimar Tavares &amp; Prof. Daves Martins &amp; Prof. Victor Vidigal</p>
+        <p style="margin-top:10px; font-size:0.85em;">Documento gerado para fins de estudo e consulta.</p>
+    </div>
+
+</div>
+    <!-- ============================================================ -->
+    <!-- RODAPÉ -->
+    <!-- ============================================================ -->
+    <div class="rodape-guia">
+        <p><strong>Guia Completo: HTML Fundamentos</strong></p>
+        <p>Baseado no material didático da disciplina <em>Desenvolvimento de Web Sites</em> — UniAcademia</p>
+        <p>Prof. Jacimar Tavares &amp; Prof. Daves Martins &amp; Prof. Victor Vidigal</p>
+        <p style="margin-top:10px; font-size:0.85em;">Documento gerado para fins de estudo e consulta.</p>
+    </div>
+
+</div>
+
+<!-- ============================================== -->
+<!-- BOTÃO HOME — COLE ESTE BLOCO ANTES DE </body>  -->
+<!-- ============================================== -->
+<a href="index.html" class="btn-home" title="Voltar à página inicial" aria-label="Voltar à página inicial">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+    </svg>
+    <span>Início</span>
+</a>
+
+<style>
+    .btn-home {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 1000;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 18px;
+        background: #2c3e50;
+        color: #ffffff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 0.9em;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 50px;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+        transition: all 0.25s ease;
+    }
+    .btn-home:hover {
+        background: #1a252f;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+        color: #ffffff;
+    }
+    .btn-home:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    .btn-home svg { flex-shrink: 0; }
+    @media (max-width: 480px) {
+        .btn-home { padding: 10px; border-radius: 50%; }
+        .btn-home span { display: none; }
+    }
+</style>
+</body>
+</html>

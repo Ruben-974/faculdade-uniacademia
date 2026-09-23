@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz — HTML Fundamentos</title>
+    <style>
+        /* ===== RESET ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f4f6f9 0%, #e8ecf3 100%);
+            min-height: 100vh;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        /* ===== CONTAINER ===== */
+        .quiz-container {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+
+        /* ===== CABEÇALHO ===== */
+        .quiz-header {
+            background: linear-gradient(135deg, #e34c26 0%, #b03a1a 100%);
+            color: #fff;
+            padding: 28px 32px;
+            border-radius: 16px 16px 0 0;
+            box-shadow: 0 4px 20px rgba(227, 76, 38, 0.2);
+        }
+
+        .quiz-header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .quiz-header h1 {
+            font-size: 1.5em;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .quiz-header h1 small {
+            display: block;
+            font-size: 0.6em;
+            font-weight: 400;
+            opacity: 0.85;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        .quiz-counter {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        /* ===== BARRA DE PROGRESSO ===== */
+        .progress-track {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #fff;
+            width: 0%;
+            border-radius: 4px;
+            transition: width 0.4s ease;
+        }
+
+        /* ===== CARD DO QUIZ ===== */
+        .quiz-card {
+            background: #fff;
+            border-radius: 0 0 16px 16px;
+            padding: 40px 40px 32px;
+            box-shadow: 0 8px 30px rgba(44, 62, 80, 0.1);
+            min-height: 420px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== TELA INICIAL ===== */
+        .tela-inicio {
+            text-align: center;
+            padding: 20px 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tela-inicio .icone {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .tela-inicio h2 {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+
+        .tela-inicio p {
+            color: #7f8c8d;
+            max-width: 460px;
+            margin: 0 auto 30px;
+        }
+
+        .tela-inicio ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 32px;
+        }
+
+        .tela-inicio li {
+            background: #fdeaea;
+            color: #b03a1a;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        /* ===== PERGUNTA ===== */
+        .tipo-badge {
+            display: inline-block;
+            font-size: 0.72em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 50px;
+            margin-bottom: 16px;
+        }
+
+        .tipo-badge.vf       { background: #d1ecf1; color: #0c5460; }
+        .tipo-badge.multipla { background: #fff3cd; color: #856404; }
+        .tipo-badge.complete { background: #d4edda; color: #155724; }
+        .tipo-badge.erro     { background: #f8d7da; color: #721c24; }
+
+        .enunciado {
+            font-size: 1.15em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 22px;
+        }
+
+        /* ===== CÓDIGO ===== */
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 18px 22px;
+            border-radius: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.92em;
+            line-height: 1.7;
+            overflow-x: auto;
+            margin-bottom: 22px;
+            white-space: pre;
+        }
+
+        .code-block .gap {
+            display: inline-block;
+            min-width: 70px;
+            padding: 0 8px;
+            background: rgba(227, 76, 38, 0.25);
+            border-bottom: 2px dashed #e34c26;
+            border-radius: 4px;
+            color: #f5a889;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .code-block .linha {
+            display: block;
+        }
+
+        .code-block .linha.destaque {
+            background: rgba(227, 76, 38, 0.18);
+            margin: 0 -22px;
+            padding: 0 22px;
+            border-left: 3px solid #e34c26;
+        }
+
+        /* ===== OPÇÕES ===== */
+        .opcoes {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .opcoes.vf-grid {
+            flex-direction: row;
+            gap: 16px;
+        }
+
+        .opcoes.vf-grid .opcao {
+            flex: 1;
+            justify-content: center;
+            padding: 22px;
+            font-size: 1.05em;
+        }
+
+        .opcao {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 20px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.98em;
+            color: #2c3e50;
+            text-align: left;
+            font-family: inherit;
+            width: 100%;
+        }
+
+        .opcao:hover:not(.desabilitada) {
+            background: #fdeaea;
+            border-color: #e34c26;
+            transform: translateX(4px);
+        }
+
+        .opcao .letra {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e34c26;
+            color: #fff;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.9em;
+        }
+
+        .opcao.vf-grid .letra {
+            display: none;
+        }
+
+        .opcao.correta {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .opcao.correta .letra { background: #28a745; }
+
+        .opcao.errada {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+
+        .opcao.errada .letra { background: #dc3545; }
+
+        .opcao.desabilitada {
+            cursor: not-allowed;
+            opacity: 0.85;
+        }
+
+        /* ===== FEEDBACK ===== */
+        .feedback {
+            padding: 16px 20px;
+            border-radius: 10px;
+            font-size: 0.95em;
+            margin-bottom: 22px;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .feedback.show { display: block; }
+
+        .feedback.sucesso {
+            background: #d4edda;
+            border-left: 5px solid #28a745;
+            color: #155724;
+        }
+
+        .feedback.erro {
+            background: #f8d7da;
+            border-left: 5px solid #dc3545;
+            color: #721c24;
+        }
+
+        .feedback strong {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 1.05em;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== NAVEGAÇÃO ===== */
+        .quiz-footer {
+            margin-top: auto;
+            padding-top: 24px;
+            border-top: 2px solid #ecf0f1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 12px 26px;
+            border-radius: 10px;
+            font-size: 0.95em;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: #e34c26;
+            color: #fff;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: #b03a1a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(227, 76, 38, 0.3);
+        }
+
+        .btn-primary:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .btn-outline {
+            background: #fff;
+            color: #e34c26;
+            border: 2px solid #e34c26;
+        }
+
+        .btn-outline:hover:not(:disabled) {
+            background: #e34c26;
+            color: #fff;
+        }
+
+        .btn-outline:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: #7f8c8d;
+        }
+
+        .btn-ghost:hover {
+            color: #2c3e50;
+        }
+
+        /* ===== TELA DE RESULTADO ===== */
+        .tela-resultado {
+            text-align: center;
+            padding: 20px 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tela-resultado .icone {
+            font-size: 4.5em;
+            margin-bottom: 16px;
+        }
+
+        .tela-resultado h2 {
+            font-size: 1.9em;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .tela-resultado .pontuacao {
+            font-size: 3.2em;
+            font-weight: 800;
+            color: #e34c26;
+            margin: 16px 0;
+            letter-spacing: -2px;
+        }
+
+        .tela-resultado .pontuacao small {
+            font-size: 0.4em;
+            font-weight: 600;
+            color: #95a5a6;
+            letter-spacing: 0;
+        }
+
+        .tela-resultado p {
+            color: #7f8c8d;
+            max-width: 420px;
+            margin: 0 auto 30px;
+        }
+
+        /* ===== ESCONDER / MOSTRAR TELAS ===== */
+        .tela { display: none; }
+        .tela.ativa { display: flex; flex-direction: column; flex: 1; }
+
+        /* ===== RESPONSIVIDADE ===== */
+        @media (max-width: 640px) {
+            .quiz-container { padding: 20px 12px 60px; }
+            .quiz-card      { padding: 28px 22px 22px; }
+            .quiz-header    { padding: 22px 22px; }
+            .quiz-header h1 { font-size: 1.2em; }
+            .opcoes.vf-grid { flex-direction: column; }
+            .enunciado      { font-size: 1.05em; }
+            .quiz-footer    { flex-direction: column-reverse; }
+            .quiz-footer .btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================ -->
+    <!-- BOTÃO HOME                                                    -->
+    <!-- ============================================================ -->
+    <a href="index.html" class="btn-home" title="Voltar à página inicial" aria-label="Voltar à página inicial">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        <span>Início</span>
+    </a>
+
+    <style>
+        .btn-home {
+            position: fixed; top: 20px; left: 20px; z-index: 1000;
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 18px; background: #2c3e50; color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 0.9em; font-weight: 600; text-decoration: none;
+            border-radius: 50px; box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+            transition: all 0.25s ease;
+        }
+        .btn-home:hover  { background: #1a252f; transform: translateY(-2px); color: #fff; }
+        .btn-home:active { transform: translateY(0); }
+        .btn-home svg    { flex-shrink: 0; }
+        @media (max-width: 480px) {
+            .btn-home { padding: 10px; border-radius: 50%; }
+            .btn-home span { display: none; }
+        }
+    </style>
+
+    <!-- ============================================================ -->
+    <!-- CONTAINER DO QUIZ                                             -->
+    <!-- ============================================================ -->
+    <div class="quiz-container">
+
+        <!-- CABEÇALHO -->
+        <header class="quiz-header">
+            <div class="quiz-header-top">
+                <h1>
+                    Quiz — HTML Fundamentos
+                    <small>Módulo 01</small>
+                </h1>
+                <div class="quiz-counter" id="contador">1 / 4</div>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" id="progresso"></div>
+            </div>
+        </header>
+
+        <!-- CARD PRINCIPAL -->
+        <main class="quiz-card">
+
+            <!-- ===== TELA 1: INÍCIO ===== -->
+            <section class="tela ativa" id="tela-inicio">
+                <div class="tela-inicio">
+                    <div class="icone">📝</div>
+                    <h2>Pronto para começar?</h2>
+                    <p>Responda as questões abaixo. Cada uma é de um tipo diferente, para você se familiarizar com o formato.</p>
+                    <ul>
+                        <li>✔ Verdadeiro ou Falso</li>
+                        <li>✔ Múltipla Escolha</li>
+                        <li>✔ Complete o Código</li>
+                        <li>✔ Aponte o Erro</li>
+                    </ul>
+                    <button class="btn btn-primary" id="btn-iniciar">
+                        🚀 Iniciar Quiz
+                    </button>
+                </div>
+            </section>
+
+            <!-- ===== TELA 2: QUESTÃO ===== -->
+            <section class="tela" id="tela-questao">
+                <span class="tipo-badge" id="tipo-badge"></span>
+                <p class="enunciado" id="enunciado"></p>
+
+                <div id="area-codigo"></div>
+                <div class="opcoes" id="opcoes"></div>
+                <div class="feedback" id="feedback"></div>
+
+                <!-- NAVEGAÇÃO -->
+                <div class="quiz-footer">
+                    <button class="btn btn-ghost" id="btn-voltar" disabled>← Anterior</button>
+                    <button class="btn btn-primary" id="btn-proximo" disabled>Próxima →</button>
+                </div>
+            </section>
+
+            <!-- ===== TELA 3: RESULTADO ===== -->
+            <section class="tela" id="tela-resultado">
+                <div class="tela-resultado">
+                    <div class="icone" id="resultado-icone">🏆</div>
+                    <h2 id="resultado-titulo">Quiz concluído!</h2>
+                    <div class="pontuacao" id="resultado-pontuacao">0<small>/0</small></div>
+                    <p id="resultado-mensagem">Confira abaixo seu desempenho.</p>
+                    <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+                        <button class="btn btn-primary" id="btn-refazer">🔄 Refazer Quiz</button>
+                        <a href="index.html" class="btn btn-outline">🏠 Voltar ao Início</a>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- JAVASCRIPT                                                    -->
+    <!-- ============================================================ -->
+    <script>
+        /* ============================================================
+           BANCO DE QUESTÕES (substituir por fetch() do banco depois)
+           ------------------------------------------------------------
+           Tipos suportados:
+             - "vf"       → Verdadeiro ou Falso         (resposta: true/false)
+             - "multipla" → Múltipla escolha            (opcoes + correta)
+             - "complete" → Completar código            (codigo com {{GAP}} + opcoes + correta)
+             - "erro"     → Apontar erro no código      (codigo + opcoes + correta)
+           ============================================================ */
+        const QUESTOES = [
+            // ----- EXEMPLO 1: VERDADEIRO OU FALSO -----
+            {
+                tipo: "vf",
+                enunciado: "A tag <body> contém o conteúdo visível da página, como textos e imagens.",
+                resposta: true,
+                explicacao: "Isso mesmo! O <body> é onde fica todo o conteúdo que o usuário vê. O <head> contém metadados, e o <html> envolve tudo."
+            },
+
+            // ----- EXEMPLO 2: MÚLTIPLA ESCOLHA -----
+            {
+                tipo: "multipla",
+                enunciado: "Qual tag é usada para criar uma lista NÃO ordenada em HTML?",
+                opcoes: ["<ol>", "<ul>", "<li>", "<dl>"],
+                correta: 1,
+                explicacao: "<ul> = Unordered List (lista não ordenada). A <ol> cria listas ordenadas, <li> é o item da lista, e <dl> é uma lista de definição."
+            },
+
+            // ----- EXEMPLO 3: COMPLETE O CÓDIGO -----
+            {
+                tipo: "complete",
+                enunciado: "Complete o código abaixo para criar um link para o site exemplo.com:",
+                codigo: `<a {{GAP}}="https://exemplo.com">Visitar site</a>`,
+                opcoes: ["src", "href", "link", "url"],
+                correta: 1,
+                explicacao: "O atributo href (hypertext reference) é o que define o destino de um link. O src é usado em imagens, scripts e iframes."
+            },
+
+            // ----- EXEMPLO 4: APONTE O ERRO -----
+            {
+                tipo: "erro",
+                enunciado: "Há um erro no código abaixo. Aponte qual é:",
+                codigo: `<ul>
+  <li>Primeiro item
+  <li>Segundo item</li>
+  <li>Terceiro item</li>
+</ul>`,
+                opcoes: [
+                    "A tag <ul> deveria ser <ol>",
+                    "Falta fechar a tag </li> do primeiro item",
+                    "A tag <li> não pode ser usada dentro de <ul>",
+                    "O código está correto"
+                ],
+                correta: 1,
+                explicacao: "O primeiro <li> foi aberto mas nunca fechado com </li>. Apesar de muitos navegadores 'consertarem' isso automaticamente, o correto é sempre fechar todas as tags."
+            }
+        ];
+
+        /* ============================================================
+           ESTADO DO QUIZ
+           ============================================================ */
+        const estado = {
+            indiceAtual: 0,
+            respostas: [],   // true = acertou, false = errou, null = não respondeu
+            selecionadas: [] // índice da opção marcada (ou null)
+        };
+
+        /* ============================================================
+           REFERÊNCIAS AOS ELEMENTOS
+           ============================================================ */
+        const $ = (id) => document.getElementById(id);
+
+        const telas = {
+            inicio:    $("tela-inicio"),
+            questao:   $("tela-questao"),
+            resultado: $("tela-resultado")
+        };
+
+        /* ============================================================
+           FUNÇÕES AUXILIARES
+           ============================================================ */
+        function mostrarTela(nome) {
+            Object.values(telas).forEach(t => t.classList.remove("ativa"));
+            telas[nome].classList.add("ativa");
+        }
+
+        function escaparHTML(str) {
+            return String(str)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;");
+        }
+
+        function atualizarProgresso() {
+            const total = QUESTOES.length;
+            const atual = estado.indiceAtual + 1;
+            $("contador").textContent = `${atual} / ${total}`;
+            $("progresso").style.width = `${(atual / total) * 100}%`;
+        }
+
+        /* ============================================================
+           RENDERIZAÇÃO DA QUESTÃO
+           ============================================================ */
+        function renderizarQuestao() {
+            const q = QUESTOES[estado.indiceAtual];
+
+            atualizarProgresso();
+
+            // ----- Badge do tipo -----
+            const badges = {
+                vf:       { texto: "Verdadeiro ou Falso", classe: "vf" },
+                multipla: { texto: "Múltipla Escolha",    classe: "multipla" },
+                complete: { texto: "Complete o Código",   classe: "complete" },
+                erro:     { texto: "Aponte o Erro",       classe: "erro" }
+            };
+            const b = badges[q.tipo];
+            const badge = $("tipo-badge");
+            badge.textContent = b.texto;
+            badge.className = "tipo-badge " + b.classe;
+
+            // ----- Enunciado -----
+            $("enunciado").textContent = q.enunciado;
+
+            // ----- Área de código (se houver) -----
+            const areaCodigo = $("area-codigo");
+            areaCodigo.innerHTML = "";
+            if (q.codigo) {
+                const bloco = document.createElement("div");
+                bloco.className = "code-block";
+
+                let codigoEscapado = escaparHTML(q.codigo);
+                codigoEscapado = codigoEscapado.replace(
+                    /\{\{GAP\}\}/g,
+                    '<span class="gap">???</span>'
+                );
+                bloco.innerHTML = codigoEscapado;
+                areaCodigo.appendChild(bloco);
+            }
+
+            // ----- Opções -----
+            const opcoesEl = $("opcoes");
+            opcoesEl.innerHTML = "";
+            opcoesEl.classList.toggle("vf-grid", q.tipo === "vf");
+
+            if (q.tipo === "vf") {
+                criarOpcao("Verdadeiro", true, opcoesEl);
+                criarOpcao("Falso", false, opcoesEl);
+            } else {
+                const letras = ["A", "B", "C", "D", "E"];
+                q.opcoes.forEach((texto, i) => {
+                    criarOpcao(texto, i, opcoesEl, letras[i]);
+                });
+            }
+
+            // ----- Feedback -----
+            $("feedback").className = "feedback";
+            $("feedback").innerHTML = "";
+
+            // ----- Botões de navegação -----
+            $("btn-voltar").disabled = estado.indiceAtual === 0;
+            $("btn-proximo").disabled = true;
+            $("btn-proximo").textContent =
+                estado.indiceAtual === QUESTOES.length - 1
+                    ? "Finalizar ✓"
+                    : "Próxima →";
+        }
+
+        function criarOpcao(texto, valor, container, letra) {
+            const btn = document.createElement("button");
+            btn.className = "opcao";
+            btn.type = "button";
+
+            if (letra) {
+                const span = document.createElement("span");
+                span.className = "letra";
+                span.textContent = letra;
+                btn.appendChild(span);
+            }
+
+            const spanTexto = document.createElement("span");
+            spanTexto.textContent = texto;
+            btn.appendChild(spanTexto);
+
+            btn.addEventListener("click", () => responder(valor));
+            container.appendChild(btn);
+        }
+
+        /* ============================================================
+           RESPOSTA DO USUÁRIO
+           ============================================================ */
+        function responder(valor) {
+            const q = QUESTOES[estado.indiceAtual];
+            const opcoesEl = $("opcoes").querySelectorAll(".opcao");
+
+            // Descobre índice da correta (para vf: true = 0, false = 1)
+            let indiceCorreto;
+            if (q.tipo === "vf") {
+                indiceCorreto = q.resposta === true ? 0 : 1;
+            } else {
+                indiceCorreto = q.correta;
+            }
+
+            // Descobre índice escolhido
+            let indiceEscolhido;
+            if (q.tipo === "vf") {
+                indiceEscolhido = valor === true ? 0 : 1;
+            } else {
+                indiceEscolhido = valor;
+            }
+
+            const acertou = indiceEscolhido === indiceCorreto;
+
+            // Desabilita todas as opções
+            opcoesEl.forEach(op => op.classList.add("desabilitada"));
+
+            // Marca a correta e a escolhida (se errou)
+            opcoesEl[indiceCorreto].classList.add("correta");
+            if (!acertou) {
+                opcoesEl[indiceEscolhido].classList.add("errada");
+            }
+
+            // Registra no estado
+            estado.respostas[estado.indiceAtual] = acertou;
+            estado.selecionadas[estado.indiceAtual] = indiceEscolhido;
+
+            // Mostra feedback
+            const fb = $("feedback");
+            fb.className = "feedback show " + (acertou ? "sucesso" : "erro");
+            fb.innerHTML = `
+                <strong>${acertou ? "✅ Resposta correta!" : "❌ Resposta incorreta"}</strong>
+                ${q.explicacao}
+            `;
+
+            // Habilita botão próximo
+            $("btn-proximo").disabled = false;
+        }
+
+        /* ============================================================
+           NAVEGAÇÃO
+           ============================================================ */
+        $("btn-voltar").addEventListener("click", () => {
+            if (estado.indiceAtual > 0) {
+                estado.indiceAtual--;
+                renderizarQuestao();
+                restaurarRespostaSeExistir();
+            }
+        });
+
+        $("btn-proximo").addEventListener("click", () => {
+            if (estado.indiceAtual < QUESTOES.length - 1) {
+                estado.indiceAtual++;
+                renderizarQuestao();
+                restaurarRespostaSeExistir();
+            } else {
+                mostrarResultado();
+            }
+        });
+
+        function restaurarRespostaSeExistir() {
+            const resp = estado.respostas[estado.indiceAtual];
+            if (resp === undefined) return;
+
+            const q = QUESTOES[estado.indiceAtual];
+            const opcoesEl = $("opcoes").querySelectorAll(".opcao");
+            const escolhido = estado.selecionadas[estado.indiceAtual];
+
+            let indiceCorreto;
+            if (q.tipo === "vf") {
+                indiceCorreto = q.resposta === true ? 0 : 1;
+            } else {
+                indiceCorreto = q.correta;
+            }
+
+            opcoesEl.forEach(op => op.classList.add("desabilitada"));
+            opcoesEl[indiceCorreto].classList.add("correta");
+            if (!resp) opcoesEl[escolhido].classList.add("errada");
+
+            const fb = $("feedback");
+            fb.className = "feedback show " + (resp ? "sucesso" : "erro");
+            fb.innerHTML = `
+                <strong>${resp ? "✅ Resposta correta!" : "❌ Resposta incorreta"}</strong>
+                ${q.explicacao}
+            `;
+            $("btn-proximo").disabled = false;
+        }
+
+        /* ============================================================
+           RESULTADO FINAL
+           ============================================================ */
+        function mostrarResultado() {
+            const total = QUESTOES.length;
+            const acertos = estado.respostas.filter(r => r === true).length;
+            const percentual = Math.round((acertos / total) * 100);
+
+            let icone, titulo, mensagem;
+            if (percentual >= 80) {
+                icone = "🏆"; titulo = "Excelente!";
+                mensagem = "Você dominou o conteúdo. Continue assim!";
+            } else if (percentual >= 60) {
+                icone = "👏"; titulo = "Muito bom!";
+                mensagem = "Bom desempenho! Revise os pontos que errou para fixar melhor.";
+            } else if (percentual >= 40) {
+                icone = "📚"; titulo = "Continue estudando";
+                mensagem = "Você está no caminho. Revise o material e tente novamente.";
+            } else {
+                icone = "💪"; titulo = "Não desanime!";
+                mensagem = "A prática leva à perfeição. Volte ao guia e refaça o quiz.";
+            }
+
+            $("resultado-icone").textContent = icone;
+            $("resultado-titulo").textContent = titulo;
+            $("resultado-pontuacao").innerHTML =
+                `${acertos}<small>/${total}</small>`;
+            $("resultado-mensagem").textContent = mensagem;
+
+            mostrarTela("resultado");
+        }
+
+        /* ============================================================
+           INICIAR / REFAZER
+           ============================================================ */
+        function iniciarQuiz() {
+            estado.indiceAtual = 0;
+            estado.respostas = [];
+            estado.selecionadas = [];
+            renderizarQuestao();
+            mostrarTela("questao");
+        }
+
+        $("btn-iniciar").addEventListener("click", iniciarQuiz);
+        $("btn-refazer").addEventListener("click", iniciarQuiz);
+    </script>
+
+</body>
+</html>

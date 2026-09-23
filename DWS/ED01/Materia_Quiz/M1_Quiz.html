@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz — HTML Fundamentos</title>
+    <style>
+        /* ===== RESET ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f4f6f9 0%, #e8ecf3 100%);
+            min-height: 100vh;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        /* ===== CONTAINER ===== */
+        .quiz-container {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+
+        /* ===== CABEÇALHO ===== */
+        .quiz-header {
+            background: linear-gradient(135deg, #e34c26 0%, #b03a1a 100%);
+            color: #fff;
+            padding: 28px 32px;
+            border-radius: 16px 16px 0 0;
+            box-shadow: 0 4px 20px rgba(227, 76, 38, 0.2);
+        }
+
+        .quiz-header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .quiz-header h1 {
+            font-size: 1.5em;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .quiz-header h1 small {
+            display: block;
+            font-size: 0.6em;
+            font-weight: 400;
+            opacity: 0.85;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        .quiz-counter {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        /* ===== BARRA DE PROGRESSO ===== */
+        .progress-track {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #fff;
+            width: 0%;
+            border-radius: 4px;
+            transition: width 0.4s ease;
+        }
+
+        /* ===== CARD DO QUIZ ===== */
+        .quiz-card {
+            background: #fff;
+            border-radius: 0 0 16px 16px;
+            padding: 40px 40px 32px;
+            box-shadow: 0 8px 30px rgba(44, 62, 80, 0.1);
+            min-height: 420px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== TELA INICIAL ===== */
+        .tela-inicio {
+            text-align: center;
+            padding: 20px 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tela-inicio .icone {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .tela-inicio h2 {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+
+        .tela-inicio p {
+            color: #7f8c8d;
+            max-width: 460px;
+            margin: 0 auto 30px;
+        }
+
+        .tela-inicio ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 32px;
+        }
+
+        .tela-inicio li {
+            background: #fdeaea;
+            color: #b03a1a;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        /* ===== AVISO DE EMBARALHAMENTO ===== */
+        .aviso-aleatorio {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #e8f0fe;
+            color: #1a5276;
+            border: 1px solid #b8d4f0;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.82em;
+            font-weight: 600;
+            margin-bottom: 26px;
+        }
+
+        /* ===== PERGUNTA ===== */
+        .tipo-badge {
+            display: inline-block;
+            font-size: 0.72em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 50px;
+            margin-bottom: 16px;
+        }
+
+        .tipo-badge.vf       { background: #d1ecf1; color: #0c5460; }
+        .tipo-badge.multipla { background: #fff3cd; color: #856404; }
+        .tipo-badge.complete { background: #d4edda; color: #155724; }
+        .tipo-badge.erro     { background: #f8d7da; color: #721c24; }
+
+        .enunciado {
+            font-size: 1.15em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 22px;
+        }
+
+        /* ===== CÓDIGO ===== */
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 18px 22px;
+            border-radius: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.92em;
+            line-height: 1.7;
+            overflow-x: auto;
+            margin-bottom: 22px;
+            white-space: pre;
+        }
+
+        .code-block .gap {
+            display: inline-block;
+            min-width: 70px;
+            padding: 0 8px;
+            background: rgba(227, 76, 38, 0.25);
+            border-bottom: 2px dashed #e34c26;
+            border-radius: 4px;
+            color: #f5a889;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* ===== OPÇÕES ===== */
+        .opcoes {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .opcoes.vf-grid {
+            flex-direction: row;
+            gap: 16px;
+        }
+
+        .opcoes.vf-grid .opcao {
+            flex: 1;
+            justify-content: center;
+            padding: 22px;
+            font-size: 1.05em;
+        }
+
+        .opcao {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 20px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.98em;
+            color: #2c3e50;
+            text-align: left;
+            font-family: inherit;
+            width: 100%;
+        }
+
+        .opcao:hover:not(.desabilitada) {
+            background: #fdeaea;
+            border-color: #e34c26;
+            transform: translateX(4px);
+        }
+
+        .opcao .letra {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e34c26;
+            color: #fff;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.9em;
+        }
+
+        .opcao.vf-grid .letra { display: none; }
+
+        .opcao.correta {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+        .opcao.correta .letra { background: #28a745; }
+
+        .opcao.errada {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+        .opcao.errada .letra { background: #dc3545; }
+
+        .opcao.desabilitada {
+            cursor: not-allowed;
+            opacity: 0.85;
+        }
+
+        /* ===== FEEDBACK ===== */
+        .feedback {
+            padding: 0;
+            border-radius: 12px;
+            font-size: 0.95em;
+            margin-bottom: 24px;
+            display: none;
+            overflow: hidden;
+            animation: fadeIn 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .feedback.show { display: block; }
+
+        .feedback.sucesso {
+            background: #f0f9f2;
+            border-color: #b7e0c1;
+        }
+
+        .feedback.erro {
+            background: #fdf2f3;
+            border-color: #f0c2c7;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cabeçalho do feedback */
+        .fb-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 26px;
+            font-weight: 700;
+            font-size: 1em;
+        }
+
+        .feedback.sucesso .fb-header {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .feedback.erro .fb-header {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .fb-header .icone { font-size: 1.3em; }
+
+        /* Comparativo de resposta */
+        .fb-respostas {
+            padding: 20px 26px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .fb-linha {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            font-size: 0.92em;
+            line-height: 1.55;
+        }
+
+        .fb-linha .rotulo {
+            flex-shrink: 0;
+            font-weight: 700;
+            min-width: 130px;
+            color: #7f8c8d;
+            font-size: 0.88em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding-top: 2px;
+        }
+
+        .fb-linha .valor {
+            flex: 1;
+            color: #2c3e50;
+            word-break: break-word;
+        }
+
+        .fb-linha .valor.correto {
+            color: #155724;
+            font-weight: 600;
+        }
+
+        .fb-linha .valor.incorreto {
+            color: #721c24;
+            font-weight: 600;
+            text-decoration: line-through;
+            text-decoration-color: rgba(114, 28, 36, 0.4);
+        }
+
+        /* Explicação */
+        .fb-explicacao {
+            padding: 18px 26px;
+            color: #2c3e50;
+            font-size: 0.93em;
+            line-height: 1.75;
+            border-top: 1px dashed rgba(0, 0, 0, 0.08);
+            margin-top: 6px;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        /* Referência ao material */
+        .fb-referencia {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px 26px 20px;
+            font-size: 0.85em;
+            color: #5d6d7e;
+            background: rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            line-height: 1.6;
+        }
+
+        .fb-referencia .icone {
+            flex-shrink: 0;
+            font-size: 1.05em;
+            line-height: 1.4;
+        }
+
+        .fb-referencia .texto { flex: 1; }
+
+        .fb-referencia strong {
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        /* ===== NAVEGAÇÃO ===== */
+        .quiz-footer {
+            margin-top: auto;
+            padding-top: 24px;
+            border-top: 2px solid #ecf0f1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 12px 26px;
+            border-radius: 10px;
+            font-size: 0.95em;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: #e34c26;
+            color: #fff;
+        }
+        .btn-primary:hover:not(:disabled) {
+            background: #b03a1a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(227, 76, 38, 0.3);
+        }
+        .btn-primary:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .btn-outline {
+            background: #fff;
+            color: #e34c26;
+            border: 2px solid #e34c26;
+        }
+        .btn-outline:hover:not(:disabled) {
+            background: #e34c26;
+            color: #fff;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: #7f8c8d;
+        }
+        .btn-ghost:hover { color: #2c3e50; }
+        .btn-ghost:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+
+        /* ===== TELA DE RESULTADO ===== */
+        .tela-resultado {
+            text-align: center;
+            padding: 20px 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tela-resultado .icone {
+            font-size: 4.5em;
+            margin-bottom: 16px;
+        }
+
+        .tela-resultado h2 {
+            font-size: 1.9em;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .tela-resultado .pontuacao {
+            font-size: 3.2em;
+            font-weight: 800;
+            color: #e34c26;
+            margin: 16px 0;
+            letter-spacing: -2px;
+        }
+
+        .tela-resultado .pontuacao small {
+            font-size: 0.4em;
+            font-weight: 600;
+            color: #95a5a6;
+            letter-spacing: 0;
+        }
+
+        .tela-resultado p {
+            color: #7f8c8d;
+            max-width: 420px;
+            margin: 0 auto 30px;
+        }
+
+        /* ===== TELAS ===== */
+        .tela { display: none; }
+        .tela.ativa { display: flex; flex-direction: column; flex: 1; }
+
+        /* ===== RESPONSIVIDADE ===== */
+        @media (max-width: 640px) {
+            .quiz-container { padding: 20px 12px 60px; }
+            .quiz-card      { padding: 28px 22px 22px; }
+            .quiz-header    { padding: 22px 22px; }
+            .quiz-header h1 { font-size: 1.2em; }
+            .opcoes.vf-grid { flex-direction: column; }
+            .enunciado      { font-size: 1.05em; }
+            .quiz-footer    { flex-direction: column-reverse; }
+            .quiz-footer .btn { width: 100%; justify-content: center; }
+            .fb-linha         { flex-direction: column; gap: 4px; }
+            .fb-linha .rotulo { min-width: auto; }
+            .fb-header,
+            .fb-respostas,
+            .fb-explicacao,
+            .fb-referencia    { padding-left: 18px; padding-right: 18px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================ -->
+    <!-- BOTÃO HOME                                                    -->
+    <!-- ============================================================ -->
+    <a href="index.html" class="btn-home" title="Voltar à página inicial" aria-label="Voltar à página inicial">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        <span>Início</span>
+    </a>
+
+    <style>
+        .btn-home {
+            position: fixed; top: 20px; left: 20px; z-index: 1000;
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 18px; background: #2c3e50; color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 0.9em; font-weight: 600; text-decoration: none;
+            border-radius: 50px; box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+            transition: all 0.25s ease;
+        }
+        .btn-home:hover  { background: #1a252f; transform: translateY(-2px); color: #fff; }
+        .btn-home:active { transform: translateY(0); }
+        .btn-home svg    { flex-shrink: 0; }
+        @media (max-width: 480px) {
+            .btn-home { padding: 10px; border-radius: 50%; }
+            .btn-home span { display: none; }
+        }
+    </style>
+
+    <!-- ============================================================ -->
+    <!-- CONTAINER DO QUIZ                                             -->
+    <!-- ============================================================ -->
+    <div class="quiz-container">
+
+        <!-- CABEÇALHO -->
+        <header class="quiz-header">
+            <div class="quiz-header-top">
+                <h1>
+                    Quiz — HTML Fundamentos
+                    <small>Módulo 01</small>
+                </h1>
+                <div class="quiz-counter" id="contador">1 / 25</div>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" id="progresso"></div>
+            </div>
+        </header>
+
+        <!-- CARD PRINCIPAL -->
+        <main class="quiz-card">
+
+            <!-- ===== TELA 1: INÍCIO ===== -->
+            <section class="tela ativa" id="tela-inicio">
+                <div class="tela-inicio">
+                    <div class="icone">📝</div>
+                    <h2>Pronto para começar?</h2>
+                    <p>Cada questão é de um tipo diferente, para você se familiarizar com o formato. As questões são sorteadas a cada tentativa.</p>
+
+                    <div class="aviso-aleatorio">
+                        🎲 As questões e alternativas são embaralhadas a cada tentativa
+                    </div>
+
+                    <ul>
+                        <li>✔ Verdadeiro ou Falso</li>
+                        <li>✔ Múltipla Escolha</li>
+                        <li>✔ Complete o Código</li>
+                        <li>✔ Aponte o Erro</li>
+                    </ul>
+                    <button class="btn btn-primary" id="btn-iniciar">
+                        🚀 Iniciar Quiz
+                    </button>
+                </div>
+            </section>
+
+            <!-- ===== TELA 2: QUESTÃO ===== -->
+            <section class="tela" id="tela-questao">
+                <span class="tipo-badge" id="tipo-badge"></span>
+                <p class="enunciado" id="enunciado"></p>
+
+                <div id="area-codigo"></div>
+                <div class="opcoes" id="opcoes"></div>
+                <div class="feedback" id="feedback"></div>
+
+                <!-- NAVEGAÇÃO -->
+                <div class="quiz-footer">
+                    <button class="btn btn-ghost" id="btn-voltar" disabled>← Anterior</button>
+                    <button class="btn btn-primary" id="btn-proximo" disabled>Próxima →</button>
+                </div>
+            </section>
+
+            <!-- ===== TELA 3: RESULTADO ===== -->
+            <section class="tela" id="tela-resultado">
+                <div class="tela-resultado">
+                    <div class="icone" id="resultado-icone">🏆</div>
+                    <h2 id="resultado-titulo">Quiz concluído!</h2>
+                    <div class="pontuacao" id="resultado-pontuacao">0<small>/0</small></div>
+                    <p id="resultado-mensagem">Confira abaixo seu desempenho.</p>
+                    <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+                        <button class="btn btn-primary" id="btn-refazer">🔄 Refazer Quiz</button>
+                        <a href="index.html" class="btn btn-outline">🏠 Voltar ao Início</a>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- JAVASCRIPT                                                    -->
+    <!-- ============================================================ -->
+    <script>
+        /* ============================================================
+           BANCO DE QUESTÕES
+           ------------------------------------------------------------
+           Estrutura:
+             tipo        → "vf" | "multipla" | "complete" | "erro"
+             enunciado   → texto da pergunta
+             opcoes      → array (não usar em "vf")
+             correta     → índice da opção correta (não usar em "vf")
+             resposta    → true/false (apenas em "vf")
+             codigo      → código HTML (opcional; em "complete" usar {{GAP}})
+             explicacao  → correção detalhada
+             referencia  → seção do material de estudo (para consulta)
+           ============================================================ */
+
+
+        const QUESTOES = [
+            /* ============================================================
+               BLOCO 1 — VERDADEIRO OU FALSO (7 questões)
+               ============================================================ */
+
+            {
+                tipo: "vf",
+                enunciado: "A tag <title> deve ficar dentro da seção <head> do documento HTML.",
+                resposta: true,
+                explicacao: "Correto! A tag <title> pertence à seção <head> e define o texto exibido na aba/barra de título do navegador — ela NÃO aparece no corpo da página. O <head> guarda metadados (charset, title, links para CSS), enquanto o <body> guarda o conteúdo visível.",
+                referencia: "Módulo 01 — Seção 1.2: Estrutura Básica do Arquivo HTML"
+            },
+
+            {
+                tipo: "vf",
+                enunciado: "A tag <ul> é usada para criar listas ordenadas em HTML.",
+                resposta: false,
+                explicacao: "Falso! A tag <ul> cria listas NÃO ordenadas (Unordered List), com marcadores como •, ○ ou ▪. Para criar listas ORDENADAS — com números, letras ou algarismos romanos — usa-se a tag <ol> (Ordered List). Ambos os tipos usam <li> para cada item.",
+                referencia: "Módulo 01 — Seção 2.2: Listas Não Ordenadas <ul>"
+            },
+
+            {
+                tipo: "vf",
+                enunciado: "A tag <img> é uma tag vazia, ou seja, não possui tag de fechamento.",
+                resposta: true,
+                explicacao: "Correto! <img> é um void element (elemento vazio). Ela se fecha em si mesma e não tem </img>. O mesmo vale para <br>, <hr> e <input>. Os dados da imagem (caminho, descrição, tamanho) são passados por atributos, não por conteúdo entre tags.",
+                referencia: "Módulo 01 — Seção 5.1: A Tag <img> e Sua Sintaxe"
+            },
+
+            {
+                tipo: "vf",
+                enunciado: "O atributo colspan mescla células verticalmente em uma tabela HTML.",
+                resposta: false,
+                explicacao: "Falso! O colspan mescla células HORIZONTALMENTE (em colunas, ← →). Quem mescla VERTICALMENTE (em linhas, ↑ ↓) é o rowspan. Mnemônico: col = coluna; row = linha.",
+                referencia: "Módulo 01 — Seção 3.5: colspan e rowspan — Mesclagem de Células"
+            },
+
+            {
+                tipo: "vf",
+                enunciado: "O HTML cria páginas estáticas, sem animação.",
+                resposta: true,
+                explicacao: "Correto! O material destaca: 'O HTML cria páginas estáticas, sem animação'. Ele define ESTRUTURA e CONTEÚDO. Para interatividade e animações, é preciso JavaScript (comportamento) e CSS (efeitos visuais). HTML sozinho não executa lógica.",
+                referencia: "Módulo 01 — Seção 1.1: O que é HTML? Definição e Propósito"
+            },
+
+            {
+                tipo: "vf",
+                enunciado: "O atributo alt é opcional em imagens e pode ser omitido sem prejuízo.",
+                resposta: false,
+                explicacao: "Falso! O alt é OBRIGATÓRIO para acessibilidade. Ele fornece descrição textual para leitores de tela e aparece quando a imagem não carrega. A única exceção é imagens puramente decorativas — nesse caso usa-se alt='' (vazio), mas nunca omitir o atributo.",
+                referencia: "Módulo 01 — Seção 5.3: O Atributo alt — Acessibilidade e Fallback"
+            },
+
+            {
+                tipo: "vf",
+                enunciado: "O método GET do formulário anexa os dados ao endereço (URL) do servidor.",
+                resposta: true,
+                explicacao: "Correto! O GET exibe os dados do formulário na própria URL (algo como pagina.php?nome=Joao&idade=25). Isso tem limite de ~2000 caracteres e baixa segurança. Já o POST envia os dados no corpo da requisição, invisíveis na URL, e é o método indicado para login, cadastro e senhas.",
+                referencia: "Módulo 01 — Seção 4.1: A Tag <form> e Atributos"
+            },
+
+            /* ============================================================
+               BLOCO 2 — MÚLTIPLA ESCOLHA (8 questões)
+               ============================================================ */
+
+            {
+                tipo: "multipla",
+                enunciado: "Qual tag é usada para criar uma lista ORDENADA em HTML?",
+                opcoes: ["<ul>", "<ol>", "<li>", "<dl>"],
+                correta: 1,
+                explicacao: "A tag <ol> (Ordered List) cria listas ordenadas com numeração (1, 2, 3), letras (A, B, C) ou algarismos romanos (I, II, III), controlados pelo atributo type. A <ul> cria listas não ordenadas, <li> representa cada item e <dl> cria listas de definição.",
+                referencia: "Módulo 01 — Seção 2.1: Listas Ordenadas <ol>"
+            },
+
+            {
+                tipo: "multipla",
+                enunciado: "Qual atributo da tag <a> define o destino do link?",
+                opcoes: ["src", "link", "href", "url"],
+                correta: 2,
+                explicacao: "O href (Hypertext REFerence) é o atributo que define para onde o link aponta. O src é usado em imagens, scripts e iframes. Os nomes 'link' e 'url' NÃO existem como atributos da tag <a>. Regra prática: href = para onde vai; src = de onde vem.",
+                referencia: "Módulo 01 — Seção 6.1: A Tag <a> e Sua Sintaxe"
+            },
+
+            {
+                tipo: "multipla",
+                enunciado: "Qual tag representa uma LINHA de tabela em HTML?",
+                opcoes: ["<td>", "<th>", "<tr>", "<table>"],
+                correta: 2,
+                explicacao: "A tag <tr> vem de 'table row' e representa uma linha da tabela. Dentro dela ficam as células: <th> (cabeçalho) e <td> (dados). A tag <table> é o contêiner principal. Estrutura padrão: <table> → <tr> → <th> e/ou <td>.",
+                referencia: "Módulo 01 — Seção 3.1: Estrutura da Tabela"
+            },
+
+            {
+                tipo: "multipla",
+                enunciado: "Qual valor do atributo type do <input> exibe asteriscos no lugar dos caracteres digitados?",
+                opcoes: ["text", "password", "hidden", "secret"],
+                correta: 1,
+                explicacao: "O type='password' mostra asteriscos (*) ou pontos enquanto o usuário digita, ocultando o conteúdo. O type='text' exibe os caracteres normalmente, e type='hidden' oculta o campo inteiro (não visível ao usuário). 'secret' não é um tipo válido em HTML.",
+                referencia: "Módulo 01 — Seção 4.2: A Tag <input> e Seus Tipos"
+            },
+
+            {
+                tipo: "multipla",
+                enunciado: "Qual tag define o título que aparece na ABA ou barra do navegador (e não no corpo da página)?",
+                opcoes: ["<h1>", "<title>", "<header>", "<caption>"],
+                correta: 1,
+                explicacao: "A tag <title> fica dentro do <head> e define o texto da aba do navegador — não é exibido no conteúdo da página. A <h1> é o título principal DENTRO do corpo. <header> é uma seção semântica do HTML5, e <caption> é o título de uma tabela.",
+                referencia: "Módulo 01 — Seção 1.2: Estrutura Básica do Arquivo HTML"
+            },
+
+            {
+                tipo: "multipla",
+                enunciado: "Qual atributo mescla células VERTICALMENTE em uma tabela HTML?",
+                opcoes: ["colspan", "rowspan", "cellspan", "merge"],
+                correta: 1,
+                explicacao: "O rowspan mescla células VERTICALMENTE (em linhas, ↑ ↓). Quem mescla horizontalmente é o colspan (em colunas, ← →). 'cellspan' e 'merge' não existem no HTML. Exemplo: <td rowspan='2'> ocupa duas linhas de altura.",
+                referencia: "Módulo 01 — Seção 3.5: colspan e rowspan — Mesclagem de Células"
+            },
+
+            {
+                tipo: "multipla",
+                enunciado: "Qual tag exibe o texto preservando EXATAMENTE os espaços, tabulações e quebras de linha como foram digitados?",
+                opcoes: ["<p>", "<br>", "<pre>", "<span>"],
+                correta: 2,
+                explicacao: "A tag <pre> (preformatted) mantém espaços, tabulações e quebras de linha exatamente como escritos no código-fonte. Isso é útil para exibir código ou arte ASCII. A <p> colapsa espaços extras, <br> força apenas uma quebra, e <span> é um container inline sem formatação especial.",
+                referencia: "Módulo 01 — Seção 7.3: Quebra de Linha (<br>) e Régua Horizontal (<hr>)"
+            },
+
+            {
+                tipo: "multipla",
+                enunciado: "Qual método HTTP envia os dados do formulário no CORPO da requisição, sem exibi-los na URL?",
+                opcoes: ["GET", "POST", "PUT", "SEND"],
+                correta: 1,
+                explicacao: "O POST envia os dados no corpo da requisição — invisíveis na URL. É o método indicado para login, cadastro e qualquer dado sensível. O GET anexa os dados à URL e é usado para buscas e filtros. PUT é usado em APIs REST, e SEND não é um método HTTP válido.",
+                referencia: "Módulo 01 — Seção 4.1: A Tag <form> e Atributos"
+            },
+
+            /* ============================================================
+               BLOCO 3 — COMPLETE O CÓDIGO (5 questões)
+               ============================================================ */
+
+            {
+                tipo: "complete",
+                enunciado: "Complete o código abaixo para criar um link para o site exemplo.com:",
+                codigo: `<a {{GAP}}="https://exemplo.com">Visitar site</a>`,
+                opcoes: ["src", "href", "link", "url"],
+                correta: 1,
+                explicacao: "O atributo correto é href (Hypertext REFerence). Ele define o DESTINO do link — para onde o navegador vai quando o usuário clicar. O src é usado em <img>, <script> e <iframe> para indicar a ORIGEM de um recurso. 'link' e 'url' não existem como atributos de <a>.",
+                referencia: "Módulo 01 — Seção 6.1: A Tag <a> e Sua Sintaxe"
+            },
+
+            {
+                tipo: "complete",
+                enunciado: "Complete o código abaixo para exibir uma imagem de foto.jpg:",
+                codigo: `<img {{GAP}}="foto.jpg" alt="Descrição da foto">`,
+                opcoes: ["src", "href", "image", "file"],
+                correta: 0,
+                explicacao: "O atributo correto é src (source). Ele especifica o CAMINHO do arquivo de imagem e é obrigatório em <img>. O href é usado em links (<a>). 'image' e 'file' não são atributos válidos em HTML. Lembre-se: src = de onde vem; href = para onde vai.",
+                referencia: "Módulo 01 — Seção 5.2: O Atributo src — A Fonte da Imagem"
+            },
+
+            {
+                tipo: "complete",
+                enunciado: "Complete o código abaixo para que a lista alfabética comece na letra C (3ª letra):",
+                codigo: `<ol type="A" {{GAP}}="3">\n  <li>Primeiro item</li>\n  <li>Segundo item</li>\n</ol>`,
+                opcoes: ["begin", "start", "from", "first"],
+                correta: 1,
+                explicacao: "O atributo start define em que VALOR a lista ordenada começa. Com type='A' e start='3', a lista inicia em C (1=A, 2=B, 3=C). O atributo 'begin', 'from' e 'first' não existem em HTML. Se start for omitido, a lista começa em 1 (ou A, ou I, dependendo do type).",
+                referencia: "Módulo 01 — Seção 2.1.3: Atributo start — Valor Inicial"
+            },
+
+            {
+                tipo: "complete",
+                enunciado: "Complete o código abaixo para criar um campo de SENHA (que oculta os caracteres):",
+                codigo: `<input type="{{GAP}}" name="senha">`,
+                opcoes: ["text", "password", "secret", "hidden"],
+                correta: 1,
+                explicacao: "O type='password' faz o navegador exibir asteriscos (*) ou pontos enquanto o usuário digita, protegendo o conteúdo contra olhares curiosos. O type='text' mostra os caracteres, 'hidden' esconde o campo inteiro (nem é exibido), e 'secret' não existe como tipo válido em HTML.",
+                referencia: "Módulo 01 — Seção 4.2: A Tag <input> e Seus Tipos"
+            },
+
+            {
+                tipo: "complete",
+                enunciado: "Complete o código abaixo para criar um link que abre o cliente de e-mail do usuário:",
+                codigo: `<a href="{{GAP}}:usuario@email.com">Enviar e-mail</a>`,
+                opcoes: ["mail", "email", "mailto", "send"],
+                correta: 2,
+                explicacao: "O prefixo correto é mailto:, que instrui o navegador a abrir o cliente de e-mail padrão do usuário com o endereço já preenchido no campo 'Para'. Uso: <a href='mailto:contato@site.com'>. Os prefixos 'mail', 'email' e 'send' não são reconhecidos. Outros prefixos válidos: tel: (telefone), sms: (mensagem de texto).",
+                referencia: "Módulo 01 — Seção 6.3: Tipos de Links — Links para E-mail"
+            },
+
+            /* ============================================================
+               BLOCO 4 — APONTE O ERRO (5 questões)
+               ============================================================ */
+
+            {
+                tipo: "erro",
+                enunciado: "Há um erro no código abaixo. Aponte qual é:",
+                codigo: `<ul>\n  <li>Primeiro item\n  <li>Segundo item</li>\n  <li>Terceiro item</li>\n</ul>`,
+                opcoes: [
+                    "A tag <ul> deveria ser <ol>",
+                    "Falta fechar a tag </li> do primeiro item",
+                    "A tag <li> não pode ser usada dentro de <ul>",
+                    "O código está correto"
+                ],
+                correta: 1,
+                explicacao: "O primeiro <li> foi aberto mas nunca fechado com </li>. Embora a maioria dos navegadores 'conserte' isso automaticamente, o código está tecnicamente incorreto. Seguir a regra de sempre fechar TODAS as tags evita bugs sutis, garante consistência entre navegadores e facilita a manutenção. O correto seria: <li>Primeiro item</li>.",
+                referencia: "Módulo 01 — Seção 1.3: Sintaxe dos Comandos HTML"
+            },
+
+            {
+                tipo: "erro",
+                enunciado: "Há um erro no código abaixo. Aponte qual é:",
+                codigo: `<img src="logo.png" width="150" height="80">`,
+                opcoes: [
+                    "width e height não podem ser usados juntos",
+                    "Falta o atributo alt, obrigatório para acessibilidade",
+                    "src deveria ser href para imagens",
+                    "O código está correto"
+                ],
+                correta: 1,
+                explicacao: "O atributo alt está ausente. Ele é OBRIGATÓRIO para acessibilidade: leitores de tela leem seu conteúdo para usuários com deficiência visual, e ele aparece quando a imagem não carrega. O correto seria: <img src='logo.png' alt='Logotipo da empresa' width='150' height='80'>. O src é o atributo correto para imagens (href é para links).",
+                referencia: "Módulo 01 — Seção 5.3: O Atributo alt — Acessibilidade e Fallback"
+            },
+
+            {
+                tipo: "erro",
+                enunciado: "Há um problema no formulário abaixo. Aponte qual é:",
+                codigo: `<form action="login.php" method="get">\n  <input type="text" name="usuario">\n  <input type="password" name="senha">\n  <input type="submit" value="Entrar">\n</form>`,
+                opcoes: [
+                    "type='password' não é válido em HTML",
+                    "Usar GET para enviar senha é inseguro; o correto é method='post'",
+                    "Falta o atributo type no <form>",
+                    "O código está correto"
+                ],
+                correta: 1,
+                explicacao: "Senhas NUNCA devem ser enviadas via GET, porque os dados ficam visíveis na URL (ex: login.php?usuario=joao&senha=1234), ficam salvos no histórico do navegador e em logs de servidor. O método POST envia os dados no corpo da requisição, tornando-os invisíveis na URL. Para login, SEMPRE use POST.",
+                referencia: "Módulo 01 — Seção 4.1: A Tag <form> e Atributos"
+            },
+
+            {
+                tipo: "erro",
+                enunciado: "Há um erro estrutural no código abaixo. Aponte qual é:",
+                codigo: `<table border="1">\n  <th>Nome</th>\n  <th>Idade</th>\n  <tr>\n    <td>Ana</td>\n    <td>20</td>\n  </tr>\n</table>`,
+                opcoes: [
+                    "A tag <table> deveria ser <tab>",
+                    "As tags <th> devem estar dentro de uma linha <tr>",
+                    "border não aceita o valor '1'",
+                    "O código está correto"
+                ],
+                correta: 1,
+                explicacao: "As tags <th> (células de cabeçalho) devem SEMPRE estar dentro de uma linha <tr>. A estrutura correta é: <table> → <tr> → <th> (cabeçalho) ou <td> (dados). Do jeito que está, os <th> estão soltos dentro da <table>, o que quebra a estrutura e gera renderização inconsistente entre navegadores.",
+                referencia: "Módulo 01 — Seção 3.1: Estrutura da Tabela"
+            },
+
+            {
+                tipo: "erro",
+                enunciado: "Há um erro estrutural no documento abaixo. Aponte qual é:",
+                codigo: `<html>\n  <body>\n    <head>\n      <title>Meu site</title>\n    </head>\n    <h1>Bem-vindo</h1>\n  </body>\n</html>`,
+                opcoes: [
+                    "A tag <title> deveria estar dentro do <body>",
+                    "A seção <head> deve vir ANTES do <body>, nunca dentro dele",
+                    "A tag <h1> não pode estar dentro do <body>",
+                    "O código está correto"
+                ],
+                correta: 1,
+                explicacao: "A estrutura correta do documento HTML é: <html> → <head> (primeiro) → <body> (depois). O <head> contém metadados (title, charset, links para CSS) e deve vir ANTES do <body>. Do jeito que está, o <head> está aninhado dentro do <body>, o que é semanticamente inválido e pode causar comportamento imprevisível nos navegadores.",
+                referencia: "Módulo 01 — Seção 1.2: Estrutura Básica do Arquivo HTML"
+            }
+        ];
+
+
+
+
+
+        /* ============================================================
+           UTILITÁRIOS DE ALEATORIEDADE
+           ============================================================ */
+
+        // Embaralha um array usando o algoritmo Fisher-Yates
+        function embaralhar(array) {
+            const copia = [...array]; // não modifica o original
+            for (let i = copia.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copia[i], copia[j]] = [copia[j], copia[i]];
+            }
+            return copia;
+        }
+
+        // Embaralha as opções de uma questão e ajusta o índice da correta
+        function embaralharOpcoes(questao) {
+            // V/F não tem opções para embaralhar
+            if (questao.tipo === "vf" || !questao.opcoes) return { ...questao };
+
+            const opcoesOriginais = [...questao.opcoes];
+
+            // Cria pares {texto, eraCorreta} para preservar a marcação
+            const pares = opcoesOriginais.map((texto, i) => ({
+                texto,
+                eraCorreta: i === questao.correta
+            }));
+
+            // Embaralha os pares
+            const paresEmbaralhados = embaralhar(pares);
+
+            // Reconstrói o array de opções e descobre o novo índice da correta
+            const novasOpcoes = paresEmbaralhados.map(p => p.texto);
+            const novoIndiceCorreto = paresEmbaralhados.findIndex(p => p.eraCorreta);
+
+            return {
+                ...questao,
+                opcoes: novasOpcoes,
+                correta: novoIndiceCorreto
+            };
+        }
+
+        /* ============================================================
+           ESTADO DO QUIZ
+           ============================================================ */
+        const estado = {
+            questoes: [],       // questões já embaralhadas (cópia)
+            indiceAtual: 0,
+            respostas: [],      // true = acertou, false = errou
+            selecionadas: []    // índice escolhido (ou null em vf)
+        };
+
+        /* ============================================================
+           REFERÊNCIAS AOS ELEMENTOS
+           ============================================================ */
+        const $ = (id) => document.getElementById(id);
+
+        const telas = {
+            inicio:    $("tela-inicio"),
+            questao:   $("tela-questao"),
+            resultado: $("tela-resultado")
+        };
+
+        /* ============================================================
+           FUNÇÕES AUXILIARES
+           ============================================================ */
+        function mostrarTela(nome) {
+            Object.values(telas).forEach(t => t.classList.remove("ativa"));
+            telas[nome].classList.add("ativa");
+        }
+
+        function escaparHTML(str) {
+            return String(str)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;");
+        }
+
+        function atualizarProgresso() {
+            const total = estado.questoes.length;
+            const atual = estado.indiceAtual + 1;
+            $("contador").textContent = `${atual} / ${total}`;
+            $("progresso").style.width = `${(atual / total) * 100}%`;
+        }
+
+        // Retorna o TEXTO da resposta correta de uma questão
+        function textoRespostaCorreta(q) {
+            if (q.tipo === "vf") {
+                return q.resposta === true ? "Verdadeiro" : "Falso";
+            }
+            return q.opcoes[q.correta];
+        }
+
+        // Retorna o TEXTO da resposta escolhida pelo usuário
+        function textoRespostaEscolhida(q, indiceEscolhido) {
+            if (q.tipo === "vf") {
+                return indiceEscolhido === 0 ? "Verdadeiro" : "Falso";
+            }
+            return q.opcoes[indiceEscolhido];
+        }
+
+        /* ============================================================
+           RENDERIZAÇÃO DA QUESTÃO
+           ============================================================ */
+        function renderizarQuestao() {
+            const q = estado.questoes[estado.indiceAtual];
+
+            atualizarProgresso();
+
+            // ----- Badge do tipo -----
+            const badges = {
+                vf:       { texto: "Verdadeiro ou Falso", classe: "vf" },
+                multipla: { texto: "Múltipla Escolha",    classe: "multipla" },
+                complete: { texto: "Complete o Código",   classe: "complete" },
+                erro:     { texto: "Aponte o Erro",       classe: "erro" }
+            };
+            const b = badges[q.tipo];
+            const badge = $("tipo-badge");
+            badge.textContent = b.texto;
+            badge.className = "tipo-badge " + b.classe;
+
+            // ----- Enunciado -----
+            $("enunciado").textContent = q.enunciado;
+
+            // ----- Área de código (se houver) -----
+            const areaCodigo = $("area-codigo");
+            areaCodigo.innerHTML = "";
+            if (q.codigo) {
+                const bloco = document.createElement("div");
+                bloco.className = "code-block";
+
+                let codigoEscapado = escaparHTML(q.codigo);
+                codigoEscapado = codigoEscapado.replace(
+                    /\{\{GAP\}\}/g,
+                    '<span class="gap">???</span>'
+                );
+                bloco.innerHTML = codigoEscapado;
+                areaCodigo.appendChild(bloco);
+            }
+
+            // ----- Opções -----
+            const opcoesEl = $("opcoes");
+            opcoesEl.innerHTML = "";
+            opcoesEl.classList.toggle("vf-grid", q.tipo === "vf");
+
+            if (q.tipo === "vf") {
+                criarOpcao("Verdadeiro", true, opcoesEl);
+                criarOpcao("Falso", false, opcoesEl);
+            } else {
+                const letras = ["A", "B", "C", "D", "E"];
+                q.opcoes.forEach((texto, i) => {
+                    criarOpcao(texto, i, opcoesEl, letras[i]);
+                });
+            }
+
+            // ----- Feedback -----
+            $("feedback").className = "feedback";
+            $("feedback").innerHTML = "";
+
+            // ----- Botões de navegação -----
+            $("btn-voltar").disabled = estado.indiceAtual === 0;
+            $("btn-proximo").disabled = true;
+            $("btn-proximo").textContent =
+                estado.indiceAtual === estado.questoes.length - 1
+                    ? "Finalizar ✓"
+                    : "Próxima →";
+        }
+
+        function criarOpcao(texto, valor, container, letra) {
+            const btn = document.createElement("button");
+            btn.className = "opcao";
+            btn.type = "button";
+
+            if (letra) {
+                const span = document.createElement("span");
+                span.className = "letra";
+                span.textContent = letra;
+                btn.appendChild(span);
+            }
+
+            const spanTexto = document.createElement("span");
+            spanTexto.textContent = texto;
+            btn.appendChild(spanTexto);
+
+            btn.addEventListener("click", () => responder(valor));
+            container.appendChild(btn);
+        }
+
+        /* ============================================================
+           RESPOSTA DO USUÁRIO
+           ============================================================ */
+        function responder(valor) {
+            const q = estado.questoes[estado.indiceAtual];
+            const opcoesEl = $("opcoes").querySelectorAll(".opcao");
+
+            // Descobre índice da correta
+            let indiceCorreto;
+            if (q.tipo === "vf") {
+                indiceCorreto = q.resposta === true ? 0 : 1;
+            } else {
+                indiceCorreto = q.correta;
+            }
+
+            // Descobre índice escolhido
+            let indiceEscolhido;
+            if (q.tipo === "vf") {
+                indiceEscolhido = valor === true ? 0 : 1;
+            } else {
+                indiceEscolhido = valor;
+            }
+
+            const acertou = indiceEscolhido === indiceCorreto;
+
+            // Desabilita todas as opções
+            opcoesEl.forEach(op => op.classList.add("desabilitada"));
+
+            // Marca a correta e a escolhida (se errou)
+            opcoesEl[indiceCorreto].classList.add("correta");
+            if (!acertou) {
+                opcoesEl[indiceEscolhido].classList.add("errada");
+            }
+
+            // Registra no estado
+            estado.respostas[estado.indiceAtual] = acertou;
+            estado.selecionadas[estado.indiceAtual] = indiceEscolhido;
+
+            // Mostra feedback enriquecido
+            renderizarFeedback(q, acertou, indiceEscolhido);
+
+            // Habilita botão próximo
+            $("btn-proximo").disabled = false;
+        }
+
+        /* ============================================================
+           FEEDBACK ENRIQUECIDO (versão segura, sem innerHTML)
+           ============================================================ */
+        function renderizarFeedback(q, acertou, indiceEscolhido) {
+            const fb = $("feedback");
+            fb.className = "feedback show " + (acertou ? "sucesso" : "erro");
+            fb.innerHTML = ""; // limpa
+
+            const textoCorreto   = textoRespostaCorreta(q);
+            const textoEscolhido = textoRespostaEscolhida(q, indiceEscolhido);
+
+            // ----- Cabeçalho -----
+            const header = document.createElement("div");
+            header.className = "fb-header";
+
+            const iconeHeader = document.createElement("span");
+            iconeHeader.className = "icone";
+            iconeHeader.textContent = acertou ? "✅" : "❌";
+
+            const tituloHeader = document.createElement("span");
+            tituloHeader.textContent = acertou
+                ? "Resposta correta!"
+                : "Resposta incorreta";
+
+            header.append(iconeHeader, tituloHeader);
+            fb.appendChild(header);
+
+            // ----- Comparativo de respostas -----
+            const respostas = document.createElement("div");
+            respostas.className = "fb-respostas";
+
+            if (!acertou) {
+                respostas.appendChild(
+                    criarLinhaResposta("Sua resposta", textoEscolhido, "incorreto")
+                );
+            }
+            respostas.appendChild(
+                criarLinhaResposta(
+                    acertou ? "Resposta" : "Resposta correta",
+                    textoCorreto,
+                    "correto"
+                )
+            );
+            fb.appendChild(respostas);
+
+            // ----- Explicação (textContent → preserva < > literalmente) -----
+            const explicacao = document.createElement("div");
+            explicacao.className = "fb-explicacao";
+            explicacao.textContent = q.explicacao;
+            fb.appendChild(explicacao);
+
+            // ----- Referência ao material -----
+            if (q.referencia) {
+                const ref = document.createElement("div");
+                ref.className = "fb-referencia";
+
+                const iconeRef = document.createElement("span");
+                iconeRef.className = "icone";
+                iconeRef.textContent = "📖";
+
+                const textoRef = document.createElement("span");
+                textoRef.className = "texto";
+
+                const strong = document.createElement("strong");
+                strong.textContent = "Para revisar: ";
+
+                const spanRef = document.createElement("span");
+                spanRef.textContent = q.referencia;
+
+                textoRef.append(strong, spanRef);
+                ref.append(iconeRef, textoRef);
+                fb.appendChild(ref);
+            }
+        }
+
+        // Helper: cria uma linha "RÓTULO   valor"
+        function criarLinhaResposta(rotulo, valor, tipo) {
+            const linha = document.createElement("div");
+            linha.className = "fb-linha";
+
+            const spanRotulo = document.createElement("span");
+            spanRotulo.className = "rotulo";
+            spanRotulo.textContent = rotulo;
+
+            const spanValor = document.createElement("span");
+            spanValor.className = "valor " + tipo;
+            spanValor.textContent = valor;
+
+            linha.append(spanRotulo, spanValor);
+            return linha;
+        }
+
+        /* ============================================================
+           NAVEGAÇÃO
+           ============================================================ */
+        $("btn-voltar").addEventListener("click", () => {
+            if (estado.indiceAtual > 0) {
+                estado.indiceAtual--;
+                renderizarQuestao();
+                restaurarRespostaSeExistir();
+            }
+        });
+
+        $("btn-proximo").addEventListener("click", () => {
+            if (estado.indiceAtual < estado.questoes.length - 1) {
+                estado.indiceAtual++;
+                renderizarQuestao();
+                restaurarRespostaSeExistir();
+            } else {
+                mostrarResultado();
+            }
+        });
+
+        function restaurarRespostaSeExistir() {
+            const resp = estado.respostas[estado.indiceAtual];
+            if (resp === undefined) return;
+
+            const q = estado.questoes[estado.indiceAtual];
+            const opcoesEl = $("opcoes").querySelectorAll(".opcao");
+            const escolhido = estado.selecionadas[estado.indiceAtual];
+
+            let indiceCorreto;
+            if (q.tipo === "vf") {
+                indiceCorreto = q.resposta === true ? 0 : 1;
+            } else {
+                indiceCorreto = q.correta;
+            }
+
+            opcoesEl.forEach(op => op.classList.add("desabilitada"));
+            opcoesEl[indiceCorreto].classList.add("correta");
+            if (!resp) opcoesEl[escolhido].classList.add("errada");
+
+            renderizarFeedback(q, resp, escolhido);
+            $("btn-proximo").disabled = false;
+        }
+
+        /* ============================================================
+           RESULTADO FINAL
+           ============================================================ */
+        function mostrarResultado() {
+            const total = estado.questoes.length;
+            const acertos = estado.respostas.filter(r => r === true).length;
+            const percentual = Math.round((acertos / total) * 100);
+
+            let icone, titulo, mensagem;
+            if (percentual >= 80) {
+                icone = "🏆"; titulo = "Excelente!";
+                mensagem = "Você dominou o conteúdo. Continue assim!";
+            } else if (percentual >= 60) {
+                icone = "👏"; titulo = "Muito bom!";
+                mensagem = "Bom desempenho! Revise os pontos que errou para fixar melhor.";
+            } else if (percentual >= 40) {
+                icone = "📚"; titulo = "Continue estudando";
+                mensagem = "Você está no caminho. Revise o material e tente novamente.";
+            } else {
+                icone = "💪"; titulo = "Não desanime!";
+                mensagem = "A prática leva à perfeição. Volte ao guia e refaça o quiz.";
+            }
+
+            $("resultado-icone").textContent = icone;
+            $("resultado-titulo").textContent = titulo;
+            $("resultado-pontuacao").innerHTML = `${acertos}<small>/${total}</small>`;
+            $("resultado-mensagem").textContent = mensagem;
+
+            mostrarTela("resultado");
+        }
+
+        /* ============================================================
+           INICIAR / REFAZER
+           ============================================================ */
+        function iniciarQuiz() {
+            // 1. Embaralha a ORDEM das questões
+            // 2. Para cada questão, embaralha as OPÇÕES (exceto V/F)
+            estado.questoes = embaralhar(QUESTOES).map(embaralharOpcoes);
+            estado.indiceAtual = 0;
+            estado.respostas = [];
+            estado.selecionadas = [];
+
+            renderizarQuestao();
+            mostrarTela("questao");
+        }
+
+        $("btn-iniciar").addEventListener("click", iniciarQuiz);
+        $("btn-refazer").addEventListener("click", iniciarQuiz);
+    </script>
+
+</body>
+</html>

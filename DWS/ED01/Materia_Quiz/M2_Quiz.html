@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz — CSS Fundamentos</title>
+    <style>
+        /* ===== RESET ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f4f6f9 0%, #e8ecf3 100%);
+            min-height: 100vh;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        /* ===== CONTAINER ===== */
+        .quiz-container {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+
+        /* ===== CABEÇALHO ===== */
+        .quiz-header {
+            background: linear-gradient(135deg, #2965f1 0%, #1a5276 100%);
+            color: #fff;
+            padding: 28px 32px;
+            border-radius: 16px 16px 0 0;
+            box-shadow: 0 4px 20px rgba(41, 101, 241, 0.25);
+        }
+
+        .quiz-header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .quiz-header h1 {
+            font-size: 1.5em;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .quiz-header h1 small {
+            display: block;
+            font-size: 0.6em;
+            font-weight: 400;
+            opacity: 0.85;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        .quiz-counter {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        /* ===== BARRA DE PROGRESSO ===== */
+        .progress-track {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #fff;
+            width: 0%;
+            border-radius: 4px;
+            transition: width 0.4s ease;
+        }
+
+        /* ===== CARD DO QUIZ ===== */
+        .quiz-card {
+            background: #fff;
+            border-radius: 0 0 16px 16px;
+            padding: 40px 40px 32px;
+            box-shadow: 0 8px 30px rgba(44, 62, 80, 0.1);
+            min-height: 420px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== TELA INICIAL ===== */
+        .tela-inicio {
+            text-align: center;
+            padding: 20px 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tela-inicio .icone {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .tela-inicio h2 {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+
+        .tela-inicio p {
+            color: #7f8c8d;
+            max-width: 460px;
+            margin: 0 auto 30px;
+        }
+
+        .tela-inicio ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 32px;
+        }
+
+        .tela-inicio li {
+            background: #e8f0fe;
+            color: #1a5276;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        /* ===== AVISO DE EMBARALHAMENTO ===== */
+        .aviso-aleatorio {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #e8f0fe;
+            color: #1a5276;
+            border: 1px solid #b8d4f0;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.82em;
+            font-weight: 600;
+            margin-bottom: 26px;
+        }
+
+        /* ===== PERGUNTA ===== */
+        .tipo-badge {
+            display: inline-block;
+            font-size: 0.72em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 50px;
+            margin-bottom: 16px;
+        }
+
+        .tipo-badge.vf       { background: #d1ecf1; color: #0c5460; }
+        .tipo-badge.multipla { background: #fff3cd; color: #856404; }
+        .tipo-badge.complete { background: #d4edda; color: #155724; }
+        .tipo-badge.erro     { background: #f8d7da; color: #721c24; }
+
+        .enunciado {
+            font-size: 1.15em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 22px;
+        }
+
+        /* ===== CÓDIGO ===== */
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 18px 22px;
+            border-radius: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.92em;
+            line-height: 1.7;
+            overflow-x: auto;
+            margin-bottom: 22px;
+            white-space: pre;
+        }
+
+        .code-block .gap {
+            display: inline-block;
+            min-width: 70px;
+            padding: 0 8px;
+            background: rgba(41, 101, 241, 0.3);
+            border-bottom: 2px dashed #2965f1;
+            border-radius: 4px;
+            color: #8bb4ff;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* ===== OPÇÕES ===== */
+        .opcoes {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .opcoes.vf-grid {
+            flex-direction: row;
+            gap: 16px;
+        }
+
+        .opcoes.vf-grid .opcao {
+            flex: 1;
+            justify-content: center;
+            padding: 22px;
+            font-size: 1.05em;
+        }
+
+        .opcao {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 20px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.98em;
+            color: #2c3e50;
+            text-align: left;
+            font-family: inherit;
+            width: 100%;
+        }
+
+        .opcao:hover:not(.desabilitada) {
+            background: #e8f0fe;
+            border-color: #2965f1;
+            transform: translateX(4px);
+        }
+
+        .opcao .letra {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #2965f1;
+            color: #fff;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.9em;
+        }
+
+        .opcao.vf-grid .letra { display: none; }
+
+        .opcao.correta {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+        .opcao.correta .letra { background: #28a745; }
+
+        .opcao.errada {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+        .opcao.errada .letra { background: #dc3545; }
+
+        .opcao.desabilitada {
+            cursor: not-allowed;
+            opacity: 0.85;
+        }
+
+        /* ===== FEEDBACK ===== */
+        .feedback {
+            padding: 0;
+            border-radius: 12px;
+            font-size: 0.95em;
+            margin-bottom: 24px;
+            display: none;
+            overflow: hidden;
+            animation: fadeIn 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .feedback.show { display: block; }
+
+        .feedback.sucesso {
+            background: #f0f9f2;
+            border-color: #b7e0c1;
+        }
+
+        .feedback.erro {
+            background: #fdf2f3;
+            border-color: #f0c2c7;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .fb-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 26px;
+            font-weight: 700;
+            font-size: 1em;
+        }
+
+        .feedback.sucesso .fb-header {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .feedback.erro .fb-header {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .fb-header .icone { font-size: 1.3em; }
+
+        .fb-respostas {
+            padding: 20px 26px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .fb-linha {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            font-size: 0.92em;
+            line-height: 1.55;
+        }
+
+        .fb-linha .rotulo {
+            flex-shrink: 0;
+            font-weight: 700;
+            min-width: 130px;
+            color: #7f8c8d;
+            font-size: 0.88em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding-top: 2px;
+        }
+
+        .fb-linha .valor {
+            flex: 1;
+            color: #2c3e50;
+            word-break: break-word;
+        }
+
+        .fb-linha .valor.correto {
+            color: #155724;
+            font-weight: 600;
+        }
+
+        .fb-linha .valor.incorreto {
+            color: #721c24;
+            font-weight: 600;
+            text-decoration: line-through;
+            text-decoration-color: rgba(114, 28, 36, 0.4);
+        }
+
+        .fb-explicacao {
+            padding: 18px 26px;
+            color: #2c3e50;
+            font-size: 0.93em;
+            line-height: 1.75;
+            border-top: 1px dashed rgba(0, 0, 0, 0.08);
+            margin-top: 6px;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .fb-referencia {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px 26px 20px;
+            font-size: 0.85em;
+            color: #5d6d7e;
+            background: rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            line-height: 1.6;
+        }
+
+        .fb-referencia .icone {
+            flex-shrink: 0;
+            font-size: 1.05em;
+            line-height: 1.4;
+        }
+
+        .fb-referencia .texto { flex: 1; }
+
+        .fb-referencia strong {
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        /* ===== NAVEGAÇÃO ===== */
+        .quiz-footer {
+            margin-top: auto;
+            padding-top: 24px;
+            border-top: 2px solid #ecf0f1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 12px 26px;
+            border-radius: 10px;
+            font-size: 0.95em;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: #2965f1;
+            color: #fff;
+        }
+        .btn-primary:hover:not(:disabled) {
+            background: #1a5276;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(41, 101, 241, 0.3);
+        }
+        .btn-primary:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .btn-outline {
+            background: #fff;
+            color: #2965f1;
+            border: 2px solid #2965f1;
+        }
+        .btn-outline:hover:not(:disabled) {
+            background: #2965f1;
+            color: #fff;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: #7f8c8d;
+        }
+        .btn-ghost:hover { color: #2c3e50; }
+        .btn-ghost:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+
+        /* ===== TELA DE RESULTADO ===== */
+        .tela-resultado {
+            text-align: center;
+            padding: 20px 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tela-resultado .icone {
+            font-size: 4.5em;
+            margin-bottom: 16px;
+        }
+
+        .tela-resultado h2 {
+            font-size: 1.9em;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .tela-resultado .pontuacao {
+            font-size: 3.2em;
+            font-weight: 800;
+            color: #2965f1;
+            margin: 16px 0;
+            letter-spacing: -2px;
+        }
+
+        .tela-resultado .pontuacao small {
+            font-size: 0.4em;
+            font-weight: 600;
+            color: #95a5a6;
+            letter-spacing: 0;
+        }
+
+        .tela-resultado p {
+            color: #7f8c8d;
+            max-width: 420px;
+            margin: 0 auto 30px;
+        }
+
+        /* ===== TELAS ===== */
+        .tela { display: none; }
+        .tela.ativa { display: flex; flex-direction: column; flex: 1; }
+
+        /* ===== RESPONSIVIDADE ===== */
+        @media (max-width: 640px) {
+            .quiz-container { padding: 20px 12px 60px; }
+            .quiz-card      { padding: 28px 22px 22px; }
+            .quiz-header    { padding: 22px 22px; }
+            .quiz-header h1 { font-size: 1.2em; }
+            .opcoes.vf-grid { flex-direction: column; }
+            .enunciado      { font-size: 1.05em; }
+            .quiz-footer    { flex-direction: column-reverse; }
+            .quiz-footer .btn { width: 100%; justify-content: center; }
+            .fb-linha         { flex-direction: column; gap: 4px; }
+            .fb-linha .rotulo { min-width: auto; }
+            .fb-header,
+            .fb-respostas,
+            .fb-explicacao,
+            .fb-referencia    { padding-left: 18px; padding-right: 18px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================ -->
+    <!-- BOTÃO HOME                                                    -->
+    <!-- ============================================================ -->
+    <a href="index.html" class="btn-home" title="Voltar à página inicial" aria-label="Voltar à página inicial">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        <span>Início</span>
+    </a>
+
+    <style>
+        .btn-home {
+            position: fixed; top: 20px; left: 20px; z-index: 1000;
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 18px; background: #2c3e50; color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 0.9em; font-weight: 600; text-decoration: none;
+            border-radius: 50px; box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+            transition: all 0.25s ease;
+        }
+        .btn-home:hover  { background: #1a252f; transform: translateY(-2px); color: #fff; }
+        .btn-home:active { transform: translateY(0); }
+        .btn-home svg    { flex-shrink: 0; }
+        @media (max-width: 480px) {
+            .btn-home { padding: 10px; border-radius: 50%; }
+            .btn-home span { display: none; }
+        }
+    </style>
+
+    <!-- ============================================================ -->
+    <!-- CONTAINER DO QUIZ                                             -->
+    <!-- ============================================================ -->
+    <div class="quiz-container">
+
+        <!-- CABEÇALHO -->
+        <header class="quiz-header">
+            <div class="quiz-header-top">
+                <h1>
+                    Quiz — CSS Fundamentos
+                    <small>Módulo 02</small>
+                </h1>
+                <div class="quiz-counter" id="contador">1 / 25</div>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" id="progresso"></div>
+            </div>
+        </header>
+
+        <!-- CARD PRINCIPAL -->
+        <main class="quiz-card">
+
+            <!-- ===== TELA 1: INÍCIO ===== -->
+            <section class="tela ativa" id="tela-inicio">
+                <div class="tela-inicio">
+                    <div class="icone">🎨</div>
+                    <h2>Pronto para começar?</h2>
+                    <p>25 questões sobre sintaxe, seletores, Box Model, tipografia, cores e boas práticas de CSS. As questões são sorteadas a cada tentativa.</p>
+
+                    <div class="aviso-aleatorio">
+                        🎲 As questões e alternativas são embaralhadas a cada tentativa
+                    </div>
+
+                    <ul>
+                        <li>✔ Verdadeiro ou Falso</li>
+                        <li>✔ Múltipla Escolha</li>
+                        <li>✔ Complete o Código</li>
+                        <li>✔ Aponte o Erro</li>
+                    </ul>
+                    <button class="btn btn-primary" id="btn-iniciar">
+                        🚀 Iniciar Quiz
+                    </button>
+                </div>
+            </section>
+
+            <!-- ===== TELA 2: QUESTÃO ===== -->
+            <section class="tela" id="tela-questao">
+                <span class="tipo-badge" id="tipo-badge"></span>
+                <p class="enunciado" id="enunciado"></p>
+
+                <div id="area-codigo"></div>
+                <div class="opcoes" id="opcoes"></div>
+                <div class="feedback" id="feedback"></div>
+
+                <div class="quiz-footer">
+                    <button class="btn btn-ghost" id="btn-voltar" disabled>← Anterior</button>
+                    <button class="btn btn-primary" id="btn-proximo" disabled>Próxima →</button>
+                </div>
+            </section>
+
+            <!-- ===== TELA 3: RESULTADO ===== -->
+            <section class="tela" id="tela-resultado">
+                <div class="tela-resultado">
+                    <div class="icone" id="resultado-icone">🏆</div>
+                    <h2 id="resultado-titulo">Quiz concluído!</h2>
+                    <div class="pontuacao" id="resultado-pontuacao">0<small>/0</small></div>
+                    <p id="resultado-mensagem">Confira abaixo seu desempenho.</p>
+                    <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+                        <button class="btn btn-primary" id="btn-refazer">🔄 Refazer Quiz</button>
+                        <a href="index.html" class="btn btn-outline">🏠 Voltar ao Início</a>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- JAVASCRIPT                                                    -->
+    <!-- ============================================================ -->
+    <script>
+        /* ============================================================
+           BANCO DE QUESTÕES — MÓDULO 02 (CSS)
+           ============================================================ */
+        const QUESTOES = [
+            /* ============================================================
+               BLOCO 1 — VERDADEIRO OU FALSO (7 questões)
+               ============================================================ */
+
+            {
+                tipo: "vf",
+                enunciado: "CSS é a sigla para Cascading Style Sheets (Folha de Estilo em Cascata).",
+                resposta: true,
+                explicacao: "Correto! CSS = Cascading Style Sheets. 'Folha de Estilo' é o documento com regras de formatação; 'em Cascata' refere-se à forma como múltiplas regras são aplicadas e como o navegador resolve conflitos seguindo uma ordem de prioridade.",
+                referencia: "Módulo 02 — Seção 1.1: O que é CSS? Definição e Propósito"
+            },
+
+            {
+                tipo: "vf",
+                enunciado: "Quando duas margens verticais se encontram, elas se SOMAM (ex: 30px + 20px = 50px).",
+                resposta: false,
+                explicacao: "Falso! Esse é o fenômeno do 'colapso de margens' (margin collapsing). Quando duas margens verticais se encontram, NÃO se somam — a MAIOR prevalece. Exemplo: margin-bottom: 30px + margin-top: 20px resulta em 30px, não 50px.",
+                referencia: "Módulo 02 — Seção 3.2.3: Colapso de Margens (Margin Collapsing)"
+            },
+
+            {
+                tipo: "vf",
+                enunciado: "A propriedade padding aceita valores negativos, assim como a margin.",
+                resposta: false,
+                explicacao: "Falso! Apenas a margin aceita valores negativos (ex: margin-top: -20px;). O padding NÃO aceita valores negativos — ele é sempre positivo ou zero. Essa é uma das diferenças cruciais entre as duas propriedades, junto com o fato de o padding herdar a cor de fundo do elemento e a margin ser sempre transparente.",
+                referencia: "Módulo 02 — Seção 3.3.1: Diferença Crucial entre Margin e Padding"
+            },
+
+            {
+                tipo: "vf",
+                enunciado: "A regra box-sizing: border-box faz com que width e height incluam o padding e a borda.",
+                resposta: true,
+                explicacao: "Correto! Com border-box, uma div com width:100px, padding:10px e border:5px ocupa EXATAMENTE 100px de largura — o conteúdo interno é comprimido para caber. Sem border-box (padrão content-box), ela ocuparia 130px (100 + 10 + 10 + 5 + 5). É considerada boa prática universal em projetos modernos.",
+                referencia: "Módulo 02 — Seção 3.7: Reset de Box Model e Boas Práticas"
+            },
+
+            {
+                tipo: "vf",
+                enunciado: "A ordem correta das pseudo-classes de links é LVHA: :link, :visited, :hover, :active.",
+                resposta: true,
+                explicacao: "Correto! A ordem LVHA (Link, Visited, Hover, Active) é obrigatória para que as pseudo-classes funcionem corretamente. Se você inverter a ordem — por exemplo, colocar :hover antes de :link — o navegador vai aplicar a regra errada em determinados estados.",
+                referencia: "Módulo 02 — Seção 6.3: A Ordem Correta: LVHA"
+            },
+
+            {
+                tipo: "vf",
+                enunciado: "A forma RGBA permite definir transparência em uma cor, enquanto RGB não permite.",
+                resposta: true,
+                explicacao: "Correto! O 'A' em RGBA significa Alpha (canal de opacidade). Vai de 0.0 (totalmente transparente) a 1.0 (totalmente opaco). O RGB puro não tem esse canal. O mesmo vale para HSLA em relação ao HSL. Use RGBA/HSLA para sombras, overlays e bordas com transparência.",
+                referencia: "Módulo 02 — Seção 7.5: RGBA (rgb()) — RGB com Transparência"
+            },
+
+            {
+                tipo: "vf",
+                enunciado: "O CSS Inline (atributo style na tag) é a forma MAIS recomendada para projetos grandes, pois tem maior prioridade.",
+                resposta: false,
+                explicacao: "Falso! O CSS Inline, apesar de ter alta prioridade na cascata, é a PIOR forma de inserir estilos em projetos grandes: mistura estrutura com apresentação, não é reutilizável, não suporta pseudo-classes (:hover, :focus) e torna a manutenção impossível. A forma RECOMENDADA é o CSS EXTERNO (arquivo .css separado linkado com <link>).",
+                referencia: "Módulo 02 — Seção 2.1: Formas de Inserção do CSS"
+            },
+
+            /* ============================================================
+               BLOCO 2 — MÚLTIPLA ESCOLHA (8 questões)
+               ============================================================ */
+
+            {
+                tipo: "multipla",
+                enunciado: "Qual é a sintaxe correta de uma regra CSS?",
+                opcoes: [
+                    "seletor { propriedade: valor; }",
+                    "seletor ( propriedade = valor )",
+                    "seletor [ propriedade: valor ]",
+                    "propriedade { seletor: valor; }"
+                ],
+                correta: 0,
+                explicacao: "A sintaxe CSS é: seletor { propriedade: valor; }. O seletor define ONDE aplicar; as declarações (entre chaves) definem O QUE aplicar; cada declaração usa dois-pontos (:) entre propriedade e valor, e ponto e vírgula (;) no final. Use chaves { }, nunca parênteses ( ) ou colchetes [ ].",
+                referencia: "Módulo 02 — Seção 1.2: A Sintaxe do CSS: A Anatomia de uma Regra"
+            },
+
+            {
+                tipo: "multipla",
+                enunciado: "Qual seletor tem a MAIOR especificidade no CSS?",
+                opcoes: [
+                    "Seletor de tag (ex: p)",
+                    "Seletor de classe (ex: .destaque)",
+                    "Seletor de ID (ex: #titulo)",
+                    "Seletor universal (ex: *)"
+                ],
+                correta: 2,
+                explicacao: "A ordem de especificidade (do maior para o menor) é: Inline (1000) > ID (100) > Classe (10) > Tag (1) > Universal (0). O seletor de ID (#) vence classes e tags. Exceção: o !important sobrescreve tudo, mas deve ser evitado.",
+                referencia: "Módulo 02 — Seção 2.2.3: Especificidade dos Seletores"
+            },
+
+            {
+                tipo: "multipla",
+                enunciado: "Qual unidade de medida é relativa ao font-size do elemento RAIZ (<html>) do documento?",
+                opcoes: ["px", "em", "rem", "%"],
+                correta: 2,
+                explicacao: "O rem (root em) é relativo ao font-size do elemento raiz (<html>), que por padrão é 16px. Então 1.5rem = 24px (se a raiz for 16px). Já o em é relativo ao font-size do PAI — o que pode causar efeito cascata confuso. O px é absoluto. O % é relativo ao pai.",
+                referencia: "Módulo 02 — Seção 5.2: font-size (Tamanho da Fonte)"
+            },
+
+            {
+                tipo: "multipla",
+                enunciado: "Qual valor de background-attachment cria o efeito PARALLAX, deixando a imagem fixa em relação à viewport?",
+                opcoes: ["scroll", "fixed", "local", "static"],
+                correta: 1,
+                explicacao: "O valor fixed faz a imagem de fundo ficar FIXA em relação à viewport, enquanto o conteúdo rola normalmente. Isso cria o efeito parallax, em que o fundo parece se mover em velocidade diferente do conteúdo. O valor padrão é scroll (a imagem rola junto com a página). 'local' e 'static' não existem em background-attachment.",
+                referencia: "Módulo 02 — Seção 4.5: background-attachment (Fixação da Imagem)"
+            },
+
+            {
+                tipo: "multipla",
+                enunciado: "Qual propriedade CSS define a COR DO TEXTO de um elemento?",
+                opcoes: ["text-color", "font-color", "color", "foreground"],
+                correta: 2,
+                explicacao: "A propriedade correta é color. Apesar de o nome parecer 'genérico', no CSS ela se aplica especificamente à COR DO TEXTO. 'text-color', 'font-color' e 'foreground' NÃO existem em CSS. Para cor de fundo, use background-color.",
+                referencia: "Módulo 02 — Seção 5.5: color (Cor do Texto)"
+            },
+
+            {
+                tipo: "multipla",
+                enunciado: "Qual é a ordem correta das pseudo-classes de links (LVHA)?",
+                opcoes: [
+                    ":link, :active, :hover, :visited",
+                    ":link, :visited, :hover, :active",
+                    ":visited, :link, :active, :hover",
+                    ":hover, :link, :visited, :active"
+                ],
+                correta: 1,
+                explicacao: "A ordem correta é LVHA: :link (não visitado) → :visited (visitado) → :hover (mouse sobre) → :active (no clique). Se inverter, o navegador vai aplicar a regra errada. Por exemplo, se :hover vier antes de :link, o :link sobrescreve o :hover. Decore como 'LoVe HAte' (ama/odeia).",
+                referencia: "Módulo 02 — Seção 6.3: A Ordem Correta: LVHA"
+            },
+
+            {
+                tipo: "multipla",
+                enunciado: "Qual formato de cor permite especificar um canal ALFA (transparência) além dos canais de cor?",
+                opcoes: ["rgb()", "hexadecimal", "rgba()", "color-name"],
+                correta: 2,
+                explicacao: "O rgba() estende o rgb() com um quarto valor: o canal alpha (0.0 a 1.0). Ex: rgba(255, 0, 0, 0.5) = vermelho com 50% de opacidade. Hexadecimal e nomes de cores não suportam transparência (o #RRGGBBAA é uma extensão nova, mas o material clássico usa rgba). O hsla() é o equivalente em HSL.",
+                referencia: "Módulo 02 — Seção 7.5: RGBA (rgb()) — RGB com Transparência"
+            },
+
+            {
+                tipo: "multipla",
+                enunciado: "O que a propriedade text-align: justify faz?",
+                opcoes: [
+                    "Centraliza o texto no meio do container",
+                    "Alinha o texto à direita",
+                    "Justifica o texto, distribuindo-o uniformemente entre as margens",
+                    "Coloca cada palavra em uma linha separada"
+                ],
+                correta: 2,
+                explicacao: "O valor justify faz o texto ocupar uniformemente toda a largura disponível, alinhando AMBOS os lados (esquerdo e direito). O navegador ajusta automaticamente os espaços entre as palavras. É muito usado em jornais e artigos. Diferente do left (padrão) ou center.",
+                referencia: "Módulo 02 — Seção 5.6: text-align (Alinhamento do Texto)"
+            },
+
+            /* ============================================================
+               BLOCO 3 — COMPLETE O CÓDIGO (5 questões)
+               ============================================================ */
+
+            {
+                tipo: "complete",
+                enunciado: "Complete o código abaixo para deixar o texto de todos os parágrafos em vermelho:",
+                codigo: `p {\n  {{GAP}}: #FF0000;\n}`,
+                opcoes: ["text-color", "font-color", "color", "foreground"],
+                correta: 2,
+                explicacao: "A propriedade correta é color. Ela define a cor do TEXTO. 'text-color', 'font-color' e 'foreground' não existem em CSS. Cuidado para não confundir com background-color (cor de fundo).",
+                referencia: "Módulo 02 — Seção 5.5: color (Cor do Texto)"
+            },
+
+            {
+                tipo: "complete",
+                enunciado: "Complete o código abaixo para centralizar horizontalmente uma div de largura fixa:",
+                codigo: `.container {\n  width: 960px;\n  margin: 0 {{GAP}};\n}`,
+                opcoes: ["center", "middle", "auto", "central"],
+                correta: 2,
+                explicacao: "O valor auto nas margens laterais faz o navegador calcular automaticamente um valor igual para os dois lados, centralizando o elemento. Uso: margin: 0 auto (0 em cima/baixo, auto nas laterais). 'center', 'middle' e 'central' não são valores válidos para margin — apenas 'auto' funciona.",
+                referencia: "Módulo 02 — Seção 3.2: Margin (Margem)"
+            },
+
+            {
+                tipo: "complete",
+                enunciado: "Complete o código abaixo para criar uma borda de 2px, sólida e preta:",
+                codigo: `.caixa {\n  border: 2px {{GAP}} #000000;\n}`,
+                opcoes: ["line", "solid", "full", "straight"],
+                correta: 1,
+                explicacao: "O valor solid cria uma linha contínua e sólida. Outros valores possíveis em border-style: dotted (pontilhada), dashed (tracejada), double (dupla), groove, ridge, inset, outset. 'line', 'full' e 'straight' NÃO são valores válidos em CSS.",
+                referencia: "Módulo 02 — Seção 3.4.2: border-style (Estilo da Borda)"
+            },
+
+            {
+                tipo: "complete",
+                enunciado: "Complete o código abaixo para deixar TODO o texto do site em maiúsculas:",
+                codigo: `h1, h2, p {\n  text-transform: {{GAP}};\n}`,
+                opcoes: ["uppercase", "capitalize", "upper", "majuscule"],
+                correta: 0,
+                explicacao: "O valor uppercase transforma TODAS as letras em MAIÚSCULAS. Já capitalize coloca apenas a primeira letra de cada palavra em maiúscula, e lowercase transforma tudo em minúsculas. 'upper' e 'majuscule' não existem em CSS. A propriedade é text-transform.",
+                referencia: "Módulo 02 — Seção 5.9: Propriedades Complementares de Tipografia"
+            },
+
+            {
+                tipo: "complete",
+                enunciado: "Complete o código abaixo para definir 3 níveis de espessura da fonte (normal, negrito e extra negrito):",
+                codigo: `.texto-normal { font-weight: 400; }\n.texto-bold   { font-weight: {{GAP}}; }\n.texto-black  { font-weight: 900; }`,
+                opcoes: ["600", "700", "800", "bold"],
+                correta: 1,
+                explicacao: "O valor numérico 700 corresponde ao negrito tradicional (bold). A escala de font-weight vai de 100 (thin) a 900 (black), passando por 400 (regular/normal) e 700 (bold). Usar 700 é mais compatível do que 'bold' quando você precisa de um valor específico dentro de uma família com vários pesos.",
+                referencia: "Módulo 02 — Seção 5.4: font-weight (Peso da Fonte)"
+            },
+
+            /* ============================================================
+               BLOCO 4 — APONTE O ERRO (5 questões)
+               ============================================================ */
+
+            {
+                tipo: "erro",
+                enunciado: "Há um erro de SINTAXE no código CSS abaixo. Aponte qual é:",
+                codigo: `p {\n  color: red\n  font-size: 16px;\n}`,
+                opcoes: [
+                    "A propriedade color está escrita errada",
+                    "Falta o ponto e vírgula (;) após 'red'",
+                    "A propriedade font-size não existe em CSS",
+                    "O código está correto"
+                ],
+                correta: 1,
+                explicacao: "Falta o ponto e vírgula após 'red'. Em CSS, cada declaração termina com ;. Sem ele, o navegador junta a próxima linha e tenta interpretar 'red font-size: 16px' como uma única declaração inválida — e AMBAS as propriedades são descartadas. O correto seria: color: red;",
+                referencia: "Módulo 02 — Seção 1.2: A Sintaxe do CSS: A Anatomia de uma Regra"
+            },
+
+            {
+                tipo: "erro",
+                enunciado: "Há um erro de SELETOR no código abaixo. Aponte qual é:",
+                codigo: `#titulo {\n  color: blue;\n}`,
+                opcoes: [
+                    "O seletor #titulo aplica estilo a TODOS os elementos com classe 'titulo'",
+                    "O seletor #titulo aplica estilo a UM elemento com id='titulo'; se a intenção era aplicar a uma classe, o correto seria .titulo",
+                    "O símbolo # não pode ser usado em CSS",
+                    "O código está correto"
+                ],
+                correta: 1,
+                explicacao: "O # seleciona elementos por ID — e IDs devem ser ÚNICOS por página. Se você quer aplicar o mesmo estilo a VÁRIOS elementos, o correto é usar classe: .titulo (com ponto). Confundir # com . é um dos erros mais comuns de quem está começando em CSS.",
+                referencia: "Módulo 02 — Seção 1.3: Seletores em Profundidade"
+            },
+
+            {
+                tipo: "erro",
+                enunciado: "Há um erro no nome de uma PROPRIEDADE CSS abaixo. Aponte qual é:",
+                codigo: `h1 {\n  text-color: #333;\n  font-size: 2em;\n}`,
+                opcoes: [
+                    "text-color não existe; o correto é color",
+                    "font-size não existe; o correto é text-size",
+                    "O valor #333 é inválido",
+                    "O código está correto"
+                ],
+                correta: 0,
+                explicacao: "A propriedade text-color NÃO existe em CSS. Para cor de TEXTO, use color. Já existe text-align, text-decoration, text-indent, text-transform — mas não text-color. Para cor de FUNDO, use background-color. É um erro comum de quem tenta 'especificar' que a cor é do texto.",
+                referencia: "Módulo 02 — Seção 5.5: color (Cor do Texto)"
+            },
+
+            {
+                tipo: "erro",
+                enunciado: "Há um erro na ORDEM das pseudo-classes de links abaixo. Aponte qual é:",
+                codigo: `a:hover  { color: green; }\na:link   { color: red;   }\na:visited{ color: purple;}\na:active { color: blue;  }`,
+                opcoes: [
+                    ":hover deveria estar em primeiro",
+                    "A ordem correta é LVHA: :link, :visited, :hover, :active",
+                    ":active não pode vir depois de :visited",
+                    "O código está correto"
+                ],
+                correta: 1,
+                explicacao: "A ordem correta é LVHA (:link, :visited, :hover, :active). Aqui o :hover está em PRIMEIRO, o que faz com que :link e :visited SOBRESCREVAM o efeito de hover (porque vêm depois na cascata). Resultado: o link não fica verde ao passar o mouse. Ordem correta: link → visited → hover → active.",
+                referencia: "Módulo 02 — Seção 6.3: A Ordem Correta: LVHA"
+            },
+
+            {
+                tipo: "erro",
+                enunciado: "Há um erro de UNIDADE no código abaixo. Aponte qual é:",
+                codigo: `p {\n  font-size: 16;\n  line-height: 1.5;\n}`,
+                opcoes: [
+                    "line-height não aceita valores sem unidade",
+                    "font-size: 16 não tem unidade; o correto seria 16px, 1rem ou similar",
+                    "line-height: 1.5 deveria ser line-height: 1.5px",
+                    "O código está correto"
+                ],
+                correta: 1,
+                explicacao: "font-size: 16 está SEM UNIDADE — o navegador ignora a declaração. O correto é 16px (absoluto) ou 1rem (relativo ao root). Já line-height: 1.5 é uma EXCEÇÃO válida: aceita número puro, que representa um múltiplo do font-size. Por isso 1.5 significa 1.5x o tamanho da fonte — é uma boa prática, inclusive.",
+                referencia: "Módulo 02 — Seção 5.2: font-size (Tamanho da Fonte)"
+            }
+        ];
+
+        /* ============================================================
+           UTILITÁRIOS DE ALEATORIEDADE
+           ============================================================ */
+        function embaralhar(array) {
+            const copia = [...array];
+            for (let i = copia.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copia[i], copia[j]] = [copia[j], copia[i]];
+            }
+            return copia;
+        }
+
+        function embaralharOpcoes(questao) {
+            if (questao.tipo === "vf" || !questao.opcoes) return { ...questao };
+
+            const opcoesOriginais = [...questao.opcoes];
+            const pares = opcoesOriginais.map((texto, i) => ({
+                texto,
+                eraCorreta: i === questao.correta
+            }));
+
+            const paresEmbaralhados = embaralhar(pares);
+            const novasOpcoes = paresEmbaralhados.map(p => p.texto);
+            const novoIndiceCorreto = paresEmbaralhados.findIndex(p => p.eraCorreta);
+
+            return {
+                ...questao,
+                opcoes: novasOpcoes,
+                correta: novoIndiceCorreto
+            };
+        }
+
+        /* ============================================================
+           ESTADO DO QUIZ
+           ============================================================ */
+        const estado = {
+            questoes: [],
+            indiceAtual: 0,
+            respostas: [],
+            selecionadas: []
+        };
+
+        const $ = (id) => document.getElementById(id);
+
+        const telas = {
+            inicio:    $("tela-inicio"),
+            questao:   $("tela-questao"),
+            resultado: $("tela-resultado")
+        };
+
+        /* ============================================================
+           FUNÇÕES AUXILIARES
+           ============================================================ */
+        function mostrarTela(nome) {
+            Object.values(telas).forEach(t => t.classList.remove("ativa"));
+            telas[nome].classList.add("ativa");
+        }
+
+        function escaparHTML(str) {
+            return String(str)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;");
+        }
+
+        function atualizarProgresso() {
+            const total = estado.questoes.length;
+            const atual = estado.indiceAtual + 1;
+            $("contador").textContent = `${atual} / ${total}`;
+            $("progresso").style.width = `${(atual / total) * 100}%`;
+        }
+
+        function textoRespostaCorreta(q) {
+            if (q.tipo === "vf") {
+                return q.resposta === true ? "Verdadeiro" : "Falso";
+            }
+            return q.opcoes[q.correta];
+        }
+
+        function textoRespostaEscolhida(q, indiceEscolhido) {
+            if (q.tipo === "vf") {
+                return indiceEscolhido === 0 ? "Verdadeiro" : "Falso";
+            }
+            return q.opcoes[indiceEscolhido];
+        }
+
+        /* ============================================================
+           RENDERIZAÇÃO DA QUESTÃO
+           ============================================================ */
+        function renderizarQuestao() {
+            const q = estado.questoes[estado.indiceAtual];
+
+            atualizarProgresso();
+
+            const badges = {
+                vf:       { texto: "Verdadeiro ou Falso", classe: "vf" },
+                multipla: { texto: "Múltipla Escolha",    classe: "multipla" },
+                complete: { texto: "Complete o Código",   classe: "complete" },
+                erro:     { texto: "Aponte o Erro",       classe: "erro" }
+            };
+            const b = badges[q.tipo];
+            const badge = $("tipo-badge");
+            badge.textContent = b.texto;
+            badge.className = "tipo-badge " + b.classe;
+
+            $("enunciado").textContent = q.enunciado;
+
+            const areaCodigo = $("area-codigo");
+            areaCodigo.innerHTML = "";
+            if (q.codigo) {
+                const bloco = document.createElement("div");
+                bloco.className = "code-block";
+
+                let codigoEscapado = escaparHTML(q.codigo);
+                codigoEscapado = codigoEscapado.replace(
+                    /\{\{GAP\}\}/g,
+                    '<span class="gap">???</span>'
+                );
+                bloco.innerHTML = codigoEscapado;
+                areaCodigo.appendChild(bloco);
+            }
+
+            const opcoesEl = $("opcoes");
+            opcoesEl.innerHTML = "";
+            opcoesEl.classList.toggle("vf-grid", q.tipo === "vf");
+
+            if (q.tipo === "vf") {
+                criarOpcao("Verdadeiro", true, opcoesEl);
+                criarOpcao("Falso", false, opcoesEl);
+            } else {
+                const letras = ["A", "B", "C", "D", "E"];
+                q.opcoes.forEach((texto, i) => {
+                    criarOpcao(texto, i, opcoesEl, letras[i]);
+                });
+            }
+
+            $("feedback").className = "feedback";
+            $("feedback").innerHTML = "";
+
+            $("btn-voltar").disabled = estado.indiceAtual === 0;
+            $("btn-proximo").disabled = true;
+            $("btn-proximo").textContent =
+                estado.indiceAtual === estado.questoes.length - 1
+                    ? "Finalizar ✓"
+                    : "Próxima →";
+        }
+
+        function criarOpcao(texto, valor, container, letra) {
+            const btn = document.createElement("button");
+            btn.className = "opcao";
+            btn.type = "button";
+
+            if (letra) {
+                const span = document.createElement("span");
+                span.className = "letra";
+                span.textContent = letra;
+                btn.appendChild(span);
+            }
+
+            const spanTexto = document.createElement("span");
+            spanTexto.textContent = texto;
+            btn.appendChild(spanTexto);
+
+            btn.addEventListener("click", () => responder(valor));
+            container.appendChild(btn);
+        }
+
+        /* ============================================================
+           RESPOSTA DO USUÁRIO
+           ============================================================ */
+        function responder(valor) {
+            const q = estado.questoes[estado.indiceAtual];
+            const opcoesEl = $("opcoes").querySelectorAll(".opcao");
+
+            let indiceCorreto;
+            if (q.tipo === "vf") {
+                indiceCorreto = q.resposta === true ? 0 : 1;
+            } else {
+                indiceCorreto = q.correta;
+            }
+
+            let indiceEscolhido;
+            if (q.tipo === "vf") {
+                indiceEscolhido = valor === true ? 0 : 1;
+            } else {
+                indiceEscolhido = valor;
+            }
+
+            const acertou = indiceEscolhido === indiceCorreto;
+
+            opcoesEl.forEach(op => op.classList.add("desabilitada"));
+            opcoesEl[indiceCorreto].classList.add("correta");
+            if (!acertou) {
+                opcoesEl[indiceEscolhido].classList.add("errada");
+            }
+
+            estado.respostas[estado.indiceAtual] = acertou;
+            estado.selecionadas[estado.indiceAtual] = indiceEscolhido;
+
+            renderizarFeedback(q, acertou, indiceEscolhido);
+
+            $("btn-proximo").disabled = false;
+        }
+
+        /* ============================================================
+           FEEDBACK ENRIQUECIDO
+           ============================================================ */
+        function renderizarFeedback(q, acertou, indiceEscolhido) {
+            const fb = $("feedback");
+            fb.className = "feedback show " + (acertou ? "sucesso" : "erro");
+            fb.innerHTML = "";
+
+            const textoCorreto   = textoRespostaCorreta(q);
+            const textoEscolhido = textoRespostaEscolhida(q, indiceEscolhido);
+
+            const header = document.createElement("div");
+            header.className = "fb-header";
+
+            const iconeHeader = document.createElement("span");
+            iconeHeader.className = "icone";
+            iconeHeader.textContent = acertou ? "✅" : "❌";
+
+            const tituloHeader = document.createElement("span");
+            tituloHeader.textContent = acertou
+                ? "Resposta correta!"
+                : "Resposta incorreta";
+
+            header.append(iconeHeader, tituloHeader);
+            fb.appendChild(header);
+
+            const respostas = document.createElement("div");
+            respostas.className = "fb-respostas";
+
+            if (!acertou) {
+                respostas.appendChild(
+                    criarLinhaResposta("Sua resposta", textoEscolhido, "incorreto")
+                );
+            }
+            respostas.appendChild(
+                criarLinhaResposta(
+                    acertou ? "Resposta" : "Resposta correta",
+                    textoCorreto,
+                    "correto"
+                )
+            );
+            fb.appendChild(respostas);
+
+            const explicacao = document.createElement("div");
+            explicacao.className = "fb-explicacao";
+            explicacao.textContent = q.explicacao;
+            fb.appendChild(explicacao);
+
+            if (q.referencia) {
+                const ref = document.createElement("div");
+                ref.className = "fb-referencia";
+
+                const iconeRef = document.createElement("span");
+                iconeRef.className = "icone";
+                iconeRef.textContent = "📖";
+
+                const textoRef = document.createElement("span");
+                textoRef.className = "texto";
+
+                const strong = document.createElement("strong");
+                strong.textContent = "Para revisar: ";
+
+                const spanRef = document.createElement("span");
+                spanRef.textContent = q.referencia;
+
+                textoRef.append(strong, spanRef);
+                ref.append(iconeRef, textoRef);
+                fb.appendChild(ref);
+            }
+        }
+
+        function criarLinhaResposta(rotulo, valor, tipo) {
+            const linha = document.createElement("div");
+            linha.className = "fb-linha";
+
+            const spanRotulo = document.createElement("span");
+            spanRotulo.className = "rotulo";
+            spanRotulo.textContent = rotulo;
+
+            const spanValor = document.createElement("span");
+            spanValor.className = "valor " + tipo;
+            spanValor.textContent = valor;
+
+            linha.append(spanRotulo, spanValor);
+            return linha;
+        }
+
+        /* ============================================================
+           NAVEGAÇÃO
+           ============================================================ */
+        $("btn-voltar").addEventListener("click", () => {
+            if (estado.indiceAtual > 0) {
+                estado.indiceAtual--;
+                renderizarQuestao();
+                restaurarRespostaSeExistir();
+            }
+        });
+
+        $("btn-proximo").addEventListener("click", () => {
+            if (estado.indiceAtual < estado.questoes.length - 1) {
+                estado.indiceAtual++;
+                renderizarQuestao();
+                restaurarRespostaSeExistir();
+            } else {
+                mostrarResultado();
+            }
+        });
+
+        function restaurarRespostaSeExistir() {
+            const resp = estado.respostas[estado.indiceAtual];
+            if (resp === undefined) return;
+
+            const q = estado.questoes[estado.indiceAtual];
+            const opcoesEl = $("opcoes").querySelectorAll(".opcao");
+            const escolhido = estado.selecionadas[estado.indiceAtual];
+
+            let indiceCorreto;
+            if (q.tipo === "vf") {
+                indiceCorreto = q.resposta === true ? 0 : 1;
+            } else {
+                indiceCorreto = q.correta;
+            }
+
+            opcoesEl.forEach(op => op.classList.add("desabilitada"));
+            opcoesEl[indiceCorreto].classList.add("correta");
+            if (!resp) opcoesEl[escolhido].classList.add("errada");
+
+            renderizarFeedback(q, resp, escolhido);
+            $("btn-proximo").disabled = false;
+        }
+
+        /* ============================================================
+           RESULTADO FINAL
+           ============================================================ */
+        function mostrarResultado() {
+            const total = estado.questoes.length;
+            const acertos = estado.respostas.filter(r => r === true).length;
+            const percentual = Math.round((acertos / total) * 100);
+
+            let icone, titulo, mensagem;
+            if (percentual >= 80) {
+                icone = "🏆"; titulo = "Excelente!";
+                mensagem = "Você dominou o conteúdo de CSS. Continue assim!";
+            } else if (percentual >= 60) {
+                icone = "👏"; titulo = "Muito bom!";
+                mensagem = "Bom desempenho! Revise os pontos que errou para fixar melhor.";
+            } else if (percentual >= 40) {
+                icone = "📚"; titulo = "Continue estudando";
+                mensagem = "Você está no caminho. Revise o material e tente novamente.";
+            } else {
+                icone = "💪"; titulo = "Não desanime!";
+                mensagem = "A prática leva à perfeição. Volte ao guia de CSS e refaça o quiz.";
+            }
+
+            $("resultado-icone").textContent = icone;
+            $("resultado-titulo").textContent = titulo;
+            $("resultado-pontuacao").innerHTML = `${acertos}<small>/${total}</small>`;
+            $("resultado-mensagem").textContent = mensagem;
+
+            mostrarTela("resultado");
+        }
+
+        /* ============================================================
+           INICIAR / REFAZER
+           ============================================================ */
+        function iniciarQuiz() {
+            estado.questoes = embaralhar(QUESTOES).map(embaralharOpcoes);
+            estado.indiceAtual = 0;
+            estado.respostas = [];
+            estado.selecionadas = [];
+
+            renderizarQuestao();
+            mostrarTela("questao");
+        }
+
+        $("btn-iniciar").addEventListener("click", iniciarQuiz);
+        $("btn-refazer").addEventListener("click", iniciarQuiz);
+    </script>
+
+</body>
+</html>

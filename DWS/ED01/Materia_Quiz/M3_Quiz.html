@@ -15,12 +15,12 @@
             line-height: 1.6;
         }
 
-        .quiz-container { max-width: 880px; margin: 0 auto; padding: 40px 20px 80px; }
+        .quiz-container { max-width: 1000px; margin: 0 auto; padding: 40px 20px 80px; }
 
         .quiz-header {
             background: linear-gradient(135deg, #3498db 0%, #1f618d 100%);
             color: #fff;
-            padding: 28px 32px;
+            padding: 24px 32px 22px;
             border-radius: 16px 16px 0 0;
             box-shadow: 0 4px 20px rgba(52, 152, 219, 0.25);
         }
@@ -30,7 +30,7 @@
             flex-wrap: wrap; gap: 12px; margin-bottom: 14px;
         }
 
-        .quiz-header h1 { font-size: 1.5em; font-weight: 700; letter-spacing: -0.3px; }
+        .quiz-header h1 { font-size: 1.4em; font-weight: 700; letter-spacing: -0.3px; }
 
         .quiz-header h1 small {
             display: block; font-size: 0.6em; font-weight: 400; opacity: 0.85;
@@ -41,8 +41,12 @@
             background: rgba(255, 255, 255, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.3);
             padding: 6px 14px; border-radius: 50px;
-            font-size: 0.85em; font-weight: 600;
+            font-size: 0.82em; font-weight: 600;
+            text-align: center;
+            line-height: 1.3;
         }
+
+        .quiz-counter strong { display: block; font-size: 1.1em; }
 
         .progress-track {
             height: 8px; background: rgba(255, 255, 255, 0.25);
@@ -54,6 +58,26 @@
             border-radius: 4px; transition: width 0.4s ease;
         }
 
+        .progresso-bloco {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            margin-top: 12px;
+        }
+
+        .bolinha {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .bolinha.atual    { background: #fff; transform: scale(1.3); border-color: rgba(255, 255, 255, 0.5); }
+        .bolinha.correta  { background: #28a745; border-color: rgba(255, 255, 255, 0.6); }
+        .bolinha.errada   { background: #dc3545; border-color: rgba(255, 255, 255, 0.6); }
+
         .quiz-card {
             background: #fff; border-radius: 0 0 16px 16px;
             padding: 40px 40px 32px;
@@ -61,37 +85,190 @@
             min-height: 420px; display: flex; flex-direction: column;
         }
 
-        .tela-inicio {
-            text-align: center; padding: 20px 0; flex: 1;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
+        .tela-inicio, .tela-resultado, .tela-bloco {
+            padding: 20px 0; flex: 1;
+            display: flex; flex-direction: column;
         }
 
-        .tela-inicio .icone { font-size: 4em; margin-bottom: 20px; }
-        .tela-inicio h2 { font-size: 1.8em; color: #2c3e50; margin-bottom: 12px; }
-        .tela-inicio p { color: #7f8c8d; max-width: 460px; margin: 0 auto 30px; }
+        .tela-inicio, .tela-resultado, .tela-bloco { align-items: center; text-align: center; justify-content: center; }
 
-        .tela-inicio ul {
-            list-style: none; display: flex; flex-wrap: wrap;
-            justify-content: center; gap: 10px; margin-bottom: 32px;
+        .tela-inicio .icone,
+        .tela-resultado .icone,
+        .tela-bloco .icone { font-size: 4em; margin-bottom: 20px; }
+
+        .tela-inicio h2, .tela-resultado h2, .tela-bloco h2 {
+            font-size: 1.8em; color: #2c3e50; margin-bottom: 12px;
         }
 
-        .tela-inicio li {
-            background: #eaf2f8; color: #1f618d;
-            padding: 6px 14px; border-radius: 50px;
-            font-size: 0.85em; font-weight: 600;
+        .tela-inicio p, .tela-resultado p, .tela-bloco p {
+            color: #7f8c8d; max-width: 560px; margin: 0 auto 22px;
         }
 
-        .aviso-aleatorio {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: #eaf2f8; color: #1f618d; border: 1px solid #aed6f1;
-            padding: 8px 16px; border-radius: 50px;
-            font-size: 0.82em; font-weight: 600; margin-bottom: 26px;
+        /* ===== GRADE DE BLOCOS ===== */
+        .blocos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            width: 100%;
+            max-width: 800px;
+            margin: 10px auto 24px;
         }
 
+        .bloco-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .bloco-card:hover:not(.bloco-bloqueado) {
+            border-color: #3498db;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.15);
+        }
+
+        .bloco-card.concluido {
+            border-color: #28a745;
+            background: #f0f9f2;
+        }
+
+        .bloco-card.concluido:hover {
+            border-color: #1e7e34;
+            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.15);
+        }
+
+        .bloco-card.em-andamento {
+            border-color: #f39c12;
+            background: #fef8e7;
+        }
+
+        .bloco-card.bloco-bloqueado {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
+
+        .bloco-numero {
+            font-size: 1.4em;
+            font-weight: 800;
+            color: #3498db;
+            letter-spacing: -0.5px;
+        }
+
+        .bloco-card.concluido .bloco-numero { color: #28a745; }
+        .bloco-card.em-andamento .bloco-numero { color: #d68910; }
+
+        .bloco-label {
+            font-size: 0.78em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #7f8c8d;
+            font-weight: 700;
+        }
+
+        .bloco-info {
+            font-size: 0.82em;
+            color: #7f8c8d;
+            text-align: center;
+        }
+
+        .bloco-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75em;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .bloco-status.nao-iniciado {
+            background: #e9ecef;
+            color: #6c757d;
+        }
+
+        .bloco-status.concluido {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .bloco-status.em-andamento {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .bloco-btn {
+            width: 100%;
+            padding: 10px;
+            background: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.88em;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 4px;
+            font-family: inherit;
+        }
+
+        .bloco-card.concluido .bloco-btn {
+            background: #28a745;
+        }
+
+        .bloco-card.em-andamento .bloco-btn {
+            background: #f39c12;
+        }
+
+        .bloco-btn:hover {
+            filter: brightness(0.92);
+            transform: translateY(-1px);
+        }
+
+        /* ===== PAINEL DE PROGRESSO GERAL ===== */
+        .progresso-geral {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 26px;
+            padding: 16px 22px;
+            background: #eaf2f8;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .progresso-geral .bloco-info-geral {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9em;
+            color: #1f618d;
+            font-weight: 600;
+        }
+
+        .progresso-geral .numero {
+            font-size: 1.4em;
+            font-weight: 800;
+            color: #3498db;
+        }
+
+        /* ===== TIPO BADGE ===== */
         .tipo-badge {
             display: inline-block; font-size: 0.72em; text-transform: uppercase;
             letter-spacing: 1.5px; font-weight: 700;
             padding: 5px 12px; border-radius: 50px; margin-bottom: 16px;
+            align-self: flex-start;
         }
 
         .tipo-badge.vf       { background: #d1ecf1; color: #0c5460; }
@@ -240,26 +417,61 @@
         .btn-ghost:hover { color: #2c3e50; }
         .btn-ghost:disabled { opacity: 0.35; cursor: not-allowed; }
 
-        .tela-resultado {
-            text-align: center; padding: 20px 0; flex: 1;
-            display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
+        .btn-voltar-tela {
+            background: transparent;
+            color: #7f8c8d;
+            border: 2px solid #e9ecef;
+        }
+        .btn-voltar-tela:hover {
+            background: #f8f9fa;
+            color: #2c3e50;
+            border-color: #dee2e6;
         }
 
-        .tela-resultado .icone { font-size: 4.5em; margin-bottom: 16px; }
-        .tela-resultado h2 { font-size: 1.9em; color: #2c3e50; margin-bottom: 8px; }
-
-        .tela-resultado .pontuacao {
+        .pontuacao {
             font-size: 3.2em; font-weight: 800; color: #3498db;
             margin: 16px 0; letter-spacing: -2px;
         }
 
-        .tela-resultado .pontuacao small {
+        .pontuacao small {
             font-size: 0.4em; font-weight: 600; color: #95a5a6; letter-spacing: 0;
         }
 
-        .tela-resultado p {
-            color: #7f8c8d; max-width: 420px; margin: 0 auto 30px;
+        .resumo-bloco {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px 26px;
+            margin: 0 auto 24px;
+            max-width: 460px;
+            width: 100%;
+        }
+
+        .resumo-bloco .linha-resumo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            font-size: 0.95em;
+        }
+
+        .resumo-bloco .linha-resumo + .linha-resumo {
+            border-top: 1px dashed #dee2e6;
+        }
+
+        .resumo-bloco .rotulo-resumo {
+            color: #7f8c8d;
+            font-weight: 600;
+        }
+
+        .resumo-bloco .valor-resumo {
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .resumo-bloco .valor-resumo.destaque {
+            color: #3498db;
+            font-size: 1.15em;
         }
 
         .tela { display: none; }
@@ -268,8 +480,8 @@
         @media (max-width: 640px) {
             .quiz-container { padding: 20px 12px 60px; }
             .quiz-card      { padding: 28px 22px 22px; }
-            .quiz-header    { padding: 22px 22px; }
-            .quiz-header h1 { font-size: 1.2em; }
+            .quiz-header    { padding: 20px 22px; }
+            .quiz-header h1 { font-size: 1.15em; }
             .opcoes.vf-grid { flex-direction: column; }
             .enunciado      { font-size: 1.05em; }
             .quiz-footer    { flex-direction: column-reverse; }
@@ -280,6 +492,8 @@
             .fb-respostas,
             .fb-explicacao,
             .fb-referencia    { padding-left: 18px; padding-right: 18px; }
+            .bolinha { width: 10px; height: 10px; }
+            .blocos-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
         }
     </style>
 </head>
@@ -320,35 +534,47 @@
                     Quiz — Bootstrap 3
                     <small>Módulo 03 · Grid, Layout e Componentes</small>
                 </h1>
-                <div class="quiz-counter" id="contador">1 / 25</div>
+                <div class="quiz-counter" id="contador">
+                    <strong id="contador-bloco">Bloco 1 de 1</strong>
+                    <span id="contador-questao">Questão 1 de 10</span>
+                </div>
             </div>
             <div class="progress-track">
                 <div class="progress-fill" id="progresso"></div>
             </div>
+            <div class="progresso-bloco" id="progresso-bloco"></div>
         </header>
 
         <main class="quiz-card">
 
+            <!-- TELA 1: SELEÇÃO DE BLOCOS -->
             <section class="tela ativa" id="tela-inicio">
-                <div class="tela-inicio">
+                <div class="tela-inicio" style="justify-content: flex-start; padding-top: 0;">
                     <div class="icone">📦</div>
-                    <h2>Pronto para começar?</h2>
-                    <p>25 questões sobre grid, breakpoints, formulários, componentes de navegação, estrutura base e integração do Bootstrap 3. As questões são sorteadas a cada tentativa.</p>
+                    <h2>Escolha um Bloco</h2>
+                    <p>O quiz é dividido em blocos de até 10 questões. Você pode fazer os blocos na ordem que preferir — clique em qualquer um para começar.</p>
 
-                    <div class="aviso-aleatorio">
-                        🎲 As questões e alternativas são embaralhadas a cada tentativa
+                    <div class="progresso-geral" id="progresso-geral-inicio">
+                        <div class="bloco-info-geral">
+                            <span class="numero" id="geral-concluidos">0</span>
+                            <span>de <strong id="geral-total">0</strong> blocos concluídos</span>
+                        </div>
+                        <div class="bloco-info-geral">
+                            <span class="numero" id="geral-pontos">0</span>
+                            <span>acertos no total</span>
+                        </div>
                     </div>
 
-                    <ul>
-                        <li>✔ Verdadeiro ou Falso</li>
-                        <li>✔ Múltipla Escolha</li>
-                        <li>✔ Complete o Código</li>
-                        <li>✔ Aponte o Erro</li>
-                    </ul>
-                    <button class="btn btn-primary" id="btn-iniciar">🚀 Iniciar Quiz</button>
+                    <div class="blocos-grid" id="blocos-grid"></div>
+
+                    <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top: 10px;">
+                        <button class="btn btn-outline" id="btn-refazer-tudo">🔄 Embaralhar e Recomeçar</button>
+                        <button class="btn btn-primary" id="btn-ver-resultado" style="display:none;">🏆 Ver Resultado Final</button>
+                    </div>
                 </div>
             </section>
 
+            <!-- TELA 2: QUESTÃO -->
             <section class="tela" id="tela-questao">
                 <span class="tipo-badge" id="tipo-badge"></span>
                 <p class="enunciado" id="enunciado"></p>
@@ -358,11 +584,36 @@
                 <div class="feedback" id="feedback"></div>
 
                 <div class="quiz-footer">
-                    <button class="btn btn-ghost" id="btn-voltar" disabled>← Anterior</button>
+                    <button class="btn btn-ghost" id="btn-voltar">← Anterior</button>
                     <button class="btn btn-primary" id="btn-proximo" disabled>Próxima →</button>
                 </div>
             </section>
 
+            <!-- TELA 3: FIM DE BLOCO -->
+            <section class="tela" id="tela-bloco">
+                <div class="tela-bloco">
+                    <div class="icone" id="bloco-icone">🎉</div>
+                    <h2 id="bloco-titulo">Bloco concluído!</h2>
+                    <p id="bloco-mensagem">Confira abaixo seu desempenho neste bloco.</p>
+
+                    <div class="resumo-bloco">
+                        <div class="linha-resumo">
+                            <span class="rotulo-resumo">Acertos neste bloco</span>
+                            <span class="valor-resumo destaque" id="bloco-acertos">0 / 10</span>
+                        </div>
+                        <div class="linha-resumo">
+                            <span class="rotulo-resumo">Progresso geral</span>
+                            <span class="valor-resumo" id="bloco-progresso-geral">0 / 25</span>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+                        <button class="btn btn-primary" id="btn-voltar-selecao">← Voltar para Blocos</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TELA 4: RESULTADO FINAL -->
             <section class="tela" id="tela-resultado">
                 <div class="tela-resultado">
                     <div class="icone" id="resultado-icone">🏆</div>
@@ -380,314 +631,586 @@
     </div>
 
     <script>
-        /* Banco de questões — Módulo 03 (Bootstrap 3) */
+        /* ============================================================
+           CONFIGURAÇÃO
+           ============================================================ */
+        const TAMANHO_BLOCO = 10;
 
-                const QUESTOES = [
+        /* ============================================================
+           BANCO DE QUESTÕES — MÓDULO 03 (BOOTSTRAP 3)
+           ------------------------------------------------------------
+           Cole aqui suas questões. Use \x3C no lugar de < nas strings.
+           ============================================================ */
+        const QUESTOES = [
+            
             /* BLOCO 1 — VERDADEIRO OU FALSO */
 
             {
                 tipo: "vf",
-                enunciado: "O sistema de grid do Bootstrap 3 é baseado em 12 colunas.",
+                enunciado: "A tag \x3Cbody> contém o conteúdo visível da página, como textos e imagens.",
                 resposta: true,
-                explicacao: "Correto! O grid do Bootstrap 3 usa um sistema de 12 colunas. Você combina a classe de breakpoint (col-xs, col-sm, col-md, col-lg) com o número de colunas que o elemento deve ocupar (de 1 a 12). Exemplo: col-md-4 ocupa 4 das 12 colunas — ou seja, um terço da largura.",
-                referencia: "Módulo 03 — Seção 1.3.3: .col-* (Colunas)"
+                explicacao: "Correto! O \x3Cbody> é o corpo do documento — é nele que ficam todos os elementos visíveis ao usuário (textos, imagens, listas, tabelas, formulários, etc.). A seção \x3Chead> guarda metadados (título, charset, links para CSS) que NÃO aparecem na página. A tag \x3Chtml> envolve as duas e representa o documento inteiro.",
+                referencia: "Módulo 01 — Seção 1.2: Estrutura Básica do Arquivo HTML"
             },
 
             {
                 tipo: "vf",
-                enunciado: "O Bootstrap 3 aplica globalmente box-sizing: border-box a todos os elementos.",
-                resposta: true,
-                explicacao: "Correto! O Bootstrap 3 aplica box-sizing: border-box a todos os elementos. Isso faz com que width e height INCLUAM o padding e a borda (mas não a margin). Uma div com width:100px, padding:10px e border:5px ocupa EXATAMENTE 100px.",
-                referencia: "Módulo 03 — Seção 1.1: Box Model: A Base de Tudo"
-            },
-
-            {
-                tipo: "vf",
-                enunciado: "A classe .container-fluid cria um contêiner com largura máxima fixa, centralizado na página.",
+                enunciado: "A tag \x3Cul> é usada para criar listas ordenadas em HTML.",
                 resposta: false,
-                explicacao: "Falso! A .container cria um contêiner CENTRALIZADO com largura MÁXIMA predefinida (750px, 970px ou 1170px, dependendo do breakpoint). Já a .container-fluid ocupa 100% da largura da viewport, SEM limites laterais.",
-                referencia: "Módulo 03 — Seção 1.3.1: .container (ou .container-fluid)"
+                explicacao: "Falso! A tag \x3Cul> cria listas NÃO ordenadas (Unordered List), com marcadores como ponto, círculo ou quadrado. Para criar listas ORDENADAS — com números, letras ou algarismos romanos — usa-se a tag \x3Col> (Ordered List). Ambos os tipos usam \x3Cli> para cada item.",
+                referencia: "Módulo 01 — Seção 2.2: Listas Não Ordenadas \x3Cul>"
             },
 
             {
                 tipo: "vf",
-                enunciado: "A classe .form-group aplica uma margem inferior para separar verticalmente os campos de um formulário.",
+                enunciado: "A tag \x3Cimg> é uma tag vazia, ou seja, não possui tag de fechamento.",
                 resposta: true,
-                explicacao: "Correto! A .form-group envolve cada par label + input e aplica uma margem inferior (geralmente 15px), garantindo espaçamento vertical consistente entre os campos.",
-                referencia: "Módulo 03 — Seção 2.1: A Estrutura Básica de um Formulário"
+                explicacao: "Correto! \x3Cimg> é um void element (elemento vazio). Ela se fecha em si mesma e não tem \x3C/img>. O mesmo vale para \x3Cbr>, \x3Chr> e \x3Cinput>. Os dados da imagem (caminho, descrição, tamanho) são passados por atributos, não por conteúdo entre tags.",
+                referencia: "Módulo 01 — Seção 5.1: A Tag \x3Cimg> e Sua Sintaxe"
             },
 
             {
                 tipo: "vf",
-                enunciado: "O Bootstrap 3 pode ser usado SEM a biblioteca jQuery.",
+                enunciado: "O atributo colspan mescla células verticalmente em uma tabela HTML.",
                 resposta: false,
-                explicacao: "Falso! O Bootstrap 3 DEPENDE do jQuery para todos os seus plugins JavaScript. Sem o jQuery, funcionalidades como dropdowns, modais, tooltips, abas e carrosséis simplesmente NÃO funcionam.",
-                referencia: "Módulo 03 — Seção 4.6: jQuery: A Dependência dos Plugins"
+                explicacao: "Falso! O colspan mescla células HORIZONTALMENTE (em colunas). Quem mescla VERTICALMENTE (em linhas) é o rowspan. Mnemônico: col = coluna; row = linha.",
+                referencia: "Módulo 01 — Seção 3.5: colspan e rowspan — Mesclagem de Células"
             },
 
             {
                 tipo: "vf",
-                enunciado: "Aplicar display: flex a uma .row do Bootstrap 3 mantém o sistema de grid funcionando perfeitamente.",
-                resposta: false,
-                explicacao: "Falso! O grid do Bootstrap 3 é baseado em float. Se você aplicar display:flex a uma .row, o Flexbox assume o controle do dimensionamento dos filhos, e as larguras definidas pelas classes col-* são IGNORADAS. O layout quebra.",
-                referencia: "Módulo 03 — Seção 1.5: Flexbox vs. Box Model no Contexto do Bootstrap 3"
-            },
-
-            {
-                tipo: "vf",
-                enunciado: "Os Glyphicons são ícones em formato de fonte, podendo ser redimensionados e coloridos via CSS.",
+                enunciado: "O HTML cria páginas estáticas, sem animação.",
                 resposta: true,
-                explicacao: "Correto! Os Glyphicons são uma biblioteca de ícones em FONTE. Por serem fontes, podem ser redimensionados e coloridos via CSS sem perda de qualidade. Cada ícone é usado com duas classes: .glyphicon (base) + .glyphicon-* (específica).",
-                referencia: "Módulo 03 — Seção 3.4: Glyphicons (Ícones)"
+                explicacao: "Correto! O material destaca: 'O HTML cria páginas estáticas, sem animação'. Ele define ESTRUTURA e CONTEÚDO. Para interatividade e animações, é preciso JavaScript (comportamento) e CSS (efeitos visuais). HTML sozinho não executa lógica.",
+                referencia: "Módulo 01 — Seção 1.1: O que é HTML? Definição e Propósito"
+            },
+
+            {
+                tipo: "vf",
+                enunciado: "O atributo alt é opcional em imagens e pode ser omitido sem prejuízo.",
+                resposta: false,
+                explicacao: "Falso! O alt é OBRIGATÓRIO para acessibilidade. Ele fornece descrição textual para leitores de tela e aparece quando a imagem não carrega. A única exceção é imagens puramente decorativas — nesse caso usa-se alt vazio, mas nunca omitir o atributo.",
+                referencia: "Módulo 01 — Seção 5.3: O Atributo alt — Acessibilidade e Fallback"
+            },
+
+            {
+                tipo: "vf",
+                enunciado: "O método GET do formulário anexa os dados ao endereço (URL) do servidor.",
+                resposta: true,
+                explicacao: "Correto! O GET exibe os dados do formulário na própria URL (algo como pagina.php?nome=Joao&idade=25). Isso tem limite de aproximadamente 2000 caracteres e baixa segurança. Já o POST envia os dados no corpo da requisição, invisíveis na URL, e é o método indicado para login, cadastro e senhas.",
+                referencia: "Módulo 01 — Seção 4.1: A Tag form e Atributos"
             },
 
             /* BLOCO 2 — MÚLTIPLA ESCOLHA */
 
             {
                 tipo: "multipla",
-                enunciado: "Quantas colunas tem o sistema de grid do Bootstrap 3?",
-                opcoes: ["6", "10", "12", "16"],
-                correta: 2,
-                explicacao: "O grid do Bootstrap 3 é baseado em 12 colunas. Você distribui o espaço somando valores que totalizam 12. O 12 foi escolhido por ser divisível por 2, 3, 4 e 6.",
-                referencia: "Módulo 03 — Seção 1.3.3: .col-* (Colunas)"
+                enunciado: "Qual tag é usada para criar uma lista ORDENADA em HTML?",
+                opcoes: ["\x3Col>", "\x3Cul>", "\x3Cli>", "\x3Cdl>"],
+                correta: 0,
+                explicacao: "A tag ol (Ordered List) cria listas ordenadas com numeração (1, 2, 3), letras (A, B, C) ou algarismos romanos (I, II, III), controlados pelo atributo type. A ul cria listas não ordenadas, li representa cada item e dl cria listas de definição.",
+                referencia: "Módulo 01 — Seção 2.1: Listas Ordenadas ol"
             },
 
             {
                 tipo: "multipla",
-                enunciado: "Qual breakpoint do Bootstrap 3 corresponde a TABLETS (largura ≥ 768px)?",
-                opcoes: ["col-xs", "col-sm", "col-md", "col-lg"],
+                enunciado: "Qual atributo da tag a define o destino do link?",
+                opcoes: ["src", "link", "href", "url"],
+                correta: 2,
+                explicacao: "O href (Hypertext REFerence) é o atributo que define para onde o link aponta. O src é usado em imagens, scripts e iframes. Os nomes 'link' e 'url' NÃO existem como atributos da tag a. Regra prática: href = para onde vai; src = de onde vem.",
+                referencia: "Módulo 01 — Seção 6.1: A Tag a e Sua Sintaxe"
+            },
+
+            {
+                tipo: "multipla",
+                enunciado: "Qual tag representa uma LINHA de tabela em HTML?",
+                opcoes: ["\x3Ctd>", "\x3Cth>", "\x3Ctr>", "\x3Ctable>"],
+                correta: 2,
+                explicacao: "A tag tr vem de 'table row' e representa uma linha da tabela. Dentro dela ficam as células: th (cabeçalho) e td (dados). A tag table é o contêiner principal. Estrutura padrão: table, depois tr, depois th e/ou td.",
+                referencia: "Módulo 01 — Seção 3.1: Estrutura da Tabela"
+            },
+
+            {
+                tipo: "multipla",
+                enunciado: "Qual valor do atributo type do input exibe asteriscos no lugar dos caracteres digitados?",
+                opcoes: ["text", "password", "hidden", "secret"],
                 correta: 1,
-                explicacao: "O breakpoint col-sm (Small) é para tablets (maior ou igual a 768px). Correspondência: col-xs = telefones (menor que 768px); col-sm = tablets; col-md = desktops (maior ou igual a 992px); col-lg = alta resolução (maior ou igual a 1200px).",
-                referencia: "Módulo 03 — Seção 1.4: Breakpoints e Responsividade"
+                explicacao: "O type password mostra asteriscos ou pontos enquanto o usuário digita, ocultando o conteúdo. O type text exibe os caracteres normalmente, e type hidden oculta o campo inteiro (não visível ao usuário). 'secret' não é um tipo válido em HTML.",
+                referencia: "Módulo 01 — Seção 4.2: A Tag input e Seus Tipos"
             },
 
             {
                 tipo: "multipla",
-                enunciado: "Qual classe é OBRIGATÓRIA em inputs, selects e textareas para que recebam a estilização padrão do Bootstrap?",
-                opcoes: ["input-style", "form-field", "form-control", "bootstrap-input"],
-                correta: 2,
-                explicacao: "A classe .form-control é a classe 'mágica' dos inputs. Ela aplica width 100%, altura padronizada, padding, bordas arredondadas e efeito de foco. Sem ela, o campo fica com a aparência 'crua' do navegador.",
-                referencia: "Módulo 03 — Seção 2.1: A Estrutura Básica de um Formulário"
-            },
-
-            {
-                tipo: "multipla",
-                enunciado: "Qual componente do Bootstrap 3 é usado para adicionar texto, ícones ou botões AO LADO de um input?",
-                opcoes: [".form-group", ".input-group", ".input-addon", ".field-extension"],
+                enunciado: "Qual tag define o título que aparece na ABA ou barra do navegador (e não no corpo da página)?",
+                opcoes: ["\x3Ch1>", "\x3Ctitle>", "\x3Cheader>", "\x3Ccaption>"],
                 correta: 1,
-                explicacao: "O .input-group estende o input, permitindo adicionar texto (input-group-addon) ou botões (input-group-btn) nas laterais. Exemplo clássico: um campo de valor com 'R$' à esquerda.",
-                referencia: "Módulo 03 — Seção 2.3: Input Groups (Grupos de Input)"
+                explicacao: "A tag title fica dentro do head e define o texto da aba do navegador — não é exibido no conteúdo da página. A h1 é o título principal DENTRO do corpo. header é uma seção semântica do HTML5, e caption é o título de uma tabela.",
+                referencia: "Módulo 01 — Seção 1.2: Estrutura Básica do Arquivo HTML"
             },
 
             {
                 tipo: "multipla",
-                enunciado: "Qual biblioteca JavaScript é dependência OBRIGATÓRIA do Bootstrap 3?",
-                opcoes: ["Vue.js", "React.js", "jQuery", "Angular"],
-                correta: 2,
-                explicacao: "O Bootstrap 3 depende do jQuery. Todos os seus plugins foram construídos em cima dessa biblioteca. Sem o jQuery carregado ANTES do Bootstrap, os plugins não funcionam.",
-                referencia: "Módulo 03 — Seção 4.6: jQuery: A Dependência dos Plugins"
+                enunciado: "Qual atributo mescla células VERTICALMENTE em uma tabela HTML?",
+                opcoes: ["colspan", "rowspan", "cellspan", "merge"],
+                correta: 1,
+                explicacao: "O rowspan mescla células VERTICALMENTE (em linhas). Quem mescla horizontalmente é o colspan (em colunas). 'cellspan' e 'merge' não existem no HTML. Exemplo: td com rowspan igual a 2 ocupa duas linhas de altura.",
+                referencia: "Módulo 01 — Seção 3.5: colspan e rowspan — Mesclagem de Células"
             },
 
             {
                 tipo: "multipla",
-                enunciado: "Qual classe torna uma tabela responsiva, exibindo barra de rolagem horizontal em telas pequenas?",
-                opcoes: [".table-scroll", ".table-mobile", ".table-responsive", ".table-fluid"],
+                enunciado: "Qual tag exibe o texto preservando EXATAMENTE os espaços, tabulações e quebras de linha como foram digitados?",
+                opcoes: ["\x3Cp>", "\x3Cbr>", "\x3Cpre>", "\x3Cspan>"],
                 correta: 2,
-                explicacao: "A classe .table-responsive é aplicada a um div que ENVOLVE a tabela (não na própria table). Quando a viewport é menor que 768px, ela adiciona scroll horizontal.",
-                referencia: "Módulo 03 — Seção 3.3.1: Classes Principais"
+                explicacao: "A tag pre (preformatted) mantém espaços, tabulações e quebras de linha exatamente como escritos no código-fonte. Isso é útil para exibir código ou arte ASCII. A p colapsa espaços extras, br força apenas uma quebra, e span é um container inline sem formatação especial.",
+                referencia: "Módulo 01 — Seção 7.3: Quebra de Linha e Régua Horizontal"
             },
 
             {
                 tipo: "multipla",
-                enunciado: "Qual classe base é usada para criar um painel (panel) no Bootstrap 3?",
-                opcoes: [".card", ".box", ".panel", ".widget"],
-                correta: 2,
-                explicacao: "No Bootstrap 3, o componente de caixa é o .panel. As subclasses são .panel-heading, .panel-body e .panel-footer. No Bootstrap 4/5, o .panel foi SUBSTITUÍDO pelo .card.",
-                referencia: "Módulo 03 — Seção 3.2: Painéis (Panels)"
-            },
-
-            {
-                tipo: "multipla",
-                enunciado: "Qual meta tag é ESSENCIAL para que o Bootstrap 3 funcione de forma responsiva em dispositivos móveis?",
-                opcoes: [
-                    "A meta charset UTF-8",
-                    "A meta http-equiv X-UA-Compatible",
-                    "A meta viewport (width=device-width, initial-scale=1)",
-                    "A meta description"
-                ],
-                correta: 2,
-                explicacao: "A meta viewport é a mais importante para a responsividade. Ela instrui o navegador a definir a largura da viewport igual à largura do dispositivo e a não aplicar zoom inicial. Sem ela, dispositivos móveis renderizam a página como se fosse desktop.",
-                referencia: "Módulo 03 — Seção 4.1.1: Meta Tags Obrigatórias"
+                enunciado: "Qual método HTTP envia os dados do formulário no CORPO da requisição, sem exibi-los na URL?",
+                opcoes: ["GET", "POST", "PUT", "SEND"],
+                correta: 1,
+                explicacao: "O POST envia os dados no corpo da requisição — invisíveis na URL. É o método indicado para login, cadastro e qualquer dado sensível. O GET anexa os dados à URL e é usado para buscas e filtros. PUT é usado em APIs REST, e SEND não é um método HTTP válido.",
+                referencia: "Módulo 01 — Seção 4.1: A Tag form e Atributos"
             },
 
             /* BLOCO 3 — COMPLETE O CÓDIGO */
 
             {
                 tipo: "complete",
-                enunciado: "Complete o código abaixo para criar uma coluna que ocupe METADE da largura em desktops:",
-                codigo: '\x3Cdiv class="row">\n  \x3Cdiv class="{{GAP}}">\n    Conteúdo\n  \x3C/div>\n\x3C/div>',
-                opcoes: ["col-md-4", "col-md-6", "col-md-12", "col-md-3"],
+                enunciado: "Complete o código abaixo para criar um link para o site exemplo.com:",
+                codigo: '\x3Ca {{GAP}}="https://exemplo.com">Visitar site\x3C/a>',
+                opcoes: ["src", "href", "link", "url"],
                 correta: 1,
-                explicacao: "Como o grid tem 12 colunas, METADE corresponde a 6 (12 dividido por 2 = 6). Então col-md-6 ocupa 50% da largura em telas de desktop (maior ou igual a 992px).",
-                referencia: "Módulo 03 — Seção 1.3.3: .col-* (Colunas)"
+                explicacao: "O atributo correto é href (Hypertext REFerence). Ele define o DESTINO do link — para onde o navegador vai quando o usuário clicar. O src é usado em img, script e iframe para indicar a ORIGEM de um recurso. 'link' e 'url' não existem como atributos de a.",
+                referencia: "Módulo 01 — Seção 6.1: A Tag a e Sua Sintaxe"
             },
 
             {
                 tipo: "complete",
-                enunciado: "Complete o código abaixo para criar um BOTÃO PRIMÁRIO (azul escuro):",
-                codigo: '\x3Cbutton type="submit" class="btn btn-{{GAP}}">Enviar\x3C/button>',
-                opcoes: ["main", "primary", "blue", "default"],
-                correta: 1,
-                explicacao: "A classe .btn-primary cria um botão azul escuro, indicando ação principal. A escala é: .btn-primary (azul), .btn-default (cinza), .btn-success (verde), .btn-danger (vermelho), .btn-warning (amarelo), .btn-info (azul claro).",
-                referencia: "Módulo 03 — Seção 2.7: Button (Botões)"
+                enunciado: "Complete o código abaixo para exibir uma imagem de foto.jpg:",
+                codigo: '\x3Cimg {{GAP}}="foto.jpg" alt="Descrição da foto">',
+                opcoes: ["src", "href", "image", "file"],
+                correta: 0,
+                explicacao: "O atributo correto é src (source). Ele especifica o CAMINHO do arquivo de imagem e é obrigatório em img. O href é usado em links (a). 'image' e 'file' não são atributos válidos em HTML. Lembre-se: src = de onde vem; href = para onde vai.",
+                referencia: "Módulo 01 — Seção 5.2: O Atributo src — A Fonte da Imagem"
             },
 
             {
                 tipo: "complete",
-                enunciado: "Complete o código abaixo para criar um campo de email com o ícone '@' à esquerda:",
-                codigo: '\x3Cdiv class="{{GAP}}">\n  \x3Cspan class="input-group-addon">@\x3C/span>\n  \x3Cinput type="email" class="form-control">\n\x3C/div>',
-                opcoes: ["form-group", "input-group", "field-addon", "input-box"],
+                enunciado: "Complete o código abaixo para que a lista alfabética comece na letra C (3ª letra):",
+                codigo: '\x3Col type="A" {{GAP}}="3">\n  \x3Cli>Primeiro item\x3C/li>\n  \x3Cli>Segundo item\x3C/li>\n\x3C/ol>',
+                opcoes: ["begin", "start", "from", "first"],
                 correta: 1,
-                explicacao: "A classe .input-group é o CONTÊINER do componente de grupo de input. Ela agrupa o input e seus addons. O .input-group-addon (usado no span) é o item lateral com o '@'.",
-                referencia: "Módulo 03 — Seção 2.3: Input Groups (Grupos de Input)"
+                explicacao: "O atributo start define em que VALOR a lista ordenada começa. Com type A e start 3, a lista inicia em C (1=A, 2=B, 3=C). Os atributos 'begin', 'from' e 'first' não existem em HTML. Se start for omitido, a lista começa em 1 (ou A, ou I, dependendo do type).",
+                referencia: "Módulo 01 — Seção 2.1.3: Atributo start — Valor Inicial"
             },
 
             {
                 tipo: "complete",
-                enunciado: "Complete o código abaixo para criar um RASTRO DE NAVEGAÇÃO (breadcrumb):",
-                codigo: '\x3Col class="{{GAP}}">\n  \x3Cli>\x3Ca href="index.html">Início\x3C/a>\x3C/li>\n  \x3Cli class="active">Cadastro\x3C/li>\n\x3C/ol>',
-                opcoes: ["nav-trail", "breadcrumb", "path", "crumb"],
+                enunciado: "Complete o código abaixo para criar um campo de SENHA (que oculta os caracteres):",
+                codigo: '\x3Cinput type="{{GAP}}" name="senha">',
+                opcoes: ["text", "password", "secret", "hidden"],
                 correta: 1,
-                explicacao: "A classe .breadcrumb é aplicada a uma lista ORDENADA (ol) para criar o rastro de navegação. O Bootstrap adiciona automaticamente o separador barra entre os itens via CSS.",
-                referencia: "Módulo 03 — Seção 3.1: Breadcrumbs (Rastro de Navegação)"
+                explicacao: "O type password faz o navegador exibir asteriscos ou pontos enquanto o usuário digita, protegendo o conteúdo contra olhares curiosos. O type text mostra os caracteres, hidden esconde o campo inteiro (nem é exibido), e 'secret' não existe como tipo válido em HTML.",
+                referencia: "Módulo 01 — Seção 4.2: A Tag input e Seus Tipos"
             },
 
             {
                 tipo: "complete",
-                enunciado: "Complete o código abaixo para exibir o ícone de BUSCA (lupa) do Glyphicon:",
-                codigo: '\x3Cspan class="glyphicon glyphicon-{{GAP}}" aria-hidden="true">\x3C/span>',
-                opcoes: ["magnify", "search", "lupa", "find"],
-                correta: 1,
-                explicacao: "A classe glyphicon-search exibe a lupa de busca. Os Glyphicons usam DUAS classes: .glyphicon (base) + .glyphicon-* (específica).",
-                referencia: "Módulo 03 — Seção 3.4: Glyphicons (Ícones)"
+                enunciado: "Complete o código abaixo para criar um link que abre o cliente de e-mail do usuário:",
+                codigo: '\x3Ca href="{{GAP}}:usuario@email.com">Enviar e-mail\x3C/a>',
+                opcoes: ["mail", "email", "mailto", "send"],
+                correta: 2,
+                explicacao: "O prefixo correto é mailto:, que instrui o navegador a abrir o cliente de e-mail padrão do usuário com o endereço já preenchido no campo 'Para'. Uso: a href igual a mailto:contato@site.com. Os prefixos 'mail', 'email' e 'send' não são reconhecidos. Outros prefixos válidos: tel: (telefone), sms: (mensagem de texto).",
+                referencia: "Módulo 01 — Seção 6.3: Tipos de Links — Links para E-mail"
             },
 
             /* BLOCO 4 — APONTE O ERRO */
 
             {
                 tipo: "erro",
-                enunciado: "Há um erro ESTRUTURAL no grid do Bootstrap abaixo. Aponte qual é:",
-                codigo: '\x3Cdiv class="container">\n  \x3Cdiv class="col-md-6">Coluna A\x3C/div>\n  \x3Cdiv class="col-md-6">Coluna B\x3C/div>\n\x3C/div>',
+                enunciado: "Há um erro no código abaixo. Aponte qual é:",
+                codigo: '\x3Cul>\n  \x3Cli>Primeiro item\n  \x3Cli>Segundo item\x3C/li>\n  \x3Cli>Terceiro item\x3C/li>\n\x3C/ul>',
                 opcoes: [
-                    "As colunas deveriam ser col-md-12",
-                    "Falta a div .row entre o .container e as colunas",
-                    "O container não pode ter apenas duas colunas",
+                    "A tag ul deveria ser ol",
+                    "Falta fechar a tag li do primeiro item",
+                    "A tag li não pode ser usada dentro de ul",
                     "O código está correto"
                 ],
                 correta: 1,
-                explicacao: "Falta a div .row! A hierarquia OBRIGATÓRIA do grid do Bootstrap 3 é: .container → .row → .col-*. As colunas devem ser filhas DIRETAS de uma .row. Sem a .row, as margens negativas e o clearfix não são aplicados, e o layout quebra.",
-                referencia: "Módulo 03 — Seção 1.3: Estrutura do Grid: Containers, Rows e Columns"
+                explicacao: "O primeiro li foi aberto mas nunca fechado com a barra correspondente. Embora a maioria dos navegadores 'conserte' isso automaticamente, o código está tecnicamente incorreto. Seguir a regra de sempre fechar TODAS as tags evita bugs sutis, garante consistência entre navegadores e facilita a manutenção.",
+                referencia: "Módulo 01 — Seção 1.3: Sintaxe dos Comandos HTML"
             },
 
             {
                 tipo: "erro",
-                enunciado: "Há um erro no formulário Bootstrap abaixo. Aponte qual é:",
-                codigo: '\x3Cdiv class="form-group">\n  \x3Clabel>Nome:\x3C/label>\n  \x3Cinput type="text" id="nome">\n\x3C/div>',
+                enunciado: "Há um erro no código abaixo. Aponte qual é:",
+                codigo: '\x3Cimg src="logo.png" width="150" height="80">',
                 opcoes: [
-                    "O label não pode estar dentro do form-group",
-                    "Falta a classe .form-control no input",
-                    "O type deveria ser 'name'",
+                    "width e height não podem ser usados juntos",
+                    "Falta o atributo alt, obrigatório para acessibilidade",
+                    "src deveria ser href para imagens",
                     "O código está correto"
                 ],
                 correta: 1,
-                explicacao: "Falta a classe .form-control no input. Sem ela, o campo fica com a aparência 'crua' do navegador — sem largura 100%, sem padding, sem bordas arredondadas, sem efeito de foco.",
-                referencia: "Módulo 03 — Seção 2.1: A Estrutura Básica de um Formulário"
+                explicacao: "O atributo alt está ausente. Ele é OBRIGATÓRIO para acessibilidade: leitores de tela leem seu conteúdo para usuários com deficiência visual, e ele aparece quando a imagem não carrega. O src é o atributo correto para imagens (href é para links).",
+                referencia: "Módulo 01 — Seção 5.3: O Atributo alt — Acessibilidade e Fallback"
             },
 
             {
                 tipo: "erro",
-                enunciado: "Há um erro de ACESSIBILIDADE no formulário abaixo. Aponte qual é:",
-                codigo: '\x3Clabel for="email">Email:\x3C/label>\n\x3Cinput type="email" class="form-control" id="mail">',
+                enunciado: "Há um problema no formulário abaixo. Aponte qual é:",
+                codigo: '\x3Cform action="login.php" method="get">\n  \x3Cinput type="text" name="usuario">\n  \x3Cinput type="password" name="senha">\n  \x3Cinput type="submit" value="Entrar">\n\x3C/form>',
                 opcoes: [
-                    "O input não pode ter type='email'",
-                    "O atributo for do label aponta para 'email', mas o id do input é 'mail' — eles devem coincidir",
+                    "type password não é válido em HTML",
+                    "Usar GET para enviar senha é inseguro; o correto é method post",
+                    "Falta o atributo type no form",
+                    "O código está correto"
+                ],
+                correta: 1,
+                explicacao: "Senhas NUNCA devem ser enviadas via GET, porque os dados ficam visíveis na URL (ex: login.php?usuario=joao&senha=1234), ficam salvos no histórico do navegador e em logs de servidor. O método POST envia os dados no corpo da requisição, tornando-os invisíveis na URL. Para login, SEMPRE use POST.",
+                referencia: "Módulo 01 — Seção 4.1: A Tag form e Atributos"
+            },
+
+            {
+                tipo: "erro",
+                enunciado: "Há um erro estrutural no código abaixo. Aponte qual é:",
+                codigo: '\x3Ctable border="1">\n  \x3Cth>Nome\x3C/th>\n  \x3Cth>Idade\x3C/th>\n  \x3Ctr>\n    \x3Ctd>Ana\x3C/td>\n    \x3Ctd>20\x3C/td>\n  \x3C/tr>\n\x3C/table>',
+                opcoes: [
+                    "A tag table deveria ser tab",
+                    "As tags th devem estar dentro de uma linha tr",
+                    "border não aceita o valor 1",
+                    "O código está correto"
+                ],
+                correta: 1,
+                explicacao: "As tags th (células de cabeçalho) devem SEMPRE estar dentro de uma linha tr. A estrutura correta é: table, depois tr, depois th (cabeçalho) ou td (dados). Do jeito que está, os th estão soltos dentro da table, o que quebra a estrutura e gera renderização inconsistente entre navegadores.",
+                referencia: "Módulo 01 — Seção 3.1: Estrutura da Tabela"
+            },
+
+            {
+                tipo: "erro",
+                enunciado: "Há um erro estrutural no documento abaixo. Aponte qual é:",
+                codigo: '\x3Chtml>\n  \x3Cbody>\n    \x3Chead>\n      \x3Ctitle>Meu site\x3C/title>\n    \x3C/head>\n    \x3Ch1>Bem-vindo\x3C/h1>\n  \x3C/body>\n\x3C/html>',
+                opcoes: [
+                    "A tag title deveria estar dentro do body",
+                    "A seção head deve vir ANTES do body, nunca dentro dele",
+                    "A tag h1 não pode estar dentro do body",
+                    "O código está correto"
+                ],
+                correta: 1,
+                explicacao: "A estrutura correta do documento HTML é: html, depois head (primeiro), depois body. O head contém metadados (title, charset, links para CSS) e deve vir ANTES do body. Do jeito que está, o head está aninhado dentro do body, o que é semanticamente inválido e pode causar comportamento imprevisível nos navegadores.",
+                referencia: "Módulo 01 — Seção 1.2: Estrutura Básica do Arquivo HTML"
+            },
+                        /* ============================================================
+               EXPANSÃO — 25 questões adicionais (M1)
+               ============================================================ */
+
+            /* BLOCO 1 — VERDADEIRO OU FALSO */
+
+            {
+                tipo: "vf",
+                enunciado: "A tag \x3Cdiv> é um elemento de nível bloco (block) que agrupa conteúdo.",
+                resposta: true,
+                explicacao: "Correto! A div (division) é um container genérico de nível BLOCO, ou seja, ocupa toda a largura disponível e força quebra de linha antes e depois. Ela serve para agrupar elementos e é muito usada com CSS para criar layouts. Já a span é inline — fica na mesma linha do conteúdo ao redor.",
+                referencia: "Módulo 01 — Seção 1.3: Sintaxe dos Comandos HTML"
+            },
+
+            {
+                tipo: "vf",
+                enunciado: "O atributo target=\"_blank\" em um link faz com que ele abra em uma NOVA aba ou janela do navegador.",
+                resposta: true,
+                explicacao: "Correto! O target define ONDE o link será aberto. Os valores principais são: _self (mesma aba, padrão), _blank (nova aba), _parent e _top (frames, obsoletos). Recomenda-se usar rel=\"noopener noreferrer\" junto com _blank por segurança, evitando que a página de destino acesse a janela de origem.",
+                referencia: "Módulo 01 — Seção 6.2: O Atributo target"
+            },
+
+            {
+                tipo: "vf",
+                enunciado: "A tag \x3Cfieldset> serve para agrupar campos de um formulário visualmente.",
+                resposta: true,
+                explicacao: "Correto! O fieldset agrupa campos relacionados dentro de um formulário. Ele costuma vir acompanhado de um legend (título do grupo). A dupla fieldset + legend cria uma caixa com borda e um título no topo, ajudando a organizar formulários longos em seções lógicas.",
+                referencia: "Módulo 01 — Seção 4.6: Agrupar e Organizar Campos"
+            },
+
+            {
+                tipo: "vf",
+                enunciado: "As tags \x3Cstrong> e \x3Cb> produzem o mesmo efeito VISUAL (negrito), mas \x3Cstrong> carrega significado semântico de importância.",
+                resposta: true,
+                explicacao: "Correto! Ambas deixam o texto em negrito, mas com propósitos diferentes. b é apenas ESTILO visual (bold), sem significado. strong indica IMPORTÂNCIA forte do conteúdo, sendo lida com ênfase por leitores de tela. Boa prática moderna: preferir strong (semântica) em vez de b (visual).",
+                referencia: "Módulo 01 — Seção 7.4: Formatação de Texto"
+            },
+
+            {
+                tipo: "vf",
+                enunciado: "A tag \x3Cbr> é uma tag vazia (void element), ou seja, não precisa de fechamento.",
+                resposta: true,
+                explicacao: "Correto! A tag br (break) é void — não tem fechamento. Ela apenas insere uma quebra de linha. O mesmo vale para hr (régua horizontal), img, input, meta, link e outras. Void elements se fecham em si mesmos e não podem conter conteúdo entre abertura e fechamento.",
+                referencia: "Módulo 01 — Seção 7.3: Quebra de Linha e Régua Horizontal"
+            },
+
+            {
+                tipo: "vf",
+                enunciado: "O placeholder de um input pode substituir o \x3Clabel> sem prejuízo para a acessibilidade.",
+                resposta: false,
+                explicacao: "Falso! O placeholder é apenas uma DICA visual — ele desaparece quando o usuário começa a digitar e NÃO é lido de forma confiável por leitores de tela. O label é a estrutura semântica correta para descrever o campo. Regra de ouro: sempre tenha label; use placeholder apenas como complemento visual.",
+                referencia: "Módulo 01 — Seção 4.3: Atributos da Tag input"
+            },
+
+            {
+                tipo: "vf",
+                enunciado: "A tag \x3Cfigcaption> é usada para adicionar uma legenda a uma imagem dentro de \x3Cfigure>.",
+                resposta: true,
+                explicacao: "Correto! A dupla figure + figcaption cria uma figura com legenda semântica. O figure agrupa a imagem (ou vídeo, gráfico, código) e o figcaption fornece a descrição/legenda. Isso melhora a acessibilidade e a semântica do documento — leitores de tela entendem a relação entre imagem e legenda.",
+                referencia: "Módulo 01 — Seção 5.8: figure e figcaption — Legendas Semânticas"
+            },
+
+            /* BLOCO 2 — MÚLTIPLA ESCOLHA */
+
+            {
+                tipo: "multipla",
+                enunciado: "Qual tag é usada para criar uma lista de DEFINIÇÃO (termo + descrição)?",
+                opcoes: ["\x3Col>", "\x3Cul>", "\x3Cdl>", "\x3Cdir>"],
+                correta: 2,
+                explicacao: "A tag dl (Definition List) cria listas de definição, usadas para pares termo + descrição. Dentro dela usam-se dt (Definition Term) para o termo e dd (Definition Description) para a descrição. É ideal para glossários, dicionários e perguntas frequentes (FAQ).",
+                referencia: "Módulo 01 — Seção 2.4: Listas de Definição"
+            },
+
+            {
+                tipo: "multipla",
+                enunciado: "Qual atributo do link define que ele será aberto em uma nova aba do navegador?",
+                opcoes: ["href=\"_blank\"", "open=\"_blank\"", "target=\"_blank\"", "window=\"new\""],
+                correta: 2,
+                explicacao: "O atributo target com valor _blank é o correto. O href só define o DESTINO (URL), não o comportamento. open, window e outros valores não existem em HTML. Adicione sempre rel=\"noopener noreferrer\" ao usar _blank — evita vulnerabilidades e melhora segurança.",
+                referencia: "Módulo 01 — Seção 6.2: O Atributo target"
+            },
+
+            {
+                tipo: "multipla",
+                enunciado: "Qual tag fornece um TÍTULO a uma tabela, geralmente exibido acima dela?",
+                opcoes: ["\x3Ctitle>", "\x3Ccaption>", "\x3Cth>", "\x3Cheader>"],
+                correta: 1,
+                explicacao: "A tag caption é usada DENTRO da table (logo após a abertura) para fornecer uma legenda/título visível. A tag title pertence ao head do documento (título da aba), th é célula de cabeçalho e header é uma seção semântica do HTML5. caption é o correto para título de tabela.",
+                referencia: "Módulo 01 — Seção 3.6: Tabela-Resumo dos Elementos"
+            },
+
+            {
+                tipo: "multipla",
+                enunciado: "Qual tag agrupa um conjunto de opções dentro de um dropdown (select)?",
+                opcoes: ["\x3Coptgroup>", "\x3Cgroup>", "\x3Coptions>", "\x3Cselectgroup>"],
+                correta: 0,
+                explicacao: "A tag optgroup agrupa visualmente opções dentro de um select, usando o atributo label para definir o rótulo do grupo. Ex: agrupar estados por região (Sudeste, Sul, etc.). As tags group, options e selectgroup NÃO existem em HTML. optgroup é filho direto de select.",
+                referencia: "Módulo 01 — Seção 4.8: Exemplo com Endereço (optgroup e datalist)"
+            },
+
+            {
+                tipo: "multipla",
+                enunciado: "Qual tag cria uma área de texto MULTILINHA para entrada livre do usuário?",
+                opcoes: ["\x3Cinput type=\"text\">", "\x3Ctext>", "\x3Ctextarea>", "\x3Cmultiline>"],
+                correta: 2,
+                explicacao: "A textarea cria uma área de digitação com múltiplas linhas. Seus atributos rows e cols definem as dimensões visuais (linhas x colunas). É ideal para comentários, mensagens longas e descrições. O input type text é de linha única, e text/multiline NÃO existem em HTML.",
+                referencia: "Módulo 01 — Seção 4.5: Tag textarea"
+            },
+
+            {
+                tipo: "multipla",
+                enunciado: "Qual atributo HTML permite exibir SUGESTÕES de preenchimento automaticamente ao digitar em um input?",
+                opcoes: ["autocomplete", "suggestions", "datalist", "autofill"],
+                correta: 2,
+                explicacao: "O datalist fornece uma lista de sugestões para um input. Ele é referenciado pelo atributo list do input: input list=\"cidades\" + datalist id=\"cidades\". Conforme o usuário digita, o navegador filtra e mostra as opções. autocomplete é um atributo diferente (memória de formulário), e suggestions/autofill não existem.",
+                referencia: "Módulo 01 — Seção 4.8: Exemplo com Endereço (optgroup e datalist)"
+            },
+
+            {
+                tipo: "multipla",
+                enunciado: "Qual é a estrutura CORRETA de um documento HTML5?",
+                opcoes: [
+                    "html, depois body, depois head",
+                    "html, depois head, depois body",
+                    "head, depois html, depois body",
+                    "body, depois head, depois html"
+                ],
+                correta: 1,
+                explicacao: "A estrutura correta é: html (raiz), contendo head (metadados, título, charset, links) e, EM SEGUIDA, body (conteúdo visível). O head deve vir SEMPRE antes do body. Inverter a ordem é semanticamente inválido e pode causar comportamento imprevisível nos navegadores.",
+                referencia: "Módulo 01 — Seção 1.2: Estrutura Básica do Arquivo HTML"
+            },
+
+            {
+                tipo: "multipla",
+                enunciado: "Qual atributo do form define a URL do programa que irá processar os dados enviados?",
+                opcoes: ["method", "href", "action", "target"],
+                correta: 2,
+                explicacao: "O action define a URL (endereço) que irá PROCESSAR os dados do formulário. O method define COMO os dados serão enviados (GET ou POST). O href é atributo de links (a), não de form. O target é usado em links para definir onde abrir. A dupla form action + method é a base do envio de formulários.",
+                referencia: "Módulo 01 — Seção 4.1: A Tag form e Atributos"
+            },
+
+            /* BLOCO 3 — COMPLETE O CÓDIGO */
+
+            {
+                tipo: "complete",
+                enunciado: "Complete o código abaixo para adicionar um TÍTULO à tabela:",
+                codigo: '\x3Ctable>\n  \x3C{{GAP}}>Lista de Alunos\x3C/caption>\n  \x3Ctr>\x3Cth>Nome\x3C/th>\x3C/tr>\n\x3C/table>',
+                opcoes: ["title", "caption", "header", "label"],
+                correta: 1,
+                explicacao: "O elemento correto é caption. Ele fica DENTRO da table, geralmente logo após a abertura, e fornece um título visível para a tabela. Não confundir com title (que é do head, para a aba do navegador). caption é filho direto de table.",
+                referencia: "Módulo 01 — Seção 3.6: Tabela-Resumo dos Elementos"
+            },
+
+            {
+                tipo: "complete",
+                enunciado: "Complete o código abaixo para que o link abra em uma NOVA ABA:",
+                codigo: '\x3Ca href="https://site.com" {{GAP}}="_blank" rel="noopener">Visitar\x3C/a>',
+                opcoes: ["window", "open", "target", "new"],
+                correta: 2,
+                explicacao: "O atributo correto é target. Com target=\"_blank\", o link abre em nova aba. Use sempre junto de rel=\"noopener noreferrer\" por segurança. Os nomes window, open e new não existem como atributos do a — são erros comuns de quem está começando.",
+                referencia: "Módulo 01 — Seção 6.2: O Atributo target"
+            },
+
+            {
+                tipo: "complete",
+                enunciado: "Complete o código abaixo para criar uma área de texto multilinha para comentários:",
+                codigo: 'Deixe seu comentário:\n\x3C{{GAP}} name="comentario" rows="5" cols="30">\x3C/textarea>',
+                opcoes: ["input", "text", "textarea", "multiline"],
+                correta: 2,
+                explicacao: "A tag correta é textarea. Ela cria uma área multilinha com atributos rows (número de linhas) e cols (número de colunas visuais). Diferente do input, ela TEM tag de fechamento obrigatória. É ideal para textos longos.",
+                referencia: "Módulo 01 — Seção 4.5: Tag textarea"
+            },
+
+            {
+                tipo: "complete",
+                enunciado: "Complete o código abaixo para que o checkbox já venha MARCADO por padrão:",
+                codigo: '\x3Cinput type="checkbox" name="termos" {{GAP}}> Aceito os termos',
+                opcoes: ["selected", "checked", "default", "marked"],
+                correta: 1,
+                explicacao: "O atributo correto é checked (sem valor). Ele deixa o checkbox ou radio pré-marcado. Já selected é usado em options de um select para definir o item pré-selecionado. default e marked não existem como atributos HTML.",
+                referencia: "Módulo 01 — Seção 4.3: Atributos da Tag input"
+            },
+
+            {
+                tipo: "complete",
+                enunciado: "Complete o código abaixo para agrupar opções de estado por região:",
+                codigo: '\x3Cselect name="estado">\n  \x3C{{GAP}} label="Sudeste">\n    \x3Coption value="SP">São Paulo\x3C/option>\n    \x3Coption value="RJ">Rio de Janeiro\x3C/option>\n  \x3C/optgroup>\n\x3C/select>',
+                opcoes: ["group", "optgroup", "selectgroup", "fieldset"],
+                correta: 1,
+                explicacao: "A tag correta é optgroup. Ela agrupa visualmente opções dentro de um select, com um rótulo definido no atributo label. Os grupos aparecem com o texto em negrito e as opções indentadas. É ideal para organizar muitos itens (estados por região, produtos por categoria, etc.).",
+                referencia: "Módulo 01 — Seção 4.8: Exemplo com Endereço (optgroup e datalist)"
+            },
+
+            /* BLOCO 4 — APONTE O ERRO */
+
+            {
+                tipo: "erro",
+                enunciado: "Há um problema no código abaixo. Aponte qual é:",
+                codigo: '\x3Cimg src="banner.jpg" width="800">',
+                opcoes: [
+                    "src deveria ser href",
+                    "A imagem pode ficar distorcida sem height definido proporcional",
+                    "Falta o atributo type",
+                    "O código está correto"
+                ],
+                correta: 1,
+                explicacao: "Definir apenas width faz o navegador calcular a altura proporcionalmente — o que normalmente é OK. Mas se você definir APENAS width e a imagem original tiver proporção diferente do esperado, ela pode ficar distorcida. O ideal é sempre especificar width E height em proporção correta, ou usar CSS. Aqui falta também o alt obrigatório (para acessibilidade), mas o problema principal mencionado é a distorção.",
+                referencia: "Módulo 01 — Seção 5.4: Atributos de Dimensão: width e height"
+            },
+
+            {
+                tipo: "erro",
+                enunciado: "Há um problema estrutural no formulário abaixo. Aponte qual é:",
+                codigo: '\x3Cfieldset>\n  \x3Cinput type="text" name="nome">\n  \x3Cinput type="email" name="email">\n\x3C/fieldset>',
+                opcoes: [
+                    "Faltou o legend para dar título ao grupo",
+                    "fieldset não pode conter inputs",
+                    "Faltou fechar com legend",
+                    "O código está correto"
+                ],
+                correta: 0,
+                explicacao: "A tag fieldset deve vir acompanhada de um legend. O legend é o TÍTULO do grupo e deve ser o PRIMEIRO filho do fieldset. Sem ele, o agrupamento fica sem descrição, o que é ruim para acessibilidade e semântica. O correto: fieldset com legend logo depois.",
+                referencia: "Módulo 01 — Seção 4.6: Agrupar e Organizar Campos"
+            },
+
+            {
+                tipo: "erro",
+                enunciado: "Há um problema no formulário abaixo. Aponte qual é:",
+                codigo: '\x3Clabel>Email:\x3C/label>\n\x3Cinput type="email" id="email">',
+                opcoes: [
+                    "Falta o atributo for no label, apontando para o id do input",
+                    "O input deveria ter type text",
                     "O label deveria vir depois do input",
                     "O código está correto"
                 ],
-                correta: 1,
-                explicacao: "O atributo for do label deve corresponder EXATAMENTE ao id do input. Aqui, o label aponta para 'email' mas o input tem id='mail'. Com essa divergência, ao clicar no rótulo, o campo NÃO recebe foco, e leitores de tela não associam corretamente rótulo e campo.",
-                referencia: "Módulo 03 — Seção 2.10: Acessibilidade (A11y) em Formulários"
+                correta: 0,
+                explicacao: "Falta a associação entre label e input. O correto é: label for=\"email\" + input id=\"email\". Sem o for correspondente ao id, ao clicar no rótulo o campo NÃO recebe foco, e leitores de tela não associam corretamente rótulo e campo. A acessibilidade fica comprometida.",
+                referencia: "Módulo 01 — Seção 4.3: Atributos da Tag input"
             },
 
             {
                 tipo: "erro",
-                enunciado: "Um desenvolvedor precisa incluir os arquivos JavaScript do Bootstrap 3 em sua página. Ele declarou os arquivos nesta ordem: 1º o Bootstrap, 2º o jQuery. Há um erro nessa ordem. Aponte qual é:",
-                codigo: 'Ordem declarada:\n  1. bootstrap.min.js\n  2. jquery.min.js',
+                enunciado: "Há um erro estrutural na tabela abaixo. Aponte qual é:",
+                codigo: '\x3Ctable>\n  \x3Cthead>\n    \x3Ctd>Nome\x3C/td>\n    \x3Ctd>Idade\x3C/td>\n  \x3C/thead>\n\x3C/table>',
                 opcoes: [
-                    "O bootstrap.min.js deveria ser o último da lista",
-                    "O jQuery deve vir ANTES do bootstrap.min.js, pois é dependência dos plugins",
-                    "Os dois arquivos deveriam estar no head",
-                    "A ordem está correta"
-                ],
-                correta: 1,
-                explicacao: "O jQuery DEVE ser carregado ANTES do bootstrap.min.js. Como os plugins do Bootstrap dependem do jQuery, se o bootstrap.min.js for carregado primeiro, ele vai tentar usar a biblioteca antes dela existir, causando erro de JavaScript. A ordem correta é: 1º jQuery, 2º Bootstrap.",
-                referencia: "Módulo 03 — Seção 4.3: Integração de Arquivos CSS e JavaScript"
-            },
-
-            {
-                tipo: "erro",
-                enunciado: "Um documento HTML tem as seções head e body na ordem correta. No entanto, faltam duas meta tags importantes logo após a declaração de charset. Aponte qual é o problema:",
-                codigo: 'Estrutura do documento:\n  - DOCTYPE html\n  - html lang="pt-br"\n  - head\n      - meta charset utf-8\n      - title Meu site\n  - body\n      - h1 Olá',
-                opcoes: [
-                    "O DOCTYPE deveria ser XHTML",
-                    "Faltam as meta tags X-UA-Compatible e viewport — essenciais para responsividade",
-                    "A tag title deveria estar no body",
+                    "thead não pode ser usado em table",
+                    "Dentro de thead devem ser usados th (células de cabeçalho), não td",
+                    "Faltou a tag caption",
                     "O código está correto"
                 ],
                 correta: 1,
-                explicacao: "Faltam DUAS meta tags essenciais do template Bootstrap 3: a meta http-equiv X-UA-Compatible (força o IE a usar a versão moderna) e a meta viewport (habilita a responsividade em mobile). Sem a viewport, o site NÃO será responsivo em celulares.",
-                referencia: "Módulo 03 — Seção 4.1.1: Meta Tags Obrigatórias"
+                explicacao: "Dentro de thead, as células devem ser th (table header) — que já vêm em negrito e centralizadas por padrão e indicam cabeçalho. Usar td dentro de thead é semanticamente incorreto: o navegador renderiza, mas o significado se perde para leitores de tela. O correto é: thead + tr + th.",
+                referencia: "Módulo 01 — Seção 3.1: Estrutura da Tabela"
+            },
+
+            {
+                tipo: "erro",
+                enunciado: "Há um problema no código abaixo. Aponte qual é:",
+                codigo: '\x3Cform action="processa.php" method="get">\n  \x3Cinput type="password" name="senha">\n  \x3Cinput type="submit">\n\x3C/form>',
+                opcoes: [
+                    "type password não pode ser usado em form",
+                    "Usar GET para enviar senha é inseguro — os dados ficam visíveis na URL",
+                    "Faltou o atributo name no submit",
+                    "O código está correto"
+                ],
+                correta: 1,
+                explicacao: "Senhas NUNCA devem ser enviadas via GET, porque os dados ficam visíveis na URL (ex: processa.php?senha=1234), no histórico do navegador, em logs de servidor e podem ser vistos por terceiros. O correto é usar method=\"post\", que envia os dados no corpo da requisição, invisíveis na URL.",
+                referencia: "Módulo 01 — Seção 4.1: A Tag form e Atributos"
             }
+        
         ];
 
-        /* Utilitários de aleatoriedade */
-        function embaralhar(array) {
-            const copia = [...array];
-            for (let i = copia.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [copia[i], copia[j]] = [copia[j], copia[i]];
-            }
-            return copia;
-        }
-
-        function embaralharOpcoes(questao) {
-            if (questao.tipo === "vf" || !questao.opcoes) return { ...questao };
-            const opcoesOriginais = [...questao.opcoes];
-            const pares = opcoesOriginais.map((texto, i) => ({
-                texto,
-                eraCorreta: i === questao.correta
-            }));
-            const paresEmbaralhados = embaralhar(pares);
-            const novasOpcoes = paresEmbaralhados.map(p => p.texto);
-            const novoIndiceCorreto = paresEmbaralhados.findIndex(p => p.eraCorreta);
-            return { ...questao, opcoes: novasOpcoes, correta: novoIndiceCorreto };
-        }
-
+        /* ============================================================
+           ESTADO DO QUIZ
+           ============================================================ */
         const estado = {
-            questoes: [],
-            indiceAtual: 0,
-            respostas: [],
-            selecionadas: []
+            questoes: [],       // banco embaralhado
+            respostas: {},      // { [indiceGlobal]: true/false }
+            selecionadas: {},   // { [indiceGlobal]: indiceEscolhido }
+            indiceGlobal: 0,    // posição atual
+            blocoAtivo: 0       // qual bloco está sendo jogado agora
         };
 
+        const totalQuestoes = () => estado.questoes.length;
+        const totalBlocos   = () => Math.ceil(totalQuestoes() / TAMANHO_BLOCO);
+
+        const inicioDoBloco  = (b) => b * TAMANHO_BLOCO;
+        const fimDoBloco     = (b) => Math.min(inicioDoBloco(b) + TAMANHO_BLOCO, totalQuestoes());
+        const tamanhoDoBloco = (b) => fimDoBloco(b) - inicioDoBloco(b);
+
+        const posNoBlocoAtivo = () =>
+            estado.indiceGlobal - inicioDoBloco(estado.blocoAtivo);
+
+        /* ============================================================
+           REFERÊNCIAS AOS ELEMENTOS
+           ============================================================ */
         const $ = (id) => document.getElementById(id);
 
         const telas = {
             inicio:    $("tela-inicio"),
             questao:   $("tela-questao"),
+            bloco:     $("tela-bloco"),
             resultado: $("tela-resultado")
         };
 
+        /* ============================================================
+           FUNÇÕES AUXILIARES
+           ============================================================ */
         function mostrarTela(nome) {
             Object.values(telas).forEach(t => t.classList.remove("ativa"));
             telas[nome].classList.add("ativa");
@@ -700,26 +1223,199 @@
                 .replace(/>/g, "&gt;");
         }
 
-        function atualizarProgresso() {
-            const total = estado.questoes.length;
-            const atual = estado.indiceAtual + 1;
-            $("contador").textContent = `${atual} / ${total}`;
-            $("progresso").style.width = `${(atual / total) * 100}%`;
+        function contarAcertosBloco(b) {
+            let acertos = 0;
+            for (let i = inicioDoBloco(b); i < fimDoBloco(b); i++) {
+                if (estado.respostas[i] === true) acertos++;
+            }
+            return acertos;
         }
 
-        function textoRespostaCorreta(q) {
-            if (q.tipo === "vf") return q.resposta === true ? "Verdadeiro" : "Falso";
-            return q.opcoes[q.correta];
+        function contarRespondidasBloco(b) {
+            let respondidas = 0;
+            for (let i = inicioDoBloco(b); i < fimDoBloco(b); i++) {
+                if (estado.respostas[i] !== undefined) respondidas++;
+            }
+            return respondidas;
         }
 
-        function textoRespostaEscolhida(q, indiceEscolhido) {
-            if (q.tipo === "vf") return indiceEscolhido === 0 ? "Verdadeiro" : "Falso";
-            return q.opcoes[indiceEscolhido];
+        function blocoEstaConcluido(b) {
+            return contarRespondidasBloco(b) === tamanhoDoBloco(b);
         }
 
+        function contarAcertosTotal() {
+            return Object.values(estado.respostas).filter(r => r === true).length;
+        }
+
+        function contarRespondidasTotal() {
+            return Object.keys(estado.respostas).length;
+        }
+
+        function contarBlocosConcluidos() {
+            let count = 0;
+            for (let b = 0; b < totalBlocos(); b++) {
+                if (blocoEstaConcluido(b)) count++;
+            }
+            return count;
+        }
+
+        /* ============================================================
+           ATUALIZAÇÃO DO CABEÇALHO
+           ============================================================ */
+        function atualizarCabecalho() {
+            // Contador principal
+            const b = estado.blocoAtivo;
+            $("contador-bloco").textContent = `Bloco ${b + 1} de ${totalBlocos()}`;
+            $("contador-questao").textContent = `Questão ${posNoBlocoAtivo() + 1} de ${tamanhoDoBloco(b)}`;
+
+            // Barra de progresso GERAL (respondidas / total)
+            const total = totalQuestoes();
+            const respondidas = contarRespondidasTotal();
+            const percentual = total > 0 ? (respondidas / total) * 100 : 0;
+            $("progresso").style.width = `${percentual}%`;
+
+            // Bolinhas do bloco atual
+            const blocoEl = $("progresso-bloco");
+            blocoEl.innerHTML = "";
+
+            for (let i = 0; i < tamanhoDoBloco(b); i++) {
+                const indice = inicioDoBloco(b) + i;
+                const bolinha = document.createElement("span");
+                bolinha.className = "bolinha";
+
+                if (indice === estado.indiceGlobal) {
+                    bolinha.classList.add("atual");
+                } else if (estado.respostas[indice] === true) {
+                    bolinha.classList.add("correta");
+                } else if (estado.respostas[indice] === false) {
+                    bolinha.classList.add("errada");
+                }
+
+                blocoEl.appendChild(bolinha);
+            }
+        }
+
+        /* ============================================================
+           RENDERIZAÇÃO DA TELA DE SELEÇÃO DE BLOCOS
+           ============================================================ */
+        function renderizarTelaInicial() {
+            if (totalQuestoes() === 0) {
+                $("blocos-grid").innerHTML = `
+                    <div style="grid-column: 1/-1; padding: 30px; text-align: center; color:#7f8c8d;">
+                        Nenhuma questão cadastrada ainda.
+                    </div>
+                `;
+                $("btn-refazer-tudo").style.display = "none";
+                $("btn-ver-resultado").style.display = "none";
+                return;
+            }
+
+            const totalB = totalBlocos();
+            const concluidos = contarBlocosConcluidos();
+            const acertosTotal = contarAcertosTotal();
+
+            // Atualiza painel geral
+            $("geral-concluidos").textContent = concluidos;
+            $("geral-total").textContent = totalB;
+            $("geral-pontos").textContent = acertosTotal;
+
+            // Monta os cards de blocos
+            const grid = $("blocos-grid");
+            grid.innerHTML = "";
+
+            for (let b = 0; b < totalB; b++) {
+                const tamanho = tamanhoDoBloco(b);
+                const respondidas = contarRespondidasBloco(b);
+                const acertos = contarAcertosBloco(b);
+                const concluido = blocoEstaConcluido(b);
+                const iniciado = respondidas > 0 && !concluido;
+
+                const card = document.createElement("div");
+                card.className = "bloco-card";
+                if (concluido) card.classList.add("concluido");
+                else if (iniciado) card.classList.add("em-andamento");
+
+                // Conteúdo
+                let statusHTML;
+                if (concluido) {
+                    statusHTML = `<span class="bloco-status concluido">✓ Concluído</span>`;
+                } else if (iniciado) {
+                    statusHTML = `<span class="bloco-status em-andamento">Em andamento</span>`;
+                } else {
+                    statusHTML = `<span class="bloco-status nao-iniciado">Não iniciado</span>`;
+                }
+
+                let infoHTML;
+                if (concluido) {
+                    infoHTML = `<strong>${acertos}/${tamanho}</strong> acertos`;
+                } else if (iniciado) {
+                    infoHTML = `${respondidas}/${tamanho} respondidas`;
+                } else {
+                    infoHTML = `${tamanho} questões`;
+                }
+
+                let btnTexto = "▶ Jogar";
+                if (concluido) btnTexto = "↻ Refazer";
+
+                card.innerHTML = `
+                    <div class="bloco-label">Bloco</div>
+                    <div class="bloco-numero">${String(b + 1).padStart(2, "0")}</div>
+                    ${statusHTML}
+                    <div class="bloco-info">${infoHTML}</div>
+                    <button class="bloco-btn">${btnTexto}</button>
+                `;
+
+                // Clique no card INTEIRO (ou botão) abre o bloco
+                card.addEventListener("click", () => abrirBloco(b));
+
+                grid.appendChild(card);
+            }
+
+            // Botão "Ver Resultado Final" só aparece se TODOS os blocos foram concluídos
+            const btnVerResultado = $("btn-ver-resultado");
+            if (concluidos === totalB && totalB > 0) {
+                btnVerResultado.style.display = "inline-flex";
+            } else {
+                btnVerResultado.style.display = "none";
+            }
+        }
+
+        /* ============================================================
+           ABRIR UM BLOCO
+           ============================================================ */
+        function abrirBloco(b) {
+            // Se o bloco já foi concluído, ao clicar em "Refazer", limpamos as respostas dele
+            if (blocoEstaConcluido(b)) {
+                for (let i = inicioDoBloco(b); i < fimDoBloco(b); i++) {
+                    delete estado.respostas[i];
+                    delete estado.selecionadas[i];
+                }
+            }
+
+            estado.blocoAtivo = b;
+            // Se o usuário já respondeu algumas questões, volta para a próxima pendente
+            let proximaPendente = inicioDoBloco(b);
+            for (let i = inicioDoBloco(b); i < fimDoBloco(b); i++) {
+                if (estado.respostas[i] === undefined) {
+                    proximaPendente = i;
+                    break;
+                }
+                proximaPendente = i + 1;
+            }
+            if (proximaPendente >= fimDoBloco(b)) proximaPendente = inicioDoBloco(b);
+
+            estado.indiceGlobal = proximaPendente;
+
+            renderizarQuestao();
+            mostrarTela("questao");
+        }
+
+        /* ============================================================
+           RENDERIZAÇÃO DA QUESTÃO
+           ============================================================ */
         function renderizarQuestao() {
-            const q = estado.questoes[estado.indiceAtual];
-            atualizarProgresso();
+            const q = estado.questoes[estado.indiceGlobal];
+            atualizarCabecalho();
 
             const badges = {
                 vf:       { texto: "Verdadeiro ou Falso", classe: "vf" },
@@ -765,12 +1461,15 @@
             $("feedback").className = "feedback";
             $("feedback").innerHTML = "";
 
-            $("btn-voltar").disabled = estado.indiceAtual === 0;
+            // Botão Anterior: não permitir antes do início do bloco
+            $("btn-voltar").disabled = estado.indiceGlobal === inicioDoBloco(estado.blocoAtivo);
+
+            // Botão Próximo
             $("btn-proximo").disabled = true;
-            $("btn-proximo").textContent =
-                estado.indiceAtual === estado.questoes.length - 1
-                    ? "Finalizar ✓"
-                    : "Próxima →";
+            const ehUltimaDoBloco = estado.indiceGlobal === fimDoBloco(estado.blocoAtivo) - 1;
+            $("btn-proximo").textContent = ehUltimaDoBloco
+                ? "Finalizar Bloco ✓"
+                : "Próxima →";
         }
 
         function criarOpcao(texto, valor, container, letra) {
@@ -793,8 +1492,11 @@
             container.appendChild(btn);
         }
 
+        /* ============================================================
+           RESPOSTA DO USUÁRIO
+           ============================================================ */
         function responder(valor) {
-            const q = estado.questoes[estado.indiceAtual];
+            const q = estado.questoes[estado.indiceGlobal];
             const opcoesEl = $("opcoes").querySelectorAll(".opcao");
 
             let indiceCorreto = q.tipo === "vf"
@@ -811,11 +1513,25 @@
             opcoesEl[indiceCorreto].classList.add("correta");
             if (!acertou) opcoesEl[indiceEscolhido].classList.add("errada");
 
-            estado.respostas[estado.indiceAtual] = acertou;
-            estado.selecionadas[estado.indiceAtual] = indiceEscolhido;
+            estado.respostas[estado.indiceGlobal] = acertou;
+            estado.selecionadas[estado.indiceGlobal] = indiceEscolhido;
 
             renderizarFeedback(q, acertou, indiceEscolhido);
             $("btn-proximo").disabled = false;
+            atualizarCabecalho();
+        }
+
+        /* ============================================================
+           FEEDBACK
+           ============================================================ */
+        function textoRespostaCorreta(q) {
+            if (q.tipo === "vf") return q.resposta === true ? "Verdadeiro" : "Falso";
+            return q.opcoes[q.correta];
+        }
+
+        function textoRespostaEscolhida(q, indiceEscolhido) {
+            if (q.tipo === "vf") return indiceEscolhido === 0 ? "Verdadeiro" : "Falso";
+            return q.opcoes[indiceEscolhido];
         }
 
         function renderizarFeedback(q, acertou, indiceEscolhido) {
@@ -884,31 +1600,36 @@
             return linha;
         }
 
+        /* ============================================================
+           NAVEGAÇÃO DENTRO DO BLOCO
+           ============================================================ */
         $("btn-voltar").addEventListener("click", () => {
-            if (estado.indiceAtual > 0) {
-                estado.indiceAtual--;
+            if (estado.indiceGlobal > inicioDoBloco(estado.blocoAtivo)) {
+                estado.indiceGlobal--;
                 renderizarQuestao();
                 restaurarRespostaSeExistir();
             }
         });
 
         $("btn-proximo").addEventListener("click", () => {
-            if (estado.indiceAtual < estado.questoes.length - 1) {
-                estado.indiceAtual++;
+            const ultimaDoBloco = estado.indiceGlobal === fimDoBloco(estado.blocoAtivo) - 1;
+
+            if (ultimaDoBloco) {
+                mostrarFimDeBloco();
+            } else {
+                estado.indiceGlobal++;
                 renderizarQuestao();
                 restaurarRespostaSeExistir();
-            } else {
-                mostrarResultado();
             }
         });
 
         function restaurarRespostaSeExistir() {
-            const resp = estado.respostas[estado.indiceAtual];
+            const resp = estado.respostas[estado.indiceGlobal];
             if (resp === undefined) return;
 
-            const q = estado.questoes[estado.indiceAtual];
+            const q = estado.questoes[estado.indiceGlobal];
             const opcoesEl = $("opcoes").querySelectorAll(".opcao");
-            const escolhido = estado.selecionadas[estado.indiceAtual];
+            const escolhido = estado.selecionadas[estado.indiceGlobal];
 
             let indiceCorreto = q.tipo === "vf"
                 ? (q.resposta === true ? 0 : 1)
@@ -922,15 +1643,57 @@
             $("btn-proximo").disabled = false;
         }
 
-        function mostrarResultado() {
-            const total = estado.questoes.length;
-            const acertos = estado.respostas.filter(r => r === true).length;
+        /* ============================================================
+           FIM DE BLOCO
+           ============================================================ */
+        function mostrarFimDeBloco() {
+            const b = estado.blocoAtivo;
+            const acertos = contarAcertosBloco(b);
+            const tamanho = tamanhoDoBloco(b);
+            const percentual = Math.round((acertos / tamanho) * 100);
+
+            let icone, titulo, mensagem;
+            if (percentual >= 80) {
+                icone = "🎉"; titulo = "Excelente bloco!";
+                mensagem = "Você arrasou nas questões deste bloco.";
+            } else if (percentual >= 60) {
+                icone = "👏"; titulo = "Bom trabalho!";
+                mensagem = "Bom desempenho neste bloco. Continue assim!";
+            } else if (percentual >= 40) {
+                icone = "📚"; titulo = "Bloco concluído";
+                mensagem = "Você está no caminho. Revise os pontos que errou.";
+            } else {
+                icone = "💪"; titulo = "Bloco concluído";
+                mensagem = "Não desanime! A prática leva à perfeição.";
+            }
+
+            $("bloco-icone").textContent = icone;
+            $("bloco-titulo").textContent = titulo;
+            $("bloco-mensagem").textContent = mensagem;
+
+            $("bloco-acertos").textContent = `${acertos} / ${tamanho}`;
+            $("bloco-progresso-geral").textContent = `${contarRespondidasTotal()} / ${totalQuestoes()}`;
+
+            mostrarTela("bloco");
+        }
+
+        $("btn-voltar-selecao").addEventListener("click", () => {
+            renderizarTelaInicial();
+            mostrarTela("inicio");
+        });
+
+        /* ============================================================
+           RESULTADO FINAL
+           ============================================================ */
+        function mostrarResultadoFinal() {
+            const total = totalQuestoes();
+            const acertos = contarAcertosTotal();
             const percentual = Math.round((acertos / total) * 100);
 
             let icone, titulo, mensagem;
             if (percentual >= 80) {
                 icone = "🏆"; titulo = "Excelente!";
-                mensagem = "Você dominou o Bootstrap 3. Continue assim!";
+                mensagem = "Você dominou o conteúdo. Continue assim!";
             } else if (percentual >= 60) {
                 icone = "👏"; titulo = "Muito bom!";
                 mensagem = "Bom desempenho! Revise os pontos que errou para fixar melhor.";
@@ -939,7 +1702,7 @@
                 mensagem = "Você está no caminho. Revise o material e tente novamente.";
             } else {
                 icone = "💪"; titulo = "Não desanime!";
-                mensagem = "A prática leva à perfeição. Volte ao guia do Bootstrap 3 e refaça o quiz.";
+                mensagem = "A prática leva à perfeição. Volte ao guia e refaça o quiz.";
             }
 
             $("resultado-icone").textContent = icone;
@@ -950,18 +1713,68 @@
             mostrarTela("resultado");
         }
 
-        function iniciarQuiz() {
-            estado.questoes = embaralhar(QUESTOES).map(embaralharOpcoes);
-            estado.indiceAtual = 0;
-            estado.respostas = [];
-            estado.selecionadas = [];
+        $("btn-ver-resultado").addEventListener("click", mostrarResultadoFinal);
 
-            renderizarQuestao();
-            mostrarTela("questao");
+        /* ============================================================
+           INICIAR / REFAZER
+           ============================================================ */
+        function iniciarQuiz(embaralharNovamente) {
+            if (QUESTOES.length === 0) {
+                alert("Nenhuma questão cadastrada ainda. Adicione questões no array QUESTOES.");
+                return;
+            }
+
+            if (embaralharNovamente !== false) {
+                // Embaralha ordem das questões E das opções
+                estado.questoes = embaralhar(QUESTOES).map(embaralharOpcoes);
+                estado.respostas = {};
+                estado.selecionadas = {};
+            }
+
+            estado.blocoAtivo = 0;
+            estado.indiceGlobal = 0;
+
+            renderizarTelaInicial();
+            mostrarTela("inicio");
         }
 
-        $("btn-iniciar").addEventListener("click", iniciarQuiz);
-        $("btn-refazer").addEventListener("click", iniciarQuiz);
+        $("btn-refazer-tudo").addEventListener("click", () => iniciarQuiz(true));
+        $("btn-refazer").addEventListener("click", () => iniciarQuiz(true));
+
+        /* ============================================================
+           UTILITÁRIOS DE ALEATORIEDADE
+           ============================================================ */
+        function embaralhar(array) {
+            const copia = [...array];
+            for (let i = copia.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copia[i], copia[j]] = [copia[j], copia[i]];
+            }
+            return copia;
+        }
+
+        function embaralharOpcoes(questao) {
+            if (questao.tipo === "vf" || !questao.opcoes) return { ...questao };
+            const opcoesOriginais = [...questao.opcoes];
+            const pares = opcoesOriginais.map((texto, i) => ({
+                texto,
+                eraCorreta: i === questao.correta
+            }));
+            const paresEmbaralhados = embaralhar(pares);
+            const novasOpcoes = paresEmbaralhados.map(p => p.texto);
+            const novoIndiceCorreto = paresEmbaralhados.findIndex(p => p.eraCorreta);
+            return { ...questao, opcoes: novasOpcoes, correta: novoIndiceCorreto };
+        }
+
+        /* ============================================================
+           INICIALIZAÇÃO
+           ============================================================ */
+        // Ao carregar a página, embaralha e mostra a tela de seleção de blocos
+        if (QUESTOES.length > 0) {
+            iniciarQuiz(true);
+        } else {
+            renderizarTelaInicial();
+        }
     </script>
 
 </body>

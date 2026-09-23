@@ -15,12 +15,12 @@
             line-height: 1.6;
         }
 
-        .quiz-container { max-width: 880px; margin: 0 auto; padding: 40px 20px 80px; }
+        .quiz-container { max-width: 1000px; margin: 0 auto; padding: 40px 20px 80px; }
 
         .quiz-header {
             background: linear-gradient(135deg, #f7df1e 0%, #d4b106 100%);
             color: #2c3e50;
-            padding: 28px 32px;
+            padding: 24px 32px 22px;
             border-radius: 16px 16px 0 0;
             box-shadow: 0 4px 20px rgba(212, 177, 6, 0.3);
         }
@@ -30,11 +30,12 @@
             flex-wrap: wrap; gap: 12px; margin-bottom: 14px;
         }
 
-        .quiz-header h1 { font-size: 1.5em; font-weight: 700; letter-spacing: -0.3px; }
+        .quiz-header h1 { font-size: 1.4em; font-weight: 700; letter-spacing: -0.3px; color: #2c3e50; }
 
         .quiz-header h1 small {
             display: block; font-size: 0.6em; font-weight: 400; opacity: 0.75;
             letter-spacing: 1px; text-transform: uppercase; margin-top: 4px;
+            color: #2c3e50;
         }
 
         .quiz-counter {
@@ -42,8 +43,11 @@
             border: 1px solid rgba(44, 62, 80, 0.25);
             color: #2c3e50;
             padding: 6px 14px; border-radius: 50px;
-            font-size: 0.85em; font-weight: 700;
+            font-size: 0.82em; font-weight: 700;
+            text-align: center; line-height: 1.3;
         }
+
+        .quiz-counter strong { display: block; font-size: 1.1em; }
 
         .progress-track {
             height: 8px; background: rgba(44, 62, 80, 0.18);
@@ -55,6 +59,20 @@
             border-radius: 4px; transition: width 0.4s ease;
         }
 
+        .progresso-bloco {
+            display: flex; gap: 6px; justify-content: center; margin-top: 12px;
+        }
+
+        .bolinha {
+            width: 12px; height: 12px; border-radius: 50%;
+            background: rgba(44, 62, 80, 0.25);
+            transition: all 0.3s ease; border: 2px solid transparent;
+        }
+
+        .bolinha.atual   { background: #2c3e50; transform: scale(1.3); border-color: rgba(44, 62, 80, 0.5); }
+        .bolinha.correta { background: #28a745; border-color: rgba(255, 255, 255, 0.8); }
+        .bolinha.errada  { background: #dc3545; border-color: rgba(255, 255, 255, 0.8); }
+
         .quiz-card {
             background: #fff; border-radius: 0 0 16px 16px;
             padding: 40px 40px 32px;
@@ -62,37 +80,117 @@
             min-height: 420px; display: flex; flex-direction: column;
         }
 
-        .tela-inicio {
-            text-align: center; padding: 20px 0; flex: 1;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
+        .tela-inicio, .tela-resultado, .tela-bloco {
+            padding: 20px 0; flex: 1;
+            display: flex; flex-direction: column;
+            align-items: center; text-align: center; justify-content: center;
         }
 
-        .tela-inicio .icone { font-size: 4em; margin-bottom: 20px; }
-        .tela-inicio h2 { font-size: 1.8em; color: #2c3e50; margin-bottom: 12px; }
-        .tela-inicio p { color: #7f8c8d; max-width: 460px; margin: 0 auto 30px; }
-
-        .tela-inicio ul {
-            list-style: none; display: flex; flex-wrap: wrap;
-            justify-content: center; gap: 10px; margin-bottom: 32px;
+        .tela-inicio .icone, .tela-resultado .icone, .tela-bloco .icone {
+            font-size: 4em; margin-bottom: 20px;
         }
 
-        .tela-inicio li {
-            background: #fef9e7; color: #8a6d00;
-            padding: 6px 14px; border-radius: 50px;
-            font-size: 0.85em; font-weight: 600;
+        .tela-inicio h2, .tela-resultado h2, .tela-bloco h2 {
+            font-size: 1.8em; color: #2c3e50; margin-bottom: 12px;
         }
 
-        .aviso-aleatorio {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: #fef9e7; color: #8a6d00; border: 1px solid #f7df1e;
-            padding: 8px 16px; border-radius: 50px;
-            font-size: 0.82em; font-weight: 600; margin-bottom: 26px;
+        .tela-inicio p, .tela-resultado p, .tela-bloco p {
+            color: #7f8c8d; max-width: 560px; margin: 0 auto 22px;
+        }
+
+        .blocos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px; width: 100%; max-width: 800px; margin: 10px auto 24px;
+        }
+
+        .bloco-card {
+            background: #f8f9fa; border: 2px solid #e9ecef;
+            border-radius: 12px; padding: 20px 18px;
+            display: flex; flex-direction: column;
+            align-items: center; gap: 10px;
+            transition: all 0.25s ease; cursor: pointer;
+        }
+
+        .bloco-card:hover:not(.bloco-bloqueado) {
+            border-color: #d4a600; transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(212, 166, 0, 0.2);
+        }
+
+        .bloco-card.concluido {
+            border-color: #28a745; background: #f0f9f2;
+        }
+
+        .bloco-card.concluido:hover {
+            border-color: #1e7e34;
+            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.15);
+        }
+
+        .bloco-card.em-andamento {
+            border-color: #f39c12; background: #fef8e7;
+        }
+
+        .bloco-numero {
+            font-size: 1.4em; font-weight: 800; color: #d4a600;
+            letter-spacing: -0.5px;
+        }
+
+        .bloco-card.concluido .bloco-numero { color: #28a745; }
+        .bloco-card.em-andamento .bloco-numero { color: #d68910; }
+
+        .bloco-label {
+            font-size: 0.78em; text-transform: uppercase;
+            letter-spacing: 1.5px; color: #7f8c8d; font-weight: 700;
+        }
+
+        .bloco-info { font-size: 0.82em; color: #7f8c8d; text-align: center; }
+
+        .bloco-status {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-size: 0.75em; font-weight: 700;
+            padding: 4px 12px; border-radius: 50px;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+
+        .bloco-status.nao-iniciado { background: #e9ecef; color: #6c757d; }
+        .bloco-status.concluido    { background: #d4edda; color: #155724; }
+        .bloco-status.em-andamento { background: #fff3cd; color: #856404; }
+
+        .bloco-btn {
+            width: 100%; padding: 10px;
+            background: #d4a600; color: #fff; border: none;
+            border-radius: 8px; font-weight: 600; font-size: 0.88em;
+            cursor: pointer; transition: all 0.2s ease;
+            margin-top: 4px; font-family: inherit;
+        }
+
+        .bloco-card.concluido .bloco-btn    { background: #28a745; }
+        .bloco-card.em-andamento .bloco-btn { background: #f39c12; }
+
+        .bloco-btn:hover { filter: brightness(0.92); transform: translateY(-1px); }
+
+        .progresso-geral {
+            width: 100%; max-width: 800px; margin: 0 auto 26px;
+            padding: 16px 22px; background: #fef9e7;
+            border-radius: 10px; display: flex;
+            justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 12px;
+        }
+
+        .progresso-geral .bloco-info-geral {
+            display: flex; align-items: center; gap: 10px;
+            font-size: 0.9em; color: #8a6d00; font-weight: 600;
+        }
+
+        .progresso-geral .numero {
+            font-size: 1.4em; font-weight: 800; color: #d4a600;
         }
 
         .tipo-badge {
             display: inline-block; font-size: 0.72em; text-transform: uppercase;
             letter-spacing: 1.5px; font-weight: 700;
             padding: 5px 12px; border-radius: 50px; margin-bottom: 16px;
+            align-self: flex-start;
         }
 
         .tipo-badge.vf       { background: #d1ecf1; color: #0c5460; }
@@ -241,27 +339,33 @@
         .btn-ghost:hover { color: #2c3e50; }
         .btn-ghost:disabled { opacity: 0.35; cursor: not-allowed; }
 
-        .tela-resultado {
-            text-align: center; padding: 20px 0; flex: 1;
-            display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
-        }
-
-        .tela-resultado .icone { font-size: 4.5em; margin-bottom: 16px; }
-        .tela-resultado h2 { font-size: 1.9em; color: #2c3e50; margin-bottom: 8px; }
-
-        .tela-resultado .pontuacao {
+        .pontuacao {
             font-size: 3.2em; font-weight: 800; color: #d4a600;
             margin: 16px 0; letter-spacing: -2px;
         }
 
-        .tela-resultado .pontuacao small {
+        .pontuacao small {
             font-size: 0.4em; font-weight: 600; color: #95a5a6; letter-spacing: 0;
         }
 
-        .tela-resultado p {
-            color: #7f8c8d; max-width: 420px; margin: 0 auto 30px;
+        .resumo-bloco {
+            background: #f8f9fa; border: 1px solid #e9ecef;
+            border-radius: 12px; padding: 20px 26px;
+            margin: 0 auto 24px; max-width: 460px; width: 100%;
         }
+
+        .resumo-bloco .linha-resumo {
+            display: flex; justify-content: space-between;
+            align-items: center; padding: 8px 0; font-size: 0.95em;
+        }
+
+        .resumo-bloco .linha-resumo + .linha-resumo {
+            border-top: 1px dashed #dee2e6;
+        }
+
+        .resumo-bloco .rotulo-resumo { color: #7f8c8d; font-weight: 600; }
+        .resumo-bloco .valor-resumo  { font-weight: 700; color: #2c3e50; }
+        .resumo-bloco .valor-resumo.destaque { color: #d4a600; font-size: 1.15em; }
 
         .tela { display: none; }
         .tela.ativa { display: flex; flex-direction: column; flex: 1; }
@@ -269,18 +373,19 @@
         @media (max-width: 640px) {
             .quiz-container { padding: 20px 12px 60px; }
             .quiz-card      { padding: 28px 22px 22px; }
-            .quiz-header    { padding: 22px 22px; }
-            .quiz-header h1 { font-size: 1.2em; }
+            .quiz-header    { padding: 20px 22px; }
+            .quiz-header h1 { font-size: 1.15em; }
             .opcoes.vf-grid { flex-direction: column; }
             .enunciado      { font-size: 1.05em; }
             .quiz-footer    { flex-direction: column-reverse; }
             .quiz-footer .btn { width: 100%; justify-content: center; }
             .fb-linha         { flex-direction: column; gap: 4px; }
             .fb-linha .rotulo { min-width: auto; }
-            .fb-header,
-            .fb-respostas,
-            .fb-explicacao,
-            .fb-referencia    { padding-left: 18px; padding-right: 18px; }
+            .fb-header, .fb-respostas, .fb-explicacao, .fb-referencia {
+                padding-left: 18px; padding-right: 18px;
+            }
+            .bolinha { width: 10px; height: 10px; }
+            .blocos-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
         }
     </style>
 </head>
@@ -314,53 +419,78 @@
     </style>
 
     <div class="quiz-container">
-
         <header class="quiz-header">
             <div class="quiz-header-top">
                 <h1>
                     Quiz — JavaScript Fundamentos
                     <small>Módulo 04 · Variáveis, Funções, DOM e Eventos</small>
                 </h1>
-                <div class="quiz-counter" id="contador">1 / 25</div>
+                <div class="quiz-counter" id="contador">
+                    <strong id="contador-bloco">Bloco 1 de 1</strong>
+                    <span id="contador-questao">Questão 1 de 10</span>
+                </div>
             </div>
-            <div class="progress-track">
-                <div class="progress-fill" id="progresso"></div>
-            </div>
+            <div class="progress-track"><div class="progress-fill" id="progresso"></div></div>
+            <div class="progresso-bloco" id="progresso-bloco"></div>
         </header>
 
         <main class="quiz-card">
-
             <section class="tela ativa" id="tela-inicio">
-                <div class="tela-inicio">
+                <div class="tela-inicio" style="justify-content: flex-start; padding-top: 0;">
                     <div class="icone">⚡</div>
-                    <h2>Pronto para começar?</h2>
-                    <p>25 questões sobre história, variáveis, tipos, funções, DOM, eventos e integração com Bootstrap 5. As questões são sorteadas a cada tentativa.</p>
+                    <h2>Escolha um Bloco</h2>
+                    <p>O quiz é dividido em blocos de até 10 questões. Você pode fazer os blocos na ordem que preferir — clique em qualquer um para começar.</p>
 
-                    <div class="aviso-aleatorio">
-                        🎲 As questões e alternativas são embaralhadas a cada tentativa
+                    <div class="progresso-geral" id="progresso-geral-inicio">
+                        <div class="bloco-info-geral">
+                            <span class="numero" id="geral-concluidos">0</span>
+                            <span>de <strong id="geral-total">0</strong> blocos concluídos</span>
+                        </div>
+                        <div class="bloco-info-geral">
+                            <span class="numero" id="geral-pontos">0</span>
+                            <span>acertos no total</span>
+                        </div>
                     </div>
 
-                    <ul>
-                        <li>✔ Verdadeiro ou Falso</li>
-                        <li>✔ Múltipla Escolha</li>
-                        <li>✔ Complete o Código</li>
-                        <li>✔ Aponte o Erro</li>
-                    </ul>
-                    <button class="btn btn-primary" id="btn-iniciar">🚀 Iniciar Quiz</button>
+                    <div class="blocos-grid" id="blocos-grid"></div>
+
+                    <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top: 10px;">
+                        <button class="btn btn-outline" id="btn-refazer-tudo">🔄 Embaralhar e Recomeçar</button>
+                        <button class="btn btn-primary" id="btn-ver-resultado" style="display:none;">🏆 Ver Resultado Final</button>
+                    </div>
                 </div>
             </section>
 
             <section class="tela" id="tela-questao">
                 <span class="tipo-badge" id="tipo-badge"></span>
                 <p class="enunciado" id="enunciado"></p>
-
                 <div id="area-codigo"></div>
                 <div class="opcoes" id="opcoes"></div>
                 <div class="feedback" id="feedback"></div>
-
                 <div class="quiz-footer">
-                    <button class="btn btn-ghost" id="btn-voltar" disabled>← Anterior</button>
+                    <button class="btn btn-ghost" id="btn-voltar">← Anterior</button>
                     <button class="btn btn-primary" id="btn-proximo" disabled>Próxima →</button>
+                </div>
+            </section>
+
+            <section class="tela" id="tela-bloco">
+                <div class="tela-bloco">
+                    <div class="icone" id="bloco-icone">🎉</div>
+                    <h2 id="bloco-titulo">Bloco concluído!</h2>
+                    <p id="bloco-mensagem">Confira abaixo seu desempenho neste bloco.</p>
+                    <div class="resumo-bloco">
+                        <div class="linha-resumo">
+                            <span class="rotulo-resumo">Acertos neste bloco</span>
+                            <span class="valor-resumo destaque" id="bloco-acertos">0 / 10</span>
+                        </div>
+                        <div class="linha-resumo">
+                            <span class="rotulo-resumo">Progresso geral</span>
+                            <span class="valor-resumo" id="bloco-progresso-geral">0 / 25</span>
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+                        <button class="btn btn-primary" id="btn-voltar-selecao">← Voltar para Blocos</button>
+                    </div>
                 </div>
             </section>
 
@@ -376,16 +506,17 @@
                     </div>
                 </div>
             </section>
-
         </main>
     </div>
 
     <script>
-        /* Banco de questões — Módulo 04 (JavaScript) */
+                const TAMANHO_BLOCO = 10;
 
+        /* ============================================================
+           BANCO DE QUESTÕES — MÓDULO 04 (JAVASCRIPT)
+           ============================================================ */
         const QUESTOES = [
             /* BLOCO 1 — VERDADEIRO OU FALSO */
-
             {
                 tipo: "vf",
                 enunciado: "JavaScript foi criado em 1995 por Brendan Eich, em apenas 10 dias, na Netscape.",
@@ -393,7 +524,6 @@
                 explicacao: "Correto! Em 1995, a Netscape contratou Brendan Eich para criar uma linguagem de script simples para tornar as páginas web mais interativas. Ele desenvolveu a primeira versão em apenas 10 DIAS. A linguagem recebeu inicialmente o nome de Mocha, depois LiveScript, e finalmente JavaScript — nome escolhido por marketing, aproveitando a popularidade do Java na época.",
                 referencia: "Módulo 04 — Seção 1.1: História e Origem"
             },
-
             {
                 tipo: "vf",
                 enunciado: "JavaScript e Java são a mesma linguagem, apenas com nomes diferentes.",
@@ -401,7 +531,6 @@
                 explicacao: "Falso! Apesar do nome similar, JavaScript e Java são linguagens COMPLETAMENTE DIFERENTES em design, arquitetura e propósito. O nome 'JavaScript' foi uma decisão de MARKETING da Netscape para surfar na popularidade do Java. São linguagens sem parentesco técnico real — Java é compilada, orientada a classes; JavaScript é interpretada, baseada em protótipos.",
                 referencia: "Módulo 04 — Seção 1.1: História e Origem"
             },
-
             {
                 tipo: "vf",
                 enunciado: "Em JavaScript, o operador typeof null retorna a string 'object' — uma particularidade histórica da linguagem.",
@@ -409,7 +538,6 @@
                 explicacao: "Correto! typeof null === 'object' é uma decisão HISTÓRICA do JavaScript, amplamente considerada um bug, mas mantida por compatibilidade. Quando a linguagem foi criada, os valores eram representados por tags binárias e null recebeu a mesma tag que objetos. Corrigir isso quebraria milhares de sites. Por isso, para verificar se algo é null, use === null, não typeof.",
                 referencia: "Módulo 04 — Seção 2.2.3: Verificação de Tipo com typeof"
             },
-
             {
                 tipo: "vf",
                 enunciado: "Os operadores == e === fazem exatamente a mesma coisa em JavaScript.",
@@ -417,7 +545,6 @@
                 explicacao: "Falso! O == faz comparação com COERÇÃO DE TIPO — '5' == 5 retorna true. Já o === faz comparação ESTRITA, sem coerção — '5' === 5 retorna false. A recomendação é usar SEMPRE === e !== para evitar resultados inesperados, como '' == 0 (true) ou null == undefined (true).",
                 referencia: "Módulo 04 — Seção 2.3.1: Operadores Relacionais"
             },
-
             {
                 tipo: "vf",
                 enunciado: "Variáveis declaradas com let e const têm escopo de BLOCO, enquanto var tem escopo de FUNÇÃO.",
@@ -425,7 +552,6 @@
                 explicacao: "Correto! Essa é a diferença fundamental entre as três palavras-chave. Variáveis com let/const só existem dentro do bloco { } onde foram declaradas — fora dele, geram erro de referência. Já o var vaza do bloco: uma variável declarada dentro de um for continua acessível depois. Por isso, var deve ser EVITADO em código moderno.",
                 referencia: "Módulo 04 — Seção 2.1: Variáveis e Constantes"
             },
-
             {
                 tipo: "vf",
                 enunciado: "O evento change dispara a CADA alteração no valor de um input, enquanto input só dispara ao perder o foco.",
@@ -433,7 +559,6 @@
                 explicacao: "Falso — está INVERTIDO! O evento input dispara IMEDIATAMENTE a cada alteração (digitação, colagem, autocomplete). Já o change só dispara quando o elemento PERDE O FOCO após ter sido alterado. Para validação em tempo real (como no projeto do M4), usamos input. Para validação ao sair do campo, usamos change.",
                 referencia: "Módulo 04 — Seção 3.5.1: Principais Tipos de Eventos"
             },
-
             {
                 tipo: "vf",
                 enunciado: "O atributo aria-live='polite' em uma div de mensagens dinâmicas melhora a acessibilidade para leitores de tela.",
@@ -441,9 +566,6 @@
                 explicacao: "Correto! O aria-live='polite' instrui leitores de tela a ANUNCIAR o conteúdo da região quando ele muda, mas sem interromper o que está sendo lido. É ideal para mensagens de sucesso/erro em formulários. O valor 'polite' espera a pausa natural; 'assertive' interrompe imediatamente.",
                 referencia: "Módulo 04 — Seção 5.8: Desafios e Extensões do Projeto"
             },
-
-            /* BLOCO 2 — MÚLTIPLA ESCOLHA */
-
             {
                 tipo: "multipla",
                 enunciado: "Qual palavra-chave cria variáveis que NÃO podem ser REATRIBUÍDAS após a declaração?",
@@ -452,7 +574,6 @@
                 explicacao: "O const cria constantes — variáveis cujo VALOR não pode ser reatribuído. Tentar fazer PI = 3.14 depois de const PI = 3.14159 gera erro. Atenção: const impede REATRIBUIÇÃO, mas se o valor for objeto ou array, o CONTEÚDO INTERNO ainda pode ser modificado. 'static' é de outras linguagens (Java, C#).",
                 referencia: "Módulo 04 — Seção 2.1.3: const (Constante com Escopo de Bloco)"
             },
-
             {
                 tipo: "multipla",
                 enunciado: "Qual método de array CRIA UM NOVO array com o resultado da aplicação de uma função a cada elemento?",
@@ -461,7 +582,6 @@
                 explicacao: "O map() cria um NOVO array aplicando uma função de transformação a cada elemento. Ex: [1,2,3].map(x => x * 2) retorna [2,4,6]. O push() adiciona itens ao array original (modifica); o forEach() apenas ITERA sem criar novo array; o join() une os elementos em uma string. map() é ideal para transformar dados.",
                 referencia: "Módulo 04 — Seção 2.9: Métodos Nativos de Arrays"
             },
-
             {
                 tipo: "multipla",
                 enunciado: "Qual método de STRING remove espaços em branco do início e do fim?",
@@ -470,7 +590,6 @@
                 explicacao: "O trim() remove espaços em branco (incluindo tabs e quebras de linha) do INÍCIO e do FIM da string, sem alterar o meio. Muito usado em validações: if (nome.value.trim().length > 2). Os métodos 'strip', 'clean' e 'cut' NÃO existem para strings em JavaScript.",
                 referencia: "Módulo 04 — Seção 2.7: Métodos Nativos de Strings"
             },
-
             {
                 tipo: "multipla",
                 enunciado: "Qual método do DOM seleciona APENAS O PRIMEIRO elemento que corresponde a um seletor CSS?",
@@ -479,7 +598,6 @@
                 explicacao: "O querySelector() aceita QUALQUER seletor CSS (tag, classe, id, atributo, combinador) e retorna o PRIMEIRO elemento encontrado (ou null). Já o querySelectorAll() retorna TODOS em uma NodeList. O getElementById() só aceita ID.",
                 referencia: "Módulo 04 — Seção 3.2: Seleção de Elementos do DOM"
             },
-
             {
                 tipo: "multipla",
                 enunciado: "Qual método do objeto event cancela o comportamento PADRÃO do navegador (ex: recarregar a página ao enviar um formulário)?",
@@ -493,7 +611,6 @@
                 explicacao: "O event.preventDefault() cancela o comportamento PADRÃO do evento (ex: submit recarregando a página, clique em link navegando). Já o stopPropagation() impede que o evento continue subindo pela árvore DOM (borbulhamento). 'cancel' e 'stop' não existem no objeto event.",
                 referencia: "Módulo 04 — Seção 3.5.4: O Objeto event"
             },
-
             {
                 tipo: "multipla",
                 enunciado: "Qual classe do Bootstrap 5 aplica BORDA VERDE e ÍCONE DE CHECK em um campo válido?",
@@ -502,7 +619,6 @@
                 explicacao: "No Bootstrap 5, a validação visual usa .is-valid (verde, check) e .is-invalid (vermelho, exclamação). No Bootstrap 3 (M3), era diferente: .has-success e .has-error eram aplicadas ao .form-group. Essa mudança de nomenclatura é uma das diferenças entre BS3 e BS5.",
                 referencia: "Módulo 04 — Seção 4.8: Componentes de Validação Visual"
             },
-
             {
                 tipo: "multipla",
                 enunciado: "Como se chama a característica do JavaScript que permite que uma MESMA variável armazene valores de tipos DIFERENTES ao longo da execução?",
@@ -516,7 +632,6 @@
                 explicacao: "JavaScript é DINAMICAMENTE TIPADO (latent typing). Isso significa que o tipo é inferido em TEMPO DE EXECUÇÃO, não na declaração. Ex: let x = 3 (Number); x = 'texto' (String); x = null — tudo válido. Linguagens como Java e C# são estaticamente tipadas: o tipo é fixado na declaração e nunca muda.",
                 referencia: "Módulo 04 — Seção 1.3.3: Dinamicamente Tipada (Latent Typing)"
             },
-
             {
                 tipo: "multipla",
                 enunciado: "Qual propriedade do DOM insere conteúdo tratando-o como TEXTO PURO (sem interpretar HTML), sendo segura contra XSS?",
@@ -525,9 +640,6 @@
                 explicacao: "O textContent insere o conteúdo como TEXTO PURO, sem interpretar marcação HTML. Isso torna o código SEGURO contra ataques de XSS (Cross-Site Scripting): se um usuário malicioso digitar uma tag de script no campo, ela aparece como texto literal em vez de ser executada pelo navegador. Já o innerHTML INTERPRETA a marcação, o que é PERIGOSO com dados do usuário. Regra de ouro: use SEMPRE textContent para dados que vêm do usuário.",
                 referencia: "Módulo 04 — Seção 3.3: Manipulação de Conteúdo: innerHTML"
             },
-
-            /* BLOCO 3 — COMPLETE O CÓDIGO */
-
             {
                 tipo: "complete",
                 enunciado: "Complete o código abaixo para declarar uma variável de escopo de bloco que PODE ser reatribuída:",
@@ -537,7 +649,6 @@
                 explicacao: "O let cria variáveis com ESCOPO DE BLOCO que PODEM ser reatribuídas. O const também tem escopo de bloco, mas NÃO permite reatribuição. O var tem escopo de função (mais amplo e confuso). Como o código faz uma reatribuição (idade = 26), precisamos de let. Se fosse const, geraria erro 'Assignment to constant variable'.",
                 referencia: "Módulo 04 — Seção 2.1.2: let (Escopo de Bloco)"
             },
-
             {
                 tipo: "complete",
                 enunciado: "Complete o código abaixo para converter o texto '25' em um número válido para validação:",
@@ -547,7 +658,6 @@
                 explicacao: "O Number() converte uma string em número. Number('25') retorna 25 (Number), Number('abc') retorna NaN. Também poderíamos usar parseInt() ou parseFloat(), mas Number() é mais direto e cobre decimais. Não existe parseString nem toNumber em JavaScript. Sem a conversão, '25' + 5 resultaria em '255' (concatenação).",
                 referencia: "Módulo 04 — Seção 2.8: Métodos Nativos de Números"
             },
-
             {
                 tipo: "complete",
                 enunciado: "Complete o código abaixo para adicionar um novo usuário ao array:",
@@ -557,7 +667,6 @@
                 explicacao: "O push() adiciona um ou mais itens ao FINAL de um array, modificando o array original. Existem também unshift() (adiciona no início), pop() (remove do fim) e shift() (remove do início). 'add', 'append' e 'insert' não existem em arrays JavaScript — são de outras linguagens.",
                 referencia: "Módulo 04 — Seção 2.9: Métodos Nativos de Arrays"
             },
-
             {
                 tipo: "complete",
                 enunciado: "Complete o código abaixo para verificar se a string contém o caractere '@':",
@@ -567,7 +676,6 @@
                 explicacao: "O includes() verifica se uma string CONTÉM uma substring, retornando true ou false. Ex: 'usuario@email.com'.includes('@') retorna true. Também funciona em arrays. Os métodos 'has' e 'contains' NÃO existem em strings JavaScript. O search() existe, mas retorna o índice, não um booleano.",
                 referencia: "Módulo 04 — Seção 2.7: Métodos Nativos de Strings"
             },
-
             {
                 tipo: "complete",
                 enunciado: "Complete o código abaixo para REMOVER as classes de validação de um input após limpar o formulário:",
@@ -577,9 +685,6 @@
                 explicacao: "O classList.remove() remove uma ou mais classes de um elemento. Aceita múltiplos argumentos: remove('is-valid', 'is-invalid') remove AMBAS se presentes. Existem também: add() (adiciona), toggle() (alterna) e contains() (verifica). 'delete', 'clear' e 'erase' não existem em classList.",
                 referencia: "Módulo 04 — Seção 3.4: Manipulação de Classes CSS: classList"
             },
-
-            /* BLOCO 4 — APONTE O ERRO */
-
             {
                 tipo: "erro",
                 enunciado: "Há um erro LÓGICO no código JavaScript abaixo. Aponte qual é:",
@@ -591,14 +696,13 @@
                     "O código está correto"
                 ],
                 correta: 1,
-                explicacao: "O operador = é ATRIBUIÇÃO, não comparação! O código 'idade = 18' ATRIBUI o valor 18 à variável idade e retorna 18 (que é truthy), então o if SEMPRE será verdadeiro. O correto é usar === (comparação estrita) ou == (comparação com coerção): if (idade === 18). Esse é um dos erros mais comuns e perigosos em JavaScript — e não gera erro de sintaxe, apenas comportamento errado.",
+                explicacao: "O operador = é ATRIBUIÇÃO, não comparação! O código 'idade = 18' ATRIBUI o valor 18 à variável idade e retorna 18 (que é truthy), então o if SEMPRE será verdadeiro. O correto é usar === (comparação estrita) ou == (comparação com coerção): if (idade === 18). Esse é um dos erros mais comuns e perigosos em JavaScript.",
                 referencia: "Módulo 04 — Seção 2.3.1: Operadores Relacionais"
             },
-
             {
                 tipo: "erro",
                 enunciado: "Há um problema de ESCOPO no código abaixo. Aponte qual é:",
-                codigo: 'for (var i = 0; i < 3; i++) {\n  console.log(i);\n}\nconsole.log(i); // ainda funciona!',
+                codigo: 'for (var i = 0; i \x3C 3; i++) {\n  console.log(i);\n}\nconsole.log(i); // ainda funciona!',
                 opcoes: [
                     "var não pode ser usado em for",
                     "var tem escopo de função, então i vaza para fora do bloco — o ideal é usar let",
@@ -606,10 +710,9 @@
                     "O código está correto"
                 ],
                 correta: 1,
-                explicacao: "Usar var dentro de um for faz a variável VAZAR para fora do bloco, porque var tem escopo de FUNÇÃO (não de bloco). Resultado: i ainda existe e vale 3 após o loop. Em código moderno, use let: 'for (let i = 0; ...)'. Com let, a variável i só existe DENTRO do loop, e tentar acessá-la depois gera 'ReferenceError: i is not defined'. Isso evita bugs sutis.",
+                explicacao: "Usar var dentro de um for faz a variável VAZAR para fora do bloco, porque var tem escopo de FUNÇÃO (não de bloco). Resultado: i ainda existe e vale 3 após o loop. Em código moderno, use let: 'for (let i = 0; ...)'. Com let, a variável i só existe DENTRO do loop.",
                 referencia: "Módulo 04 — Seção 2.1.1: var (Escopo de Função ou Global)"
             },
-
             {
                 tipo: "erro",
                 enunciado: "Há um problema no manipulador de evento abaixo. Aponte qual é:",
@@ -624,7 +727,6 @@
                 explicacao: "Falta o event.preventDefault()! Sem ele, o comportamento PADRÃO do submit é executado — o navegador RECARREGA a página e envia os dados. Isso apaga o console e interrompe o JavaScript. O correto é interceptar o evento logo no início: form.addEventListener('submit', function(event) { event.preventDefault(); });",
                 referencia: "Módulo 04 — Seção 3.5.3: O Evento submit e a Interceptação"
             },
-
             {
                 tipo: "erro",
                 enunciado: "Há um problema de SEGURANÇA no código abaixo. Aponte qual é:",
@@ -636,10 +738,9 @@
                     "O código está correto"
                 ],
                 correta: 1,
-                explicacao: "Usar innerHTML com dados fornecidos pelo usuário é PERIGOSO. Se o usuário digitar uma tag de script maliciosa no campo, o navegador vai INTERPRETAR como código e executá-la — ataque conhecido como XSS (Cross-Site Scripting). Para dados não confiáveis, use SEMPRE textContent (insere texto puro) ou sanitize a marcação antes. Segurança em primeiro lugar!",
+                explicacao: "Usar innerHTML com dados fornecidos pelo usuário é PERIGOSO. Se o usuário digitar uma tag de script maliciosa no campo, o navegador vai INTERPRETAR como código e executá-la — ataque conhecido como XSS (Cross-Site Scripting). Para dados não confiáveis, use SEMPRE textContent (insere texto puro) ou sanitize a marcação antes.",
                 referencia: "Módulo 04 — Seção 3.3: Manipulação de Conteúdo: innerHTML"
             },
-
             {
                 tipo: "erro",
                 enunciado: "Há um erro no código abaixo envolvendo const. Aponte qual é:",
@@ -651,12 +752,261 @@
                     "O código está correto"
                 ],
                 correta: 1,
-                explicacao: "const cria uma CONSTANTE — o valor NÃO pode ser reatribuído. A linha 'PI = 3.14159' gera o erro 'Assignment to constant variable'. Se o valor precisa mudar, use let: 'let taxa = 3.14; taxa = 3.14159;'. Use const apenas para valores que NUNCA vão mudar. É uma boa prática: comece com const, mude para let só se necessário.",
+                explicacao: "const cria uma CONSTANTE — o valor NÃO pode ser reatribuído. A linha 'PI = 3.14159' gera o erro 'Assignment to constant variable'. Se o valor precisa mudar, use let: 'let taxa = 3.14; taxa = 3.14159;'. Use const apenas para valores que NUNCA vão mudar.",
                 referencia: "Módulo 04 — Seção 2.1.3: const (Constante com Escopo de Bloco)"
+            },
+
+            /* ============================================================
+               EXPANSÃO — 25 questões adicionais (M4)
+               ============================================================ */
+            {
+                tipo: "vf",
+                enunciado: "Os métodos map, filter e reduce são métodos nativos de array em JavaScript.",
+                resposta: true,
+                explicacao: "Correto! Todos os três são métodos de ARRAY: map (transforma cada elemento, criando um novo array), filter (filtra elementos que atendem a uma condição) e reduce (reduz o array a um único valor, como soma). São a base da programação funcional em JavaScript. Cada um recebe uma função de callback.",
+                referencia: "Módulo 04 — Seção 2.9: Métodos Nativos de Arrays"
+            },
+            {
+                tipo: "vf",
+                enunciado: "As palavras-chave let e const foram introduzidas no ECMAScript 2015 (ES6).",
+                resposta: true,
+                explicacao: "Correto! Antes do ES6 (2015), só existia var. Com o ES6, surgiram let (escopo de bloco, reatribuível) e const (escopo de bloco, NÃO reatribuível). Essas duas palavras resolveram vários problemas de escopo que o var causava, e são o padrão moderno.",
+                referencia: "Módulo 04 — Seção 2.1: Variáveis e Constantes"
+            },
+            {
+                tipo: "vf",
+                enunciado: "Arrow functions NÃO possuem seu próprio this — elas herdam o this do contexto onde foram definidas.",
+                resposta: true,
+                explicacao: "Correto! Esse é um comportamento único das arrow functions. Funções tradicionais têm seu próprio this, que depende de como são chamadas. Já as arrow functions capturam o this do ESCOPO ONDE FORAM CRIADAS — o chamado 'lexical this'.",
+                referencia: "Módulo 04 — Seção 2.5.3: Arrow Functions (Funções Seta)"
+            },
+            {
+                tipo: "vf",
+                enunciado: "JSON.parse() converte uma STRING em um objeto JavaScript.",
+                resposta: true,
+                explicacao: "Correto! JSON.parse() pega uma string no formato JSON e devolve o objeto JavaScript correspondente. O inverso é JSON.stringify(), que converte um objeto em string JSON — útil para salvar no localStorage. Esses dois métodos são inseparáveis em desenvolvimento web.",
+                referencia: "Módulo 04 — Seção 5.8: Desafios e Extensões do Projeto"
+            },
+            {
+                tipo: "vf",
+                enunciado: "try/catch é usado para capturar erros que ocorrem em tempo de execução do JavaScript.",
+                resposta: true,
+                explicacao: "Correto! O bloco try contém o código que pode gerar erro. Se algo falhar, o controle passa para o bloco catch, que recebe o objeto de erro como parâmetro. Opcionalmente, há o bloco finally, executado SEMPRE (com ou sem erro).",
+                referencia: "Módulo 04 — Seção 1.3.1: Linguagem de Script (Interpretada)"
+            },
+            {
+                tipo: "vf",
+                enunciado: "O método fetch() retorna uma Promise, que pode ser resolvida com await ou com .then().",
+                resposta: true,
+                explicacao: "Correto! fetch() retorna uma Promise que resolve quando a resposta chega. Você pode consumir com .then() (promises tradicionais) ou com async/await (sintaxe moderna, mais limpa). Além disso, é preciso chamar .json() ou .text() na resposta para extrair os dados.",
+                referencia: "Módulo 04 — Seção 5.8: Desafios e Extensões do Projeto"
+            },
+            {
+                tipo: "vf",
+                enunciado: "localStorage salva dados no navegador do usuário e persiste mesmo após fechar e reabrir a página.",
+                resposta: true,
+                explicacao: "Correto! localStorage salva dados no NAVEGADOR de forma PERSISTENTE — os dados continuam lá mesmo após fechar a aba, reabrir o navegador ou reiniciar o computador. Ele só aceita STRINGS, então objetos precisam ser convertidos com JSON.stringify.",
+                referencia: "Módulo 04 — Seção 5.8: Desafios e Extensões do Projeto"
+            },
+            {
+                tipo: "multipla",
+                enunciado: "Qual método de array retorna um NOVO array contendo apenas os elementos que satisfazem uma condição?",
+                opcoes: ["map()", "filter()", "reduce()", "find()"],
+                correta: 1,
+                explicacao: "O filter() retorna um NOVO array com apenas os elementos que passam no teste da função. Ex: [1,2,3,4].filter(x => x > 2) retorna [2,3,4]. O map() transforma cada elemento sem filtrar; o reduce() reduz a um único valor; o find() retorna apenas o PRIMEIRO elemento que satisfaz a condição.",
+                referencia: "Módulo 04 — Seção 2.9: Métodos Nativos de Arrays"
+            },
+            {
+                tipo: "multipla",
+                enunciado: "Qual método de array REDUZ todos os elementos a um único valor (ex: soma de todos os números)?",
+                opcoes: ["sum()", "reduce()", "join()", "concat()"],
+                correta: 1,
+                explicacao: "O reduce() aplica uma função acumuladora a cada elemento, retornando um único valor final. Ex: [1,2,3].reduce((acc, n) => acc + n, 0) retorna 6. O segundo argumento (0) é o valor INICIAL do acumulador. 'sum' não existe. join() une em string e concat() junta arrays.",
+                referencia: "Módulo 04 — Seção 2.9: Métodos Nativos de Arrays"
+            },
+            {
+                tipo: "multipla",
+                enunciado: "Qual método de array retorna o PRIMEIRO elemento que satisfaz uma condição, ou undefined se nenhum satisfizer?",
+                opcoes: ["filter()", "find()", "some()", "indexOf()"],
+                correta: 1,
+                explicacao: "O find() retorna o PRIMEIRO elemento que passa no teste. Se nenhum passar, retorna undefined. Já o some() retorna true/false (se ALGUM satisfaz). E o filter() retorna TODOS os que satisfazem em um novo array.",
+                referencia: "Módulo 04 — Seção 2.9: Métodos Nativos de Arrays"
+            },
+            {
+                tipo: "multipla",
+                enunciado: "Qual método de array verifica se TODOS os elementos satisfazem uma condição, retornando true ou false?",
+                opcoes: ["some()", "every()", "all()", "check()"],
+                correta: 1,
+                explicacao: "O every() retorna true apenas se TODOS os elementos passarem no teste. Ex: [2,4,6].every(x => x % 2 === 0) retorna true. Já o some() retorna true se ALGUM elemento passar. 'all' e 'check' não existem em arrays JavaScript.",
+                referencia: "Módulo 04 — Seção 2.9: Métodos Nativos de Arrays"
+            },
+            {
+                tipo: "multipla",
+                enunciado: "O que o método JSON.stringify() faz?",
+                opcoes: [
+                    "Converte uma string em objeto",
+                    "Converte um objeto em string JSON",
+                    "Valida se um JSON está correto",
+                    "Formata um JSON com indentação"
+                ],
+                correta: 1,
+                explicacao: "O JSON.stringify() converte um objeto (ou array, número, string) em uma STRING no formato JSON. É essencial para salvar no localStorage, que só aceita strings. O inverso é JSON.parse().",
+                referencia: "Módulo 04 — Seção 5.8: Desafios e Extensões do Projeto"
+            },
+            {
+                tipo: "multipla",
+                enunciado: "Qual método salva um valor no localStorage com uma chave?",
+                opcoes: [
+                    "localStorage.save('chave', valor)",
+                    "localStorage.set('chave', valor)",
+                    "localStorage.setItem('chave', valor)",
+                    "localStorage.put('chave', valor)"
+                ],
+                correta: 2,
+                explicacao: "O método correto é setItem(chave, valor). Para ler, usa-se getItem(chave). Para remover um item, removeItem(chave); para limpar tudo, clear(). Os métodos 'save', 'set' e 'put' NÃO existem em localStorage.",
+                referencia: "Módulo 04 — Seção 5.8: Desafios e Extensões do Projeto"
+            },
+            {
+                tipo: "multipla",
+                enunciado: "Qual é a sintaxe CORRETA de um template literal (string com interpolação de variáveis) em JavaScript?",
+                opcoes: [
+                    "'Olá, ' + nome + '!'",
+                    "\"Olá, ${nome}!\"",
+                    "`Olá, ${nome}!`",
+                    "'Olá, {nome}!'"
+                ],
+                correta: 2,
+                explicacao: "Template literals usam ACENTO GRAVE (backtick) em vez de aspas simples ou duplas, e permitem interpolar variáveis com ${expressão}. Ex: `Olá, ${nome}!`. A forma com + é a concatenação tradicional; as formas com \"\" e { } não interpolam.",
+                referencia: "Módulo 04 — Seção 5.3.1: A Função formatarDados"
+            },
+            {
+                tipo: "multipla",
+                enunciado: "Qual palavra-chave cria uma classe em JavaScript moderno (ES6+)?",
+                opcoes: ["class", "Class", "object", "prototype"],
+                correta: 0,
+                explicacao: "A palavra-chave class foi introduzida no ES6 para criar classes de forma mais clara (ainda que 'por baixo dos panos' o JavaScript continue baseado em protótipos). A palavra deve ser escrita em minúsculas — 'Class' não existe.",
+                referencia: "Módulo 04 — Seção 1.3.4: Baseada em Protótipos (Prototype-Based)"
+            },
+            {
+                tipo: "complete",
+                enunciado: "Complete o código abaixo para filtrar apenas números PARES de um array:",
+                codigo: 'const pares = numeros.{{GAP}}(n => n % 2 === 0);',
+                opcoes: ["map", "filter", "reduce", "each"],
+                correta: 1,
+                explicacao: "O método correto é filter — ele retorna um NOVO array com os elementos que passam no teste. A arrow function n => n % 2 === 0 retorna true para números pares. Já o map() transformaria cada elemento sem filtrar; o reduce() reduziria a um único valor.",
+                referencia: "Módulo 04 — Seção 2.9: Métodos Nativos de Arrays"
+            },
+            {
+                tipo: "complete",
+                enunciado: "Complete o código abaixo para converter a string JSON em um objeto JavaScript:",
+                codigo: 'const texto = \'{"nome":"Ana","idade":28}\';\nconst pessoa = JSON.{{GAP}}(texto);',
+                opcoes: ["stringify", "parse", "decode", "toObject"],
+                correta: 1,
+                explicacao: "O método correto é JSON.parse() — ele converte uma STRING no formato JSON em um OBJETO JavaScript. O inverso é JSON.stringify(), que converte objeto em string. Muito usado ao recuperar dados do localStorage.",
+                referencia: "Módulo 04 — Seção 5.8: Desafios e Extensões do Projeto"
+            },
+            {
+                tipo: "complete",
+                enunciado: "Complete o código abaixo para salvar um array de usuários no localStorage:",
+                codigo: 'localStorage.{{GAP}}("usuarios", JSON.stringify(usuarios));',
+                opcoes: ["save", "set", "setItem", "put"],
+                correta: 2,
+                explicacao: "O método correto é setItem(chave, valor). Ele salva um par chave-valor no localStorage. Como o localStorage só aceita STRINGS, usamos JSON.stringify() para converter o array em texto. Para recuperar depois: JSON.parse(localStorage.getItem('usuarios')).",
+                referencia: "Módulo 04 — Seção 5.8: Desafios e Extensões do Projeto"
+            },
+            {
+                tipo: "complete",
+                enunciado: "Complete o código abaixo para criar uma mensagem com interpolação usando template literal:",
+                codigo: 'const mensagem = `Olá, {{GAP}}! Você tem ${idade} anos.`;',
+                opcoes: ["[nome]", "{nome}", "${nome}", "$nome"],
+                correta: 2,
+                explicacao: "A sintaxe correta de interpolação em template literals é ${expressão}. O cifrão é obrigatório — sem ele, o navegador trata como texto literal. As formas [nome], {nome} e $nome não funcionam.",
+                referencia: "Módulo 04 — Seção 5.3.1: A Função formatarDados"
+            },
+            {
+                tipo: "complete",
+                enunciado: "Complete o código abaixo para capturar um erro de conversão JSON inválida:",
+                codigo: '{{GAP}} {\n  const dados = JSON.parse(textoInvalido);\n} catch (erro) {\n  console.error("JSON inválido:", erro.message);\n}',
+                opcoes: ["try", "catch", "attempt", "test"],
+                correta: 0,
+                explicacao: "O bloco correto é try. Ele envolve o código que pode falhar. Se algo der erro, o controle passa para o catch, que recebe o objeto de erro. É essencial para lidar com JSON.parse() de dados corrompidos, fetch com falha de rede, etc.",
+                referencia: "Módulo 04 — Seção 1.3.1: Linguagem de Script (Interpretada)"
+            },
+            {
+                tipo: "erro",
+                enunciado: "Há um erro LÓGICO no código abaixo. Aponte qual é:",
+                codigo: 'let contador = 0;\nfor (let i = 0; i \x3C 5; i++) {\n  contador = contador + i;\n}\nconsole.log(contador);',
+                opcoes: [
+                    "O código está correto e exibe 10",
+                    "O for nunca executa porque i começa em 0",
+                    "contador deveria ser const",
+                    "O código está correto mas exibe 15"
+                ],
+                correta: 0,
+                explicacao: "O código está CORRETO! Ele soma 0+1+2+3+4 = 10. O for executa normalmente (i vai de 0 a 4), e cada iteração adiciona i a contador. Resposta: 10. Cuidado para não confundir: usar const em contador não funcionaria, pois ele é reatribuído a cada iteração.",
+                referencia: "Módulo 04 — Seção 2.4.3: Laço for"
+            },
+            {
+                tipo: "erro",
+                enunciado: "Há um erro no código abaixo relacionado a escopo. Aponte qual é:",
+                codigo: 'function teste() {\n  if (true) {\n    let mensagem = "Olá";\n  }\n  console.log(mensagem);\n}',
+                opcoes: [
+                    "let tem escopo de bloco — mensagem não existe fora do if",
+                    "Faltou declarar mensagem com var",
+                    "console.log deveria estar dentro do if",
+                    "O código está correto"
+                ],
+                correta: 0,
+                explicacao: "O let tem escopo de BLOCO. A variável mensagem só existe DENTRO do if. Tentar acessá-la fora (no console.log) gera 'ReferenceError: mensagem is not defined'. Para funcionar, você precisaria declarar mensagem FORA do if com let, ou usar var (que tem escopo de função).",
+                referencia: "Módulo 04 — Seção 2.1.2: let (Escopo de Bloco)"
+            },
+            {
+                tipo: "erro",
+                enunciado: "Há um problema no código abaixo. Aponte qual é:",
+                codigo: 'const usuario = { nome: "Ana" };\nusuario = { nome: "Maria" };',
+                opcoes: [
+                    "const não permite REATRIBUIR o objeto inteiro — o correto seria let, ou modificar propriedades",
+                    "Objetos não podem ser atribuídos a const",
+                    "Falta ponto e vírgula",
+                    "O código está correto"
+                ],
+                correta: 0,
+                explicacao: "const impede REATRIBUIÇÃO da variável. Aqui, usuario = {...} tenta REATRIBUIR, gerando 'Assignment to constant variable'. Mas atenção: você PODE modificar propriedades de um objeto const (ex: usuario.nome = 'Maria' funciona). O correto seria usar let, ou modificar apenas a propriedade.",
+                referencia: "Módulo 04 — Seção 2.1.3: const (Constante com Escopo de Bloco)"
+            },
+            {
+                tipo: "erro",
+                enunciado: "Há um problema no manipulador de evento abaixo. Aponte qual é:",
+                codigo: 'form.addEventListener("submit", (event) => {\n  const nome = document.getElementById("nome").value;\n  resultado.innerHTML = `Olá, ${nome}`;\n});',
+                opcoes: [
+                    "Falta event.preventDefault() — o formulário vai recarregar a página e perder os dados",
+                    "Arrow function não pode ser usada em addEventListener",
+                    "getElementById não funciona dentro de listeners",
+                    "O código está correto"
+                ],
+                correta: 0,
+                explicacao: "Falta o event.preventDefault()! Sem ele, o comportamento PADRÃO do submit é executado — o navegador RECARREGA a página, enviando os dados e apagando o resultado. O correto é chamar event.preventDefault() logo no início do listener.",
+                referencia: "Módulo 04 — Seção 3.5.3: O Evento submit e a Interceptação"
+            },
+            {
+                tipo: "erro",
+                enunciado: "Há um problema de SEGURANÇA no código abaixo. Aponte qual é:",
+                codigo: 'const comentario = document.getElementById("comentario").value;\nresultado.innerHTML = comentario;',
+                opcoes: [
+                    "innerHTML com dados de usuário abre brecha para XSS — o correto é textContent",
+                    "comentario deveria ser const",
+                    "getElementById não pode acessar value",
+                    "O código está correto"
+                ],
+                correta: 0,
+                explicacao: "Usar innerHTML com dados do usuário é PERIGOSO. Se o usuário digitar uma marcação de script maliciosa no comentário, o navegador vai INTERPRETAR como código e executá-la — ataque XSS. Para dados não confiáveis, use SEMPRE textContent, que insere como TEXTO PURO.",
+                referencia: "Módulo 04 — Seção 3.3: Manipulação de Conteúdo: innerHTML"
             }
         ];
 
-        /* Utilitários de aleatoriedade */
+        /* ============================================================
+           UTILITÁRIOS DE ALEATORIEDADE
+           ============================================================ */
         function embaralhar(array) {
             const copia = [...array];
             for (let i = copia.length - 1; i > 0; i--) {
@@ -679,53 +1029,179 @@
             return { ...questao, opcoes: novasOpcoes, correta: novoIndiceCorreto };
         }
 
+        /* ============================================================
+           ESTADO
+           ============================================================ */
         const estado = {
-            questoes: [],
-            indiceAtual: 0,
-            respostas: [],
-            selecionadas: []
+            questoes: [], respostas: {}, selecionadas: {},
+            indiceGlobal: 0, blocoAtivo: 0
         };
 
-        const $ = (id) => document.getElementById(id);
+        const totalQuestoes = () => estado.questoes.length;
+        const totalBlocos   = () => Math.ceil(totalQuestoes() / TAMANHO_BLOCO);
+        const inicioDoBloco  = (b) => b * TAMANHO_BLOCO;
+        const fimDoBloco     = (b) => Math.min(inicioDoBloco(b) + TAMANHO_BLOCO, totalQuestoes());
+        const tamanhoDoBloco = (b) => fimDoBloco(b) - inicioDoBloco(b);
+        const posNoBlocoAtivo = () => estado.indiceGlobal - inicioDoBloco(estado.blocoAtivo);
 
+        const $ = (id) => document.getElementById(id);
         const telas = {
             inicio:    $("tela-inicio"),
             questao:   $("tela-questao"),
+            bloco:     $("tela-bloco"),
             resultado: $("tela-resultado")
         };
 
+        /* ============================================================
+           FUNÇÕES AUXILIARES
+           ============================================================ */
         function mostrarTela(nome) {
             Object.values(telas).forEach(t => t.classList.remove("ativa"));
             telas[nome].classList.add("ativa");
         }
 
         function escaparHTML(str) {
-            return String(str)
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;");
+            return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
         }
 
-        function atualizarProgresso() {
-            const total = estado.questoes.length;
-            const atual = estado.indiceAtual + 1;
-            $("contador").textContent = `${atual} / ${total}`;
-            $("progresso").style.width = `${(atual / total) * 100}%`;
+        function contarAcertosBloco(b) {
+            let a = 0;
+            for (let i = inicioDoBloco(b); i < fimDoBloco(b); i++) if (estado.respostas[i] === true) a++;
+            return a;
         }
 
-        function textoRespostaCorreta(q) {
-            if (q.tipo === "vf") return q.resposta === true ? "Verdadeiro" : "Falso";
-            return q.opcoes[q.correta];
+        function contarRespondidasBloco(b) {
+            let r = 0;
+            for (let i = inicioDoBloco(b); i < fimDoBloco(b); i++) if (estado.respostas[i] !== undefined) r++;
+            return r;
         }
 
-        function textoRespostaEscolhida(q, indiceEscolhido) {
-            if (q.tipo === "vf") return indiceEscolhido === 0 ? "Verdadeiro" : "Falso";
-            return q.opcoes[indiceEscolhido];
+        function blocoEstaConcluido(b) { return contarRespondidasBloco(b) === tamanhoDoBloco(b); }
+        function contarAcertosTotal() { return Object.values(estado.respostas).filter(r => r === true).length; }
+        function contarRespondidasTotal() { return Object.keys(estado.respostas).length; }
+
+        function contarBlocosConcluidos() {
+            let c = 0;
+            for (let b = 0; b < totalBlocos(); b++) if (blocoEstaConcluido(b)) c++;
+            return c;
         }
 
+        /* ============================================================
+           CABEÇALHO
+           ============================================================ */
+        function atualizarCabecalho() {
+            const b = estado.blocoAtivo;
+            $("contador-bloco").textContent = `Bloco ${b + 1} de ${totalBlocos()}`;
+            $("contador-questao").textContent = `Questão ${posNoBlocoAtivo() + 1} de ${tamanhoDoBloco(b)}`;
+
+            const total = totalQuestoes();
+            const respondidas = contarRespondidasTotal();
+            $("progresso").style.width = `${total > 0 ? (respondidas / total) * 100 : 0}%`;
+
+            const blocoEl = $("progresso-bloco");
+            blocoEl.innerHTML = "";
+            for (let i = 0; i < tamanhoDoBloco(b); i++) {
+                const indice = inicioDoBloco(b) + i;
+                const bolinha = document.createElement("span");
+                bolinha.className = "bolinha";
+                if (indice === estado.indiceGlobal) bolinha.classList.add("atual");
+                else if (estado.respostas[indice] === true) bolinha.classList.add("correta");
+                else if (estado.respostas[indice] === false) bolinha.classList.add("errada");
+                blocoEl.appendChild(bolinha);
+            }
+        }
+
+        /* ============================================================
+           TELA INICIAL
+           ============================================================ */
+        function renderizarTelaInicial() {
+            if (totalQuestoes() === 0) {
+                $("blocos-grid").innerHTML = `<div style="grid-column: 1/-1; padding: 30px; text-align: center; color:#7f8c8d;">Nenhuma questão cadastrada ainda.</div>`;
+                $("btn-refazer-tudo").style.display = "none";
+                $("btn-ver-resultado").style.display = "none";
+                return;
+            }
+
+            const totalB = totalBlocos();
+            const concluidos = contarBlocosConcluidos();
+
+            $("geral-concluidos").textContent = concluidos;
+            $("geral-total").textContent = totalB;
+            $("geral-pontos").textContent = contarAcertosTotal();
+
+            const grid = $("blocos-grid");
+            grid.innerHTML = "";
+
+            for (let b = 0; b < totalB; b++) {
+                const tamanho = tamanhoDoBloco(b);
+                const respondidas = contarRespondidasBloco(b);
+                const acertos = contarAcertosBloco(b);
+                const concluido = blocoEstaConcluido(b);
+                const iniciado = respondidas > 0 && !concluido;
+
+                const card = document.createElement("div");
+                card.className = "bloco-card";
+                if (concluido) card.classList.add("concluido");
+                else if (iniciado) card.classList.add("em-andamento");
+
+                let statusHTML;
+                if (concluido) statusHTML = `<span class="bloco-status concluido">✓ Concluído</span>`;
+                else if (iniciado) statusHTML = `<span class="bloco-status em-andamento">Em andamento</span>`;
+                else statusHTML = `<span class="bloco-status nao-iniciado">Não iniciado</span>`;
+
+                let infoHTML;
+                if (concluido) infoHTML = `<strong>${acertos}/${tamanho}</strong> acertos`;
+                else if (iniciado) infoHTML = `${respondidas}/${tamanho} respondidas`;
+                else infoHTML = `${tamanho} questões`;
+
+                let btnTexto = "▶ Jogar";
+                if (concluido) btnTexto = "↻ Refazer";
+
+                card.innerHTML = `
+                    <div class="bloco-label">Bloco</div>
+                    <div class="bloco-numero">${String(b + 1).padStart(2, "0")}</div>
+                    ${statusHTML}
+                    <div class="bloco-info">${infoHTML}</div>
+                    <button class="bloco-btn">${btnTexto}</button>
+                `;
+                card.addEventListener("click", () => abrirBloco(b));
+                grid.appendChild(card);
+            }
+
+            const btnVerResultado = $("btn-ver-resultado");
+            btnVerResultado.style.display = (concluidos === totalB && totalB > 0) ? "inline-flex" : "none";
+        }
+
+        /* ============================================================
+           ABRIR BLOCO
+           ============================================================ */
+        function abrirBloco(b) {
+            if (blocoEstaConcluido(b)) {
+                for (let i = inicioDoBloco(b); i < fimDoBloco(b); i++) {
+                    delete estado.respostas[i];
+                    delete estado.selecionadas[i];
+                }
+            }
+
+            estado.blocoAtivo = b;
+            let proxima = inicioDoBloco(b);
+            for (let i = inicioDoBloco(b); i < fimDoBloco(b); i++) {
+                if (estado.respostas[i] === undefined) { proxima = i; break; }
+                proxima = i + 1;
+            }
+            if (proxima >= fimDoBloco(b)) proxima = inicioDoBloco(b);
+            estado.indiceGlobal = proxima;
+
+            renderizarQuestao();
+            mostrarTela("questao");
+        }
+
+        /* ============================================================
+           RENDERIZAÇÃO DA QUESTÃO
+           ============================================================ */
         function renderizarQuestao() {
-            const q = estado.questoes[estado.indiceAtual];
-            atualizarProgresso();
+            const q = estado.questoes[estado.indiceGlobal];
+            atualizarCabecalho();
 
             const badges = {
                 vf:       { texto: "Verdadeiro ou Falso", classe: "vf" },
@@ -745,12 +1221,9 @@
             if (q.codigo) {
                 const bloco = document.createElement("div");
                 bloco.className = "code-block";
-                let codigoEscapado = escaparHTML(q.codigo);
-                codigoEscapado = codigoEscapado.replace(
-                    /\{\{GAP\}\}/g,
-                    '<span class="gap">???</span>'
-                );
-                bloco.innerHTML = codigoEscapado;
+                let esc = escaparHTML(q.codigo);
+                esc = esc.replace(/\{\{GAP\}\}/g, '<span class="gap">???</span>');
+                bloco.innerHTML = esc;
                 areaCodigo.appendChild(bloco);
             }
 
@@ -763,20 +1236,16 @@
                 criarOpcao("Falso", false, opcoesEl);
             } else {
                 const letras = ["A", "B", "C", "D", "E"];
-                q.opcoes.forEach((texto, i) => {
-                    criarOpcao(texto, i, opcoesEl, letras[i]);
-                });
+                q.opcoes.forEach((texto, i) => criarOpcao(texto, i, opcoesEl, letras[i]));
             }
 
             $("feedback").className = "feedback";
             $("feedback").innerHTML = "";
 
-            $("btn-voltar").disabled = estado.indiceAtual === 0;
+            $("btn-voltar").disabled = estado.indiceGlobal === inicioDoBloco(estado.blocoAtivo);
             $("btn-proximo").disabled = true;
-            $("btn-proximo").textContent =
-                estado.indiceAtual === estado.questoes.length - 1
-                    ? "Finalizar ✓"
-                    : "Próxima →";
+            const ultima = estado.indiceGlobal === fimDoBloco(estado.blocoAtivo) - 1;
+            $("btn-proximo").textContent = ultima ? "Finalizar Bloco ✓" : "Próxima →";
         }
 
         function criarOpcao(texto, valor, container, letra) {
@@ -799,29 +1268,40 @@
             container.appendChild(btn);
         }
 
+        /* ============================================================
+           RESPOSTA
+           ============================================================ */
         function responder(valor) {
-            const q = estado.questoes[estado.indiceAtual];
+            const q = estado.questoes[estado.indiceGlobal];
             const opcoesEl = $("opcoes").querySelectorAll(".opcao");
 
-            let indiceCorreto = q.tipo === "vf"
-                ? (q.resposta === true ? 0 : 1)
-                : q.correta;
-
-            let indiceEscolhido = q.tipo === "vf"
-                ? (valor === true ? 0 : 1)
-                : valor;
-
+            let indiceCorreto = q.tipo === "vf" ? (q.resposta === true ? 0 : 1) : q.correta;
+            let indiceEscolhido = q.tipo === "vf" ? (valor === true ? 0 : 1) : valor;
             const acertou = indiceEscolhido === indiceCorreto;
 
             opcoesEl.forEach(op => op.classList.add("desabilitada"));
             opcoesEl[indiceCorreto].classList.add("correta");
             if (!acertou) opcoesEl[indiceEscolhido].classList.add("errada");
 
-            estado.respostas[estado.indiceAtual] = acertou;
-            estado.selecionadas[estado.indiceAtual] = indiceEscolhido;
+            estado.respostas[estado.indiceGlobal] = acertou;
+            estado.selecionadas[estado.indiceGlobal] = indiceEscolhido;
 
             renderizarFeedback(q, acertou, indiceEscolhido);
             $("btn-proximo").disabled = false;
+            atualizarCabecalho();
+        }
+
+        /* ============================================================
+           FEEDBACK
+           ============================================================ */
+        function textoRespostaCorreta(q) {
+            if (q.tipo === "vf") return q.resposta === true ? "Verdadeiro" : "Falso";
+            return q.opcoes[q.correta];
+        }
+
+        function textoRespostaEscolhida(q, indice) {
+            if (q.tipo === "vf") return indice === 0 ? "Verdadeiro" : "Falso";
+            return q.opcoes[indice];
         }
 
         function renderizarFeedback(q, acertou, indiceEscolhido) {
@@ -844,14 +1324,8 @@
 
             const respostas = document.createElement("div");
             respostas.className = "fb-respostas";
-            if (!acertou) {
-                respostas.appendChild(criarLinhaResposta("Sua resposta", textoEscolhido, "incorreto"));
-            }
-            respostas.appendChild(criarLinhaResposta(
-                acertou ? "Resposta" : "Resposta correta",
-                textoCorreto,
-                "correto"
-            ));
+            if (!acertou) respostas.appendChild(criarLinhaResposta("Sua resposta", textoEscolhido, "incorreto"));
+            respostas.appendChild(criarLinhaResposta(acertou ? "Resposta" : "Resposta correta", textoCorreto, "correto"));
             fb.appendChild(respostas);
 
             const explicacao = document.createElement("div");
@@ -862,17 +1336,17 @@
             if (q.referencia) {
                 const ref = document.createElement("div");
                 ref.className = "fb-referencia";
-                const iconeRef = document.createElement("span");
-                iconeRef.className = "icone";
-                iconeRef.textContent = "📖";
-                const textoRef = document.createElement("span");
-                textoRef.className = "texto";
+                const iRef = document.createElement("span");
+                iRef.className = "icone";
+                iRef.textContent = "📖";
+                const tRef = document.createElement("span");
+                tRef.className = "texto";
                 const strong = document.createElement("strong");
                 strong.textContent = "Para revisar: ";
                 const spanRef = document.createElement("span");
                 spanRef.textContent = q.referencia;
-                textoRef.append(strong, spanRef);
-                ref.append(iconeRef, textoRef);
+                tRef.append(strong, spanRef);
+                ref.append(iRef, tRef);
                 fb.appendChild(ref);
             }
         }
@@ -890,35 +1364,36 @@
             return linha;
         }
 
+        /* ============================================================
+           NAVEGAÇÃO
+           ============================================================ */
         $("btn-voltar").addEventListener("click", () => {
-            if (estado.indiceAtual > 0) {
-                estado.indiceAtual--;
+            if (estado.indiceGlobal > inicioDoBloco(estado.blocoAtivo)) {
+                estado.indiceGlobal--;
                 renderizarQuestao();
                 restaurarRespostaSeExistir();
             }
         });
 
         $("btn-proximo").addEventListener("click", () => {
-            if (estado.indiceAtual < estado.questoes.length - 1) {
-                estado.indiceAtual++;
+            if (estado.indiceGlobal === fimDoBloco(estado.blocoAtivo) - 1) {
+                mostrarFimDeBloco();
+            } else {
+                estado.indiceGlobal++;
                 renderizarQuestao();
                 restaurarRespostaSeExistir();
-            } else {
-                mostrarResultado();
             }
         });
 
         function restaurarRespostaSeExistir() {
-            const resp = estado.respostas[estado.indiceAtual];
+            const resp = estado.respostas[estado.indiceGlobal];
             if (resp === undefined) return;
 
-            const q = estado.questoes[estado.indiceAtual];
+            const q = estado.questoes[estado.indiceGlobal];
             const opcoesEl = $("opcoes").querySelectorAll(".opcao");
-            const escolhido = estado.selecionadas[estado.indiceAtual];
+            const escolhido = estado.selecionadas[estado.indiceGlobal];
 
-            let indiceCorreto = q.tipo === "vf"
-                ? (q.resposta === true ? 0 : 1)
-                : q.correta;
+            let indiceCorreto = q.tipo === "vf" ? (q.resposta === true ? 0 : 1) : q.correta;
 
             opcoesEl.forEach(op => op.classList.add("desabilitada"));
             opcoesEl[indiceCorreto].classList.add("correta");
@@ -928,25 +1403,48 @@
             $("btn-proximo").disabled = false;
         }
 
-        function mostrarResultado() {
-            const total = estado.questoes.length;
-            const acertos = estado.respostas.filter(r => r === true).length;
-            const percentual = Math.round((acertos / total) * 100);
+        /* ============================================================
+           FIM DE BLOCO
+           ============================================================ */
+        function mostrarFimDeBloco() {
+            const b = estado.blocoAtivo;
+            const acertos = contarAcertosBloco(b);
+            const tamanho = tamanhoDoBloco(b);
+            const pct = Math.round((acertos / tamanho) * 100);
 
             let icone, titulo, mensagem;
-            if (percentual >= 80) {
-                icone = "🏆"; titulo = "Excelente!";
-                mensagem = "Você dominou o JavaScript! Continue assim!";
-            } else if (percentual >= 60) {
-                icone = "👏"; titulo = "Muito bom!";
-                mensagem = "Bom desempenho! Revise os pontos que errou para fixar melhor.";
-            } else if (percentual >= 40) {
-                icone = "📚"; titulo = "Continue estudando";
-                mensagem = "Você está no caminho. Revise o material e tente novamente.";
-            } else {
-                icone = "💪"; titulo = "Não desanime!";
-                mensagem = "A prática leva à perfeição. Volte ao guia de JavaScript e refaça o quiz.";
-            }
+            if (pct >= 80)      { icone = "🎉"; titulo = "Excelente bloco!"; mensagem = "Você arrasou nas questões deste bloco."; }
+            else if (pct >= 60) { icone = "👏"; titulo = "Bom trabalho!";    mensagem = "Bom desempenho neste bloco. Continue assim!"; }
+            else if (pct >= 40) { icone = "📚"; titulo = "Bloco concluído";  mensagem = "Você está no caminho. Revise os pontos que errou."; }
+            else                { icone = "💪"; titulo = "Bloco concluído";  mensagem = "Não desanime! A prática leva à perfeição."; }
+
+            $("bloco-icone").textContent = icone;
+            $("bloco-titulo").textContent = titulo;
+            $("bloco-mensagem").textContent = mensagem;
+            $("bloco-acertos").textContent = `${acertos} / ${tamanho}`;
+            $("bloco-progresso-geral").textContent = `${contarRespondidasTotal()} / ${totalQuestoes()}`;
+
+            mostrarTela("bloco");
+        }
+
+        $("btn-voltar-selecao").addEventListener("click", () => {
+            renderizarTelaInicial();
+            mostrarTela("inicio");
+        });
+
+        /* ============================================================
+           RESULTADO FINAL
+           ============================================================ */
+        function mostrarResultadoFinal() {
+            const total = totalQuestoes();
+            const acertos = contarAcertosTotal();
+            const pct = Math.round((acertos / total) * 100);
+
+            let icone, titulo, mensagem;
+            if (pct >= 80)      { icone = "🏆"; titulo = "Excelente!";         mensagem = "Você dominou o conteúdo. Continue assim!"; }
+            else if (pct >= 60) { icone = "👏"; titulo = "Muito bom!";         mensagem = "Bom desempenho! Revise os pontos que errou."; }
+            else if (pct >= 40) { icone = "📚"; titulo = "Continue estudando"; mensagem = "Você está no caminho. Revise o material."; }
+            else                { icone = "💪"; titulo = "Não desanime!";      mensagem = "A prática leva à perfeição. Refaça o quiz."; }
 
             $("resultado-icone").textContent = icone;
             $("resultado-titulo").textContent = titulo;
@@ -956,19 +1454,35 @@
             mostrarTela("resultado");
         }
 
-        function iniciarQuiz() {
-            estado.questoes = embaralhar(QUESTOES).map(embaralharOpcoes);
-            estado.indiceAtual = 0;
-            estado.respostas = [];
-            estado.selecionadas = [];
+        $("btn-ver-resultado").addEventListener("click", mostrarResultadoFinal);
 
-            renderizarQuestao();
-            mostrarTela("questao");
+        /* ============================================================
+           INICIAR / REFAZER
+           ============================================================ */
+        function iniciarQuiz(embaralharNovamente) {
+            if (QUESTOES.length === 0) {
+                alert("Nenhuma questão cadastrada ainda.");
+                return;
+            }
+            if (embaralharNovamente !== false) {
+                estado.questoes = embaralhar(QUESTOES).map(embaralharOpcoes);
+                estado.respostas = {};
+                estado.selecionadas = {};
+            }
+            estado.blocoAtivo = 0;
+            estado.indiceGlobal = 0;
+            renderizarTelaInicial();
+            mostrarTela("inicio");
         }
 
-        $("btn-iniciar").addEventListener("click", iniciarQuiz);
-        $("btn-refazer").addEventListener("click", iniciarQuiz);
-    </script>
+        $("btn-refazer-tudo").addEventListener("click", () => iniciarQuiz(true));
+        $("btn-refazer").addEventListener("click", () => iniciarQuiz(true));
 
+        /* ============================================================
+           INICIALIZAÇÃO
+           ============================================================ */
+        if (QUESTOES.length > 0) iniciarQuiz(true);
+        else renderizarTelaInicial();
+    </script>
 </body>
 </html>

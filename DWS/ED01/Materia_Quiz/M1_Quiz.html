@@ -668,40 +668,38 @@
            ============================================================ */
 
 
-        const QUESTOES = [
-            /* ============================================================
-               BLOCO 1 — VERDADEIRO OU FALSO (7 questões)
-               ============================================================ */
+                const QUESTOES = [
+            /* BLOCO 1 — VERDADEIRO OU FALSO */
 
             {
                 tipo: "vf",
-                enunciado: "A tag <title> deve ficar dentro da seção <head> do documento HTML.",
+                enunciado: "A tag \x3Cbody> contém o conteúdo visível da página, como textos e imagens.",
                 resposta: true,
-                explicacao: "Correto! A tag <title> pertence à seção <head> e define o texto exibido na aba/barra de título do navegador — ela NÃO aparece no corpo da página. O <head> guarda metadados (charset, title, links para CSS), enquanto o <body> guarda o conteúdo visível.",
+                explicacao: "Correto! O \x3Cbody> é o corpo do documento — é nele que ficam todos os elementos visíveis ao usuário (textos, imagens, listas, tabelas, formulários, etc.). A seção \x3Chead> guarda metadados (título, charset, links para CSS) que NÃO aparecem na página. A tag \x3Chtml> envolve as duas e representa o documento inteiro.",
                 referencia: "Módulo 01 — Seção 1.2: Estrutura Básica do Arquivo HTML"
             },
 
             {
                 tipo: "vf",
-                enunciado: "A tag <ul> é usada para criar listas ordenadas em HTML.",
+                enunciado: "A tag \x3Cul> é usada para criar listas ordenadas em HTML.",
                 resposta: false,
-                explicacao: "Falso! A tag <ul> cria listas NÃO ordenadas (Unordered List), com marcadores como •, ○ ou ▪. Para criar listas ORDENADAS — com números, letras ou algarismos romanos — usa-se a tag <ol> (Ordered List). Ambos os tipos usam <li> para cada item.",
-                referencia: "Módulo 01 — Seção 2.2: Listas Não Ordenadas <ul>"
+                explicacao: "Falso! A tag \x3Cul> cria listas NÃO ordenadas (Unordered List), com marcadores como ponto, círculo ou quadrado. Para criar listas ORDENADAS — com números, letras ou algarismos romanos — usa-se a tag \x3Col> (Ordered List). Ambos os tipos usam \x3Cli> para cada item.",
+                referencia: "Módulo 01 — Seção 2.2: Listas Não Ordenadas \x3Cul>"
             },
 
             {
                 tipo: "vf",
-                enunciado: "A tag <img> é uma tag vazia, ou seja, não possui tag de fechamento.",
+                enunciado: "A tag \x3Cimg> é uma tag vazia, ou seja, não possui tag de fechamento.",
                 resposta: true,
-                explicacao: "Correto! <img> é um void element (elemento vazio). Ela se fecha em si mesma e não tem </img>. O mesmo vale para <br>, <hr> e <input>. Os dados da imagem (caminho, descrição, tamanho) são passados por atributos, não por conteúdo entre tags.",
-                referencia: "Módulo 01 — Seção 5.1: A Tag <img> e Sua Sintaxe"
+                explicacao: "Correto! \x3Cimg> é um void element (elemento vazio). Ela se fecha em si mesma e não tem \x3C/img>. O mesmo vale para \x3Cbr>, \x3Chr> e \x3Cinput>. Os dados da imagem (caminho, descrição, tamanho) são passados por atributos, não por conteúdo entre tags.",
+                referencia: "Módulo 01 — Seção 5.1: A Tag \x3Cimg> e Sua Sintaxe"
             },
 
             {
                 tipo: "vf",
                 enunciado: "O atributo colspan mescla células verticalmente em uma tabela HTML.",
                 resposta: false,
-                explicacao: "Falso! O colspan mescla células HORIZONTALMENTE (em colunas, ← →). Quem mescla VERTICALMENTE (em linhas, ↑ ↓) é o rowspan. Mnemônico: col = coluna; row = linha.",
+                explicacao: "Falso! O colspan mescla células HORIZONTALMENTE (em colunas). Quem mescla VERTICALMENTE (em linhas) é o rowspan. Mnemônico: col = coluna; row = linha.",
                 referencia: "Módulo 01 — Seção 3.5: colspan e rowspan — Mesclagem de Células"
             },
 
@@ -717,7 +715,7 @@
                 tipo: "vf",
                 enunciado: "O atributo alt é opcional em imagens e pode ser omitido sem prejuízo.",
                 resposta: false,
-                explicacao: "Falso! O alt é OBRIGATÓRIO para acessibilidade. Ele fornece descrição textual para leitores de tela e aparece quando a imagem não carrega. A única exceção é imagens puramente decorativas — nesse caso usa-se alt='' (vazio), mas nunca omitir o atributo.",
+                explicacao: "Falso! O alt é OBRIGATÓRIO para acessibilidade. Ele fornece descrição textual para leitores de tela e aparece quando a imagem não carrega. A única exceção é imagens puramente decorativas — nesse caso usa-se alt vazio, mas nunca omitir o atributo.",
                 referencia: "Módulo 01 — Seção 5.3: O Atributo alt — Acessibilidade e Fallback"
             },
 
@@ -725,56 +723,54 @@
                 tipo: "vf",
                 enunciado: "O método GET do formulário anexa os dados ao endereço (URL) do servidor.",
                 resposta: true,
-                explicacao: "Correto! O GET exibe os dados do formulário na própria URL (algo como pagina.php?nome=Joao&idade=25). Isso tem limite de ~2000 caracteres e baixa segurança. Já o POST envia os dados no corpo da requisição, invisíveis na URL, e é o método indicado para login, cadastro e senhas.",
-                referencia: "Módulo 01 — Seção 4.1: A Tag <form> e Atributos"
+                explicacao: "Correto! O GET exibe os dados do formulário na própria URL (algo como pagina.php?nome=Joao&idade=25). Isso tem limite de aproximadamente 2000 caracteres e baixa segurança. Já o POST envia os dados no corpo da requisição, invisíveis na URL, e é o método indicado para login, cadastro e senhas.",
+                referencia: "Módulo 01 — Seção 4.1: A Tag form e Atributos"
             },
 
-            /* ============================================================
-               BLOCO 2 — MÚLTIPLA ESCOLHA (8 questões)
-               ============================================================ */
+            /* BLOCO 2 — MÚLTIPLA ESCOLHA */
 
             {
                 tipo: "multipla",
                 enunciado: "Qual tag é usada para criar uma lista ORDENADA em HTML?",
-                opcoes: ["<ul>", "<ol>", "<li>", "<dl>"],
-                correta: 1,
-                explicacao: "A tag <ol> (Ordered List) cria listas ordenadas com numeração (1, 2, 3), letras (A, B, C) ou algarismos romanos (I, II, III), controlados pelo atributo type. A <ul> cria listas não ordenadas, <li> representa cada item e <dl> cria listas de definição.",
-                referencia: "Módulo 01 — Seção 2.1: Listas Ordenadas <ol>"
+                opcoes: ["\x3Col>", "\x3Cul>", "\x3Cli>", "\x3Cdl>"],
+                correta: 0,
+                explicacao: "A tag ol (Ordered List) cria listas ordenadas com numeração (1, 2, 3), letras (A, B, C) ou algarismos romanos (I, II, III), controlados pelo atributo type. A ul cria listas não ordenadas, li representa cada item e dl cria listas de definição.",
+                referencia: "Módulo 01 — Seção 2.1: Listas Ordenadas ol"
             },
 
             {
                 tipo: "multipla",
-                enunciado: "Qual atributo da tag <a> define o destino do link?",
+                enunciado: "Qual atributo da tag a define o destino do link?",
                 opcoes: ["src", "link", "href", "url"],
                 correta: 2,
-                explicacao: "O href (Hypertext REFerence) é o atributo que define para onde o link aponta. O src é usado em imagens, scripts e iframes. Os nomes 'link' e 'url' NÃO existem como atributos da tag <a>. Regra prática: href = para onde vai; src = de onde vem.",
-                referencia: "Módulo 01 — Seção 6.1: A Tag <a> e Sua Sintaxe"
+                explicacao: "O href (Hypertext REFerence) é o atributo que define para onde o link aponta. O src é usado em imagens, scripts e iframes. Os nomes 'link' e 'url' NÃO existem como atributos da tag a. Regra prática: href = para onde vai; src = de onde vem.",
+                referencia: "Módulo 01 — Seção 6.1: A Tag a e Sua Sintaxe"
             },
 
             {
                 tipo: "multipla",
                 enunciado: "Qual tag representa uma LINHA de tabela em HTML?",
-                opcoes: ["<td>", "<th>", "<tr>", "<table>"],
+                opcoes: ["\x3Ctd>", "\x3Cth>", "\x3Ctr>", "\x3Ctable>"],
                 correta: 2,
-                explicacao: "A tag <tr> vem de 'table row' e representa uma linha da tabela. Dentro dela ficam as células: <th> (cabeçalho) e <td> (dados). A tag <table> é o contêiner principal. Estrutura padrão: <table> → <tr> → <th> e/ou <td>.",
+                explicacao: "A tag tr vem de 'table row' e representa uma linha da tabela. Dentro dela ficam as células: th (cabeçalho) e td (dados). A tag table é o contêiner principal. Estrutura padrão: table, depois tr, depois th e/ou td.",
                 referencia: "Módulo 01 — Seção 3.1: Estrutura da Tabela"
             },
 
             {
                 tipo: "multipla",
-                enunciado: "Qual valor do atributo type do <input> exibe asteriscos no lugar dos caracteres digitados?",
+                enunciado: "Qual valor do atributo type do input exibe asteriscos no lugar dos caracteres digitados?",
                 opcoes: ["text", "password", "hidden", "secret"],
                 correta: 1,
-                explicacao: "O type='password' mostra asteriscos (*) ou pontos enquanto o usuário digita, ocultando o conteúdo. O type='text' exibe os caracteres normalmente, e type='hidden' oculta o campo inteiro (não visível ao usuário). 'secret' não é um tipo válido em HTML.",
-                referencia: "Módulo 01 — Seção 4.2: A Tag <input> e Seus Tipos"
+                explicacao: "O type password mostra asteriscos ou pontos enquanto o usuário digita, ocultando o conteúdo. O type text exibe os caracteres normalmente, e type hidden oculta o campo inteiro (não visível ao usuário). 'secret' não é um tipo válido em HTML.",
+                referencia: "Módulo 01 — Seção 4.2: A Tag input e Seus Tipos"
             },
 
             {
                 tipo: "multipla",
                 enunciado: "Qual tag define o título que aparece na ABA ou barra do navegador (e não no corpo da página)?",
-                opcoes: ["<h1>", "<title>", "<header>", "<caption>"],
+                opcoes: ["\x3Ch1>", "\x3Ctitle>", "\x3Cheader>", "\x3Ccaption>"],
                 correta: 1,
-                explicacao: "A tag <title> fica dentro do <head> e define o texto da aba do navegador — não é exibido no conteúdo da página. A <h1> é o título principal DENTRO do corpo. <header> é uma seção semântica do HTML5, e <caption> é o título de uma tabela.",
+                explicacao: "A tag title fica dentro do head e define o texto da aba do navegador — não é exibido no conteúdo da página. A h1 é o título principal DENTRO do corpo. header é uma seção semântica do HTML5, e caption é o título de uma tabela.",
                 referencia: "Módulo 01 — Seção 1.2: Estrutura Básica do Arquivo HTML"
             },
 
@@ -783,17 +779,17 @@
                 enunciado: "Qual atributo mescla células VERTICALMENTE em uma tabela HTML?",
                 opcoes: ["colspan", "rowspan", "cellspan", "merge"],
                 correta: 1,
-                explicacao: "O rowspan mescla células VERTICALMENTE (em linhas, ↑ ↓). Quem mescla horizontalmente é o colspan (em colunas, ← →). 'cellspan' e 'merge' não existem no HTML. Exemplo: <td rowspan='2'> ocupa duas linhas de altura.",
+                explicacao: "O rowspan mescla células VERTICALMENTE (em linhas). Quem mescla horizontalmente é o colspan (em colunas). 'cellspan' e 'merge' não existem no HTML. Exemplo: td com rowspan igual a 2 ocupa duas linhas de altura.",
                 referencia: "Módulo 01 — Seção 3.5: colspan e rowspan — Mesclagem de Células"
             },
 
             {
                 tipo: "multipla",
                 enunciado: "Qual tag exibe o texto preservando EXATAMENTE os espaços, tabulações e quebras de linha como foram digitados?",
-                opcoes: ["<p>", "<br>", "<pre>", "<span>"],
+                opcoes: ["\x3Cp>", "\x3Cbr>", "\x3Cpre>", "\x3Cspan>"],
                 correta: 2,
-                explicacao: "A tag <pre> (preformatted) mantém espaços, tabulações e quebras de linha exatamente como escritos no código-fonte. Isso é útil para exibir código ou arte ASCII. A <p> colapsa espaços extras, <br> força apenas uma quebra, e <span> é um container inline sem formatação especial.",
-                referencia: "Módulo 01 — Seção 7.3: Quebra de Linha (<br>) e Régua Horizontal (<hr>)"
+                explicacao: "A tag pre (preformatted) mantém espaços, tabulações e quebras de linha exatamente como escritos no código-fonte. Isso é útil para exibir código ou arte ASCII. A p colapsa espaços extras, br força apenas uma quebra, e span é um container inline sem formatação especial.",
+                referencia: "Módulo 01 — Seção 7.3: Quebra de Linha e Régua Horizontal"
             },
 
             {
@@ -802,86 +798,82 @@
                 opcoes: ["GET", "POST", "PUT", "SEND"],
                 correta: 1,
                 explicacao: "O POST envia os dados no corpo da requisição — invisíveis na URL. É o método indicado para login, cadastro e qualquer dado sensível. O GET anexa os dados à URL e é usado para buscas e filtros. PUT é usado em APIs REST, e SEND não é um método HTTP válido.",
-                referencia: "Módulo 01 — Seção 4.1: A Tag <form> e Atributos"
+                referencia: "Módulo 01 — Seção 4.1: A Tag form e Atributos"
             },
 
-            /* ============================================================
-               BLOCO 3 — COMPLETE O CÓDIGO (5 questões)
-               ============================================================ */
+            /* BLOCO 3 — COMPLETE O CÓDIGO */
 
             {
                 tipo: "complete",
                 enunciado: "Complete o código abaixo para criar um link para o site exemplo.com:",
-                codigo: `<a {{GAP}}="https://exemplo.com">Visitar site</a>`,
+                codigo: '\x3Ca {{GAP}}="https://exemplo.com">Visitar site\x3C/a>',
                 opcoes: ["src", "href", "link", "url"],
                 correta: 1,
-                explicacao: "O atributo correto é href (Hypertext REFerence). Ele define o DESTINO do link — para onde o navegador vai quando o usuário clicar. O src é usado em <img>, <script> e <iframe> para indicar a ORIGEM de um recurso. 'link' e 'url' não existem como atributos de <a>.",
-                referencia: "Módulo 01 — Seção 6.1: A Tag <a> e Sua Sintaxe"
+                explicacao: "O atributo correto é href (Hypertext REFerence). Ele define o DESTINO do link — para onde o navegador vai quando o usuário clicar. O src é usado em img, script e iframe para indicar a ORIGEM de um recurso. 'link' e 'url' não existem como atributos de a.",
+                referencia: "Módulo 01 — Seção 6.1: A Tag a e Sua Sintaxe"
             },
 
             {
                 tipo: "complete",
                 enunciado: "Complete o código abaixo para exibir uma imagem de foto.jpg:",
-                codigo: `<img {{GAP}}="foto.jpg" alt="Descrição da foto">`,
+                codigo: '\x3Cimg {{GAP}}="foto.jpg" alt="Descrição da foto">',
                 opcoes: ["src", "href", "image", "file"],
                 correta: 0,
-                explicacao: "O atributo correto é src (source). Ele especifica o CAMINHO do arquivo de imagem e é obrigatório em <img>. O href é usado em links (<a>). 'image' e 'file' não são atributos válidos em HTML. Lembre-se: src = de onde vem; href = para onde vai.",
+                explicacao: "O atributo correto é src (source). Ele especifica o CAMINHO do arquivo de imagem e é obrigatório em img. O href é usado em links (a). 'image' e 'file' não são atributos válidos em HTML. Lembre-se: src = de onde vem; href = para onde vai.",
                 referencia: "Módulo 01 — Seção 5.2: O Atributo src — A Fonte da Imagem"
             },
 
             {
                 tipo: "complete",
                 enunciado: "Complete o código abaixo para que a lista alfabética comece na letra C (3ª letra):",
-                codigo: `<ol type="A" {{GAP}}="3">\n  <li>Primeiro item</li>\n  <li>Segundo item</li>\n</ol>`,
+                codigo: '\x3Col type="A" {{GAP}}="3">\n  \x3Cli>Primeiro item\x3C/li>\n  \x3Cli>Segundo item\x3C/li>\n\x3C/ol>',
                 opcoes: ["begin", "start", "from", "first"],
                 correta: 1,
-                explicacao: "O atributo start define em que VALOR a lista ordenada começa. Com type='A' e start='3', a lista inicia em C (1=A, 2=B, 3=C). O atributo 'begin', 'from' e 'first' não existem em HTML. Se start for omitido, a lista começa em 1 (ou A, ou I, dependendo do type).",
+                explicacao: "O atributo start define em que VALOR a lista ordenada começa. Com type A e start 3, a lista inicia em C (1=A, 2=B, 3=C). Os atributos 'begin', 'from' e 'first' não existem em HTML. Se start for omitido, a lista começa em 1 (ou A, ou I, dependendo do type).",
                 referencia: "Módulo 01 — Seção 2.1.3: Atributo start — Valor Inicial"
             },
 
             {
                 tipo: "complete",
                 enunciado: "Complete o código abaixo para criar um campo de SENHA (que oculta os caracteres):",
-                codigo: `<input type="{{GAP}}" name="senha">`,
+                codigo: '\x3Cinput type="{{GAP}}" name="senha">',
                 opcoes: ["text", "password", "secret", "hidden"],
                 correta: 1,
-                explicacao: "O type='password' faz o navegador exibir asteriscos (*) ou pontos enquanto o usuário digita, protegendo o conteúdo contra olhares curiosos. O type='text' mostra os caracteres, 'hidden' esconde o campo inteiro (nem é exibido), e 'secret' não existe como tipo válido em HTML.",
-                referencia: "Módulo 01 — Seção 4.2: A Tag <input> e Seus Tipos"
+                explicacao: "O type password faz o navegador exibir asteriscos ou pontos enquanto o usuário digita, protegendo o conteúdo contra olhares curiosos. O type text mostra os caracteres, hidden esconde o campo inteiro (nem é exibido), e 'secret' não existe como tipo válido em HTML.",
+                referencia: "Módulo 01 — Seção 4.2: A Tag input e Seus Tipos"
             },
 
             {
                 tipo: "complete",
                 enunciado: "Complete o código abaixo para criar um link que abre o cliente de e-mail do usuário:",
-                codigo: `<a href="{{GAP}}:usuario@email.com">Enviar e-mail</a>`,
+                codigo: '\x3Ca href="{{GAP}}:usuario@email.com">Enviar e-mail\x3C/a>',
                 opcoes: ["mail", "email", "mailto", "send"],
                 correta: 2,
-                explicacao: "O prefixo correto é mailto:, que instrui o navegador a abrir o cliente de e-mail padrão do usuário com o endereço já preenchido no campo 'Para'. Uso: <a href='mailto:contato@site.com'>. Os prefixos 'mail', 'email' e 'send' não são reconhecidos. Outros prefixos válidos: tel: (telefone), sms: (mensagem de texto).",
+                explicacao: "O prefixo correto é mailto:, que instrui o navegador a abrir o cliente de e-mail padrão do usuário com o endereço já preenchido no campo 'Para'. Uso: a href igual a mailto:contato@site.com. Os prefixos 'mail', 'email' e 'send' não são reconhecidos. Outros prefixos válidos: tel: (telefone), sms: (mensagem de texto).",
                 referencia: "Módulo 01 — Seção 6.3: Tipos de Links — Links para E-mail"
             },
 
-            /* ============================================================
-               BLOCO 4 — APONTE O ERRO (5 questões)
-               ============================================================ */
+            /* BLOCO 4 — APONTE O ERRO */
 
             {
                 tipo: "erro",
                 enunciado: "Há um erro no código abaixo. Aponte qual é:",
-                codigo: `<ul>\n  <li>Primeiro item\n  <li>Segundo item</li>\n  <li>Terceiro item</li>\n</ul>`,
+                codigo: '\x3Cul>\n  \x3Cli>Primeiro item\n  \x3Cli>Segundo item\x3C/li>\n  \x3Cli>Terceiro item\x3C/li>\n\x3C/ul>',
                 opcoes: [
-                    "A tag <ul> deveria ser <ol>",
-                    "Falta fechar a tag </li> do primeiro item",
-                    "A tag <li> não pode ser usada dentro de <ul>",
+                    "A tag ul deveria ser ol",
+                    "Falta fechar a tag li do primeiro item",
+                    "A tag li não pode ser usada dentro de ul",
                     "O código está correto"
                 ],
                 correta: 1,
-                explicacao: "O primeiro <li> foi aberto mas nunca fechado com </li>. Embora a maioria dos navegadores 'conserte' isso automaticamente, o código está tecnicamente incorreto. Seguir a regra de sempre fechar TODAS as tags evita bugs sutis, garante consistência entre navegadores e facilita a manutenção. O correto seria: <li>Primeiro item</li>.",
+                explicacao: "O primeiro li foi aberto mas nunca fechado com a barra correspondente. Embora a maioria dos navegadores 'conserte' isso automaticamente, o código está tecnicamente incorreto. Seguir a regra de sempre fechar TODAS as tags evita bugs sutis, garante consistência entre navegadores e facilita a manutenção.",
                 referencia: "Módulo 01 — Seção 1.3: Sintaxe dos Comandos HTML"
             },
 
             {
                 tipo: "erro",
                 enunciado: "Há um erro no código abaixo. Aponte qual é:",
-                codigo: `<img src="logo.png" width="150" height="80">`,
+                codigo: '\x3Cimg src="logo.png" width="150" height="80">',
                 opcoes: [
                     "width e height não podem ser usados juntos",
                     "Falta o atributo alt, obrigatório para acessibilidade",
@@ -889,52 +881,52 @@
                     "O código está correto"
                 ],
                 correta: 1,
-                explicacao: "O atributo alt está ausente. Ele é OBRIGATÓRIO para acessibilidade: leitores de tela leem seu conteúdo para usuários com deficiência visual, e ele aparece quando a imagem não carrega. O correto seria: <img src='logo.png' alt='Logotipo da empresa' width='150' height='80'>. O src é o atributo correto para imagens (href é para links).",
+                explicacao: "O atributo alt está ausente. Ele é OBRIGATÓRIO para acessibilidade: leitores de tela leem seu conteúdo para usuários com deficiência visual, e ele aparece quando a imagem não carrega. O src é o atributo correto para imagens (href é para links).",
                 referencia: "Módulo 01 — Seção 5.3: O Atributo alt — Acessibilidade e Fallback"
             },
 
             {
                 tipo: "erro",
                 enunciado: "Há um problema no formulário abaixo. Aponte qual é:",
-                codigo: `<form action="login.php" method="get">\n  <input type="text" name="usuario">\n  <input type="password" name="senha">\n  <input type="submit" value="Entrar">\n</form>`,
+                codigo: '\x3Cform action="login.php" method="get">\n  \x3Cinput type="text" name="usuario">\n  \x3Cinput type="password" name="senha">\n  \x3Cinput type="submit" value="Entrar">\n\x3C/form>',
                 opcoes: [
-                    "type='password' não é válido em HTML",
-                    "Usar GET para enviar senha é inseguro; o correto é method='post'",
-                    "Falta o atributo type no <form>",
+                    "type password não é válido em HTML",
+                    "Usar GET para enviar senha é inseguro; o correto é method post",
+                    "Falta o atributo type no form",
                     "O código está correto"
                 ],
                 correta: 1,
                 explicacao: "Senhas NUNCA devem ser enviadas via GET, porque os dados ficam visíveis na URL (ex: login.php?usuario=joao&senha=1234), ficam salvos no histórico do navegador e em logs de servidor. O método POST envia os dados no corpo da requisição, tornando-os invisíveis na URL. Para login, SEMPRE use POST.",
-                referencia: "Módulo 01 — Seção 4.1: A Tag <form> e Atributos"
+                referencia: "Módulo 01 — Seção 4.1: A Tag form e Atributos"
             },
 
             {
                 tipo: "erro",
                 enunciado: "Há um erro estrutural no código abaixo. Aponte qual é:",
-                codigo: `<table border="1">\n  <th>Nome</th>\n  <th>Idade</th>\n  <tr>\n    <td>Ana</td>\n    <td>20</td>\n  </tr>\n</table>`,
+                codigo: '\x3Ctable border="1">\n  \x3Cth>Nome\x3C/th>\n  \x3Cth>Idade\x3C/th>\n  \x3Ctr>\n    \x3Ctd>Ana\x3C/td>\n    \x3Ctd>20\x3C/td>\n  \x3C/tr>\n\x3C/table>',
                 opcoes: [
-                    "A tag <table> deveria ser <tab>",
-                    "As tags <th> devem estar dentro de uma linha <tr>",
-                    "border não aceita o valor '1'",
+                    "A tag table deveria ser tab",
+                    "As tags th devem estar dentro de uma linha tr",
+                    "border não aceita o valor 1",
                     "O código está correto"
                 ],
                 correta: 1,
-                explicacao: "As tags <th> (células de cabeçalho) devem SEMPRE estar dentro de uma linha <tr>. A estrutura correta é: <table> → <tr> → <th> (cabeçalho) ou <td> (dados). Do jeito que está, os <th> estão soltos dentro da <table>, o que quebra a estrutura e gera renderização inconsistente entre navegadores.",
+                explicacao: "As tags th (células de cabeçalho) devem SEMPRE estar dentro de uma linha tr. A estrutura correta é: table, depois tr, depois th (cabeçalho) ou td (dados). Do jeito que está, os th estão soltos dentro da table, o que quebra a estrutura e gera renderização inconsistente entre navegadores.",
                 referencia: "Módulo 01 — Seção 3.1: Estrutura da Tabela"
             },
 
             {
                 tipo: "erro",
                 enunciado: "Há um erro estrutural no documento abaixo. Aponte qual é:",
-                codigo: `<html>\n  <body>\n    <head>\n      <title>Meu site</title>\n    </head>\n    <h1>Bem-vindo</h1>\n  </body>\n</html>`,
+                codigo: '\x3Chtml>\n  \x3Cbody>\n    \x3Chead>\n      \x3Ctitle>Meu site\x3C/title>\n    \x3C/head>\n    \x3Ch1>Bem-vindo\x3C/h1>\n  \x3C/body>\n\x3C/html>',
                 opcoes: [
-                    "A tag <title> deveria estar dentro do <body>",
-                    "A seção <head> deve vir ANTES do <body>, nunca dentro dele",
-                    "A tag <h1> não pode estar dentro do <body>",
+                    "A tag title deveria estar dentro do body",
+                    "A seção head deve vir ANTES do body, nunca dentro dele",
+                    "A tag h1 não pode estar dentro do body",
                     "O código está correto"
                 ],
                 correta: 1,
-                explicacao: "A estrutura correta do documento HTML é: <html> → <head> (primeiro) → <body> (depois). O <head> contém metadados (title, charset, links para CSS) e deve vir ANTES do <body>. Do jeito que está, o <head> está aninhado dentro do <body>, o que é semanticamente inválido e pode causar comportamento imprevisível nos navegadores.",
+                explicacao: "A estrutura correta do documento HTML é: html, depois head (primeiro), depois body. O head contém metadados (title, charset, links para CSS) e deve vir ANTES do body. Do jeito que está, o head está aninhado dentro do body, o que é semanticamente inválido e pode causar comportamento imprevisível nos navegadores.",
                 referencia: "Módulo 01 — Seção 1.2: Estrutura Básica do Arquivo HTML"
             }
         ];

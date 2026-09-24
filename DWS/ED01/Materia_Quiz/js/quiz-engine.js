@@ -1,5 +1,5 @@
 /* ============================================================
-   QUIZ ENGINE v2 — Motor genérico com suporte a 13 tipos
+   QUIZ ENGINE v2.1 — Motor genérico com suporte a 13 tipos + localStorage
    ------------------------------------------------------------
    Tipos suportados:
      vf, vf-justificativa,
@@ -8,6 +8,8 @@
      erro, debug-multiplo,
      associacao, ordenar, categorizacao,
      flashcard, predicao
+
+   Persistência: localStorage (por módulo, baseado no data-tema)
    ============================================================ */
 (function () {
     'use strict';
@@ -20,15 +22,71 @@
     const QUESTOES = CONFIG.questoes || [];
 
     /* ============================================================
+       PERSISTÊNCIA — localStorage
+       ============================================================ */
+    const STORAGE_VERSION = 1;
+    const STORAGE_KEY = `quiz-progress-${document.body.dataset.tema || "default"}`;
+
+    function salvarProgresso() {
+        try {
+            const dados = {
+                versao:        STORAGE_VERSION,
+                questoes:      estado.questoes,
+                respostas:     estado.respostas,
+                selecionadas:  estado.selecionadas,
+                blocoAtivo:    estado.blocoAtivo,
+                indiceGlobal:  estado.indiceGlobal,
+                totalQuestoes: QUESTOES.length,
+                savedAt:       Date.now()
+            };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(dados));
+        } catch (e) {
+            console.warn("[Quiz] Não foi possível salvar o progresso:", e);
+        }
+    }
+
+    function carregarProgresso() {
+        try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) return false;
+
+            const dados = JSON.parse(raw);
+
+            if (dados.versao !== STORAGE_VERSION) return false;
+            if (dados.totalQuestoes !== QUESTOES.length) return false;
+            if (!Array.isArray(dados.questoes) || dados.questoes.length === 0) return false;
+
+            estado.questoes     = dados.questoes;
+            estado.respostas    = dados.respostas    || {};
+            estado.selecionadas = dados.selecionadas || {};
+            estado.blocoAtivo   = dados.blocoAtivo   || 0;
+            estado.indiceGlobal = dados.indiceGlobal || 0;
+
+            return true;
+        } catch (e) {
+            console.warn("[Quiz] Erro ao carregar progresso:", e);
+            return false;
+        }
+    }
+
+    function limparProgresso() {
+        try {
+            localStorage.removeItem(STORAGE_KEY);
+        } catch (e) {
+            console.warn("[Quiz] Erro ao limpar progresso:", e);
+        }
+    }
+
+    /* ============================================================
        ESTADO
        ============================================================ */
     const estado = {
         questoes:     [],
-        respostas:    {},   // { [i]: true|false }
-        selecionadas: {},   // { [i]: respostaBruta }
+        respostas:    {},
+        selecionadas: {},
         indiceGlobal: 0,
         blocoAtivo:   0,
-        temp:         {}    // estado temporário durante interação
+        temp:         {}
     };
 
     /* ============================================================
@@ -58,7 +116,10 @@
     }
 
     function escaparHTML(str) {
-        return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        return String(str)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
     }
 
     function embaralhar(array) {
@@ -241,6 +302,7 @@
 
         renderizarQuestao();
         mostrarTela("questao");
+        salvarProgresso();
     }
 
     /* ============================================================
@@ -250,10 +312,9 @@
         const q = estado.questoes[estado.indiceGlobal];
         if (!q) return;
 
-        estado.temp = {}; // reset temporário
+        estado.temp = {};
         atualizarCabecalho();
 
-        // Badge
         const badges = {
             "vf":                { texto: "Verdadeiro ou Falso",        classe: "vf" },
             "vf-justificativa":  { texto: "V ou F + Justificativa",     classe: "vf" },
@@ -278,7 +339,6 @@
 
         setText("enunciado", q.enunciado);
 
-        // Área de código (opcional)
         const areaCodigo = $("area-codigo");
         if (areaCodigo) {
             areaCodigo.innerHTML = "";
@@ -286,7 +346,6 @@
                 const bloco = document.createElement("div");
                 bloco.className = "code-block";
                 let esc = escaparHTML(q.codigo);
-                // Suporta {{GAP}} único e {{GAP1}}, {{GAP2}}, ...
                 esc = esc.replace(/\{\{GAP\}\}/g, '<span class="gap">???</span>');
                 esc = esc.replace(/\{\{GAP(\d+)\}\}/g, (m, n) => `<span class="gap" data-gap="${n}">???</span>`);
                 bloco.innerHTML = esc;
@@ -294,18 +353,15 @@
             }
         }
 
-        // Reset feedback
         const fb = $("feedback");
         if (fb) { fb.className = "feedback"; fb.innerHTML = ""; }
 
-        // Prepara container de opções
         const opcoesEl = $("opcoes");
         if (opcoesEl) {
             opcoesEl.innerHTML = "";
             opcoesEl.className = "opcoes";
         }
 
-        // Delega para o renderizador do tipo
         const renderer = RENDERIZADORES[q.tipo];
         if (renderer) {
             renderer(q, opcoesEl);
@@ -316,7 +372,6 @@
             }
         }
 
-        // Botões de navegação
         const btnVoltar = $("btn-voltar");
         const btnProximo = $("btn-proximo");
         if (btnVoltar) btnVoltar.disabled = estado.indiceGlobal === inicioDoBloco(estado.blocoAtivo);
@@ -367,23 +422,18 @@
        RENDERIZADORES POR TIPO
        ============================================================ */
 
-    /* -------- V/F -------- */
     function renderVf(q, container) {
         container.classList.add("vf-grid");
         criarBotaoOpcao("Verdadeiro", true, container, null, () => responderVf(q, true));
         criarBotaoOpcao("Falso", false, container, null, () => responderVf(q, false));
     }
 
-    /* -------- V/F + Justificativa -------- */
     function renderVfJust(q, container) {
-        // Etapa 1: V/F
         const etapa1 = document.createElement("div");
         etapa1.className = "opcoes vf-grid";
-        etapa1.id = "etapa-vf";
 
         const etapa2 = document.createElement("div");
         etapa2.className = "justificativas-wrapper";
-        etapa2.id = "etapa-just";
         etapa2.style.display = "none";
 
         criarBotaoOpcao("Verdadeiro", true, etapa1, null, () => mostrarJustificativas(true));
@@ -393,7 +443,6 @@
         container.appendChild(etapa2);
 
         function mostrarJustificativas(vf) {
-            // Desabilita os botões V/F
             etapa1.querySelectorAll(".opcao").forEach(b => {
                 b.classList.add("desabilitada");
                 b.style.pointerEvents = "none";
@@ -403,13 +452,11 @@
                 }
             });
 
-            // Marca também a opção errada se o usuário escolheu V ou F errado
             if (vf !== q.resposta) {
                 const letra = vf === true ? 0 : 1;
                 etapa1.querySelectorAll(".opcao")[letra].classList.add("errada");
             }
 
-            // Mostra justificativas
             etapa2.style.display = "block";
             const titulo = document.createElement("p");
             titulo.style.cssText = "font-weight:600;margin:14px 0 10px;color:#2c3e50;";
@@ -433,7 +480,6 @@
         }
     }
 
-    /* -------- Múltipla escolha (1 correta) -------- */
     function renderMultipla(q, container) {
         const letras = ["A", "B", "C", "D", "E", "F"];
         q.opcoes.forEach((texto, i) => {
@@ -441,13 +487,11 @@
         });
     }
 
-    /* -------- Múltiplas respostas (checkbox) -------- */
     function renderMultiplaResp(q, container) {
         container.classList.add("opcoes-checkbox");
         const selecionadas = new Set();
         const letras = ["A", "B", "C", "D", "E", "F"];
 
-        // Cria botões
         const btns = [];
         q.opcoes.forEach((texto, i) => {
             const btn = document.createElement("button");
@@ -493,7 +537,6 @@
         });
     }
 
-    /* -------- Complete o código (1 gap) -------- */
     function renderComplete(q, container) {
         const letras = ["A", "B", "C", "D", "E"];
         q.opcoes.forEach((texto, i) => {
@@ -501,7 +544,6 @@
         });
     }
 
-    /* -------- Complete múltiplo (2+ gaps) -------- */
     function renderCompleteMultiplo(q, container) {
         container.classList.add("complete-multiplo-wrapper");
         const selecionadas = q.gaps.map(() => null);
@@ -552,7 +594,6 @@
         });
     }
 
-    /* -------- Aponte o erro (1 erro) -------- */
     function renderErro(q, container) {
         const letras = ["A", "B", "C", "D", "E"];
         q.opcoes.forEach((texto, i) => {
@@ -560,7 +601,6 @@
         });
     }
 
-    /* -------- Debug múltiplo (vários erros) -------- */
     function renderDebugMultiplo(q, container) {
         container.classList.add("opcoes-checkbox");
         const selecionadas = new Set();
@@ -608,16 +648,14 @@
         });
     }
 
-    /* -------- Associação (ligar colunas) -------- */
     function renderAssociacao(q, container) {
         container.classList.add("associacao-wrapper");
 
-        // Embaralha as colunas
         const direitaEmbaralhada = embaralhar(
             q.pares.map((p, i) => ({ texto: p.direita, idxOriginal: i }))
         );
 
-        const pares = {};        // { idxEsquerda: idxDireitaEmbaralhada }
+        const pares = {};
         let esquerdaSelecionada = null;
 
         const wrapper = document.createElement("div");
@@ -642,7 +680,6 @@
         const btnsEsq = [];
         const btnsDir = [];
 
-        // Coluna esquerda
         q.pares.forEach((par, i) => {
             const btn = document.createElement("button");
             btn.className = "associacao-item";
@@ -661,7 +698,6 @@
             colEsq.appendChild(btn);
         });
 
-        // Coluna direita
         direitaEmbaralhada.forEach((item, idxEmb) => {
             const btn = document.createElement("button");
             btn.className = "associacao-item";
@@ -674,7 +710,6 @@
                 if (esquerdaSelecionada === null) return;
                 if (pares[esquerdaSelecionada] !== undefined) return;
 
-                // Associa
                 pares[esquerdaSelecionada] = idxEmb;
 
                 btnsEsq[esquerdaSelecionada].classList.remove("selecionado");
@@ -682,8 +717,6 @@
                 btn.classList.add("pareado");
 
                 esquerdaSelecionada = null;
-
-                // Habilita confirmar se todos pareados
                 btnConf.disabled = Object.keys(pares).length !== q.pares.length;
             });
 
@@ -696,19 +729,15 @@
         container.appendChild(wrapper);
 
         const btnConf = criarBotaoConfirmar(container, "Confirmar resposta", () => {
-            // Converte pares para comparar com gabarito
             const respostaUsuario = { ...pares };
             responderAssociacao(q, respostaUsuario, direitaEmbaralhada);
         });
     }
 
-    /* -------- Ordenar -------- */
     function renderOrdenar(q, container) {
         container.classList.add("ordenar-wrapper");
 
-        // Embaralha para apresentar
         const itens = embaralhar(q.itens.map((t, i) => ({ texto: t, idxOriginal: i })));
-        // Evita começar já na ordem correta
         if (itens.every((it, i) => it.idxOriginal === i)) {
             itens.reverse();
         }
@@ -771,7 +800,6 @@
         btnConf.disabled = false;
     }
 
-    /* -------- Categorização -------- */
     function renderCategorizacao(q, container) {
         container.classList.add("categorizacao-wrapper");
 
@@ -783,7 +811,6 @@
         titulo.textContent = "Clique em um item e depois na categoria correspondente:";
         container.appendChild(titulo);
 
-        // Caixas de categoria
         const caixas = document.createElement("div");
         caixas.className = "categorizacao-caixas";
 
@@ -803,10 +830,9 @@
             caixa.addEventListener("click", () => {
                 if (itemSelecionado === null) return;
                 atribuicoes[itemSelecionado] = ci;
-                // Move o item para dentro da caixa
                 const itemEl = itemPool.querySelector(`[data-idx="${itemSelecionado}"]`);
                 if (itemEl) corpo.appendChild(itemEl);
-                itemEl.classList.remove("selecionado");
+                if (itemEl) itemEl.classList.remove("selecionado");
                 itemSelecionado = null;
                 btnConf.disabled = atribuicoes.some(a => a === null);
             });
@@ -815,7 +841,6 @@
             return caixa;
         });
 
-        // Pool de itens
         const poolWrapper = document.createElement("div");
         poolWrapper.className = "categoria-pool";
 
@@ -853,7 +878,6 @@
         });
     }
 
-    /* -------- Flashcard -------- */
     function renderFlashcard(q, container) {
         container.classList.add("flashcard-wrapper");
 
@@ -873,7 +897,6 @@
 
         container.appendChild(card);
 
-        // Botão "Ver resposta"
         const btnWrap = document.createElement("div");
         btnWrap.style.cssText = "display:flex;justify-content:center;margin:20px 0;";
 
@@ -890,7 +913,6 @@
         btnWrap.appendChild(btnVer);
         container.appendChild(btnWrap);
 
-        // Autoavaliação (aparece depois)
         const autoavalWrap = document.createElement("div");
         autoavalWrap.className = "flashcard-autoaval";
         autoavalWrap.style.display = "none";
@@ -923,9 +945,6 @@
         container.appendChild(autoavalWrap);
     }
 
-    /* ============================================================
-       MAPA DE RENDERIZADORES
-       ============================================================ */
     const RENDERIZADORES = {
         "vf":                renderVf,
         "vf-justificativa":  renderVfJust,
@@ -961,14 +980,12 @@
 
     function responderVfJust(q, vf, just) {
         const opcoesVF = $("opcoes").querySelectorAll(".opcao");
-        // opcoesVF: 2 primeiros são V/F, restantes são justificativas
         const opcoesJust = Array.from(opcoesVF).slice(2);
 
         const acertouVf = vf === q.resposta;
         const acertouJust = just === q.justificativaCorreta;
         const acertou = acertouVf && acertouJust;
 
-        // Marca justificativa correta
         opcoesJust.forEach((b, i) => {
             b.classList.add("desabilitada");
             b.style.pointerEvents = "none";
@@ -1011,7 +1028,6 @@
     function responderCompleteMultiplo(q, escolhas) {
         const acertou = escolhas.every((e, i) => e === q.gaps[i].correta);
 
-        // Marca visualmente cada bloco
         const blocos = $("opcoes").querySelectorAll(".gap-bloco");
         blocos.forEach((bloco, gi) => {
             const btns = bloco.querySelectorAll(".opcao-gap");
@@ -1048,7 +1064,6 @@
     function responderAssociacao(q, respostaUsuario, direitaEmbaralhada) {
         let acertouTudo = true;
 
-        // Verifica cada par
         q.pares.forEach((par, idxEsq) => {
             const idxDir = respostaUsuario[idxEsq];
             if (idxDir === undefined) { acertouTudo = false; return; }
@@ -1056,7 +1071,6 @@
             if (itemDireita.idxOriginal !== idxEsq) acertouTudo = false;
         });
 
-        // Marca visualmente
         const btnsEsq = $("opcoes").querySelectorAll(".associacao-coluna:first-child .associacao-item");
         const btnsDir = $("opcoes").querySelectorAll(".associacao-coluna:last-child .associacao-item");
 
@@ -1105,6 +1119,8 @@
         const btnProximo = $("btn-proximo");
         if (btnProximo) btnProximo.disabled = false;
         atualizarCabecalho();
+
+        salvarProgresso();
     }
 
     /* ============================================================
@@ -1213,7 +1229,6 @@
         fb.className = "feedback show " + (acertou ? "sucesso" : "erro");
         fb.innerHTML = "";
 
-        // Cabeçalho
         const header = document.createElement("div");
         header.className = "fb-header";
         const icone = document.createElement("span");
@@ -1224,7 +1239,6 @@
         header.append(icone, titulo);
         fb.appendChild(header);
 
-        // Comparativo (só para tipos que NÃO sejam flashcard)
         if (q.tipo !== "flashcard") {
             const respostas = document.createElement("div");
             respostas.className = "fb-respostas";
@@ -1240,13 +1254,11 @@
             fb.appendChild(respostas);
         }
 
-        // Explicação
         const expl = document.createElement("div");
         expl.className = "fb-explicacao";
         expl.textContent = q.explicacao;
         fb.appendChild(expl);
 
-        // Referência
         if (q.referencia) {
             const ref = document.createElement("div");
             ref.className = "fb-referencia";
@@ -1286,6 +1298,7 @@
             estado.indiceGlobal--;
             renderizarQuestao();
             restaurarRespostaSeExistir();
+            salvarProgresso();
         }
     }
 
@@ -1296,6 +1309,7 @@
             estado.indiceGlobal++;
             renderizarQuestao();
             restaurarRespostaSeExistir();
+            salvarProgresso();
         }
     }
 
@@ -1306,9 +1320,7 @@
         const q = estado.questoes[estado.indiceGlobal];
         const bruta = estado.selecionadas[estado.indiceGlobal];
 
-        // Reaplica visualmente conforme o tipo
         aplicarEstadoRespondido(q, bruta, resp);
-
         renderizarFeedback(q, resp, bruta);
         const btnProximo = $("btn-proximo");
         if (btnProximo) btnProximo.disabled = false;
@@ -1318,7 +1330,6 @@
         const opcoesEl = $("opcoes");
         if (!opcoesEl) return;
 
-        // Para tipos simples: marca correta/errada
         const tiposSimples = ["vf", "multipla", "complete", "erro", "predicao"];
         if (tiposSimples.includes(q.tipo)) {
             const btns = opcoesEl.querySelectorAll(".opcao");
@@ -1334,8 +1345,6 @@
                 }
             }
         }
-        // Para os outros tipos, basta mostrar o feedback — a UI já está marcada
-        // porque o render já foi feito e o feedback mostra as respostas.
     }
 
     /* ============================================================
@@ -1360,6 +1369,7 @@
         setText("bloco-progresso-geral", `${contarRespondidasTotal()} / ${totalQuestoes()}`);
 
         mostrarTela("bloco");
+        salvarProgresso();
     }
 
     /* ============================================================
@@ -1388,21 +1398,34 @@
     /* ============================================================
        INICIAR / REFAZER
        ============================================================ */
-    function iniciarQuiz(embaralharNovamente) {
+    function iniciarQuiz(opcoes) {
+        opcoes = opcoes || {};
+        const recomecar = opcoes.recomecar === true;
+
         if (QUESTOES.length === 0) {
             console.warn("[Quiz Engine] Nenhuma questão cadastrada em window.QUIZ_DATA.questoes.");
             renderizarTelaInicial();
             return;
         }
-        if (embaralharNovamente !== false) {
-            estado.questoes = embaralhar(QUESTOES).map(embaralharOpcoes);
-            estado.respostas = {};
-            estado.selecionadas = {};
-        }
-        estado.blocoAtivo = 0;
-        estado.indiceGlobal = 0;
-        estado.temp = {};
 
+        // Tenta carregar progresso salvo (a menos que seja para recomeçar)
+        if (!recomecar && carregarProgresso()) {
+            console.info("[Quiz] Progresso restaurado do localStorage.");
+            renderizarTelaInicial();
+            mostrarTela("inicio");
+            return;
+        }
+
+        // Recomeça do zero
+        limparProgresso();
+        estado.questoes     = embaralhar(QUESTOES).map(embaralharOpcoes);
+        estado.respostas    = {};
+        estado.selecionadas = {};
+        estado.blocoAtivo   = 0;
+        estado.indiceGlobal = 0;
+        estado.temp         = {};
+
+        salvarProgresso();
         renderizarTelaInicial();
         mostrarTela("inicio");
     }
@@ -1417,16 +1440,16 @@
         mostrarTela("inicio");
     });
     bind("btn-ver-resultado",  "click", mostrarResultadoFinal);
-    bind("btn-refazer-tudo",   "click", () => iniciarQuiz(true));
-    bind("btn-refazer",        "click", () => iniciarQuiz(true));
+    bind("btn-refazer-tudo",   "click", () => iniciarQuiz({ recomecar: true }));
+    bind("btn-refazer",        "click", () => iniciarQuiz({ recomecar: true }));
 
     /* ============================================================
        INICIALIZAÇÃO
        ============================================================ */
     if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", () => iniciarQuiz(true));
+        document.addEventListener("DOMContentLoaded", () => iniciarQuiz({}));
     } else {
-        iniciarQuiz(true);
+        iniciarQuiz({});
     }
 
 })();

@@ -8,9 +8,6 @@
 </head>
 <body data-tema="m1">
 
-    <!-- ============================================================
-         CABEÇALHO (padrão do site)
-         ============================================================ -->
     <header class="site-header">
         <div class="header-inner">
             <div class="brand">
@@ -31,14 +28,11 @@
 
     <div class="quiz-container">
 
-        <!-- ============================================================
-             PAINEL DE PROGRESSO
-             ============================================================ -->
         <header class="quiz-header">
             <div class="quiz-header-top">
                 <h1>
                     Quiz — HTML Fundamentos
-                    <small>Blocos de 10 questões</small>
+                    <small>Blocos de 10 questões · Embaralhadas a cada tentativa</small>
                 </h1>
                 <div class="quiz-counter" id="contador">
                     <strong id="contador-bloco">Bloco 1 de 1</strong>
@@ -51,7 +45,6 @@
 
         <main class="quiz-card">
 
-            <!-- ===== TELA 1: SELEÇÃO DE BLOCOS ===== -->
             <section class="tela ativa" id="tela-inicio">
                 <div class="tela-inicio" style="justify-content:flex-start;padding-top:0;">
                     <div class="icone">📄</div>
@@ -78,28 +71,23 @@
                 </div>
             </section>
 
-            <!-- ===== TELA 2: QUESTÃO ===== -->
             <section class="tela" id="tela-questao">
                 <span class="tipo-badge" id="tipo-badge"></span>
                 <p class="enunciado" id="enunciado"></p>
-
                 <div id="area-codigo"></div>
                 <div class="opcoes" id="opcoes"></div>
                 <div class="feedback" id="feedback"></div>
-
                 <div class="quiz-footer">
                     <button class="btn btn-ghost" id="btn-voltar">← Anterior</button>
                     <button class="btn btn-primary" id="btn-proximo" disabled>Próxima →</button>
                 </div>
             </section>
 
-            <!-- ===== TELA 3: FIM DE BLOCO ===== -->
             <section class="tela" id="tela-bloco">
                 <div class="tela-bloco">
                     <div class="icone" id="bloco-icone">🎉</div>
                     <h2 id="bloco-titulo">Bloco concluído!</h2>
                     <p id="bloco-mensagem">Confira abaixo seu desempenho.</p>
-
                     <div class="resumo-bloco">
                         <div class="linha-resumo">
                             <span class="rotulo-resumo">Acertos neste bloco</span>
@@ -110,12 +98,10 @@
                             <span class="valor-resumo" id="bloco-progresso-geral">0 / 25</span>
                         </div>
                     </div>
-
                     <button class="btn btn-primary" id="btn-voltar-selecao">← Voltar para Blocos</button>
                 </div>
             </section>
 
-            <!-- ===== TELA 4: RESULTADO FINAL ===== -->
             <section class="tela" id="tela-resultado">
                 <div class="tela-resultado">
                     <div class="icone" id="resultado-icone">🏆</div>
@@ -132,16 +118,12 @@
         </main>
     </div>
 
-    <!-- ============================================================
-         RODAPÉ
-         ============================================================ -->
     <footer class="site-footer">
         <p><strong>Quiz — HTML Fundamentos</strong> · UniAcademia</p>
         <p>Desenvolvido por Rúben Israel Esterci de Souza · Eng. Software 2026/2</p>
         <p class="footer-note">Documento gerado para fins de estudo e consulta.</p>
     </footer>
 
-    <!-- 1º: banco de questões | 2º: motor -->
     <script src="../js/questoes/m1-questoes.js"></script>
     <script src="../js/quiz-engine.js"></script>
 </body>

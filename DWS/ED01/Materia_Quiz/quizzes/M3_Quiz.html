@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz — Bootstrap 3</title>
+    <link rel="stylesheet" href="../css/quiz.css">
+</head>
+<body data-tema="m3">
+
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="brand">
+                <div class="brand-text">
+                    <h1>Quiz — Bootstrap 3</h1>
+                    <p>Módulo 03 · Exercícios práticos</p>
+                </div>
+            </div>
+            <a href="../index.html" class="btn-home-header" title="Voltar à página inicial" aria-label="Voltar à página inicial">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>Início</span>
+            </a>
+        </div>
+    </header>
+
+    <div class="quiz-container">
+
+        <header class="quiz-header">
+            <div class="quiz-header-top">
+                <h1>
+                    Quiz — Bootstrap 3
+                    <small>Blocos de 10 questões · Embaralhadas a cada tentativa</small>
+                </h1>
+                <div class="quiz-counter" id="contador">
+                    <strong id="contador-bloco">Bloco 1 de 1</strong>
+                    <span id="contador-questao">Questão 1 de 10</span>
+                </div>
+            </div>
+            <div class="progress-track"><div class="progress-fill" id="progresso"></div></div>
+            <div class="progresso-bloco" id="progresso-bloco"></div>
+        </header>
+
+        <main class="quiz-card">
+
+            <section class="tela ativa" id="tela-inicio">
+                <div class="tela-inicio" style="justify-content:flex-start;padding-top:0;">
+                    <div class="icone">📦</div>
+                    <h2>Escolha um Bloco</h2>
+                    <p>O quiz é dividido em blocos de até 10 questões. Você pode fazer os blocos na ordem que preferir.</p>
+
+                    <div class="progresso-geral">
+                        <div class="bloco-info-geral">
+                            <span class="numero" id="geral-concluidos">0</span>
+                            <span>de <strong id="geral-total">0</strong> blocos concluídos</span>
+                        </div>
+                        <div class="bloco-info-geral">
+                            <span class="numero" id="geral-pontos">0</span>
+                            <span>acertos no total</span>
+                        </div>
+                    </div>
+
+                    <div class="blocos-grid" id="blocos-grid"></div>
+
+                    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:10px;">
+                        <button class="btn btn-outline" id="btn-refazer-tudo">🔄 Embaralhar e Recomeçar</button>
+                        <button class="btn btn-primary" id="btn-ver-resultado" style="display:none;">🏆 Ver Resultado Final</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tela" id="tela-questao">
+                <span class="tipo-badge" id="tipo-badge"></span>
+                <p class="enunciado" id="enunciado"></p>
+                <div id="area-codigo"></div>
+                <div class="opcoes" id="opcoes"></div>
+                <div class="feedback" id="feedback"></div>
+                <div class="quiz-footer">
+                    <button class="btn btn-ghost" id="btn-voltar">← Anterior</button>
+                    <button class="btn btn-primary" id="btn-proximo" disabled>Próxima →</button>
+                </div>
+            </section>
+
+            <section class="tela" id="tela-bloco">
+                <div class="tela-bloco">
+                    <div class="icone" id="bloco-icone">🎉</div>
+                    <h2 id="bloco-titulo">Bloco concluído!</h2>
+                    <p id="bloco-mensagem">Confira abaixo seu desempenho.</p>
+                    <div class="resumo-bloco">
+                        <div class="linha-resumo">
+                            <span class="rotulo-resumo">Acertos neste bloco</span>
+                            <span class="valor-resumo destaque" id="bloco-acertos">0 / 10</span>
+                        </div>
+                        <div class="linha-resumo">
+                            <span class="rotulo-resumo">Progresso geral</span>
+                            <span class="valor-resumo" id="bloco-progresso-geral">0 / 25</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" id="btn-voltar-selecao">← Voltar para Blocos</button>
+                </div>
+            </section>
+
+            <section class="tela" id="tela-resultado">
+                <div class="tela-resultado">
+                    <div class="icone" id="resultado-icone">🏆</div>
+                    <h2 id="resultado-titulo">Quiz concluído!</h2>
+                    <div class="pontuacao" id="resultado-pontuacao">0<small>/0</small></div>
+                    <p id="resultado-mensagem">Confira abaixo seu desempenho.</p>
+                    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+                        <button class="btn btn-primary" id="btn-refazer">🔄 Refazer Quiz</button>
+                        <a href="../index.html" class="btn btn-outline">🏠 Voltar ao Início</a>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <footer class="site-footer">
+        <p><strong>Quiz — Bootstrap 3</strong> · UniAcademia</p>
+        <p>Desenvolvido por Rúben Israel Esterci de Souza · Eng. Software 2026/2</p>
+        <p class="footer-note">Documento gerado para fins de estudo e consulta.</p>
+    </footer>
+
+    <script src="../js/questoes/m3-questoes.js"></script>
+    <script src="../js/quiz-engine.js"></script>
+</body>
+</html>

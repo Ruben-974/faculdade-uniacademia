@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Completo: Bootstrap 3 — Grid, Layout e Componentes</title>
+    <link rel="stylesheet" href="../css/guia.css">
+</head>
+
+<body data-tema="m3">
+
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="brand">
+                <div class="brand-text">
+                    <h1>Bootstrap 3</h1>
+                    <p>Módulo 03 · Grid, Layout e Componentes</p>
+                </div>
+            </div>
+            <a href="../index.html" class="btn-home-header" title="Voltar à página inicial"
+                aria-label="Voltar à página inicial">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>Início</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="guia-wrapper">
+        <div class="container-guia">
+
+            <h1>📘 Guia Completo: Bootstrap 3
+                <small>Grid, Layout e Componentes</small>
+            </h1>
+
+            <div class="indice">
+                <h3>📑 Índice</h3>
+                <ol>
+                    <li><a href="#topico1">Sistema de Grid e Layout: Os Fundamentos Conceituais</a></li>
+                    <li><a href="#topico2">Componentes de Formulário</a></li>
+                    <li><a href="#topico3">Componentes de Navegação e Conteúdo</a></li>
+                    <li><a href="#topico4">Estrutura Base e Recursos Técnicos</a></li>
+                    <li><a href="#topico5">Integração com o Projeto e Componentes Finais</a></li>
+                </ol>
+            </div>
+
+
+            <!-- ============================================================ -->
+            <!-- TÓPICO 1 -->
+            <!-- ============================================================ -->
+            <h2 id="topico1">1. Sistema de Grid e Layout: Os Fundamentos Conceituais</h2>
+
+            <p>O sistema de grid do Bootstrap 3 é a espinha dorsal de qualquer layout responsivo construído com o
+                framework. Para dominá-lo, é essencial compreender os conceitos de <strong>Box Model</strong>, a
+                <strong>filosofia Mobile First</strong>, a <strong>estrutura de 12 colunas</strong>, os
+                <strong>breakpoints de responsividade</strong> e a <strong>relação com o Flexbox</strong>.
+            </p>
+
+            <h3>1.1 Box Model: A Base de Tudo</h3>
+            <p>O <strong>Box Model (Modelo de Caixa)</strong> é um conceito fundamental do CSS que define como cada
+                elemento HTML é renderizado na página. Cada elemento é tratado como uma caixa retangular composta por
+                quatro áreas concêntricas, de dentro para fora:</p>
+            <ol>
+                <li><strong>Conteúdo (Content):</strong> A área onde o texto e as imagens são exibidos. Suas dimensões
+                    são controladas pelas propriedades <code>width</code> e <code>height</code>.</li>
+                <li><strong>Preenchimento (Padding):</strong> O espaço transparente entre o conteúdo e a borda. O
+                    padding "empurra" a borda para longe do conteúdo.</li>
+                <li><strong>Borda (Border):</strong> Uma linha que circunda o padding e o conteúdo.</li>
+                <li><strong>Margem (Margin):</strong> O espaço transparente fora da borda, que separa o elemento de
+                    outros elementos na página.</li>
+            </ol>
+
+            <div class="destaque">
+                <strong>🔑 A Decisão Crucial do Bootstrap 3:</strong> O framework aplica globalmente a regra
+                <code>box-sizing: border-box</code> a todos os elementos. Isso significa que as propriedades
+                <code>width</code> e <code>height</code> <strong>incluem</strong> o padding e a borda, mas não a margem.
+                Essa escolha simplifica drasticamente o cálculo de layouts.
+            </div>
+
+            <p><strong>Exemplo Prático:</strong> Sem <code>border-box</code>, uma <code>div</code> com
+                <code>width: 100px</code>, <code>padding: 10px</code> e <code>border: 5px</code> ocuparia um total de
+                130px de largura (100 + 10 + 10 + 5 + 5). Com <code>border-box</code>, ela ocupa exatamente 100px, e o
+                conteúdo interno é comprimido para caber.
+            </p>
+
+            <h3>1.2 A Filosofia Mobile First</h3>
+            <p>O Bootstrap 3 foi projetado com a abordagem <strong>Mobile First</strong> (Primeiro o Móvel). Isso
+                significa que os estilos padrão do framework são pensados, primeiramente, para telas pequenas (como as
+                de smartphones). O layout, então, "cresce" e se adapta para telas maiores através de <strong>media
+                    queries</strong>.</p>
+
+            <div class="destaque-azul">
+                <strong>💡 Implicação Prática:</strong> Se você usar apenas a classe <code>col-xs-6</code> (para telas
+                muito pequenas), essa configuração de largura será herdada por telas maiores, a menos que você
+                especifique uma classe de breakpoint superior (como <code>col-md-4</code>) para sobrescrevê-la. Isso
+                garante que a experiência em dispositivos móveis seja a mais simples e funcional possível.
+            </div>
+
+            <h3>1.3 Estrutura do Grid: Containers, Rows e Columns</h3>
+            <p>A estrutura hierárquica do grid do Bootstrap 3 é <strong>obrigatória</strong> e segue a ordem:
+                <code>.container</code> &gt; <code>.row</code> &gt; <code>.col-*</code>.
+            </p>
+
+            <h4>1.3.1 <code>.container</code> (ou <code>.container-fluid</code>)</h4>
+            <p>É o elemento mais externo do grid. Ele cria um contêiner centralizado na página, com uma largura máxima
+                predefinida que varia conforme o breakpoint (ex: 750px, 970px, 1170px). A classe
+                <code>.container-fluid</code> cria um contêiner que ocupa 100% da largura da viewport, sem limites
+                laterais.
+            </p>
+
+            <h4>1.3.2 <code>.row</code> (Linha)</h4>
+            <p>A classe <code>.row</code> cria uma linha horizontal que serve como um <strong>wrapper</strong> para as
+                colunas. Sua principal função é <strong>limpar os floats</strong> (clearfix) das colunas filhas e
+                aplicar <strong>margens negativas</strong> (geralmente de -15px em cada lado) para compensar o
+                <strong>padding</strong> (gutter) de 15px que cada coluna possui. Isso garante que o espaçamento entre
+                as colunas seja uniforme e que a linha como um todo não transborde do contêiner.
+            </p>
+
+            <div class="destaque-vermelho">
+                <strong>⚠️ Regra de Ouro:</strong> Apenas elementos com classes de coluna (<code>.col-*</code>) podem
+                ser filhos diretos de um <code>.row</code>.
+            </div>
+
+            <h4>1.3.3 <code>.col-*</code> (Colunas)</h4>
+            <p>As colunas são os blocos de construção do layout. O sistema é baseado em <strong>12 colunas</strong>.
+                Você cria colunas combinando a classe de breakpoint (ex: <code>col-md</code>) com o número de colunas
+                que o elemento deve ocupar (de 1 a 12). Por exemplo, <code>col-md-4</code> ocupa 4 das 12 colunas
+                disponíveis, ou seja, um terço da largura.</p>
+
+            <h3>1.4 Breakpoints e Responsividade</h3>
+            <p>O Bootstrap 3 define <strong>quatro breakpoints</strong> (pontos de interrupção) principais, cada um com
+                um conjunto de classes de coluna:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Classe</th>
+                        <th>Tipo de Dispositivo</th>
+                        <th>Largura da Viewport</th>
+                        <th>Comportamento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>.col-xs-*</code></td>
+                        <td>Telefones</td>
+                        <td>&lt; 768px</td>
+                        <td>As colunas são fluidas e <strong>empilham-se verticalmente</strong> (cada uma ocupa 100% da
+                            largura).</td>
+                    </tr>
+                    <tr>
+                        <td><code>.col-sm-*</code></td>
+                        <td>Tablets</td>
+                        <td>≥ 768px</td>
+                        <td>O layout começa a se tornar horizontal. As colunas se alinham lado a lado.</td>
+                    </tr>
+                    <tr>
+                        <td><code>.col-md-*</code></td>
+                        <td>Desktops</td>
+                        <td>≥ 992px</td>
+                        <td>Layout horizontal completo, com as larguras definidas pelo desenvolvedor.</td>
+                    </tr>
+                    <tr>
+                        <td><code>.col-lg-*</code></td>
+                        <td>Desktops de alta resolução</td>
+                        <td>≥ 1200px</td>
+                        <td>Similar ao <code>md</code>, mas para telas ainda maiores.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>Combinação de Classes:</strong> Você pode (e deve) combinar múltiplas classes de coluna em um
+                mesmo elemento para definir comportamentos diferentes em cada breakpoint. Por exemplo:
+                <code>&lt;div class="col-xs-12 col-sm-6 col-md-4"&gt;</code>. Neste caso, o elemento ocupará a largura
+                total em celulares, metade da largura em tablets e um terço em desktops.
+            </p>
+
+            <h4>Exemplo de Código Prático (Três Colunas Iguais):</h4>
+            <pre><code>&lt;div class="container"&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-md-4"&gt;
+      &lt;h2&gt;Coluna 1&lt;/h2&gt;
+      &lt;p&gt;Conteúdo da primeira coluna.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="col-md-4"&gt;
+      &lt;h2&gt;Coluna 2&lt;/h2&gt;
+      &lt;p&gt;Conteúdo da segunda coluna.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="col-md-4"&gt;
+      &lt;h2&gt;Coluna 3&lt;/h2&gt;
+      &lt;p&gt;Conteúdo da terceira coluna.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            <p><em>Neste exemplo, em telas de desktop (≥992px), as três colunas aparecerão lado a lado, cada uma
+                    ocupando 1/3 da largura. Em telas menores, elas se empilharão verticalmente.</em></p>
+
+            <h4>Exemplo de Código Prático (Colunas Responsivas):</h4>
+            <pre><code>&lt;div class="container"&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-xs-12 col-sm-6 col-md-4"&gt;
+      &lt;p&gt;Coluna A&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="col-xs-12 col-sm-6 col-md-4"&gt;
+      &lt;p&gt;Coluna B&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="col-xs-12 col-sm-12 col-md-4"&gt;
+      &lt;p&gt;Coluna C&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            <p><strong>Comportamento:</strong></p>
+            <ul>
+                <li><strong>Celular (&lt;768px):</strong> Todas as colunas ocupam 100% da largura (empilhadas).</li>
+                <li><strong>Tablet (≥768px):</strong> Colunas A e B ficam lado a lado (50% cada), e a Coluna C fica
+                    abaixo, ocupando 100%.</li>
+                <li><strong>Desktop (≥992px):</strong> As três colunas ficam lado a lado (33,3% cada).</li>
+            </ul>
+
+            <h3>1.5 Flexbox vs. Box Model no Contexto do Bootstrap 3</h3>
+            <p>É crucial entender a distinção entre esses dois conceitos, pois eles não são a mesma coisa e, no
+                Bootstrap 3, <strong>não devem ser misturados</strong> no sistema de grid.</p>
+            <ul>
+                <li><strong>Box Model:</strong> É a <strong>estrutura</strong> de um elemento individual. O sistema de
+                    grid do Bootstrap 3 é construído sobre o Box Model e utiliza a propriedade CSS
+                    <code>float: left</code> para posicionar as colunas lado a lado.
+                </li>
+                <li><strong>Flexbox:</strong> É um <strong>modelo de layout</strong> do CSS3 para distribuir espaço e
+                    alinhar itens em um contêiner. É um sistema unidimensional (linha <strong>ou</strong> coluna).</li>
+            </ul>
+
+            <div class="destaque-vermelho">
+                <strong>⚠️ Atenção — Armadilha Comum:</strong> Aplicar <code>display: flex</code> a uma
+                <code>.row</code> do Bootstrap 3 <strong>quebrará o layout</strong>. Isso acontece porque o Flexbox
+                assume o controle do dimensionamento dos elementos filhos. As propriedades <code>width</code> definidas
+                pelas classes <code>col-*</code> (que dependem do modelo de float) são ignoradas, e as colunas passam a
+                se dimensionar com base no conteúdo, e não na proporção de 12 colunas.
+            </div>
+
+            <div class="destaque-verde">
+                <strong>📌 Nota sobre Versões:</strong> O Flexbox tornou-se o sistema de grid <strong>nativo</strong>
+                apenas no <strong>Bootstrap 4</strong>. No Bootstrap 3, o grid é baseado em floats. Portanto, para
+                seguir fielmente o material apresentado, utilize as classes de grid como <code>col-md-*</code> e evite
+                aplicar <code>display: flex</code> diretamente às <code>.row</code>.
+            </div>
+
+            <!-- ============================================================ -->
+            <!-- TÓPICO 2 -->
+            <!-- ============================================================ -->
+            <h2 id="topico2">2. Componentes de Formulário</h2>
+
+            <p>Os formulários são a principal forma de interação entre o usuário e uma aplicação web. No Bootstrap 3, os
+                formulários recebem um tratamento especial para garantir que sejam visualmente agradáveis, acessíveis e,
+                acima de tudo, <strong>responsivos</strong>. O framework não apenas estiliza os campos, mas também
+                fornece uma estrutura de grid para alinhá-los, além de classes para estados de validação e feedback
+                visual.</p>
+
+            <h3>2.1 A Estrutura Básica de um Formulário</h3>
+            <p>Antes de mergulhar nos componentes individuais, é preciso entender a estrutura padrão que o Bootstrap 3
+                exige para formulários verticais (o padrão).</p>
+            <ul>
+                <li><strong><code>&lt;form&gt;</code></strong>: O contêiner principal. Embora o Bootstrap 3 não exija a
+                    classe <code>.form</code> (como em versões anteriores), é uma boa prática usar
+                    <code>&lt;form role="form"&gt;</code> para acessibilidade.
+                </li>
+                <li><strong><code>.form-group</code></strong>: Esta é a classe mais importante. Ela envolve cada par de
+                    <code>label</code> + <code>input</code>. Sua função é aplicar uma <strong>margem inferior</strong>
+                    (geralmente 15px) para separar verticalmente os grupos de campos, garantindo um espaçamento
+                    consistente e limpo.
+                </li>
+                <li><strong><code>.form-control</code></strong>: A classe mágica para inputs. Ela aplica
+                    <code>width: 100%</code>, altura padronizada, padding interno, bordas arredondadas, cor de fundo e
+                    um efeito de foco (box-shadow azul). Ela é aplicada a <code>&lt;input&gt;</code>,
+                    <code>&lt;textarea&gt;</code> e <code>&lt;select&gt;</code>.
+                </li>
+            </ul>
+
+            <h4>Exemplo Básico (Vertical):</h4>
+            <pre><code>&lt;form role="form"&gt;
+  &lt;div class="form-group"&gt;
+    &lt;label for="email"&gt;Email:&lt;/label&gt;
+    &lt;input type="email" class="form-control" id="email" placeholder="Digite seu email"&gt;
+  &lt;/div&gt;
+  &lt;div class="form-group"&gt;
+    &lt;label for="senha"&gt;Senha:&lt;/label&gt;
+    &lt;input type="password" class="form-control" id="senha" placeholder="Digite sua senha"&gt;
+  &lt;/div&gt;
+&lt;/form&gt;</code></pre>
+
+            <h3>2.2 Labels + Textfields (Rótulos e Campos de Texto)</h3>
+            <p>O material apresenta uma abordagem específica para alinhar rótulos e campos de texto usando o
+                <strong>Sistema de Grid</strong>. Em vez de usar o formulário vertical padrão, o exemplo utiliza uma
+                estrutura horizontal (<code>row</code> + <code>col-md-*</code>).
+            </p>
+            <ul>
+                <li><strong>Label:</strong> A tag <code>&lt;label&gt;</code> é usada para descrever o campo. O atributo
+                    <code>for</code> deve corresponder ao <code>id</code> do input para que, ao clicar no rótulo, o
+                    campo seja focado (acessibilidade).
+                </li>
+                <li><strong>Textfield:</strong> O <code>&lt;input type="text"&gt;</code> com a classe
+                    <code>.form-control</code> ocupa 100% da largura da coluna onde está inserido.
+                </li>
+            </ul>
+
+            <h4>Análise do Código do Material (Email e Nome):</h4>
+            <pre><code>&lt;div class="row"&gt;
+  &lt;div class="col-md-1"&gt;
+    &lt;label&gt;&lt;h4&gt;Email: &lt;/h4&gt;&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div class="col-md-5"&gt;
+    &lt;div class="input-group"&gt;
+      &lt;span class="input-group-addon" id="basic-addon1"&gt;@&lt;/span&gt;
+      &lt;input type="text" class="form-control" placeholder="Informe seu email" aria-describedby="basic-addon1"&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            <ul>
+                <li><strong>Observação:</strong> O uso de <code>&lt;h4&gt;</code> dentro do <code>&lt;label&gt;</code> é
+                    uma prática de estilização para aumentar a fonte do rótulo, embora não seja estritamente semântico
+                    (o ideal seria usar CSS para isso).</li>
+                <li><strong>Grid:</strong> A coluna do rótulo ocupa 1 parte (<code>col-md-1</code>) e a do campo ocupa 5
+                    partes (<code>col-md-5</code>), deixando 6 partes vazias à direita.</li>
+                <li><strong>Acessibilidade:</strong> O atributo <code>aria-describedby="basic-addon1"</code> conecta o
+                    input ao <code>span</code> que contém o <code>@</code>, garantindo que leitores de tela entendam o
+                    contexto.</li>
+            </ul>
+
+            <h3>2.3 Input Groups (Grupos de Input)</h3>
+            <p>O <strong>Input Group</strong> é um componente poderoso para estender campos de formulário. Ele permite
+                adicionar texto, ícones ou botões antes, depois ou em ambos os lados de um input.</p>
+            <ul>
+                <li><strong><code>.input-group</code></strong>: O contêiner que agrupa o input e os complementos.</li>
+                <li><strong><code>.input-group-addon</code></strong>: Usado para adicionar texto ou ícones (como o
+                    <code>@</code> no exemplo do material).
+                </li>
+                <li><strong><code>.input-group-btn</code></strong>: Usado para adicionar botões ao grupo.</li>
+            </ul>
+
+            <h4>Exemplo Prático (com addon e botão):</h4>
+            <pre><code>&lt;div class="input-group"&gt;
+  &lt;span class="input-group-addon"&gt;R$&lt;/span&gt;
+  &lt;input type="text" class="form-control" placeholder="Valor do produto"&gt;
+  &lt;span class="input-group-btn"&gt;
+    &lt;button class="btn btn-default" type="button"&gt;Calcular&lt;/button&gt;
+  &lt;/span&gt;
+&lt;/div&gt;</code></pre>
+
+            <h3>2.4 Dropdown (Select / Menu Suspenso)</h3>
+            <p>O elemento <code>&lt;select&gt;</code> é estilizado com a classe <code>.form-control</code>. Ele herda a
+                largura de 100% do seu contêiner pai (geralmente uma coluna do grid).</p>
+            <ul>
+                <li><strong><code>&lt;option&gt;</code></strong>: Define cada item da lista.</li>
+                <li><strong><code>value</code></strong>: É o valor que será enviado ao servidor.</li>
+                <li><strong><code>selected</code></strong>: Define qual opção aparece por padrão.</li>
+            </ul>
+
+            <h4>Análise do Código do Material (Estado):</h4>
+            <pre><code>&lt;div class="row"&gt;
+  &lt;div class="col-md-1"&gt;
+    &lt;label&gt;&lt;h4&gt;Estado: &lt;/h4&gt;&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div class="col-md-2"&gt;
+    &lt;select class="form-control" name="comboestado"&gt;
+      &lt;option value="null"&gt; &lt;/option&gt;
+      &lt;option value="MG"&gt;MG&lt;/option&gt;
+      &lt;option value="MG"&gt;SP&lt;/option&gt; &lt;!-- ERRO NO MATERIAL: value deveria ser "SP" --&gt;
+      &lt;option value="RJ"&gt;RJ&lt;/option&gt;
+    &lt;/select&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+            <div class="destaque-vermelho">
+                <strong>⚠️ Ponto de Atenção (Erro no Material):</strong> No código apresentado no slide, a opção "SP"
+                está com <code>value="MG"</code>. Isso é um erro grave de programação, pois, ao enviar o formulário, o
+                servidor receberia "MG" mesmo que o usuário tivesse selecionado "SP". É um excelente exemplo prático de
+                por que devemos sempre revisar o código.
+            </div>
+
+            <p><strong>Boas Práticas:</strong> O <code>&lt;option value="null"&gt; &lt;/option&gt;</code> cria uma opção
+                vazia inicial, forçando o usuário a fazer uma escolha ativa.</p>
+
+            <h3>2.5 Radio Buttons (Botões de Rádio)</h3>
+            <p>Os botões de rádio permitem que o usuário selecione <strong>apenas uma</strong> opção entre várias. No
+                Bootstrap 3, a estrutura recomendada é envolver cada input em uma <code>&lt;label&gt;</code> e agrupar
+                tudo em uma <code>div</code> com a classe <code>.radio</code>.</p>
+            <ul>
+                <li><strong><code>type="radio"</code></strong>: Define o tipo do input.</li>
+                <li><strong><code>name</code></strong>: <strong>Crucial</strong>. Todos os botões de rádio do mesmo
+                    grupo DEVEM ter o mesmo atributo <code>name</code>. Isso força a exclusividade da seleção.</li>
+                <li><strong><code>value</code></strong>: O valor a ser enviado.</li>
+                <li><strong><code>.radio</code></strong>: Aplica espaçamento e alinhamento adequados.</li>
+            </ul>
+
+            <h4>Análise do Código do Material (Sexo):</h4>
+            <pre><code>&lt;div class="row"&gt;
+  &lt;div class="col-md-1"&gt;
+    &lt;label&gt;&lt;h4&gt;Sexo: &lt;/h4&gt;&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div class="col-md-3"&gt;
+    &lt;div class="radio"&gt;
+      &lt;label&gt;
+        &lt;input type="radio" name="optradio" value="masculino"&gt; Masculino
+      &lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class="radio"&gt;
+      &lt;label&gt;
+        &lt;input type="radio" name="optradio" value="feminino"&gt; Feminino
+      &lt;/label&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            <p><strong>Observação:</strong> Para colocar os botões de rádio na mesma linha horizontal, o Bootstrap 3
+                oferece a classe <code>.radio-inline</code> aplicada diretamente ao <code>&lt;label&gt;</code>, em vez
+                de usar <code>.radio</code> em uma <code>div</code> separada.</p>
+
+            <h3>2.6 Checkboxes (Caixas de Seleção)</h3>
+            <p>Diferente dos botões de rádio, os checkboxes permitem que o usuário selecione <strong>múltiplas</strong>
+                opções. A estrutura é semelhante à dos radios, mas usando a classe <code>.checkbox</code>.</p>
+            <ul>
+                <li><strong><code>type="checkbox"</code></strong>: Define o tipo do input.</li>
+                <li><strong><code>name</code></strong>: Se for um array de valores (ex: <code>name="optcheck[]"</code>),
+                    o servidor receberá uma lista. Se for o mesmo nome sem colchetes, apenas o último valor será
+                    enviado.</li>
+                <li><strong><code>.checkbox</code></strong>: Aplica o estilo e o espaçamento.</li>
+            </ul>
+
+            <h4>Análise do Código do Material (Esportes):</h4>
+            <pre><code>&lt;div class="row"&gt;
+  &lt;div class="col-md-1"&gt;
+    &lt;label&gt;&lt;h4&gt;Esportes: &lt;/h4&gt;&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div class="col-md-3"&gt;
+    &lt;div class="checkbox"&gt;
+      &lt;label&gt;
+        &lt;input type="checkbox" name="optcheck" value="futebol"&gt; Futebol
+      &lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class="checkbox"&gt;
+      &lt;label&gt;
+        &lt;input type="checkbox" name="optcheck" value="volei"&gt; Volei
+      &lt;/label&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+            <h3>2.7 Button (Botões)</h3>
+            <p>O Botão é o elemento que dispara a ação do formulário (geralmente um <code>submit</code>). O Bootstrap 3
+                oferece uma vasta gama de classes para estilizá-lo.</p>
+            <ul>
+                <li><strong><code>.btn</code></strong>: Classe base obrigatória. Remove o estilo padrão do navegador e
+                    aplica padding, borda e transições.</li>
+                <li><strong><code>.btn-default</code></strong>: Estilo padrão (cinza claro).</li>
+                <li><strong><code>.btn-primary</code></strong>: Azul escuro (ação principal).</li>
+                <li><strong><code>.btn-success</code></strong>: Verde (sucesso).</li>
+                <li><strong><code>.btn-danger</code></strong>: Vermelho (perigo/ação destrutiva).</li>
+                <li><strong><code>.btn-warning</code></strong>: Amarelo (aviso).</li>
+                <li><strong><code>.btn-info</code></strong>: Azul claro (informação).</li>
+                <li><strong><code>.btn-link</code></strong>: Aparência de link.</li>
+                <li><strong>Tamanhos:</strong> <code>.btn-lg</code>, <code>.btn-sm</code>, <code>.btn-xs</code>.</li>
+                <li><strong><code>.btn-block</code></strong>: Ocupa 100% da largura do contêiner.</li>
+            </ul>
+
+            <h4>Análise do Código do Material (Salvar):</h4>
+            <pre><code>&lt;div class="row"&gt;
+  &lt;div class="col-md-3"&gt;
+    &lt;button type="submit" class="btn btn-default"&gt;Salvar&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            <p><strong>Observação:</strong> O botão está dentro de uma coluna <code>col-md-3</code>. Isso significa que
+                o botão ocupará a largura do seu conteúdo (não 100% da coluna, a menos que use <code>.btn-block</code>).
+                O alinhamento à esquerda é o padrão.</p>
+
+            <h3>2.8 Estados de Validação (Recurso Adicional Importante)</h3>
+            <p>Embora não explicitamente mostrado nos slides, é fundamental citar que o Bootstrap 3 oferece classes para
+                indicar o estado de validação de um campo, o que melhora a experiência do usuário:</p>
+            <ul>
+                <li><strong><code>.has-success</code></strong>: Borda e texto verdes (campo válido).</li>
+                <li><strong><code>.has-warning</code></strong>: Borda e texto amarelos (atenção).</li>
+                <li><strong><code>.has-error</code></strong>: Borda e texto vermelhos (erro).</li>
+                <li><strong><code>.has-feedback</code></strong>: Adiciona um ícone de feedback (ex: check ou X) dentro
+                    do campo.</li>
+            </ul>
+
+            <h4>Exemplo Prático:</h4>
+            <pre><code>&lt;div class="form-group has-success has-feedback"&gt;
+  &lt;label class="control-label" for="inputSuccess"&gt;Input com sucesso&lt;/label&gt;
+  &lt;input type="text" class="form-control" id="inputSuccess"&gt;
+  &lt;span class="glyphicon glyphicon-ok form-control-feedback"&gt;&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+
+            <h3>2.9 Formulários Horizontais e Inline</h3>
+            <p>O material apresenta uma abordagem "híbrida", usando o grid para alinhar labels e inputs. No entanto, o
+                Bootstrap 3 possui classes específicas para isso:</p>
+            <ul>
+                <li><strong><code>.form-horizontal</code></strong>: Aplicada à tag <code>&lt;form&gt;</code>. Transforma
+                    os <code>.form-group</code> em <code>.row</code> e permite o uso de classes de grid
+                    (<code>col-sm-*</code>) para alinhar labels e inputs horizontalmente de forma nativa. Requer a
+                    classe <code>.control-label</code> nos labels.</li>
+                <li><strong><code>.form-inline</code></strong>: Aplicada à tag <code>&lt;form&gt;</code>. Faz com que os
+                    campos fiquem na mesma linha, ideal para filtros e barras de busca. Requer largura automática
+                    (<code>width: auto</code>) nos inputs.</li>
+            </ul>
+
+            <h3>2.10 Acessibilidade (A11y) em Formulários</h3>
+            <p>O material demonstra boas práticas de acessibilidade que merecem destaque:</p>
+            <ul>
+                <li><strong><code>aria-describedby</code></strong>: Usado no exemplo do email para conectar o input ao
+                    texto de ajuda (<code>@</code>). Isso permite que leitores de tela leiam "Arroba, informe seu
+                    email".</li>
+                <li><strong><code>placeholder</code></strong>: Fornece uma dica visual, mas <strong>nunca deve
+                        substituir o <code>&lt;label&gt;</code></strong>. O label é essencial para usuários de leitores
+                    de tela.</li>
+                <li><strong><code>&lt;label for="..."&gt;</code></strong>: A amarração correta entre label e input é
+                    vital para a navegação por teclado e leitores de tela.</li>
+            </ul>
+
+            <h3>Resumo dos Componentes de Formulário no Bootstrap 3</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Componente</th>
+                        <th>Classe Principal</th>
+                        <th>Função</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Grupo de Campo</strong></td>
+                        <td><code>.form-group</code></td>
+                        <td>Espaçamento vertical entre campos.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Input de Texto</strong></td>
+                        <td><code>.form-control</code></td>
+                        <td>Estilização padrão de inputs, selects e textareas.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Input Group</strong></td>
+                        <td><code>.input-group</code></td>
+                        <td>Adicionar ícones, textos ou botões ao lado do input.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Addon</strong></td>
+                        <td><code>.input-group-addon</code></td>
+                        <td>Texto/ícone dentro do input group.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Radio</strong></td>
+                        <td><code>.radio</code> ou <code>.radio-inline</code></td>
+                        <td>Botões de seleção única.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Checkbox</strong></td>
+                        <td><code>.checkbox</code> ou <code>.checkbox-inline</code></td>
+                        <td>Caixas de seleção múltipla.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Botão</strong></td>
+                        <td><code>.btn</code> + <code>.btn-*</code></td>
+                        <td>Ação do formulário.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Validação</strong></td>
+                        <td><code>.has-success</code>, <code>.has-error</code></td>
+                        <td>Feedback visual de erro/sucesso.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- ============================================================ -->
+            <!-- TÓPICO 3 -->
+            <!-- ============================================================ -->
+            <h2 id="topico3">3. Componentes de Navegação e Conteúdo</h2>
+
+            <p>O Bootstrap 3 oferece um conjunto de componentes prontos para estruturar a navegação e a apresentação de
+                conteúdo. Eles garantem consistência visual e funcional, além de serem totalmente responsivos.</p>
+
+            <h3>3.1 Breadcrumbs (Rastro de Navegação)</h3>
+            <p>O <strong>Breadcrumb</strong> (ou "rastro de navegação") é um componente que indica a localização da
+                página atual dentro da hierarquia do site. Ele ajuda o usuário a entender onde está e a navegar para
+                níveis superiores.</p>
+
+            <h4>3.1.1 Estrutura e Classes</h4>
+            <p>O breadcrumb é construído com uma <strong>lista ordenada</strong> (<code>&lt;ol&gt;</code>) que recebe a
+                classe <code>.breadcrumb</code>. Cada item da lista (<code>&lt;li&gt;</code>) representa um nível da
+                hierarquia:</p>
+            <ul>
+                <li><strong>Itens intermediários:</strong> Contêm um link (<code>&lt;a&gt;</code>) para o nível
+                    correspondente.</li>
+                <li><strong>Item ativo (página atual):</strong> Recebe a classe <code>.active</code> e <strong>não deve
+                        conter link</strong> (já que o usuário já está nessa página). O Bootstrap 3 estiliza o
+                    <code>.active</code> com uma cor de texto mais escura e sem sublinhado.
+                </li>
+            </ul>
+
+            <h4>3.1.2 Exemplo Prático:</h4>
+            <pre><code>&lt;ol class="breadcrumb"&gt;
+  &lt;li&gt;&lt;a href="welcome.php"&gt;Página Inicial&lt;/a&gt;&lt;/li&gt;
+  &lt;li class="active"&gt;Cadastro&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+            <ul>
+                <li><strong>Acessibilidade:</strong> O ideal é envolver o breadcrumb em uma tag <code>&lt;nav&gt;</code>
+                    com <code>aria-label="breadcrumb"</code> para que leitores de tela identifiquem a região de
+                    navegação.</li>
+                <li><strong>Separadores:</strong> O Bootstrap 3 adiciona automaticamente o separador <code>/</code>
+                    (barra) entre os itens via CSS, usando o seletor <code>:before</code> com a propriedade
+                    <code>content</code>.
+                </li>
+            </ul>
+
+            <h3>3.2 Painéis (Panels)</h3>
+            <p>Os <strong>Painéis</strong> são contêineres versáteis para agrupar conteúdo em uma caixa com borda e
+                padding. Eles são úteis para destacar informações, criar widgets ou organizar seções de uma página.</p>
+
+            <h4>3.2.1 Estrutura do Painel</h4>
+            <p>Um painel é composto por um contêiner principal e, opcionalmente, por seções de cabeçalho e rodapé:</p>
+            <ul>
+                <li><strong><code>.panel</code></strong>: Classe base obrigatória. Aplica a borda e o espaçamento
+                    externo.</li>
+                <li><strong><code>.panel-default</code></strong>: Define a cor padrão do painel (cinza claro).</li>
+                <li><strong><code>.panel-heading</code></strong>: Cria uma seção de cabeçalho com fundo diferenciado.
+                    Pode conter um título com a classe <code>.panel-title</code> (para estilização pré-definida).</li>
+                <li><strong><code>.panel-body</code></strong>: A área principal de conteúdo, com padding ao redor.</li>
+                <li><strong><code>.panel-footer</code></strong>: Cria um rodapé com fundo acinzentado, ideal para botões
+                    ou texto secundário.</li>
+            </ul>
+
+            <h4>3.2.2 Variações de Contexto</h4>
+            <p>Assim como os botões, os painéis possuem variações de cor para indicar significado:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Classe</th>
+                        <th>Cor</th>
+                        <th>Uso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>.panel-primary</code></td>
+                        <td>Azul</td>
+                        <td>Ação principal</td>
+                    </tr>
+                    <tr>
+                        <td><code>.panel-success</code></td>
+                        <td>Verde</td>
+                        <td>Sucesso</td>
+                    </tr>
+                    <tr>
+                        <td><code>.panel-info</code></td>
+                        <td>Azul claro</td>
+                        <td>Informação</td>
+                    </tr>
+                    <tr>
+                        <td><code>.panel-warning</code></td>
+                        <td>Amarelo</td>
+                        <td>Aviso</td>
+                    </tr>
+                    <tr>
+                        <td><code>.panel-danger</code></td>
+                        <td>Vermelho</td>
+                        <td>Perigo</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>3.2.3 Exemplo Prático:</h4>
+            <pre><code>&lt;div class="panel panel-default"&gt;
+  &lt;div class="panel-heading"&gt;
+    &lt;h3 class="panel-title"&gt;Título do Painel&lt;/h3&gt;
+  &lt;/div&gt;
+  &lt;div class="panel-body"&gt;
+    Componentes aqui...
+  &lt;/div&gt;
+  &lt;div class="panel-footer"&gt;
+    &lt;button class="btn btn-default"&gt;Ação&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+            <h3>3.3 Tabelas (Tables)</h3>
+            <p>As tabelas do Bootstrap 3 são estilizadas com a classe <code>.table</code>. O framework oferece variações
+                para melhorar a legibilidade e a usabilidade.</p>
+
+            <h4>3.3.1 Classes Principais</h4>
+            <ul>
+                <li><strong><code>.table</code></strong>: Classe base. Aplica padding, alinhamento e bordas sutis.</li>
+                <li><strong><code>.table-striped</code></strong>: Adiciona <strong>listras zebradas</strong>
+                    (alternância de cores entre linhas) para facilitar a leitura de muitas linhas de dados.</li>
+                <li><strong><code>.table-bordered</code></strong>: Adiciona bordas em todas as células.</li>
+                <li><strong><code>.table-hover</code></strong>: Ativa um efeito de destaque ao passar o mouse sobre uma
+                    linha.</li>
+                <li><strong><code>.table-responsive</code></strong>: Torna a tabela <strong>responsiva</strong>. Quando
+                    aplicada a um contêiner pai (<code>&lt;div&gt;</code>), a tabela exibirá uma barra de rolagem
+                    horizontal em telas pequenas (&lt;768px), evitando que o layout quebre.</li>
+            </ul>
+
+            <h4>3.3.2 Linhas com Contexto</h4>
+            <p>O Bootstrap 3 permite colorir linhas inteiras com base em um estado, usando classes aplicadas à tag
+                <code>&lt;tr&gt;</code>:
+            </p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Classe</th>
+                        <th>Cor</th>
+                        <th>Uso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>.success</code></td>
+                        <td>Verde</td>
+                        <td>Sucesso</td>
+                    </tr>
+                    <tr>
+                        <td><code>.info</code></td>
+                        <td>Azul</td>
+                        <td>Informação</td>
+                    </tr>
+                    <tr>
+                        <td><code>.warning</code></td>
+                        <td>Amarelo</td>
+                        <td>Aviso</td>
+                    </tr>
+                    <tr>
+                        <td><code>.danger</code></td>
+                        <td>Vermelho</td>
+                        <td>Perigo</td>
+                    </tr>
+                    <tr>
+                        <td><code>.active</code></td>
+                        <td>Cinza</td>
+                        <td>Linha ativa</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>3.3.3 Exemplo Prático (Lista de Cadastrados):</h4>
+            <pre><code>&lt;div class="table-responsive"&gt;
+  &lt;table class="table table-striped table-hover"&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th&gt;ID&lt;/th&gt;
+        &lt;th&gt;Nome&lt;/th&gt;
+        &lt;th&gt;CPF&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;1&lt;/td&gt;
+        &lt;td&gt;João&lt;/td&gt;
+        &lt;td&gt;000.000.000-00&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+
+            <h3>3.4 Glyphicons (Ícones)</h3>
+            <p>O <strong>Glyphicon</strong> é uma biblioteca de ícones em fonte incluída no Bootstrap 3. Por serem
+                fontes, os ícones podem ser redimensionados e coloridos via CSS, sem perda de qualidade.</p>
+
+            <h4>3.4.1 Como Usar</h4>
+            <p>Para usar um Glyphicon, é necessário adicionar <strong>duas classes</strong> a um elemento
+                <code>&lt;span&gt;</code>:
+            </p>
+            <ol>
+                <li><strong><code>.glyphicon</code></strong>: Classe base (define a família de fontes, posicionamento,
+                    etc.).</li>
+                <li><strong><code>.glyphicon-*</code></strong>: Classe específica do ícone (ex:
+                    <code>glyphicon-search</code>, <code>glyphicon-user</code>, etc.).
+                </li>
+            </ol>
+            <p><strong>Regras importantes:</strong></p>
+            <ul>
+                <li>O <code>&lt;span&gt;</code> deve estar <strong>vazio</strong> (sem texto ou elementos filhos).</li>
+                <li>O ícone deve ser usado em um <code>&lt;span&gt;</code> aninhado, não diretamente em outros
+                    componentes.</li>
+            </ul>
+
+            <h4>3.4.2 Exemplos Práticos:</h4>
+            <p><strong>Ícone de busca em um botão:</strong></p>
+            <pre><code>&lt;button class="btn btn-default"&gt;
+  &lt;span class="glyphicon glyphicon-search" aria-hidden="true"&gt;&lt;/span&gt; Buscar
+&lt;/button&gt;</code></pre>
+
+            <p><strong>Ícone de usuário ao lado de um texto:</strong></p>
+            <pre><code>&lt;p&gt;
+  &lt;span class="glyphicon glyphicon-user" aria-hidden="true"&gt;&lt;/span&gt; João
+&lt;/p&gt;</code></pre>
+            <p><strong>Acessibilidade:</strong> O atributo <code>aria-hidden="true"</code> é recomendado para ícones
+                puramente decorativos, evitando que leitores de tela os anunciem de forma confusa. Se o ícone for o
+                único conteúdo de um botão (sem texto), deve-se usar <code>aria-label</code> para descrever sua função.
+            </p>
+
+            <h3>3.5 Resumo dos Componentes de Navegação e Conteúdo</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Componente</th>
+                        <th>Classe Principal</th>
+                        <th>Função</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Breadcrumb</strong></td>
+                        <td><code>.breadcrumb</code></td>
+                        <td>Rastro de navegação hierárquico.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Panel</strong></td>
+                        <td><code>.panel</code> + <code>.panel-*</code></td>
+                        <td>Contêiner para agrupar conteúdo.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Panel Heading</strong></td>
+                        <td><code>.panel-heading</code></td>
+                        <td>Cabeçalho do painel.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Panel Body</strong></td>
+                        <td><code>.panel-body</code></td>
+                        <td>Corpo do painel.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Panel Footer</strong></td>
+                        <td><code>.panel-footer</code></td>
+                        <td>Rodapé do painel.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Table</strong></td>
+                        <td><code>.table</code></td>
+                        <td>Estilização base de tabelas.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Table Striped</strong></td>
+                        <td><code>.table-striped</code></td>
+                        <td>Listras zebradas para legibilidade.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Table Responsive</strong></td>
+                        <td><code>.table-responsive</code></td>
+                        <td>Rolagem horizontal em telas pequenas.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Glyphicon</strong></td>
+                        <td><code>.glyphicon</code> + <code>.glyphicon-*</code></td>
+                        <td>Ícones vetoriais em fonte.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- ============================================================ -->
+            <!-- TÓPICO 4 -->
+            <!-- ============================================================ -->
+            <h2 id="topico4">4. Estrutura Base e Recursos Técnicos</h2>
+
+            <p>Um projeto Bootstrap 3 começa com uma estrutura HTML5 bem definida e um conjunto de arquivos essenciais.
+                Entender essa base é fundamental para que o framework funcione corretamente, especialmente a
+                responsividade e os componentes interativos.</p>
+
+            <h3>4.1 O Template Básico (Basic Template)</h3>
+            <p>O Bootstrap 3 exige uma estrutura HTML5 específica. O template mínimo inclui:</p>
+            <ul>
+                <li><strong><code>&lt;!DOCTYPE html&gt;</code></strong>: Declara o documento como HTML5. É obrigatório
+                    para que o Bootstrap aplique seus estilos corretamente.</li>
+                <li><strong><code>&lt;html lang="en"&gt;</code></strong>: Define o idioma da página (pode ser alterado
+                    para <code>pt-br</code>).</li>
+                <li><strong><code>&lt;head&gt;</code></strong>: Contém os metadados e links para os arquivos CSS.</li>
+                <li><strong><code>&lt;body&gt;</code></strong>: Contém o conteúdo visível da página.</li>
+            </ul>
+
+            <h4>4.1.1 Meta Tags Obrigatórias</h4>
+            <p>As três meta tags a seguir <strong>devem vir primeiro no <code>&lt;head&gt;</code></strong>, antes de
+                qualquer outro conteúdo:</p>
+            <ol>
+                <li><strong><code>&lt;meta charset="utf-8"&gt;</code></strong>: Define a codificação de caracteres como
+                    UTF-8, garantindo que acentos e caracteres especiais sejam exibidos corretamente.</li>
+                <li><strong><code>&lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;</code></strong>: Força o
+                    Internet Explorer a usar a versão mais recente do seu motor de renderização, evitando o "modo de
+                    compatibilidade" que quebra layouts modernos.</li>
+                <li><strong><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</code></strong>:
+                    A meta tag mais importante para a responsividade. Ela instrui o navegador a definir a largura da
+                    viewport igual à largura do dispositivo e a não aplicar zoom inicial.</li>
+            </ol>
+
+            <h4>4.1.2 Estrutura Completa do Template Básico:</h4>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-br"&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    &lt;!-- As 3 meta tags acima *devem* vir primeiro no head --&gt;
+    &lt;title&gt;Bootstrap 101 Template&lt;/title&gt;
+    &lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello, world!&lt;/h1&gt;
+    &lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"&gt;&lt;/script&gt;
+    &lt;script src="js/bootstrap.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+            <h3>4.2 A Filosofia Mobile First e o Viewport</h3>
+            <p>O Bootstrap 3 foi projetado com a abordagem <strong>Mobile First</strong>: os estilos padrão são pensados
+                primeiro para telas pequenas, e o layout se expande para telas maiores. Para que isso funcione, a meta
+                tag <code>viewport</code> é indispensável. Sem ela, dispositivos móveis renderizam a página como se
+                fosse uma tela de desktop, forçando o usuário a fazer zoom.</p>
+            <p><strong>Opção de controle de zoom:</strong> É possível desabilitar o zoom adicionando
+                <code>user-scalable=no</code> à meta tag viewport (ex:
+                <code>content="width=device-width, initial-scale=1, user-scalable=no"</code>). Isso deve ser usado com
+                cautela por questões de acessibilidade.
+            </p>
+
+            <h3>4.3 Integração de Arquivos CSS e JavaScript</h3>
+            <p>O Bootstrap 3 depende de três arquivos principais:</p>
+            <ol>
+                <li><strong>CSS do Bootstrap</strong> (<code>bootstrap.min.css</code>): Contém todos os estilos do
+                    framework. Deve ser incluído no <code>&lt;head&gt;</code>.</li>
+                <li><strong>jQuery</strong> (<code>jquery.min.js</code>): Biblioteca JavaScript necessária para os
+                    plugins do Bootstrap (modais, dropdowns, abas, etc.). Deve ser incluído antes do JS do Bootstrap,
+                    geralmente no final do <code>&lt;body&gt;</code> para não bloquear a renderização.</li>
+                <li><strong>JavaScript do Bootstrap</strong> (<code>bootstrap.min.js</code>): Contém os plugins de
+                    interatividade. Deve ser incluído após o jQuery.</li>
+            </ol>
+
+            <p><strong>Ordem de inclusão:</strong></p>
+            <pre><code>&lt;!-- No &lt;head&gt; --&gt;
+&lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt;
+
+&lt;!-- No final do &lt;body&gt; --&gt;
+&lt;script src="js/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="js/bootstrap.min.js"&gt;&lt;/script&gt;</code></pre>
+
+            <h3>4.4 Compatibilidade com Navegadores Antigos (IE8)</h3>
+            <p>O Bootstrap 3 usa elementos HTML5 (como <code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code>,
+                <code>&lt;nav&gt;</code>) e media queries CSS3, que não são nativamente suportados pelo Internet
+                Explorer 8 e versões anteriores. Para garantir que o layout funcione nesses navegadores, o framework
+                recomenda o uso de dois scripts de "polyfill":
+            </p>
+            <ul>
+                <li><strong>HTML5 Shiv</strong> (<code>html5shiv.min.js</code>): Permite que o IE8 reconheça e estilize
+                    os novos elementos semânticos do HTML5.</li>
+                <li><strong>Respond.js</strong> (<code>respond.min.js</code>): Adiciona suporte a media queries CSS3 no
+                    IE8, permitindo que o grid responsivo funcione.</li>
+            </ul>
+            <p>Esses scripts são incluídos dentro de <strong>comentários condicionais</strong> para que sejam carregados
+                apenas por versões antigas do IE:</p>
+            <pre><code>&lt;!--[if lt IE 9]&gt;
+  &lt;script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.min.js"&gt;&lt;/script&gt;
+  &lt;script src="https://oss.maxcdn.com/libs/respond/1.4.2/respond.min.js"&gt;&lt;/script&gt;
+&lt;![endif]--&gt;</code></pre>
+            <p><strong>Limitação importante:</strong> O Respond.js <strong>não funciona</strong> quando a página é
+                aberta via protocolo <code>file://</code> (ex: abrindo um arquivo HTML local). Para testar no IE8, é
+                necessário acessar a página através de um servidor local (ex: <code>http://localhost</code>).</p>
+
+            <h3>4.5 Instalação e Estrutura de Pastas</h3>
+            <p>O processo de instalação do Bootstrap 3 é simples e manual:</p>
+            <ol>
+                <li><strong>Download:</strong> Acesse <a href="https://getbootstrap.com"
+                        target="_blank">getbootstrap.com</a> e baixe a versão compilada do Bootstrap 3.</li>
+                <li><strong>Descompactar:</strong> Extraia o arquivo ZIP baixado.</li>
+                <li><strong>Copiar pastas:</strong> Copie as pastas <code>css</code>, <code>fonts</code> e
+                    <code>js</code> para dentro da pasta do seu projeto (ex: <code>htdocs/seu-projeto/</code>).
+                </li>
+            </ol>
+
+            <p><strong>Estrutura de pastas do Bootstrap (versão compilada):</strong></p>
+            <pre><code>bootstrap/
+├── css/
+│   ├── bootstrap.css
+│   ├── bootstrap.min.css
+│   └── bootstrap.css.map
+├── js/
+│   ├── bootstrap.js
+│   └── bootstrap.min.js
+└── fonts/
+    ├── glyphicons-halflings-regular.eot
+    ├── glyphicons-halflings-regular.svg
+    ├── glyphicons-halflings-regular.ttf
+    └── glyphicons-halflings-regular.woff</code></pre>
+
+            <p><strong>Estrutura do projeto do desenvolvedor (exemplo em XAMPP/htdocs):</strong></p>
+            <pre><code>aprendendo-laravel/
+└── public/
+    ├── css/
+    │   ├── bootstrap.min.css
+    │   └── meucss.css
+    ├── fonts/
+    ├── imagens/
+    ├── js/
+    │   ├── jquery.min.js
+    │   └── bootstrap.min.js
+    ├── .htaccess
+    ├── favicon.ico
+    ├── index.php
+    ├── robots.txt
+    └── web.config</code></pre>
+
+            <div class="destaque-verde">
+                <strong>✅ Boa prática:</strong> Sempre separe seus arquivos dos arquivos do framework. Crie um arquivo
+                CSS personalizado (como <code>meucss.css</code> ou <code>style.css</code>) para sobrescrever ou
+                complementar os estilos do Bootstrap. Isso facilita futuras atualizações do framework.
+            </div>
+
+            <h3>4.6 jQuery: A Dependência dos Plugins</h3>
+            <p>O Bootstrap 3 <strong>depende do jQuery</strong> para todos os seus plugins JavaScript. Sem o jQuery,
+                funcionalidades como dropdowns, modais, tooltips, abas e carrosséis simplesmente não funcionarão. A
+                versão recomendada é o jQuery 1.12.4 ou superior (dentro da linha 1.x), pois oferece suporte a
+                navegadores antigos como o IE8.</p>
+
+            <p><strong>Verificação de carregamento:</strong> É possível adicionar um fallback para garantir que o jQuery
+                seja carregado:</p>
+            <pre><code>&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  window.jQuery || document.write('&lt;script src="js/jquery.min.js"&gt;&lt;\/script&gt;');
+&lt;/script&gt;</code></pre>
+
+            <h3>4.7 CSS Personalizado e Boas Práticas</h3>
+            <p>O Bootstrap 3 fornece uma base sólida, mas cada projeto tem suas particularidades visuais. O arquivo
+                <code>meucss.css</code> (ou <code>style.css</code>) é o local onde você deve adicionar:
+            </p>
+            <ul>
+                <li><strong>Sobrescritas de estilos:</strong> Alterar cores, fontes ou espaçamentos padrão do Bootstrap.
+                </li>
+                <li><strong>Estilos para classes customizadas:</strong> Classes como <code>.topo</code>,
+                    <code>.navegacao</code>, <code>.corpo</code>, <code>.menuEsquerdo</code>, <code>.conteudo</code>,
+                    <code>.rodape</code>.
+                </li>
+                <li><strong>Ajustes de layout específicos:</strong> Pequenos ajustes que não são cobertos pelas classes
+                    utilitárias do framework.</li>
+            </ul>
+
+            <p><strong>Exemplo de <code>meucss.css</code>:</strong></p>
+            <pre><code>body {
+    padding-top: 60px; /* Espaço para navbar fixa */
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.topo {
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px 0;
+}
+
+.rodape {
+    background-color: #34495e;
+    color: white;
+    padding: 15px 0;
+    text-align: center;
+}</code></pre>
+
+            <div class="destaque-vermelho">
+                <strong>⚠️ Regra de ouro:</strong> Nunca modifique diretamente os arquivos
+                <code>bootstrap.min.css</code> ou <code>bootstrap.min.js</code>. Se precisar de alterações, faça-as no
+                seu arquivo CSS personalizado, para que o projeto possa ser atualizado sem perder suas customizações.
+            </div>
+
+            <h3>Resumo dos Recursos Técnicos</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Recurso</th>
+                        <th>Arquivo/Classe</th>
+                        <th>Função</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Doctype HTML5</strong></td>
+                        <td><code>&lt;!DOCTYPE html&gt;</code></td>
+                        <td>Ativa o modo padrão do navegador.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Charset UTF-8</strong></td>
+                        <td><code>&lt;meta charset="utf-8"&gt;</code></td>
+                        <td>Suporte a acentos e caracteres especiais.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>X-UA-Compatible</strong></td>
+                        <td><code>&lt;meta http-equiv="..."&gt;</code></td>
+                        <td>Força o IE a usar a versão mais recente.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Viewport</strong></td>
+                        <td><code>&lt;meta name="viewport"&gt;</code></td>
+                        <td>Habilita a responsividade em dispositivos móveis.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CSS do Bootstrap</strong></td>
+                        <td><code>bootstrap.min.css</code></td>
+                        <td>Estilos do framework.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>jQuery</strong></td>
+                        <td><code>jquery.min.js</code></td>
+                        <td>Dependência dos plugins JS do Bootstrap.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>JS do Bootstrap</strong></td>
+                        <td><code>bootstrap.min.js</code></td>
+                        <td>Interatividade (modais, dropdowns, etc.).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>HTML5 Shiv</strong></td>
+                        <td><code>html5shiv.min.js</code></td>
+                        <td>Suporte a elementos HTML5 no IE8.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Respond.js</strong></td>
+                        <td><code>respond.min.js</code></td>
+                        <td>Suporte a media queries no IE8.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CSS Personalizado</strong></td>
+                        <td><code>meucss.css</code></td>
+                        <td>Sobrescritas e estilos do projeto.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Este é o alicerce técnico que sustenta todo o desenvolvimento com Bootstrap 3. Dominar essa estrutura é
+                essencial antes de avançar para os componentes visuais e o sistema de grid.</p>
+
+            <!-- ============================================================ -->
+            <!-- TÓPICO 5 -->
+            <!-- ============================================================ -->
+            <h2 id="topico5">5. Integração com o Projeto e Componentes Finais</h2>
+
+            <p>Chegamos ao momento de transformar todo o conhecimento teórico em um projeto real, colocando a mão na
+                massa para montar a estrutura do seu site. Vamos explorar o passo a passo da integração do Bootstrap 3
+                em um ambiente de desenvolvimento local, a organização das pastas e a aplicação prática dos componentes
+                HTML que construímos até aqui.</p>
+
+            <h3>📥 Preparação do Ambiente e Download do Bootstrap</h3>
+            <p>O primeiro passo para integrar o Bootstrap 3 em um projeto é preparar o ambiente de desenvolvimento. A
+                abordagem mais comum para iniciantes é utilizar um servidor local como o <strong>XAMPP</strong> (ou
+                WAMPP, LAMPP), que fornece o Apache para rodar seus arquivos PHP e o MySQL para banco de dados.</p>
+            <p>Com o servidor instalado, o processo de download do framework é simples:</p>
+            <ol>
+                <li>Acesse o site oficial do Bootstrap (getbootstrap.com) e baixe a versão compilada (v3.3.7 ou
+                    similar).</li>
+                <li>Descompacte o arquivo ZIP baixado. Dentro dele, você encontrará a pasta
+                    <code>bootstrap-3.3.7-dist</code>, que contém as pastas <code>css</code>, <code>js</code> e
+                    <code>fonts</code>.
+                </li>
+                <li>O framework não inclui o jQuery. Você precisará baixá-lo separadamente do site oficial (jquery.com).
+                    Após baixar, crie um arquivo chamado <code>jquery.js</code> e coloque-o na pasta <code>js</code> do
+                    seu projeto.</li>
+            </ol>
+
+            <h3>📁 Estrutura de Pastas do Projeto</h3>
+            <p>A organização dos arquivos é crucial para a manutenção do código. Dentro da pasta <code>htdocs</code> do
+                seu XAMPP, crie uma pasta para o seu projeto (ex: <code>aprendendo-laravel</code> ou <code>loja</code>).
+                A estrutura recomendada é separar os arquivos do framework dos seus arquivos personalizados:</p>
+            <pre><code>htdocs/
+└── seu-projeto/
+    ├── css/
+    │   ├── bootstrap.min.css  (framework)
+    │   └── meucss.css         (seu estilo personalizado)
+    ├── fonts/
+    │   └── (arquivos do Glyphicons)
+    ├── imagens/
+    ├── js/
+    │   ├── jquery.js
+    │   └── bootstrap.min.js
+    └── index.php</code></pre>
+            <p>Essa separação permite que você atualize o Bootstrap no futuro sem perder as customizações do seu CSS.
+            </p>
+
+            <h3>🔗 Inclusão dos Arquivos CSS e JavaScript</h3>
+            <p>Para que o Bootstrap funcione, você precisa incluir os arquivos corretos no seu HTML. A ordem de inclusão
+                é fundamental:</p>
+            <ul>
+                <li><strong>No <code>&lt;head&gt;</code></strong>: Inclua o CSS do Bootstrap <strong>antes</strong> de
+                    qualquer outro arquivo de estilo, para que suas regras personalizadas possam sobrescrevê-lo se
+                    necessário.</li>
+                <li><strong>No final do <code>&lt;body&gt;</code></strong>: Inclua o jQuery <strong>primeiro</strong>, e
+                    depois o JavaScript do Bootstrap. Isso garante que os plugins (como dropdowns e modais) encontrem a
+                    biblioteca jQuery já carregada.</li>
+            </ul>
+
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-br"&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    &lt;title&gt;Meu Projeto com Bootstrap&lt;/title&gt;
+    &lt;!-- CSS do Bootstrap (primeiro) --&gt;
+    &lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;!-- CSS Personalizado (depois) --&gt;
+    &lt;link href="css/meucss.css" rel="stylesheet"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello, Bootstrap!&lt;/h1&gt;
+
+    &lt;!-- jQuery (necessário para os plugins JS do Bootstrap) --&gt;
+    &lt;script src="js/jquery.js"&gt;&lt;/script&gt;
+    &lt;!-- JavaScript do Bootstrap --&gt;
+    &lt;script src="js/bootstrap.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+            <h3>🧱 Construção dos Componentes da View</h3>
+            <p>Com a estrutura pronta, podemos montar a interface do projeto. O material apresenta uma "view" completa
+                que integra o sistema de grid com os componentes que estudamos. Vamos construir essa estrutura passo a
+                passo, usando as classes corretas.</p>
+
+            <h4>Passo 1: Estrutura de Layout com Grid</h4>
+            <p>A base do layout é um contêiner central (<code>container</code>) com uma linha (<code>row</code>) que
+                divide a tela em três colunas: uma margem esquerda (<code>col-md-2</code>), o conteúdo principal
+                (<code>col-md-8</code>) e uma margem direita (<code>col-md-2</code>).</p>
+            <pre><code>&lt;div class="container"&gt;
+    &lt;div class="row"&gt;
+        &lt;div id="margemEsquerda" class="col-md-2"&gt;
+            &lt;!-- Menu Lateral --&gt;
+        &lt;/div&gt;
+        &lt;div id="conteudo" class="col-md-8"&gt;
+            &lt;!-- Conteúdo Principal --&gt;
+        &lt;/div&gt;
+        &lt;div id="margemDireita" class="col-md-2"&gt;
+            &lt;!-- Barra Lateral Direita --&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+            <h4>Passo 2: Breadcrumbs (Rastro de Navegação)</h4>
+            <p>Dentro da coluna de conteúdo, adicionamos o breadcrumb para indicar a localização do usuário. Lembre-se
+                de que o item ativo não deve ter link.</p>
+            <pre><code>&lt;ol class="breadcrumb"&gt;
+    &lt;li&gt;&lt;a href="welcome.php"&gt;Página Inicial&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="active"&gt;Cadastro&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+
+            <h4>Passo 3: Painel (Panel) para Agrupar o Formulário</h4>
+            <p>O formulário de cadastro será envolvido por um painel, que organiza visualmente os campos e destaca a
+                seção de cadastro.</p>
+            <pre><code>&lt;div class="panel panel-default"&gt;
+    &lt;div class="panel-heading"&gt;
+        &lt;h3 class="panel-title"&gt;Formulário de Cadastro&lt;/h3&gt;
+    &lt;/div&gt;
+    &lt;div class="panel-body"&gt;
+        &lt;!-- O formulário virá aqui --&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+            <h4>Passo 4: Formulário com Grid e Componentes</h4>
+            <p>Agora, montamos o formulário dentro do <code>panel-body</code>. Utilizamos o sistema de grid para alinhar
+                os rótulos e campos, e aplicamos as classes de formulário (<code>form-group</code>,
+                <code>form-control</code>) para estilização e espaçamento.
+            </p>
+            <pre><code>&lt;form role="form"&gt;
+    &lt;!-- Campo Nome --&gt;
+    &lt;div class="form-group"&gt;
+        &lt;div class="row"&gt;
+            &lt;div class="col-md-2"&gt;
+                &lt;label for="nome"&gt;&lt;h4&gt;Nome:&lt;/h4&gt;&lt;/label&gt;
+            &lt;/div&gt;
+            &lt;div class="col-md-6"&gt;
+                &lt;input type="text" class="form-control" id="nome" placeholder="Digite seu Nome"&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Campo Email com Input Group --&gt;
+    &lt;div class="form-group"&gt;
+        &lt;div class="row"&gt;
+            &lt;div class="col-md-2"&gt;
+                &lt;label for="email"&gt;&lt;h4&gt;Email:&lt;/h4&gt;&lt;/label&gt;
+            &lt;/div&gt;
+            &lt;div class="col-md-6"&gt;
+                &lt;div class="input-group"&gt;
+                    &lt;span class="input-group-addon" id="basic-addon1"&gt;@&lt;/span&gt;
+                    &lt;input type="email" class="form-control" placeholder="Informe seu email" aria-describedby="basic-addon1"&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Campo Estado (Dropdown) --&gt;
+    &lt;div class="form-group"&gt;
+        &lt;div class="row"&gt;
+            &lt;div class="col-md-2"&gt;
+                &lt;label for="estado"&gt;&lt;h4&gt;Estado:&lt;/h4&gt;&lt;/label&gt;
+            &lt;/div&gt;
+            &lt;div class="col-md-3"&gt;
+                &lt;select class="form-control" id="estado"&gt;
+                    &lt;option value=""&gt;Selecione&lt;/option&gt;
+                    &lt;option value="MG"&gt;MG&lt;/option&gt;
+                    &lt;option value="SP"&gt;SP&lt;/option&gt;
+                    &lt;option value="RJ"&gt;RJ&lt;/option&gt;
+                &lt;/select&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Campo Sexo (Radio Buttons) --&gt;
+    &lt;div class="form-group"&gt;
+        &lt;div class="row"&gt;
+            &lt;div class="col-md-2"&gt;
+                &lt;label&gt;&lt;h4&gt;Sexo:&lt;/h4&gt;&lt;/label&gt;
+            &lt;/div&gt;
+            &lt;div class="col-md-3"&gt;
+                &lt;div class="radio"&gt;
+                    &lt;label&gt;
+                        &lt;input type="radio" name="sexo" value="masculino"&gt; Masculino
+                    &lt;/label&gt;
+                &lt;/div&gt;
+                &lt;div class="radio"&gt;
+                    &lt;label&gt;
+                        &lt;input type="radio" name="sexo" value="feminino"&gt; Feminino
+                    &lt;/label&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Campo Esportes (Checkboxes) --&gt;
+    &lt;div class="form-group"&gt;
+        &lt;div class="row"&gt;
+            &lt;div class="col-md-2"&gt;
+                &lt;label&gt;&lt;h4&gt;Esportes:&lt;/h4&gt;&lt;/label&gt;
+            &lt;/div&gt;
+            &lt;div class="col-md-3"&gt;
+                &lt;div class="checkbox"&gt;
+                    &lt;label&gt;
+                        &lt;input type="checkbox" name="esportes[]" value="futebol"&gt; Futebol
+                    &lt;/label&gt;
+                &lt;/div&gt;
+                &lt;div class="checkbox"&gt;
+                    &lt;label&gt;
+                        &lt;input type="checkbox" name="esportes[]" value="volei"&gt; Vôlei
+                    &lt;/label&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Botão Salvar --&gt;
+    &lt;div class="form-group"&gt;
+        &lt;div class="row"&gt;
+            &lt;div class="col-md-3 col-md-offset-2"&gt;
+                &lt;button type="submit" class="btn btn-primary"&gt;Salvar&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;</code></pre>
+
+            <h4>Passo 5: Tabela de Listagem de Cadastrados</h4>
+            <p>Abaixo do formulário, podemos adicionar a tabela que lista os cadastros realizados. A tabela é envolvida
+                por um <code>panel</code> para manter a consistência visual e usar a classe <code>table-striped</code>
+                para melhor legibilidade.</p>
+            <pre><code>&lt;div class="panel panel-default"&gt;
+    &lt;div class="panel-heading"&gt;
+        &lt;h3 class="panel-title"&gt;Lista de Cadastrados&lt;/h3&gt;
+    &lt;/div&gt;
+    &lt;table class="table table-striped"&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th&gt;ID&lt;/th&gt;
+                &lt;th&gt;Nome&lt;/th&gt;
+                &lt;th&gt;CPF&lt;/th&gt;
+                &lt;th&gt;Ações&lt;/th&gt;
+            &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+            &lt;tr&gt;
+                &lt;td&gt;1&lt;/td&gt;
+                &lt;td&gt;João&lt;/td&gt;
+                &lt;td&gt;000.000.000-00&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;a href="#" class="btn btn-default btn-xs"&gt;
+                        &lt;span class="glyphicon glyphicon-search" aria-hidden="true"&gt;&lt;/span&gt;
+                    &lt;/a&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;2&lt;/td&gt;
+                &lt;td&gt;Maria&lt;/td&gt;
+                &lt;td&gt;111.111.111-11&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;a href="#" class="btn btn-default btn-xs"&gt;
+                        &lt;span class="glyphicon glyphicon-search" aria-hidden="true"&gt;&lt;/span&gt;
+                    &lt;/a&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+
+            <h3>✅ Resumo da Integração</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Etapa</th>
+                        <th>Ação Principal</th>
+                        <th>Detalhes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1. Ambiente</strong></td>
+                        <td>Instalar XAMPP e baixar Bootstrap + jQuery</td>
+                        <td>Colocar arquivos na pasta <code>htdocs</code>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2. Estrutura</strong></td>
+                        <td>Criar pastas <code>css</code>, <code>js</code>, <code>fonts</code>, <code>imagens</code>
+                        </td>
+                        <td>Separar arquivos do framework e personalizados.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3. Inclusão</strong></td>
+                        <td>Linkar CSS no <code>&lt;head&gt;</code> e JS no fim do <code>&lt;body&gt;</code></td>
+                        <td>jQuery deve vir antes do JS do Bootstrap.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4. Layout</strong></td>
+                        <td>Usar <code>container</code> &gt; <code>row</code> &gt; <code>col-md-*</code></td>
+                        <td>Criar as colunas de margem e conteúdo.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>5. Componentes</strong></td>
+                        <td>Aplicar Breadcrumb, Panel, Form e Table</td>
+                        <td>Usar as classes específicas para cada elemento.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Com essa estrutura, você tem uma view completa e funcional, integrando todos os componentes apresentados
+                no material. O projeto está pronto para ser acessado via <code>http://localhost/seu-projeto/</code> e
+                começar a receber os dados do formulário.</p>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p><strong>Guia Completo: Bootstrap 3</strong> · UniAcademia</p>
+        <p>Desenvolvido por Rúben Israel Esterci de Souza · Eng. Software 2026/2</p>
+        <p>Prof. Jacimar Tavares &amp; Prof. Daves Martins &amp; Prof. Victor Vidigal</p>
+        <p class="footer-note">Documento gerado para fins de estudo e consulta.</p>
+    </footer>
+
+</body>
+
+</html>

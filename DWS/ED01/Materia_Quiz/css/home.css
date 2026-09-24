@@ -1,0 +1,365 @@
+/* ============================================================
+   HOME — Central de Estudos
+   ============================================================ */
+
+/* ---------- RESET ---------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+    /* Cores de cada módulo */
+    --m1: #e34c26;   /* HTML   — laranja */
+    --m2: #2965f1;   /* CSS    — azul   */
+    --m3: #3498db;   /* BS     — azul claro */
+    --m4: #d4a600;   /* JS     — dourado */
+    --m4-icon: #2c3e50;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f4f6f9 0%, #e8ecf3 100%);
+    min-height: 100vh;
+    color: #2c3e50;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ============================================================
+   CABEÇALHO
+   ============================================================ */
+.site-header {
+    background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%);
+    color: #fff;
+    padding: 22px 24px;
+    box-shadow: 0 4px 20px rgba(44, 62, 80, 0.25);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.brand-text h1 {
+    font-size: 1.25em;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    line-height: 1.2;
+}
+
+.brand-text p {
+    font-size: 0.78em;
+    color: #bdc3c7;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 2px;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(40, 167, 69, 0.2); }
+    50%      { box-shadow: 0 0 0 6px rgba(40, 167, 69, 0.08); }
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 24px 30px;
+    text-align: center;
+}
+
+.hero h2 {
+    font-size: 2em;
+    font-weight: 700;
+    color: #2c3e50;
+    letter-spacing: -0.5px;
+    margin-bottom: 12px;
+}
+
+.hero p {
+    font-size: 1.05em;
+    color: #7f8c8d;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+/* ============================================================
+   GRID DE MÓDULOS
+   ============================================================ */
+.modules {
+    flex: 1;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 24px 60px;
+}
+
+.modules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+/* ============================================================
+   CARD
+   ============================================================ */
+.module-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px 28px;
+    box-shadow: 0 4px 20px rgba(44, 62, 80, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border-top: 5px solid var(--card-color);
+}
+
+.module-card[data-tema="m1"] { --card-color: var(--m1); }
+.module-card[data-tema="m2"] { --card-color: var(--m2); }
+.module-card[data-tema="m3"] { --card-color: var(--m3); }
+.module-card[data-tema="m4"] { --card-color: var(--m4); }
+
+.module-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 36px rgba(44, 62, 80, 0.15);
+}
+
+.module-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 130px;
+    height: 130px;
+    background: var(--card-color);
+    opacity: 0.06;
+    border-radius: 0 0 0 130px;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.module-card:hover::before {
+    opacity: 0.12;
+}
+
+/* Ícone */
+.card-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.7em;
+    font-weight: 800;
+    color: #fff;
+    background: var(--card-color);
+    margin-bottom: 20px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    letter-spacing: -1px;
+}
+
+/* No M4, o amarelo pede texto escuro */
+.module-card[data-tema="m4"] .card-icon {
+    color: var(--m4-icon);
+}
+
+/* Número do módulo */
+.card-number {
+    font-size: 0.72em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--card-color);
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+/* Título */
+.module-card h3 {
+    font-size: 1.3em;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+}
+
+/* Descrição */
+.module-card p {
+    font-size: 0.92em;
+    color: #7f8c8d;
+    margin-bottom: 24px;
+    flex-grow: 1;
+    line-height: 1.6;
+}
+
+/* ============================================================
+   BOTÕES DO CARD
+   ============================================================ */
+.card-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.btn {
+    flex: 1;
+    padding: 11px 14px;
+    border-radius: 10px;
+    font-size: 0.88em;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-family: inherit;
+    white-space: nowrap;
+}
+
+.btn-primary {
+    background: var(--card-color);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    filter: brightness(0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+/* No M4, botão dourado com texto branco fica ilegível — usa texto escuro */
+.module-card[data-tema="m4"] .btn-primary {
+    color: #2c3e50;
+}
+
+.btn-outline {
+    background: #fff;
+    color: var(--card-color);
+    border-color: var(--card-color);
+}
+
+.btn-outline:hover {
+    background: var(--card-color);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+.module-card[data-tema="m4"] .btn-outline:hover {
+    color: #2c3e50;
+}
+
+/* ============================================================
+   RODAPÉ
+   ============================================================ */
+.site-footer {
+    background: #2c3e50;
+    color: #bdc3c7;
+    text-align: center;
+    padding: 32px 24px;
+    margin-top: auto;
+}
+
+.site-footer p {
+    font-size: 0.88em;
+    margin-bottom: 4px;
+    line-height: 1.6;
+}
+
+.site-footer strong {
+    color: #ecf0f1;
+    font-weight: 600;
+}
+
+.site-footer .footer-note {
+    font-size: 0.78em;
+    color: #7f8c8d;
+    margin-top: 10px;
+}
+
+/* ============================================================
+   RESPONSIVIDADE
+   ============================================================ */
+@media (max-width: 720px) {
+    .site-header {
+        padding: 16px 18px;
+    }
+
+    .brand-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 1.3em;
+    }
+
+    .brand-text h1 {
+        font-size: 1.05em;
+    }
+
+    .brand-text p {
+        font-size: 0.7em;
+    }
+
+    .header-badge {
+        display: none;
+    }
+
+    .hero {
+        padding: 36px 20px 20px;
+    }
+
+    .hero h2 {
+        font-size: 1.5em;
+    }
+
+    .hero p {
+        font-size: 0.95em;
+    }
+
+    .modules {
+        padding: 12px 18px 40px;
+    }
+
+    .modules-grid {
+        gap: 18px;
+    }
+
+    .module-card {
+        padding: 26px 22px;
+    }
+
+    .card-actions {
+        flex-direction: column;
+    }
+
+    .site-footer {
+        padding: 24px 18px;
+    }
+}
+
+@media (max-width: 400px) {
+    .brand-text p {
+        display: none;
+    }
+}

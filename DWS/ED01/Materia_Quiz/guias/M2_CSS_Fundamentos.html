@@ -1,434 +1,62 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Guia Completo: CSS Fundamentos - Módulo 02</title>
-    <style>
-        /* ===== RESET E ESTILOS GLOBAIS ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.7;
-            color: #333;
-            background-color: #f4f6f9;
-            padding: 20px;
-        }
-
-        .container-guia {
-            max-width: 1100px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 40px 50px;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        /* ===== TIPOGRAFIA ===== */
-        h1 {
-            font-size: 2.4em;
-            color: #2c3e50;
-            border-bottom: 4px solid #2965f1;
-            padding-bottom: 15px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        h1 small {
-            font-size: 0.6em;
-            color: #7f8c8d;
-            display: block;
-            margin-top: 8px;
-        }
-
-        h2 {
-            font-size: 1.9em;
-            color: #2965f1;
-            margin-top: 50px;
-            margin-bottom: 20px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #ecf0f1;
-        }
-
-        h3 {
-            font-size: 1.5em;
-            color: #34495e;
-            margin-top: 35px;
-            margin-bottom: 15px;
-        }
-
-        h4 {
-            font-size: 1.2em;
-            color: #16a085;
-            margin-top: 25px;
-            margin-bottom: 10px;
-        }
-
-        p {
-            margin-bottom: 15px;
-            text-align: justify;
-        }
-
-        ul, ol {
-            margin-left: 25px;
-            margin-bottom: 15px;
-        }
-
-        li {
-            margin-bottom: 8px;
-        }
-
-        strong {
-            color: #2c3e50;
-        }
-
-        a {
-            color: #2965f1;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        code {
-            background-color: #f0f0f0;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.95em;
-            color: #c0392b;
-        }
-
-        pre {
-            background-color: #1e1e1e;
-            color: #d4d4d4;
-            padding: 18px 22px;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin-bottom: 20px;
-            font-size: 0.92em;
-            line-height: 1.5;
-        }
-
-        pre code {
-            background: none;
-            padding: 0;
-            color: inherit;
-            font-size: inherit;
-        }
-
-        /* ===== TABELAS ===== */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-            font-size: 0.95em;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 10px 14px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #2965f1;
-            color: #fff;
-            font-weight: 600;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        tr:hover {
-            background-color: #eaf2f8;
-        }
-
-        /* ===== ÍNDICE ===== */
-        .indice {
-            background: #ecf0f1;
-            padding: 25px 30px;
-            border-radius: 8px;
-            margin-bottom: 40px;
-            border-left: 6px solid #2965f1;
-        }
-
-        .indice h3 {
-            margin-top: 0;
-            color: #2c3e50;
-        }
-
-        .indice ol {
-            margin-bottom: 0;
-        }
-
-        .indice a {
-            color: #2965f1;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .indice a:hover {
-            text-decoration: underline;
-            color: #1a5276;
-        }
-
-        /* ===== DESTAQUES ===== */
-        .destaque {
-            background: #fff3cd;
-            border-left: 5px solid #ffc107;
-            padding: 15px 20px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-
-        .destaque-vermelho {
-            background: #f8d7da;
-            border-left: 5px solid #dc3545;
-            padding: 15px 20px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-
-        .destaque-verde {
-            background: #d4edda;
-            border-left: 5px solid #28a745;
-            padding: 15px 20px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-
-        .destaque-azul {
-            background: #d1ecf1;
-            border-left: 5px solid #17a2b8;
-            padding: 15px 20px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-
-        .destaque-css {
-            background: #e8f0fe;
-            border-left: 5px solid #2965f1;
-            padding: 15px 20px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-
-        /* ===== DEMONSTRAÇÕES VISUAIS ===== */
-        .demo-box {
-            background-color: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .demo-box h5 {
-            font-size: 1em;
-            color: #666;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
-
-        .box-model-demo {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 20px 0;
-        }
-
-        .box-model-visual {
-            background-color: #d1ecf1;
-            padding: 30px;
-            border: 3px dashed #17a2b8;
-            border-radius: 5px;
-            text-align: center;
-            position: relative;
-        }
-
-        .box-model-visual::before {
-            content: "MARGIN";
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.75em;
-            font-weight: bold;
-            color: #17a2b8;
-            letter-spacing: 1px;
-        }
-
-        .box-model-border {
-            background-color: #fff3cd;
-            padding: 25px;
-            border: 3px solid #ffc107;
-            text-align: center;
-            position: relative;
-        }
-
-        .box-model-border::before {
-            content: "BORDER";
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.75em;
-            font-weight: bold;
-            color: #ffc107;
-            letter-spacing: 1px;
-        }
-
-        .box-model-padding {
-            background-color: #d4edda;
-            padding: 25px;
-            border: 2px dashed #28a745;
-            text-align: center;
-            position: relative;
-        }
-
-        .box-model-padding::before {
-            content: "PADDING";
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.75em;
-            font-weight: bold;
-            color: #28a745;
-            letter-spacing: 1px;
-        }
-
-        .box-model-content {
-            background-color: #fff;
-            padding: 20px 40px;
-            border: 2px solid #333;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .border-showcase {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .border-item {
-            padding: 15px;
-            text-align: center;
-            font-size: 0.9em;
-            background-color: #f8f9fa;
-            border-radius: 5px;
-        }
-
-        .border-solid { border: 4px solid #333; }
-        .border-dotted { border: 4px dotted #333; }
-        .border-dashed { border: 4px dashed #333; }
-        .border-double { border: 4px double #333; }
-        .border-groove { border: 6px groove #666; }
-        .border-ridge { border: 6px ridge #666; }
-        .border-inset { border: 6px inset #666; }
-        .border-outset { border: 6px outset #666; }
-
-        .color-showcase {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 10px;
-            margin: 20px 0;
-        }
-
-        .color-item {
-            padding: 20px 10px;
-            text-align: center;
-            color: #fff;
-            font-weight: bold;
-            font-size: 0.85em;
-            border-radius: 6px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-
-        .link-demo {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        .link-demo a:link { color: #FF0000; text-decoration: underline; }
-        .link-demo a:visited { color: #800080; }
-        .link-demo a:hover { color: #00FF00; text-decoration: none; }
-        .link-demo a:active { color: #0000FF; }
-
-        /* ===== RODAPÉ ===== */
-        .rodape-guia {
-            margin-top: 60px;
-            padding-top: 25px;
-            border-top: 2px solid #ecf0f1;
-            text-align: center;
-            color: #7f8c8d;
-            font-size: 0.9em;
-        }
-
-        /* ===== RESPONSIVIDADE ===== */
-        @media (max-width: 768px) {
-            .container-guia {
-                padding: 20px 20px;
-            }
-
-            h1 { font-size: 1.8em; }
-            h2 { font-size: 1.5em; }
-
-            pre {
-                font-size: 0.82em;
-                padding: 12px 15px;
-            }
-
-            table { font-size: 0.85em; }
-
-            .border-showcase {
-                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            }
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Completo: CSS Fundamentos</title>
+    <link rel="stylesheet" href="../css/guia.css">
 </head>
-<body>
+<body data-tema="m2">
 
-<div class="container-guia">
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="brand">
+                <div class="brand-text">
+                    <h1>CSS Fundamentos</h1>
+                    <p>Módulo 02 · Guia Completo</p>
+                </div>
+            </div>
+            <a href="../index.html" class="btn-home-header" title="Voltar à página inicial" aria-label="Voltar à página inicial">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>Início</span>
+            </a>
+        </div>
+    </header>
 
-    <!-- ============================================================ -->
-    <!-- TÍTULO PRINCIPAL -->
-    <!-- ============================================================ -->
-    <h1>🎨 Guia Completo: CSS Fundamentos
-        <small>Módulo 02 — Sintaxe, Seletores, Box Model, Cores e Tipografia</small>
-    </h1>
+    <main class="guia-wrapper">
+        <div class="container-guia">
 
-    <!-- ============================================================ -->
-    <!-- ÍNDICE -->
-    <!-- ============================================================ -->
-    <div class="indice">
-        <h3>📑 Índice</h3>
-        <ol>
-            <li><a href="#topico1">Conceitos Fundamentais e Sintaxe do CSS</a></li>
-            <li><a href="#topico2">Formas de Inserção do CSS e Seletores</a></li>
-            <li><a href="#topico3">Box Model (Modelo de Caixa)</a></li>
-            <li><a href="#topico4">Propriedades de Fundo (Background)</a></li>
-            <li><a href="#topico5">Propriedades de Tipografia e Texto</a></li>
-            <li><a href="#topico6">Propriedade Links e Pseudo-classes</a></li>
-            <li><a href="#topico7">Cores no CSS</a></li>
-            <li><a href="#topico8">Organização, Boas Práticas e Projetos Práticos</a></li>
-        </ol>
-    </div>
+            <!-- ============================================================
+                 ⬇️ COLE AQUI O CONTEÚDO DO GUIA M2 ⬇️
+                 Começa em <h1>🎨 Guia Completo: CSS Fundamentos</h1>
+                 Vai até o último </table> do Tópico 8.
+                 ⚠️ Remova o <h1>...</h1> original, pois o título
+                    já aparece no header. Comece a colar a partir do
+                    <div class="indice">.
+                 ============================================================ -->
 
-    <!-- ============================================================ -->
+            <h1>🎨 Guia Completo: CSS Fundamentos
+                <small>Módulo 02 — Sintaxe, Seletores, Box Model, Cores e Tipografia</small>
+            </h1>
+
+            <div class="indice">
+                <h3>📑 Índice</h3>
+                <ol>
+                    <li><a href="#topico1">Conceitos Fundamentais e Sintaxe do CSS</a></li>
+                    <li><a href="#topico2">Formas de Inserção do CSS e Seletores</a></li>
+                    <li><a href="#topico3">Box Model (Modelo de Caixa)</a></li>
+                    <li><a href="#topico4">Propriedades de Fundo (Background)</a></li>
+                    <li><a href="#topico5">Propriedades de Tipografia e Texto</a></li>
+                    <li><a href="#topico6">Propriedade Links e Pseudo-classes</a></li>
+                    <li><a href="#topico7">Cores no CSS</a></li>
+                    <li><a href="#topico8">Organização, Boas Práticas e Projetos Práticos</a></li>
+                </ol>
+            </div>
+
+             <!-- ============================================================ -->
     <!-- TÓPICO 1 -->
     <!-- ============================================================ -->
     <h2 id="topico1">1. Conceitos Fundamentais e Sintaxe do CSS</h2>
@@ -2181,76 +1809,17 @@ input, button, textarea, select {
             <li>Avancar para tópicos mais avançados como <strong>Flexbox, Grid, animações, pré-processadores e frameworks</strong>.</li>
         </ul>
     </div>
-
-    <!-- ============================================================ -->
-    <!-- RODAPÉ -->
-    <!-- ============================================================ -->
-    <div class="rodape-guia">
-        <p><strong>Guia Completo: CSS Fundamentos — Módulo 02</strong></p>
-        <p>Baseado no material didático da disciplina <em>Desenvolvimento de Web Sites</em> — UniAcademia</p>
-        <p>Prof. Jacimar Tavares &amp; Prof. Daves Martins &amp; Prof. Victor Vidigal</p>
-        <p style="margin-top:10px; font-size:0.85em;">Documento gerado para fins de estudo e consulta.</p>
-    </div>
-
-</div>
-    <!-- ============================================================ -->
-    <!-- RODAPÉ -->
-    <!-- ============================================================ -->
-    <div class="rodape-guia">
-        <p><strong>Guia Completo: HTML Fundamentos</strong></p>
-        <p>Baseado no material didático da disciplina <em>Desenvolvimento de Web Sites</em> — UniAcademia</p>
-        <p>Prof. Jacimar Tavares &amp; Prof. Daves Martins &amp; Prof. Victor Vidigal</p>
-        <p style="margin-top:10px; font-size:0.85em;">Documento gerado para fins de estudo e consulta.</p>
-    </div>
-
 </div>
 
-<!-- ============================================== -->
-<!-- BOTÃO HOME — COLE ESTE BLOCO ANTES DE </body>  -->
-<!-- ============================================== -->
-<a href="index.html" class="btn-home" title="Voltar à página inicial" aria-label="Voltar à página inicial">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-        <polyline points="9 22 9 12 15 12 15 22"></polyline>
-    </svg>
-    <span>Início</span>
-</a>
+        </div>
+    </main>
 
-<style>
-    .btn-home {
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        z-index: 1000;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 10px 18px;
-        background: #2c3e50;
-        color: #ffffff;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-size: 0.9em;
-        font-weight: 600;
-        text-decoration: none;
-        border-radius: 50px;
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
-        transition: all 0.25s ease;
-    }
-    .btn-home:hover {
-        background: #1a252f;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
-        color: #ffffff;
-    }
-    .btn-home:active {
-        transform: translateY(0);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    }
-    .btn-home svg { flex-shrink: 0; }
-    @media (max-width: 480px) {
-        .btn-home { padding: 10px; border-radius: 50%; }
-        .btn-home span { display: none; }
-    }
-</style>
+    <footer class="site-footer">
+        <p><strong>Guia Completo: CSS Fundamentos</strong> · UniAcademia</p>
+        <p>Desenvolvido por Rúben Israel Esterci de Souza · Eng. Software 2026/2</p>
+        <p>Prof. Jacimar Tavares &amp; Prof. Daves Martins &amp; Prof. Victor Vidigal</p>
+        <p class="footer-note">Documento gerado para fins de estudo e consulta.</p>
+    </footer>
+
 </body>
 </html>

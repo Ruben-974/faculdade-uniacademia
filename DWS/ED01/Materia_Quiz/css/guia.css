@@ -1,0 +1,485 @@
+/* ============================================================
+   GUIA — Estilos compartilhados pelos 4 guias de estudo
+   Cor definida por <body data-tema="m1|m2|m3|m4">
+   ============================================================ */
+
+/* ---------- RESET ---------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ---------- TEMAS ---------- */
+:root {
+    --tema: #e34c26;
+    --tema-escura: #b03a1a;
+    --tema-hover-linha: #fdeaea;
+    --tema-destaque-bg: #fdeaea;
+}
+body[data-tema="m2"] {
+    --tema: #2965f1;
+    --tema-escura: #1a5276;
+    --tema-hover-linha: #eaf2f8;
+    --tema-destaque-bg: #e8f0fe;
+}
+body[data-tema="m3"] {
+    --tema: #3498db;
+    --tema-escura: #1f618d;
+    --tema-hover-linha: #eaf2f8;
+    --tema-destaque-bg: #eaf2f8;
+}
+body[data-tema="m4"] {
+    --tema: #d4a600;
+    --tema-escura: #a67c00;
+    --tema-hover-linha: #fef9e7;
+    --tema-destaque-bg: #fef9e7;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.7;
+    color: #333;
+    background-color: #f4f6f9;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ============================================================
+   CABEÇALHO — mesmo padrão do index.html
+   ============================================================ */
+.site-header {
+    background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%);
+    color: #fff;
+    padding: 22px 24px;
+    box-shadow: 0 4px 20px rgba(44, 62, 80, 0.25);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.brand-text h1 {
+    font-size: 1.25em;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    line-height: 1.2;
+    color: #fff;
+}
+
+.brand-text p {
+    font-size: 0.78em;
+    color: #bdc3c7;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 2px;
+}
+
+/* Botão Home no cabeçalho */
+.btn-home-header {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ecf0f1;
+    font-family: inherit;
+    font-size: 0.88em;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+}
+
+.btn-home-header:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.35);
+    transform: translateY(-2px);
+    color: #fff;
+}
+
+.btn-home-header svg { flex-shrink: 0; }
+
+/* ============================================================
+   WRAPPER
+   ============================================================ */
+.guia-wrapper {
+    flex: 1;
+    padding: 30px 20px 60px;
+}
+
+.container-guia {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 40px 50px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ============================================================
+   TIPOGRAFIA
+   ============================================================ */
+.container-guia h1 {
+    font-size: 2.4em;
+    color: #2c3e50;
+    border-bottom: 4px solid var(--tema);
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    text-align: center;
+    line-height: 1.3;
+}
+
+.container-guia h1 small {
+    font-size: 0.55em;
+    color: #7f8c8d;
+    display: block;
+    margin-top: 10px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.container-guia h2 {
+    font-size: 1.9em;
+    color: var(--tema);
+    margin-top: 50px;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #ecf0f1;
+}
+
+.container-guia h3 {
+    font-size: 1.5em;
+    color: #34495e;
+    margin-top: 35px;
+    margin-bottom: 15px;
+}
+
+.container-guia h4 {
+    font-size: 1.2em;
+    color: #16a085;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.container-guia h5 {
+    font-size: 1.05em;
+    color: #8e44ad;
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+.container-guia p {
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+.container-guia ul,
+.container-guia ol {
+    margin-left: 25px;
+    margin-bottom: 15px;
+}
+
+.container-guia li { margin-bottom: 8px; }
+
+.container-guia strong { color: #2c3e50; }
+
+.container-guia a {
+    color: var(--tema);
+    text-decoration: none;
+}
+
+.container-guia a:hover { text-decoration: underline; }
+
+.container-guia code {
+    background-color: #f0f0f0;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.95em;
+    color: #c0392b;
+}
+
+.container-guia pre {
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    padding: 18px 22px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin-bottom: 20px;
+    font-size: 0.92em;
+    line-height: 1.5;
+}
+
+.container-guia pre code {
+    background: none;
+    padding: 0;
+    color: inherit;
+    font-size: inherit;
+}
+
+/* ============================================================
+   TABELAS
+   ============================================================ */
+.container-guia table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 0.95em;
+}
+
+.container-guia th,
+.container-guia td {
+    border: 1px solid #ddd;
+    padding: 10px 14px;
+    text-align: left;
+}
+
+.container-guia th {
+    background-color: var(--tema);
+    color: #fff;
+    font-weight: 600;
+}
+
+.container-guia tr:nth-child(even) { background-color: #f9f9f9; }
+.container-guia tr:hover { background-color: var(--tema-hover-linha); }
+
+/* ============================================================
+   ÍNDICE
+   ============================================================ */
+.indice {
+    background: #ecf0f1;
+    padding: 25px 30px;
+    border-radius: 8px;
+    margin-bottom: 40px;
+    border-left: 6px solid var(--tema);
+}
+
+.indice h3 { margin-top: 0; color: #2c3e50; }
+.indice ol { margin-bottom: 0; }
+
+.indice a {
+    color: var(--tema);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.indice a:hover {
+    text-decoration: underline;
+    color: var(--tema-escura);
+}
+
+/* ============================================================
+   DESTAQUES
+   ============================================================ */
+.destaque {
+    background: #fff3cd;
+    border-left: 5px solid #ffc107;
+    padding: 15px 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.destaque-vermelho {
+    background: #f8d7da;
+    border-left: 5px solid #dc3545;
+    padding: 15px 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.destaque-verde {
+    background: #d4edda;
+    border-left: 5px solid #28a745;
+    padding: 15px 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.destaque-azul {
+    background: #d1ecf1;
+    border-left: 5px solid #17a2b8;
+    padding: 15px 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.destaque-html {
+    background: var(--tema-destaque-bg);
+    border-left: 5px solid var(--tema);
+    padding: 15px 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* ============================================================
+   DEMONSTRAÇÕES VISUAIS
+   ============================================================ */
+.demo-box {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.demo-box h5 {
+    font-size: 1em;
+    color: #666;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.tabela-demo {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 15px 0;
+}
+
+.tabela-demo th,
+.tabela-demo td {
+    border: 1px solid #999;
+    padding: 8px 12px;
+}
+
+.tabela-demo th {
+    background-color: #34495e;
+    color: white;
+}
+
+/* ============================================================
+   RODAPÉ
+   ============================================================ */
+.site-footer {
+    background: #2c3e50;
+    color: #bdc3c7;
+    text-align: center;
+    padding: 32px 24px;
+    margin-top: auto;
+}
+
+.site-footer p {
+    font-size: 0.88em;
+    margin-bottom: 4px;
+    line-height: 1.6;
+}
+
+.site-footer strong {
+    color: #ecf0f1;
+    font-weight: 600;
+}
+
+.site-footer .footer-note {
+    font-size: 0.78em;
+    color: #7f8c8d;
+    margin-top: 10px;
+}
+
+/* ============================================================
+   RESPONSIVIDADE
+   ============================================================ */
+@media (max-width: 768px) {
+    /* ---------- HEADER ---------- */
+    .site-header { padding: 16px 18px; }
+
+    .brand-text h1 { font-size: 1.05em; }
+    .brand-text p  { font-size: 0.7em; }
+
+    .btn-home-header { padding: 8px 14px; font-size: 0.8em; }
+
+    /* ---------- WRAPPER (impede estouro horizontal da página) ---------- */
+    .guia-wrapper {
+        padding: 20px 12px 40px;
+        overflow-x: hidden;   /* ⬅️ essencial */
+    }
+
+    .container-guia {
+        padding: 25px 18px;
+        max-width: 100%;
+        overflow-x: hidden;   /* ⬅️ essencial */
+    }
+
+    /* ---------- TIPOGRAFIA ---------- */
+    .container-guia h1 { font-size: 1.6em; }
+    .container-guia h2 { font-size: 1.3em; margin-top: 35px; }
+    .container-guia h3 { font-size: 1.1em; margin-top: 25px; }
+    .container-guia h4 { font-size: 1em; }
+
+    .container-guia p,
+    .container-guia li { font-size: 0.95em; }
+
+    .container-guia h1 small { font-size: 0.55em; }
+
+    /* ---------- TABELAS: rolagem horizontal isolada ---------- */
+    .container-guia table {
+        display: block;               /* deixa a tabela virar bloco scrollável */
+        overflow-x: auto;             /* ⬅️ rola SÓ a tabela */
+        -webkit-overflow-scrolling: touch;
+        max-width: 100%;
+        font-size: 0.82em;
+        border-radius: 6px;
+    }
+
+    .container-guia table th,
+    .container-guia table td {
+        padding: 8px 10px;
+        white-space: normal;
+        min-width: 90px;              /* evita colunas colapsadas */
+    }
+
+    /* ---------- CÓDIGO (pre) ---------- */
+    .container-guia pre {
+        font-size: 0.78em;
+        padding: 12px 14px;
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    .container-guia code {
+        font-size: 0.9em;
+        word-break: break-word;
+    }
+
+    /* ---------- CAIXAS DE DESTAQUE ---------- */
+    .destaque,
+    .destaque-vermelho,
+    .destaque-verde,
+    .destaque-azul,
+    .destaque-html {
+        padding: 12px 16px;
+        font-size: 0.92em;
+    }
+
+    /* ---------- ÍNDICE ---------- */
+    .indice {
+        padding: 18px 20px;
+    }
+
+    /* ---------- DEMO BOX ---------- */
+    .demo-box { padding: 14px; }
+}
+
+@media (max-width: 480px) {
+    .btn-home-header span { display: none; }
+    .btn-home-header { padding: 10px; border-radius: 50%; }
+    .brand-text p { display: none; }
+
+    .container-guia h1 { font-size: 1.4em; }
+    .container-guia h2 { font-size: 1.15em; }
+    .container-guia h3 { font-size: 1em; }
+
+    .container-guia table th,
+    .container-guia table td { min-width: 80px; padding: 6px 8px; }
+}
+}

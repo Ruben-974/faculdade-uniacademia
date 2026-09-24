@@ -502,6 +502,584 @@ window.QUIZ_DATA = {
             correta: 1,
             explicacao: "Senhas NUNCA devem ser enviadas via GET, porque os dados ficam visíveis na URL, no histórico do navegador, em logs de servidor e podem ser vistos por terceiros. O correto é usar method=\"post\".",
             referencia: "Módulo 01 — Seção 4.1: A Tag form e Atributos"
+        },
+        {
+            tipo: "vf",
+            enunciado: "A tag \x3Ctitle> deve ficar dentro da seção \x3Chead> do documento HTML.",
+            resposta: true,
+            explicacao: "Correto! O \x3Ctitle> pertence ao \x3Chead> e define o texto exibido na aba/barra do navegador — não aparece no corpo da página. O \x3Chead> guarda metadados (charset, title, links para CSS), enquanto o \x3Cbody> guarda o conteúdo visível.",
+            referencia: "Módulo 01 — Seção 1.2: Estrutura Básica do Arquivo HTML"
+        },
+        {
+            tipo: "vf",
+            enunciado: "O HTML cria páginas estáticas, sem animação.",
+            resposta: true,
+            explicacao: "Correto! O material destaca: 'O HTML cria páginas estáticas, sem animação'. Ele define ESTRUTURA e CONTEÚDO. Para interatividade e animações, é preciso JavaScript e CSS.",
+            referencia: "Módulo 01 — Seção 1.1: O que é HTML? Definição e Propósito"
+        },
+        {
+            tipo: "vf",
+            enunciado: "A tag \x3Cbr> é uma tag vazia (void element), ou seja, não precisa de fechamento.",
+            resposta: true,
+            explicacao: "Correto! A tag br é void — não tem fechamento. Ela apenas insere uma quebra de linha. O mesmo vale para hr, img, input, meta e link.",
+            referencia: "Módulo 01 — Seção 7.3: Quebra de Linha e Régua Horizontal"
+        },
+        {
+            tipo: "vf",
+            enunciado: "A tag \x3Cimg> possui tag de fechamento obrigatória: \x3C/img>.",
+            resposta: false,
+            explicacao: "Falso! \x3Cimg> é uma tag VAZIA (void element) — NÃO possui tag de fechamento. Ela se fecha em si mesma. O mesmo vale para br, hr e input.",
+            referencia: "Módulo 01 — Seção 5.1: A Tag img e Sua Sintaxe"
+        },
+        {
+            tipo: "vf",
+            enunciado: "A tag \x3Cul> cria listas NÃO ordenadas (com marcadores como •, ○, ▪).",
+            resposta: true,
+            explicacao: "Correto! ul = Unordered List. Os marcadores são controlados pelo atributo type (disc, circle, square, none). Para listas ORDENADAS, usa-se ol.",
+            referencia: "Módulo 01 — Seção 2.2: Listas Não Ordenadas ul"
+        },
+        {
+            tipo: "vf",
+            enunciado: "O atributo colspan mescla células HORIZONTALMENTE em uma tabela HTML.",
+            resposta: true,
+            explicacao: "Correto! colspan = coluna. Ele mescla horizontalmente. Para mesclar verticalmente (em linhas), usa-se rowspan.",
+            referencia: "Módulo 01 — Seção 3.5: colspan e rowspan — Mesclagem de Células"
+        },
+        {
+            tipo: "vf",
+            enunciado: "O atributo alt é opcional em imagens e pode ser omitido sem prejuízo.",
+            resposta: false,
+            explicacao: "Falso! O alt é OBRIGATÓRIO para acessibilidade. Ele fornece descrição textual para leitores de tela e aparece quando a imagem não carrega. A única exceção são imagens decorativas — mas mesmo aí usa-se alt vazio, nunca omitir.",
+            referencia: "Módulo 01 — Seção 5.3: O Atributo alt — Acessibilidade e Fallback"
+        },
+
+        /* ============================================================
+           V/F COM JUSTIFICATIVA
+           ============================================================ */
+
+        {
+            tipo: "vf-justificativa",
+            enunciado: "A seção \x3Chead> deve vir ANTES da seção \x3Cbody> no documento HTML.",
+            resposta: true,
+            justificativas: [
+                "Porque o \x3Chead> contém metadados que precisam ser lidos pelo navegador antes de renderizar o conteúdo.",
+                "Porque o \x3Cbody> não funciona se não houver um \x3Chead> antes.",
+                "Porque o \x3Chead> é uma tag mais importante hierarquicamente."
+            ],
+            justificativaCorreta: 0,
+            explicacao: "A ordem correta é: html → head → body. O navegador precisa ler os metadados (charset, title, links para CSS) ANTES de renderizar o conteúdo. Sem o charset, por exemplo, acentos podem aparecer errados na página inteira.",
+            referencia: "Módulo 01 — Seção 1.2: Estrutura Básica do Arquivo HTML"
+        },
+        {
+            tipo: "vf-justificativa",
+            enunciado: "É MAIS SEGURO usar o método GET do que o POST para enviar senhas em um formulário de login.",
+            resposta: false,
+            justificativas: [
+                "Porque o GET criptografa os dados automaticamente.",
+                "Porque o GET anexa os dados à URL, ficando visíveis no histórico, logs e barra de endereço.",
+                "Porque o GET tem limite de 2000 caracteres, o que torna o login mais rápido."
+            ],
+            justificativaCorreta: 1,
+            explicacao: "O GET anexa os dados à URL — senhas ficariam visíveis na barra de endereço, no histórico do navegador, em logs de servidor e em servidores proxy. Já o POST envia os dados no CORPO da requisição, invisíveis na URL. Para login, SEMPRE POST.",
+            referencia: "Módulo 01 — Seção 4.1: A Tag form e Atributos"
+        },
+        {
+            tipo: "vf-justificativa",
+            enunciado: "O atributo rowspan mescla células verticalmente em uma tabela.",
+            resposta: true,
+            justificativas: [
+                "Porque row = linha; rowspan estende a célula por várias linhas.",
+                "Porque row = coluna; rowspan estende a célula por várias colunas.",
+                "Porque rowspan só funciona em tabelas sem borda."
+            ],
+            justificativaCorreta: 0,
+            explicacao: "row = linha em inglês. rowspan estende a célula verticalmente, ocupando várias linhas. colspan = coluna; estende horizontalmente. Mnemônico fácil: col = coluna; row = linha.",
+            referencia: "Módulo 01 — Seção 3.5: colspan e rowspan — Mesclagem de Células"
+        },
+
+        /* ============================================================
+           MÚLTIPLA ESCOLHA
+           ============================================================ */
+
+        {
+            tipo: "multipla",
+            enunciado: "Qual é a estrutura CORRETA de um documento HTML5?",
+            opcoes: [
+                "html → body → head",
+                "html → head → body",
+                "head → html → body",
+                "body → head → html"
+            ],
+            correta: 1,
+            explicacao: "A estrutura correta é: html (raiz), contendo head (metadados) e, EM SEGUIDA, body (conteúdo visível). O head deve vir SEMPRE antes do body.",
+            referencia: "Módulo 01 — Seção 1.2: Estrutura Básica do Arquivo HTML"
+        },
+        {
+            tipo: "multipla",
+            enunciado: "Qual tag define o título que aparece na ABA ou barra do navegador (e não no corpo da página)?",
+            opcoes: ["\x3Ch1>", "\x3Ctitle>", "\x3Cheader>", "\x3Ccaption>"],
+            correta: 1,
+            explicacao: "A tag title fica dentro do head e define o texto da aba do navegador — não é exibido no conteúdo da página. A h1 é o título principal DENTRO do corpo. header é uma seção semântica do HTML5, e caption é o título de uma tabela.",
+            referencia: "Módulo 01 — Seção 1.2: Estrutura Básica do Arquivo HTML"
+        },
+        {
+            tipo: "multipla",
+            enunciado: "Qual tag representa uma LINHA de tabela em HTML?",
+            opcoes: ["\x3Ctd>", "\x3Cth>", "\x3Ctr>", "\x3Ctable>"],
+            correta: 2,
+            explicacao: "A tag tr vem de 'table row'. Dentro dela ficam as células: th (cabeçalho) e td (dados). A tag table é o contêiner principal.",
+            referencia: "Módulo 01 — Seção 3.1: Estrutura da Tabela"
+        },
+        {
+            tipo: "multipla",
+            enunciado: "Qual valor do atributo type do input exibe ASTERISCOS no lugar dos caracteres digitados?",
+            opcoes: ["text", "password", "hidden", "secret"],
+            correta: 1,
+            explicacao: "O type password oculta os caracteres com asteriscos. O type text exibe normalmente, e hidden oculta o campo inteiro (não aparece na tela).",
+            referencia: "Módulo 01 — Seção 4.2: A Tag input e Seus Tipos"
+        },
+        {
+            tipo: "multipla",
+            enunciado: "Qual valor do atributo type em uma lista \x3Col> cria uma listagem com letras maiúsculas (A, B, C)?",
+            opcoes: ["\"1\"", "\"A\"", "\"a\"", "\"I\""],
+            correta: 1,
+            explicacao: "type=\"A\" cria lista alfabética MAIÚSCULA. Outros valores: \"1\" (numérica, padrão), \"a\" (minúscula), \"I\" (romano maiúsculo), \"i\" (romano minúsculo).",
+            referencia: "Módulo 01 — Seção 2.1.2: Atributo type — Tipo de Ordenação"
+        },
+        {
+            tipo: "multipla",
+            enunciado: "Qual atributo da tag \x3Ca> define o DESTINO do link?",
+            opcoes: ["src", "link", "href", "url"],
+            correta: 2,
+            explicacao: "O href (Hypertext REFerence) define para onde o link aponta. O src é usado em imagens, scripts e iframes. 'link' e 'url' não existem como atributos de a. Regra: href = para onde vai; src = de onde vem.",
+            referencia: "Módulo 01 — Seção 6.1: A Tag a e Sua Sintaxe"
+        },
+        {
+            tipo: "multipla",
+            enunciado: "Qual método HTTP envia os dados do formulário no CORPO da requisição, sem exibi-los na URL?",
+            opcoes: ["GET", "POST", "PUT", "SEND"],
+            correta: 1,
+            explicacao: "O POST envia os dados no corpo da requisição — invisíveis na URL. É o método indicado para login, cadastro e qualquer dado sensível. O GET anexa à URL e é usado para buscas.",
+            referencia: "Módulo 01 — Seção 4.1: A Tag form e Atributos"
+        },
+        {
+            tipo: "multipla",
+            enunciado: "Qual tag exibe o texto preservando EXATAMENTE os espaços, tabulações e quebras de linha?",
+            opcoes: ["\x3Cp>", "\x3Cbr>", "\x3Cpre>", "\x3Cspan>"],
+            correta: 2,
+            explicacao: "A tag pre (preformatted) mantém espaços, tabulações e quebras exatamente como escritos no código-fonte. É útil para exibir código ou arte ASCII.",
+            referencia: "Módulo 01 — Seção 7.3: Quebra de Linha e Régua Horizontal"
+        },
+
+        /* ============================================================
+           MÚLTIPLA RESPOSTA (checkbox)
+           ============================================================ */
+
+        {
+            tipo: "multipla-resposta",
+            enunciado: "Marque TODAS as tags que são VOID elements (não possuem tag de fechamento):",
+            opcoes: ["\x3Cimg>", "\x3Cdiv>", "\x3Cbr>", "\x3Cinput>", "\x3Cp>", "\x3Chr>"],
+            corretas: [0, 2, 3, 5],
+            explicacao: "São void elements: img, br, input e hr. Não são: div e p (ambos têm fechamento obrigatório: </div> e </p>). Void elements se fecham em si mesmos e não podem conter conteúdo.",
+            referencia: "Módulo 01 — Seção 1.3: Sintaxe dos Comandos HTML"
+        },
+        {
+            tipo: "multipla-resposta",
+            enunciado: "Marque TODOS os tipos de lista que EXISTEM em HTML:",
+            opcoes: ["Ordenada (ol)", "Não ordenada (ul)", "De definição (dl)", "Numérica (nl)", "Alfabética (al)"],
+            corretas: [0, 1, 2],
+            explicacao: "Existem 3 tipos de lista em HTML: ol (ordenada), ul (não ordenada) e dl (definição, com dt e dd). 'nl' e 'al' não existem em HTML.",
+            referencia: "Módulo 01 — Seção 2.5: Resumo dos Tipos de Listas"
+        },
+        {
+            tipo: "multipla-resposta",
+            enunciado: "Marque TODOS os tipos de input que EXISTEM em HTML:",
+            opcoes: ["text", "password", "checkbox", "radio", "sentence", "color"],
+            corretas: [0, 1, 2, 3, 5],
+            explicacao: "Existem: text, password, checkbox, radio, color (entre outros: email, number, date, range, submit, reset). Não existe input type='sentence' em HTML.",
+            referencia: "Módulo 01 — Seção 4.2: A Tag input e Seus Tipos"
+        },
+
+        /* ============================================================
+           COMPLETE O CÓDIGO
+           ============================================================ */
+
+        {
+            tipo: "complete",
+            enunciado: "Complete o código abaixo para criar um link para o site exemplo.com:",
+            codigo: '\x3Ca {{GAP}}="https://exemplo.com">Visitar site\x3C/a>',
+            opcoes: ["src", "href", "link", "url"],
+            correta: 1,
+            explicacao: "O atributo correto é href (Hypertext REFerence). Ele define o DESTINO do link. O src é usado em img, script e iframe.",
+            referencia: "Módulo 01 — Seção 6.1: A Tag a e Sua Sintaxe"
+        },
+        {
+            tipo: "complete",
+            enunciado: "Complete o código abaixo para que a lista alfabética comece na letra C:",
+            codigo: '\x3Col type="A" {{GAP}}="3">\n  \x3Cli>Primeiro item\x3C/li>\n  \x3Cli>Segundo item\x3C/li>\n\x3C/ol>',
+            opcoes: ["begin", "start", "from", "first"],
+            correta: 1,
+            explicacao: "O atributo start define em que VALOR a lista ordenada começa. Com type=\"A\" e start=\"3\", a lista inicia em C (1=A, 2=B, 3=C).",
+            referencia: "Módulo 01 — Seção 2.1.3: Atributo start — Valor Inicial"
+        },
+        {
+            tipo: "complete",
+            enunciado: "Complete o código abaixo para que o checkbox já venha MARCADO por padrão:",
+            codigo: '\x3Cinput type="checkbox" name="termos" {{GAP}}> Aceito os termos',
+            opcoes: ["selected", "checked", "default", "marked"],
+            correta: 1,
+            explicacao: "O atributo correto é checked (sem valor). Ele deixa o checkbox ou radio pré-marcado. Já selected é usado em options de um select.",
+            referencia: "Módulo 01 — Seção 4.3: Atributos da Tag input"
+        },
+        {
+            tipo: "complete",
+            enunciado: "Complete o código abaixo para criar um campo de email com o ícone '@' à esquerda:",
+            codigo: '\x3Cdiv class="{{GAP}}">\n  \x3Cspan class="input-group-addon">@\x3C/span>\n  \x3Cinput type="email" class="form-control">\n\x3C/div>',
+            opcoes: ["form-group", "input-group", "field-addon", "input-box"],
+            correta: 1,
+            explicacao: "A classe .input-group é o CONTÊINER do componente de grupo de input. O .input-group-addon é o item lateral com o '@'.",
+            referencia: "Módulo 01 — Seção 4.8: Exemplo com Endereço (optgroup e datalist)"
+        },
+        {
+            tipo: "complete",
+            enunciado: "Complete o código abaixo para que a tabela tenha uma legenda de título:",
+            codigo: '\x3Ctable>\n  \x3C{{GAP}}>Lista de Alunos\x3C/caption>\n  \x3Ctr>\x3Cth>Nome\x3C/th>\x3C/tr>\n\x3C/table>',
+            opcoes: ["title", "caption", "header", "label"],
+            correta: 1,
+            explicacao: "O elemento correto é caption. Ele fica DENTRO da table e fornece um título visível. Não confundir com title (do head) ou header (seção semântica).",
+            referencia: "Módulo 01 — Seção 3.6: Tabela-Resumo dos Elementos"
+        },
+        {
+            tipo: "complete",
+            enunciado: "Complete o código abaixo para criar um link que abre o cliente de e-mail:",
+            codigo: '\x3Ca href="{{GAP}}:usuario@email.com">Enviar e-mail\x3C/a>',
+            opcoes: ["mail", "email", "mailto", "send"],
+            correta: 2,
+            explicacao: "O prefixo correto é mailto:, que instrui o navegador a abrir o cliente de e-mail padrão com o endereço preenchido. Outros: tel: (telefone), sms: (mensagem).",
+            referencia: "Módulo 01 — Seção 6.3: Tipos de Links — Links para E-mail"
+        },
+
+        /* ============================================================
+           COMPLETE MÚLTIPLO (2+ gaps)
+           ============================================================ */
+
+        {
+            tipo: "complete-multiplo",
+            enunciado: "Complete a tag de imagem com os atributos obrigatórios (caminho e descrição):",
+            codigo: '\x3Cimg {{GAP1}}="foto.jpg" {{GAP2}}="Foto da família">',
+            gaps: [
+                { opcoes: ["src", "href", "path"], correta: 0 },
+                { opcoes: ["title", "alt", "desc"], correta: 1 }
+            ],
+            explicacao: "src (source) define o CAMINHO da imagem. alt (alternative text) fornece a descrição textual, obrigatória para acessibilidade. Lembre-se: src = de onde vem; href = para onde vai. E alt ≠ title — o title é apenas uma dica de ferramenta.",
+            referencia: "Módulo 01 — Seção 5.2 e 5.3: src e alt"
+        },
+        {
+            tipo: "complete-multiplo",
+            enunciado: "Complete o formulário para que envie a senha de forma SEGURA para processar.php:",
+            codigo: '\x3Cform action="processar.php" method="{{GAP1}}">\n  \x3Cinput type="{{GAP2}}" name="senha">\n  \x3Cinput type="submit" value="Entrar">\n\x3C/form>',
+            gaps: [
+                { opcoes: ["get", "post", "send"], correta: 1 },
+                { opcoes: ["text", "password", "hidden"], correta: 1 }
+            ],
+            explicacao: "method=\"post\" é o correto para enviar senhas — os dados vão no corpo da requisição, invisíveis na URL. Já type=\"password\" oculta os caracteres digitados com asteriscos. A dupla POST + password é o padrão para qualquer formulário de login.",
+            referencia: "Módulo 01 — Seção 4.1 e 4.2: form e input"
+        },
+        {
+            tipo: "complete-multiplo",
+            enunciado: "Complete o link para que abra em uma NOVA ABA com segurança:",
+            codigo: '\x3Ca href="https://site.com" {{GAP1}}="_blank" {{GAP2}}="noopener noreferrer">Visitar\x3C/a>',
+            gaps: [
+                { opcoes: ["window", "target", "open"], correta: 1 },
+                { opcoes: ["rel", "sec", "safe"], correta: 0 }
+            ],
+            explicacao: "target=\"_blank\" faz o link abrir em nova aba. rel=\"noopener noreferrer\" é a prática de SEGURANÇA recomendada: impede que a página de destino acesse a janela de origem e evita vazamento de referência. Sempre use os dois juntos.",
+            referencia: "Módulo 01 — Seção 6.2: O Atributo target"
+        },
+
+        /* ============================================================
+           APONTE O ERRO (1 erro)
+           ============================================================ */
+
+        {
+            tipo: "erro",
+            enunciado: "Há um erro no código abaixo. Aponte qual é:",
+            codigo: '\x3Cul>\n  \x3Cli>Primeiro item\n  \x3Cli>Segundo item\x3C/li>\n  \x3Cli>Terceiro item\x3C/li>\n\x3C/ul>',
+            opcoes: [
+                "A tag ul deveria ser ol",
+                "Falta fechar a tag li do primeiro item",
+                "A tag li não pode ser usada dentro de ul",
+                "O código está correto"
+            ],
+            correta: 1,
+            explicacao: "O primeiro li foi aberto mas nunca fechado com </li>. Embora a maioria dos navegadores 'conserte' isso automaticamente, o código está tecnicamente incorreto. Sempre feche todas as tags!",
+            referencia: "Módulo 01 — Seção 1.3: Sintaxe dos Comandos HTML"
+        },
+        {
+            tipo: "erro",
+            enunciado: "Há um erro no código abaixo. Aponte qual é:",
+            codigo: '\x3Cimg src="logo.png" width="150" height="80">',
+            opcoes: [
+                "width e height não podem ser usados juntos",
+                "Falta o atributo alt, obrigatório para acessibilidade",
+                "src deveria ser href para imagens",
+                "O código está correto"
+            ],
+            correta: 1,
+            explicacao: "O atributo alt está ausente. Ele é OBRIGATÓRIO para acessibilidade: leitores de tela leem seu conteúdo para usuários com deficiência visual, e ele aparece quando a imagem não carrega.",
+            referencia: "Módulo 01 — Seção 5.3: O Atributo alt"
+        },
+        {
+            tipo: "erro",
+            enunciado: "Há um erro estrutural na tabela abaixo. Aponte qual é:",
+            codigo: '\x3Ctable border="1">\n  \x3Cth>Nome\x3C/th>\n  \x3Cth>Idade\x3C/th>\n  \x3Ctr>\n    \x3Ctd>Ana\x3C/td>\n    \x3Ctd>20\x3C/td>\n  \x3C/tr>\n\x3C/table>',
+            opcoes: [
+                "A tag table deveria ser tab",
+                "As tags th devem estar dentro de uma linha tr",
+                "border não aceita o valor 1",
+                "O código está correto"
+            ],
+            correta: 1,
+            explicacao: "As tags th devem SEMPRE estar dentro de uma linha tr. A estrutura correta é: table → tr → th (cabeçalho) ou td (dados).",
+            referencia: "Módulo 01 — Seção 3.1: Estrutura da Tabela"
+        },
+        {
+            tipo: "erro",
+            enunciado: "Há um erro estrutural no documento abaixo. Aponte qual é:",
+            codigo: '\x3Chtml>\n  \x3Cbody>\n    \x3Chead>\n      \x3Ctitle>Meu site\x3C/title>\n    \x3C/head>\n    \x3Ch1>Bem-vindo\x3C/h1>\n  \x3C/body>\n\x3C/html>',
+            opcoes: [
+                "A tag title deveria estar dentro do body",
+                "A seção head deve vir ANTES do body, nunca dentro dele",
+                "A tag h1 não pode estar dentro do body",
+                "O código está correto"
+            ],
+            correta: 1,
+            explicacao: "A estrutura correta do documento HTML é: html → head (primeiro) → body. O head contém metadados e deve vir ANTES do body. Do jeito que está, o head está aninhado dentro do body, o que é semanticamente inválido.",
+            referencia: "Módulo 01 — Seção 1.2: Estrutura Básica do Arquivo HTML"
+        },
+        {
+            tipo: "erro",
+            enunciado: "Há um problema no formulário abaixo. Aponte qual é:",
+            codigo: '\x3Cform action="processa.php" method="get">\n  \x3Cinput type="password" name="senha">\n  \x3Cinput type="submit">\n\x3C/form>',
+            opcoes: [
+                "type password não pode ser usado em form",
+                "Usar GET para enviar senha é inseguro — os dados ficam visíveis na URL",
+                "Faltou o atributo name no submit",
+                "O código está correto"
+            ],
+            correta: 1,
+            explicacao: "Senhas NUNCA devem ser enviadas via GET. Os dados ficam visíveis na URL, no histórico do navegador, em logs de servidor. O correto é method=\"post\".",
+            referencia: "Módulo 01 — Seção 4.1: A Tag form e Atributos"
+        },
+
+        /* ============================================================
+           DEBUG MÚLTIPLO (encontrar TODOS os erros)
+           ============================================================ */
+
+        {
+            tipo: "debug-multiplo",
+            enunciado: "Este documento tem 3 erros. Marque TODOS eles:",
+            codigo: '\x3Chtml>\n  \x3Cbody>\n    \x3Chead>\n      \x3Ctitle>Meu site\x3C/title>\n    \x3C/head>\n    \x3Ch1>Bem-vindo\x3Ch1>\n  \x3C/body>\n\x3C/html>',
+            opcoes: [
+                { texto: "A seção head está dentro do body (deveria vir antes)", correta: true },
+                { texto: "A tag title não deveria estar no head", correta: false },
+                { texto: "A tag h1 não foi fechada (falta </h1>)", correta: true },
+                { texto: "A tag html deveria ser HTML em maiúsculas", correta: false },
+                { texto: "Falta o fechamento </head> ... (não, este está ok)", correta: false },
+                { texto: "O body deveria vir antes do head", correta: true }
+            ],
+            explicacao: "Os 3 erros são: (1) o head está DENTRO do body, quando deveria vir ANTES; (2) a tag h1 não foi fechada corretamente (só tem a abertura, falta </h1>); (3) consequência direta do erro 1 — o body aparece antes do head, invertendo a ordem correta. Os outros itens são falsos: title pertence ao head; tags HTML são case-insensitive; o </head> está presente.",
+            referencia: "Módulo 01 — Seção 1.2: Estrutura Básica do Arquivo HTML"
+        },
+        {
+            tipo: "debug-multiplo",
+            enunciado: "Esta lista tem 3 erros. Marque TODOS eles:",
+            codigo: '\x3Col>\n  \x3Cli>Primeiro item\n  \x3Cli>Segundo item\x3C/li>\n  \x3Cul>\n    \x3Cli>Subitem\x3C/li>\n  \x3C/ul>\n\x3C/ol>',
+            opcoes: [
+                { texto: "O primeiro li não foi fechado com </li>", correta: true },
+                { texto: "Uma ul está aninhada fora de um li (deveria estar dentro de um li)", correta: true },
+                { texto: "Falta o </li> do segundo item antes de abrir a ul", correta: true },
+                { texto: "ol não pode conter ul dentro", correta: false },
+                { texto: "Subitem deveria usar <p> em vez de <li>", correta: false }
+            ],
+            explicacao: "Em HTML, para aninhar uma lista dentro de outra, a sublista DEVE ficar DENTRO de um <li> pai: <li>Item<ul><li>Subitem</li></ul></li>. Aqui faltam 3 fechamentos: o </li> do primeiro item, o </li> do segundo item (antes da ul), e a ul está fora do li. Os itens 4 e 5 são falsos — ol pode conter ul desde que aninhada corretamente, e subitem é item de lista, não parágrafo.",
+            referencia: "Módulo 01 — Seção 2.3: Listas Aninhadas"
+        },
+        {
+            tipo: "debug-multiplo",
+            enunciado: "Este formulário tem 3 erros. Marque TODOS eles:",
+            codigo: '\x3Cform action="login.php" method="get">\n  \x3Clabel>Email:\x3C/label>\n  \x3Cinput type="email" id="email">\n  \x3Cinput type="password" name="senha">\n  \x3Cinput type="submit" value="Entrar">\n\x3C/form>',
+            opcoes: [
+                { texto: "Usar GET para login expõe a senha na URL — deveria ser POST", correta: true },
+                { texto: "Falta o atributo for no label, apontando para o id do input", correta: true },
+                { texto: "Falta o atributo name no input de email", correta: true },
+                { texto: "O input type='password' não existe em HTML", correta: false },
+                { texto: "O input submit deveria ser type='button'", correta: false }
+            ],
+            explicacao: "Erro 1: GET expõe a senha — deve ser POST. Erro 2: o label precisa de for=\"email\" para associar ao input. Erro 3: sem name, o valor do input NÃO é enviado ao servidor — é como se o campo não existisse. Os itens 4 e 5 são falsos: password existe; submit é o tipo correto para enviar formulário.",
+            referencia: "Módulo 01 — Seção 4.1 e 4.3: form e atributos de input"
+        },
+
+        /* ============================================================
+           ASSOCIAÇÃO (ligar colunas)
+           ============================================================ */
+
+        {
+            tipo: "associacao",
+            enunciado: "Relacione cada TAG com sua função correta:",
+            pares: [
+                { esquerda: "\x3Chtml>", direita: "Envolve todo o documento" },
+                { esquerda: "\x3Chead>", direita: "Guarda metadados (title, charset, links)" },
+                { esquerda: "\x3Ctitle>", direita: "Texto exibido na aba do navegador" },
+                { esquerda: "\x3Cbody>", direita: "Contém o conteúdo visível da página" }
+            ],
+            explicacao: "O html é a raiz; o head guarda metadados que NÃO aparecem na página; o title é o texto da aba; o body contém tudo que o usuário vê (textos, imagens, listas).",
+            referencia: "Módulo 01 — Seção 1.2: Estrutura Básica do Arquivo HTML"
+        },
+        {
+            tipo: "associacao",
+            enunciado: "Relacione cada TIPO DE INPUT com o uso correto:",
+            pares: [
+                { esquerda: "text", direita: "Entrada de texto simples" },
+                { esquerda: "password", direita: "Senha com caracteres ocultos" },
+                { esquerda: "checkbox", direita: "Múltiplas seleções (SIM/NÃO)" },
+                { esquerda: "radio", direita: "Seleção única entre várias opções" }
+            ],
+            explicacao: "text = texto livre; password = oculta caracteres; checkbox = várias opções independentes; radio = apenas uma escolha. A diferença entre checkbox e radio é: checkbox aceita múltiplas, radio apenas uma.",
+            referencia: "Módulo 01 — Seção 4.2: A Tag input e Seus Tipos"
+        },
+        {
+            tipo: "associacao",
+            enunciado: "Relacione cada TIPO DE LISTA com sua tag e uso:",
+            pares: [
+                { esquerda: "ol", direita: "Ordenada — quando a ordem importa" },
+                { esquerda: "ul", direita: "Não ordenada — quando a ordem não importa" },
+                { esquerda: "dl", direita: "Definição — termo + descrição" },
+                { esquerda: "li", direita: "Item individual dentro de ol ou ul" }
+            ],
+            explicacao: "ol = ordenada (numerada); ul = não ordenada (com marcadores); dl = definição (com dt e dd); li = item genérico usado dentro de ol e ul.",
+            referencia: "Módulo 01 — Seção 2.5: Resumo dos Tipos de Listas"
+        },
+
+        /* ============================================================
+           ORDENAR
+           ============================================================ */
+
+        {
+            tipo: "ordenar",
+            enunciado: "Ordene a hierarquia correta do documento HTML, de fora para dentro:",
+            itens: [
+                "\x3Chtml>",
+                "\x3Chead>",
+                "\x3Ctitle>",
+                "\x3Cbody>"
+            ],
+            explicacao: "A estrutura correta é: html envolve tudo; dentro dele, o head vem PRIMEIRO (contém metadados, incluindo o title); e o body vem DEPOIS (contém o conteúdo visível). O title fica dentro do head.",
+            referencia: "Módulo 01 — Seção 1.2: Estrutura Básica do Arquivo HTML"
+        },
+        {
+            tipo: "ordenar",
+            enunciado: "Ordene as pseudo-classes de links na ordem CORRETA (LVHA):",
+            itens: [
+                ":link",
+                ":visited",
+                ":hover",
+                ":active"
+            ],
+            explicacao: "A ordem LVHA é obrigatória: :link (não visitado) → :visited (visitado) → :hover (mouse sobre) → :active (durante o clique). Se inverter, o navegador aplica a regra errada em determinados estados. Decore como 'LoVe HAte'.",
+            referencia: "Módulo 01 — Seção 6.5: Estilização com CSS (Pseudo-classes)"
+        },
+
+        /* ============================================================
+           CATEGORIZAÇÃO
+           ============================================================ */
+
+        {
+            tipo: "categorizacao",
+            enunciado: "Classifique cada tag como elemento BLOCK ou INLINE:",
+            categorias: ["Block", "Inline"],
+            itens: [
+                { texto: "\x3Cdiv>", categoria: "Block" },
+                { texto: "\x3Cspan>", categoria: "Inline" },
+                { texto: "\x3Cp>", categoria: "Block" },
+                { texto: "\x3Ca>", categoria: "Inline" },
+                { texto: "\x3Ch1>", categoria: "Block" },
+                { texto: "\x3Cstrong>", categoria: "Inline" }
+            ],
+            explicacao: "Elementos BLOCK ocupam toda a largura disponível e forçam quebra de linha (div, p, h1-h6, ul, ol, table, form). Elementos INLINE ficam na mesma linha do conteúdo ao redor (span, a, strong, em, img, br).",
+            referencia: "Módulo 01 — Seção 1.3: Sintaxe dos Comandos HTML"
+        },
+        {
+            tipo: "categorizacao",
+            enunciado: "Classifique cada tag de lista na categoria correta:",
+            categorias: ["Ordenada", "Não ordenada", "Definição"],
+            itens: [
+                { texto: "\x3Col>", categoria: "Ordenada" },
+                { texto: "\x3Cul>", categoria: "Não ordenada" },
+                { texto: "\x3Cdl>", categoria: "Definição" },
+                { texto: "\x3Cdt>", categoria: "Definição" },
+                { texto: "\x3Cdd>", categoria: "Definição" },
+                { texto: "\x3Cli>", categoria: "Não ordenada" }
+            ],
+            explicacao: "ol = ordenada (numerada); ul = não ordenada (com marcadores); dl = definição (com dt para termo e dd para descrição); li é usado dentro de ol E ul. As tags dt e dd só existem dentro de dl.",
+            referencia: "Módulo 01 — Seção 2.5: Resumo dos Tipos de Listas"
+        },
+        {
+            tipo: "categorizacao",
+            enunciado: "Classifique cada tag quanto à sua localização no formulário:",
+            categorias: ["Dentro do form", "Fora do form"],
+            itens: [
+                { texto: "\x3Cinput>", categoria: "Dentro do form" },
+                { texto: "\x3Cselect>", categoria: "Dentro do form" },
+                { texto: "\x3Ctextarea>", categoria: "Dentro do form" },
+                { texto: "\x3Ch1>", categoria: "Fora do form" },
+                { texto: "\x3Ctable>", categoria: "Fora do form" },
+                { texto: "\x3Cfieldset>", categoria: "Dentro do form" }
+            ],
+            explicacao: "Tags de ENTRADA de dados (input, select, textarea, fieldset, legend, label, button) ficam DENTRO do form. Tags de ESTRUTURA e conteúdo (h1-h6, p, div, table) ficam FORA — o form é para dados a enviar, não para layout.",
+            referencia: "Módulo 01 — Seção 4.6: Agrupar e Organizar Campos"
+        },
+
+        /* ============================================================
+           FLASHCARD (autoavaliação)
+           ============================================================ */
+
+        {
+            tipo: "flashcard",
+            enunciado: "O que faz a tag \x3Cpre>?",
+            resposta: "Mantém EXATAMENTE os espaços, tabulações e quebras de linha como foram digitados no código-fonte. Diferente da tag <p>, que colapsa espaços extras e quebras, a <pre> preserva tudo. É ideal para exibir blocos de código ou arte ASCII.",
+            referencia: "Módulo 01 — Seção 7.3: Quebra de Linha e Régua Horizontal"
+        },
+        {
+            tipo: "flashcard",
+            enunciado: "Qual a diferença entre os atributos src e href?",
+            resposta: "src (source) = ORIGEM. Usado em <img>, <script>, <iframe> para indicar DE ONDE VEM o recurso. href (Hypertext REFerence) = DESTINO. Usado em <a> para indicar PARA ONDE VAI o link. Mnemônico: src = source (de onde vem); href = referência (para onde vai).",
+            referencia: "Módulo 01 — Seção 5.2 e 6.1: src e href"
+        },
+        {
+            tipo: "flashcard",
+            enunciado: "Para que serve o atributo start em uma lista \x3Col>?",
+            resposta: "Define em que VALOR a numeração da lista começa. Uso: <ol start=\"3\"> começa em 3 (ou C, se type=\"A\"; ou III, se type=\"I\"). Sem o start, a lista começa sempre em 1 (ou A, ou I, dependendo do type). É útil quando a lista continua em outra página/seção.",
+            referencia: "Módulo 01 — Seção 2.1.3: Atributo start — Valor Inicial"
+        },
+
+        /* ============================================================
+           PREDIÇÃO
+           ============================================================ */
+
+        {
+            tipo: "predicao",
+            enunciado: "O que este código HTML renderiza na tela?",
+            codigo: '\x3Cul type="square">\n  \x3Cli>Notebook\x3C/li>\n  \x3Cli>Mouse\x3C/li>\n  \x3Cli>Teclado\x3C/li>\n\x3C/ul>',
+            opcoes: [
+                "Uma lista NUMERADA (1, 2, 3) com os três itens",
+                "Uma lista com MARCADORES QUADRADOS (▪) e os três itens",
+                "Uma lista com marcadores CIRCULARES VAZADOS (○) e os três itens",
+                "Uma lista SEM marcadores, só os três itens"
+            ],
+            correta: 1,
+            explicacao: "ul cria lista NÃO ordenada. O type=\"square\" define marcadores quadrados (▪). Os outros valores de type para ul são: disc (• — padrão), circle (○ — vazado) e none (sem marcador). Como o type é 'square', os itens aparecem com quadradinhos à esquerda.",
+            referencia: "Módulo 01 — Seção 2.2.2: Atributo type — Tipo de Marcador"
         }
     ]
 };

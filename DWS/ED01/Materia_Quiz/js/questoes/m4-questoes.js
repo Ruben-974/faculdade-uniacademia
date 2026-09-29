@@ -655,6 +655,122 @@ window.QUIZ_DATA = {
             correta: 1,
             explicacao: "aria-live='polite' instrui leitores de tela a ANUNCIAR o conteúdo da região quando ele muda, mas sem interromper o que está sendo lido. É ideal para mensagens de sucesso/erro em formulários. O valor 'assertive' interrompe imediatamente (use com moderação). Melhora muito a ACESSIBILIDADE.",
             referencia: "Módulo 04 — Seção 5.8: Desafios e Extensões do Projeto"
+        },        /* ============================================================
+           PROBLEMAS INTEGRADORES — VALIDAÇÃO, DOM E ARRAYS
+           (Problemas 5 a 8 do material extra)
+           ============================================================ */
+
+        {
+            tipo: "multipla",
+            enunciado: "Qual método do objeto `event` é ESSENCIAL para impedir que o formulário recarregue a página ao ser enviado?",
+            opcoes: [
+                "event.stopPropagation()",
+                "event.cancel()",
+                "event.preventDefault()",
+                "event.blockDefault()"
+            ],
+            correta: 2,
+            explicacao: "`event.preventDefault()` cancela o comportamento PADRÃO do navegador — no caso do submit, evita o reload. Sem ele, a página recarrega, os dados são enviados antes da validação e o usuário perde o feedback. É o primeiro passo em QUALQUER listener de submit.",
+            referencia: "Módulo 04 — Problemas integradores: Interceptação do envio"
+        },
+        {
+            tipo: "ordenar",
+            enunciado: "Ordene o FLUXO correto de uma validação de formulário com JavaScript:",
+            itens: [
+                "Usuário clica em 'Enviar' (submit)",
+                "Listener intercepta o evento submit",
+                "event.preventDefault() cancela o reload",
+                "Validações rodam (nome, email, ...)",
+                "Se inválido: exibe mensagem de erro na div de resultado",
+                "Se válido: processa os dados"
+            ],
+            explicacao: "Ordem: usuário clica → listener dispara → preventDefault cancela o reload → as validações rodam → se houver erro, mostra a mensagem e interrompe; se estiver tudo certo, prossegue com o processamento. Inverter a ordem do preventDefault causa reload e perda de dados.",
+            referencia: "Módulo 04 — Problemas integradores: Fluxo de validação"
+        },
+        {
+            tipo: "flashcard",
+            enunciado: "Qual a diferença entre PARÂMETRO e RETORNO em uma função de validação?",
+            resposta: "PARÂMETRO é a ENTRADA — o valor que a função vai analisar. Ex: em `function validarEmail(valor)`, o `valor` é o parâmetro. RETORNO é a SAÍDA — o resultado que a função devolve para quem a chamou. Em uma validação, normalmente é `true` ou `false`. Usar `return` permite que o código externo decida o que fazer com o resultado.",
+            referencia: "Módulo 04 — Problemas integradores: Parâmetros e retorno"
+        },
+        {
+            tipo: "vf",
+            enunciado: "Criar funções específicas de validação (em vez de repetir o mesmo código em vários lugares) segue o princípio DRY (Don't Repeat Yourself) e facilita a manutenção.",
+            resposta: true,
+            explicacao: "Correto! Funções dedicadas a cada tipo de validação tornam o código: (1) MAIS ORGANIZADO — cada regra fica isolada; (2) REUTILIZÁVEL — a mesma função serve em vários formulários; (3) MAIS FÁCIL DE MANTER — se a regra mudar, altera em um lugar só; (4) TESTÁVEL — pequenas funções são mais fáceis de testar isoladamente.",
+            referencia: "Módulo 04 — Problemas integradores: Vantagens das funções"
+        },
+        {
+            tipo: "multipla",
+            enunciado: "Qual método de array CRIA UM NOVO array aplicando uma transformação a cada elemento — ideal para converter objetos em strings HTML?",
+            opcoes: ["push()", "map()", "filter()", "join()"],
+            correta: 1,
+            explicacao: "`map()` percorre o array e aplica uma função a cada elemento, criando um NOVO array com os resultados. Ex: `usuarios.map(u => '<div>' + u.nome + '</div>')`. Já `join()` une os elementos em uma string única — é o passo seguinte, não a transformação.",
+            referencia: "Módulo 04 — Problemas integradores: Método map"
+        },
+        {
+            tipo: "multipla",
+            enunciado: "Para transformar um array de fragmentos HTML (`['<div>A</div>', '<div>B</div>']`) em uma única string (`'<div>A</div><div>B</div>'`), qual método usar?",
+            opcoes: ["concat()", "toString()", "join('')", "merge()"],
+            correta: 2,
+            explicacao: "`join('')` une todos os elementos do array em uma string única, usando o separador passado como argumento. Passando `''` (string vazia), os elementos ficam colados sem separador. É a dupla perfeita com `map()`: `usuarios.map(...).join('')`. O `concat()` junta arrays, não strings.",
+            referencia: "Módulo 04 — Problemas integradores: Método join"
+        },
+        {
+            tipo: "debug-multiplo",
+            enunciado: "Este código tem 2 problemas ao tentar exibir a lista de usuários. Marque TODOS eles:",
+            codigo: 'let usuarios = [];\nusuarios.push({ nome: "Ana" });\n\nconst html = usuarios.map(u => `<div>${u.nome}</div>`);\nresultado.innerHTML = html;',
+            opcoes: [
+                { texto: "Falta o join('') no resultado do map — innerHTML vai mostrar o array com vírgulas", correta: true },
+                { texto: "O push deveria receber só a string do nome, não um objeto", correta: false },
+                { texto: "Falta inicializar usuarios como array antes do push (está ok aqui)", correta: false },
+                { texto: "Está faltando o join('') para transformar o array em string", correta: true },
+                { texto: "map() não funciona com template literals", correta: false }
+            ],
+            explicacao: "O problema é que `map()` retorna um ARRAY de strings, não uma única string. Ao jogar direto em `innerHTML`, o JavaScript vai converter o array para string usando `toString()`, o que insere VÍRGULAS entre os itens. Precisa do `.join('')` para colar tudo.",
+            referencia: "Módulo 04 — Problemas integradores: Map + join"
+        },
+        {
+            tipo: "multipla",
+            enunciado: "Para validar um campo EM TEMPO REAL (a cada tecla digitada), qual evento usar?",
+            opcoes: ["change", "input", "submit", "blur"],
+            correta: 1,
+            explicacao: "O evento `input` dispara IMEDIATAMENTE a cada alteração no valor — digitação, colagem, autocomplete. Já `change` só dispara quando o campo PERDE o foco após ter sido alterado. Para feedback em tempo real, usamos `input`.",
+            referencia: "Módulo 04 — Problemas integradores: Evento input"
+        },
+        {
+            tipo: "multipla",
+            enunciado: "Qual conjunto de classes do Bootstrap 5 aplica feedback visual de validação (borda verde com check ou vermelha com exclamação) em um campo?",
+            opcoes: [
+                ".has-success e .has-error",
+                ".is-valid e .is-invalid",
+                ".form-valid e .form-invalid",
+                ".check-green e .check-red"
+            ],
+            correta: 1,
+            explicacao: "No Bootstrap 5, usamos `.is-valid` (verde + check) e `.is-invalid` (vermelho + exclamação). Essas classes são aplicadas diretamente ao input via JavaScript após a validação. Já `.has-success` e `.has-error` eram do Bootstrap 3.",
+            referencia: "Módulo 04 — Problemas integradores: Feedback visual"
+        },
+        {
+            tipo: "flashcard",
+            enunciado: "Como uma função pode alterar a APARÊNCIA de um input para dar feedback visual de validação?",
+            resposta: "Usando `classList` para adicionar ou remover classes CSS. Ex: `inputEl.classList.remove('is-valid', 'is-invalid')` limpa as classes antigas, e depois `inputEl.classList.add(valido ? 'is-valid' : 'is-invalid')` aplica a correta conforme o resultado. O CSS se encarrega de transformar essas classes em bordas coloridas, ícones e sombras.",
+            referencia: "Módulo 04 — Problemas integradores: Feedback visual com classList"
+        },
+        {
+            tipo: "categorizacao",
+            enunciado: "Classifique cada situação no MÓDULO mais adequado para resolvê-la:",
+            categorias: ["HTML", "CSS", "Bootstrap", "JavaScript"],
+            itens: [
+                { texto: "Definir que a imagem do cartão tem descrição alternativa", categoria: "HTML" },
+                { texto: "Estilizar o padding interno do cartão", categoria: "CSS" },
+                { texto: "Criar uma grade responsiva de 4 notícias", categoria: "Bootstrap" },
+                { texto: "Interceptar o submit do formulário", categoria: "JavaScript" },
+                { texto: "Marcar um campo inválido em tempo real", categoria: "JavaScript" },
+                { texto: "Usar o componente panel para agrupar campos", categoria: "Bootstrap" }
+            ],
+            explicacao: "HTML = estrutura e conteúdo. CSS = apresentação e layout. Bootstrap = componentes prontos e grid. JavaScript = comportamento, interatividade e manipulação dinâmica. Cada tecnologia tem sua responsabilidade bem definida na web.",
+            referencia: "Módulos 01-06 — Separação de responsabilidades"
         }
     ]
 };

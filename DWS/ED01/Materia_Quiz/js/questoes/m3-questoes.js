@@ -626,6 +626,113 @@ window.QUIZ_DATA = {
             ],
             explicacao: "Erro 1: falta meta charset — caracteres especiais vão aparecer errados. Erro 2: faltam X-UA-Compatible e viewport — sem elas, não há responsividade. Erro 3: ordem dos scripts invertida — jQuery precisa vir primeiro. Os itens 4 e 5 são falsos: o CSS é opcional se não usar estilos, mas o ideal é incluí-lo; DOCTYPE é obrigatório em HTML5.",
             referencia: "Módulo 03 — Seção 4: Estrutura Base"
-        }
+        },
+                /* ============================================================
+           PROBLEMAS INTEGRADORES — LAYOUT, GRID E COMPONENTES
+           (Problemas 1 a 4 do material extra)
+           ============================================================ */
+
+        {
+            tipo: "vf",
+            enunciado: "O Box Model descreve a estrutura de um elemento individual (conteúdo, padding, border, margin), enquanto o Flexbox organiza vários elementos dentro de um container.",
+            resposta: true,
+            explicacao: "Correto! São conceitos diferentes. O Box Model é a ESTRUTURA de cada elemento — o que envolve o conteúdo. O Flexbox é um MODELO DE LAYOUT que controla como múltiplos elementos se organizam entre si (em linha ou coluna).",
+            referencia: "Módulo 03 — Problemas integradores: Box Model vs Flexbox"
+        },
+        {
+            tipo: "multipla",
+            enunciado: "Em um cartão de produto, qual propriedade do Flexbox faria o BOTÃO ficar sempre colado no rodapé do card, empurrado para baixo?",
+            opcoes: [
+                "justify-content: flex-end no botão",
+                "margin-top: auto no botão, dentro de um container com display:flex e flex-direction:column",
+                "align-self: stretch no botão",
+                "position: absolute no botão"
+            ],
+            correta: 1,
+            explicacao: "Com o container em `display: flex; flex-direction: column`, aplicar `margin-top: auto` no botão faz o Flexbox empurrá-lo para o rodapé, ocupando todo o espaço livre acima. É um truque clássico de layout com Flexbox.",
+            referencia: "Módulo 03 — Problemas integradores: Flexbox em cartões"
+        },
+        {
+            tipo: "multipla",
+            enunciado: "Para exibir 4 notícias lado a lado em telas GRANDES (≥1200px) usando o grid Bootstrap 3, qual classe cada notícia deve receber?",
+            opcoes: ["col-lg-2", "col-lg-3", "col-lg-4", "col-lg-6"],
+            correta: 1,
+            explicacao: "4 colunas iguais somam 12 (4 × 3 = 12). Então cada notícia usa `col-lg-3`. `col-lg-4` daria 3 colunas; `col-lg-6` daria 2; `col-lg-2` daria 6. A regra do grid é sempre somar 12.",
+            referencia: "Módulo 03 — Problemas integradores: Grid responsivo"
+        },
+        {
+            tipo: "multipla",
+            enunciado: "Para que 4 notícias apareçam como 4 colunas em telas grandes, 2 colunas em telas médias e 1 coluna em celulares, qual combinação de classes é CORRETA?",
+            opcoes: [
+                "col-lg-3 col-md-6 col-xs-12",
+                "col-lg-4 col-md-4 col-xs-4",
+                "col-lg-12 col-md-6 col-xs-3",
+                "col-lg-3 col-md-3 col-xs-3"
+            ],
+            correta: 0,
+            explicacao: "A combinação correta é `col-lg-3 col-md-6 col-xs-12`. Em telas grandes, 3+3+3+3 = 12 (4 colunas). Em telas médias, 6+6 = 12 (2 colunas). Em mobile, 12 ocupa a linha inteira (1 coluna). O Bootstrap aplica a regra do MAIOR breakpoint disponível para a viewport atual.",
+            referencia: "Módulo 03 — Problemas integradores: Grid responsivo"
+        },
+        {
+            tipo: "vf-justificativa",
+            enunciado: "Para organizar um MENU HORIZONTAL (itens em uma única linha), o CSS Grid é a escolha mais adequada.",
+            resposta: false,
+            justificativas: [
+                "Porque o Grid funciona apenas em telas grandes, enquanto o menu precisa funcionar em todas.",
+                "Porque o Grid é bidimensional (linhas E colunas) e seria exagero para um layout linear. O Flexbox é unidimensional e ideal para alinhar itens em uma direção.",
+                "Porque o Grid não permite alinhar itens horizontalmente."
+            ],
+            justificativaCorreta: 1,
+            explicacao: "Para layouts UNIDIMENSIONAIS (uma linha OU uma coluna), o Flexbox é mais simples e apropriado. O Grid é indicado quando você precisa controlar LINHAS E COLUNAS simultaneamente, como em um dashboard. O menu horizontal só precisa alinhar itens em uma direção — Flexbox resolve isso com `justify-content` e `align-items`.",
+            referencia: "Módulo 03 — Problemas integradores: Flexbox vs Grid"
+        },
+        {
+            tipo: "associacao",
+            enunciado: "Relacione cada SITUAÇÃO com o recurso CSS mais adequado:",
+            pares: [
+                { esquerda: "Menu horizontal de navegação", direita: "Flexbox (unidimensional)" },
+                { esquerda: "Galeria de produtos em grade 3×4", direita: "CSS Grid (bidimensional)" },
+                { esquerda: "Barra de botões alinhados à direita", direita: "Flexbox (unidimensional)" },
+                { esquerda: "Dashboard com header, sidebar e main", direita: "CSS Grid (bidimensional)" }
+            ],
+            explicacao: "Regra prática: se precisa alinhar em UMA direção (linha ou coluna), Flexbox. Se precisa controlar LINHAS E COLUNAS ao mesmo tempo, Grid. Menus e barras são unidimensionais → Flexbox. Grades e dashboards são bidimensionais → Grid.",
+            referencia: "Módulo 03 — Problemas integradores: Flexbox vs Grid"
+        },
+        {
+            tipo: "multipla-resposta",
+            enunciado: "Marque TODOS os componentes do Bootstrap 3 que poderiam ser usados em uma TELA DE CADASTRO (painel, breadcrumb, campos, lista, checkboxes, botão):",
+            opcoes: [
+                ".panel (painel de identificação)",
+                ".breadcrumb (caminho de navegação)",
+                ".form-control (inputs)",
+                ".select + .option (lista de opções)",
+                ".checkbox e .radio (caixas de seleção)",
+                ".jumbotron (banner grande)",
+                ".carousel (carrossel de imagens)"
+            ],
+            corretas: [0, 1, 2, 3, 4],
+            explicacao: "Os componentes pedidos no enunciado são: panel (painel), breadcrumb (caminho), form-control (campos), select/option (lista), checkbox/radio (caixas) e button (envio). `.jumbotron` e `.carousel` são de outras finalidades — banner e slideshow — e não aparecem nessa tela.",
+            referencia: "Módulo 03 — Problemas integradores: Componentes Bootstrap"
+        },
+        {
+            tipo: "predicao",
+            enunciado: "Considerando o código abaixo, qual será o resultado visual do campo?",
+            codigo: '\x3Cdiv class="input-group">\n  \x3Cspan class="input-group-addon">@\x3C/span>\n  \x3Cinput type="email" class="form-control">\n\x3C/div>',
+            opcoes: [
+                "Um input normal sem nada à esquerda",
+                "Um input com o caractere '@' anexado à ESQUERDA, dentro do mesmo bloco visual",
+                "Um input com o '@' abaixo dele",
+                "Um botão com o texto '@'"
+            ],
+            correta: 1,
+            explicacao: "O componente `.input-group` do Bootstrap 3 estende o input adicionando conteúdo lateral. O `.input-group-addon` à esquerda renderiza o '@' colado ao input, formando um bloco único. É muito usado em campos de email, valores monetários (R$) e URLs.",
+            referencia: "Módulo 03 — Problemas integradores: Input Groups"
+        },
+        {
+            tipo: "flashcard",
+            enunciado: "Qual a diferença fundamental entre FLEXBOX e CSS GRID?",
+            resposta: "FLEXBOX é UNIDIMENSIONAL — organiza itens em UMA direção (linha OU coluna). É ideal para menus, barras de navegação e alinhamentos simples. CSS GRID é BIDIMENSIONAL — controla linhas E colunas simultaneamente, permitindo posicionar itens em células específicas. É ideal para dashboards, galerias e layouts complexos. Regra prática: 1 direção → Flexbox; linhas + colunas → Grid.",
+            referencia: "Módulo 03 — Problemas integradores: Flexbox vs Grid"
+        },
     ]
 };

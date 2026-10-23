@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+    <style>
+        .concluida {
+            color: gray;
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="entradaTarefa">
+    <button type="button" id="botaoAdicionar">Adicionar</button>
+    <p id="mensagem">Msg: </p>
+    <p>Lista de Tarefas:</p>
+    <ul id="listaTarefas">
+    </ul>
+    <p id="contador">Tarefas pendentes: 0</p>
+
+    <script>
+        const entradaTarefa = document.getElementById("entradaTarefa")
+        const botaoAdicionar = document.getElementById("botaoAdicionar")
+        const mensagem = document.getElementById("mensagem")
+        const listaTarefas = document.getElementById("listaTarefas")
+        const contador = document.getElementById("contador")
+
+        function atualizarContador() {
+            const lis = listaTarefas.querySelectorAll("li")
+            let pendentes = 0
+
+            for (let i = 0; i < lis.length; i++) {
+                const textoTarefa = lis[i].querySelector("span")
+
+                if (!textoTarefa.classList.contains("concluida")) {
+                    pendentes++
+                }
+            }
+            contador.textContent = `Tarefas pendentes: ${pendentes}`
+        }
+
+
+        botaoAdicionar.addEventListener("click", function(){
+            if (entradaTarefa.value.trim() !== "") {
+
+                const tarefa = document.createElement("li")
+                const botaoRemover = document.createElement("button")
+                const entrada = document.createElement("span")
+
+                mensagem.textContent = 'Msg: Tarefa adicionada!'
+
+
+                entrada.textContent = entradaTarefa.value
+                tarefa.appendChild(entrada)
+                botaoRemover.textContent = "remover"
+                tarefa.appendChild(botaoRemover)
+                listaTarefas.appendChild(tarefa)
+                entradaTarefa.value = ""
+
+                entrada.addEventListener("click", function(){
+                    entrada.classList.toggle("concluida")
+                    atualizarContador()
+                })
+
+                botaoRemover.addEventListener("click", function(event){
+                    event.stopPropagation()
+                    tarefa.remove()
+                    atualizarContador()
+                })
+
+            } else {
+                mensagem.textContent = 'Msg: Digite uma tarefa!'
+            }
+
+            atualizarContador()
+
+        });
+    </script>
+</body>
+</html>

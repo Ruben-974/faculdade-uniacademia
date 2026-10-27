@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Interativo</title>
+</head>
+<body>
+    <input type="text" id="campoDeBusca" placeholder="Buscar por nome ou categoria">
+    <ul id="listaDeProdutos">
+
+    </ul>
+
+    <div id="detalhesDoProduto">
+        <p>Selecione um produto para ver os detalhes.</p>
+    </div>
+     
+    <script>
+
+        const produtos = [{
+            nome: 'Teclado',
+            categoria: 'Periféricos',
+            preco: 119.90,
+            detalhes: 'Teclado Mecânico'
+        },{
+            nome: 'Mouse',
+            categoria: 'Periféricos',
+            preco: 59.90,
+            detalhes: 'Mouse RGB'
+        },{
+            nome: 'Lapiseira',
+            categoria: 'Papelaria',
+            preco: 7.90,
+            detalhes: 'Lapiseira 0.7'
+        },{
+            nome: 'Borracha',
+            categoria: 'Papelaria',
+            preco: 4.90,
+            detalhes: 'Borracha com proteção'
+        },
+        ]
+
+        const listaDeProdutos = document.getElementById('listaDeProdutos')
+        const detalhesDoProduto = document.getElementById('detalhesDoProduto')
+        const campoDeBusca = document.getElementById('campoDeBusca')
+
+        function renderizarProdutos(lista) {
+            listaDeProdutos.innerHTML = ''
+
+            for (let i = 0; i < lista.length; i++) {
+                const produto = document.createElement('li')
+
+                produto.dataset.index = produtos.indexOf(lista[i])
+                produto.textContent = `${lista[i].nome} - R$ ${lista[i].preco.toFixed(2)}`
+
+                listaDeProdutos.appendChild(produto)
+            }
+
+            if (lista.length === 0) {
+                listaDeProdutos.innerHTML = '<li>Nenhum produto encontrado.</li>'
+            }
+        }
+
+        function filtrar(lista, filtro){
+            const novaLista = []
+            for (let i in lista) {
+                if (lista[i]['nome'].toLowerCase().includes(filtro) || lista[i]['categoria'].toLowerCase().includes(filtro)) {
+                    novaLista.push(lista[i])
+                    
+                }
+            }
+            renderizarProdutos(novaLista)
+            return novaLista
+        }
+
+
+        renderizarProdutos(produtos)
+
+        campoDeBusca.addEventListener('input', function(){
+            const busca = campoDeBusca.value.toLowerCase().trim()
+
+            if (busca === '') {
+                renderizarProdutos(produtos)
+            } else {
+                filtrar(produtos, busca)
+            }
+        })
+
+        listaDeProdutos.addEventListener('click', function(event) {
+            const itemClicado = event.target.closest('li')
+
+            if (!itemClicado) return
+            if (itemClicado.dataset.index === undefined) return
+
+            const index = Number(itemClicado.dataset.index)
+            const produtoSelecionado = produtos[index]
+
+            detalhesDoProduto.textContent =
+                `PRODUTO: ${produtoSelecionado.nome}
+        CATEGORIA: ${produtoSelecionado.categoria}
+        PREÇO: R$ ${produtoSelecionado.preco.toFixed(2)}
+        DETALHES: ${produtoSelecionado.detalhes}`
+        })
+
+
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Usuários</title>
+</head>
+<body>
+    <h1>Consulta de Usuários</h1>
+
+    <button id="botaoCarregar">Carregar usuários</button>
+
+    <p id="status"></p>
+
+    <input
+        type="text"
+        id="campoDeBusca"
+        placeholder="Buscar usuário por nome"
+    >
+
+    <div id="listaDeUsuarios"></div>
+
+    <script>
+
+        const botaoCarregar = document.getElementById('botaoCarregar')
+        const status = document.getElementById('status')
+        const listaDeUsuarios = document.getElementById('listaDeUsuarios')
+        const campoDeBusca = document.getElementById('campoDeBusca')
+        let usuariosCarregados = []
+
+        botaoCarregar.addEventListener('click', carregarUsuarios)
+
+        function renderizarUsuarios(lista, mensagemVazia = 'Nenhum usuário encontrado.') {
+            listaDeUsuarios.innerHTML = ''
+
+            if (lista.length === 0) {
+                const mensagem = document.createElement('p')
+                mensagem.textContent = mensagemVazia
+                listaDeUsuarios.appendChild(mensagem)
+                return
+            }
+
+            lista.forEach(function(usuario) {
+                const card = document.createElement('div')
+
+                const nome = document.createElement('p')
+                nome.textContent = `NOME: ${usuario.name}`
+
+                const email = document.createElement('p')
+                email.textContent = `E-MAIL: ${usuario.email}`
+
+                const cidade = document.createElement('p')
+                cidade.textContent = `CIDADE: ${usuario.address.city}`
+
+                card.appendChild(nome)
+                card.appendChild(email)
+                card.appendChild(cidade)
+
+                listaDeUsuarios.appendChild(card)
+            })
+        }
+
+        async function carregarUsuarios() {
+            try {
+                botaoCarregar.disabled = true
+                botaoCarregar.textContent = 'Carregando...'     
+                status.textContent = 'Carregando...'
+                const resposta = await fetch('https://jsonplaceholder.typicode.com/users')
+
+                if (!resposta.ok) {
+                    throw new Error(`HTTP_${resposta.status}`)
+                }
+
+                let usuarios
+
+                try {
+                    usuarios = await resposta.json()
+                } catch (erro) {
+                    throw new Error('JSON_INVALIDO')
+                }
+
+                if (!Array.isArray(usuarios)) {
+                    throw new Error('FORMATO_INVALIDO')
+                }
+
+                usuariosCarregados = usuarios
+
+                if (usuarios.length === 0) {
+                    status.textContent = 'Nenhum usuário encontrado.'
+                    renderizarUsuarios(usuariosCarregados)
+                    return
+                    }
+
+                renderizarUsuarios(usuariosCarregados)
+
+                status.textContent = 'Usuários carregados com sucesso!'
+
+                } catch (erro) {
+                    if (
+                        erro.message === 'JSON_INVALIDO' ||
+                        erro.message === 'FORMATO_INVALIDO'
+                    ) {
+                        status.textContent = 'A resposta recebida não é válida.'
+
+                    } else if (erro.message.startsWith('HTTP_')) {
+                        status.textContent = 'A API respondeu com um erro.'
+
+                    } else {
+                        status.textContent = 'Falha de rede. Verifique sua conexão.'
+                    }
+
+                    console.error(erro)
+
+                } finally {
+                botaoCarregar.disabled = false
+                botaoCarregar.textContent = 'Carregar usuários'
+            } 
+        }
+
+        campoDeBusca.addEventListener('input', function() {
+            if (usuariosCarregados.length === 0) return
+
+            const busca = campoDeBusca.value.toLowerCase().trim()
+
+            const usuariosFiltrados = usuariosCarregados.filter(
+                function(usuario) {
+                    return usuario.name.toLowerCase().includes(busca)
+                }
+            )
+
+            renderizarUsuarios(
+                usuariosFiltrados,
+                'Nenhum usuário corresponde à busca.'
+            )
+        })
+
+    </script>
+</body>
+</html>

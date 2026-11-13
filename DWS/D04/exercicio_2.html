@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso de Programação</title>
+    <style>
+        body { margin: 0; font-family: Arial; background: #f3f3f3; }
+        header { background: #193b67; color: white; text-align: center; padding: 15px; }
+        main { width: min(90%, 1000px); margin: auto; }
+        .destaque { text-align: center; padding: min(5vw, 30px); }
+        /* clamp ajusta a fonte sem precisar criar vários breakpoints. */
+        h1 { font-size: clamp(24px, 5vw, 40px); }
+        .destaque img { max-width: 100%; height: auto; width: 500px; }
+        .botao { padding: 10px; background: #193b67; color: white; border: 0; cursor: pointer; }
+        .informacoes, form { display: flex; flex-direction: column; gap: 15px; }
+        .card, .inscricao { background: white; padding: 15px; margin-bottom: 15px; }
+        .card, .campo { flex: 1; }
+        label { display: block; }
+        input { padding: 8px; width: 100%; box-sizing: border-box; }
+        /* min limita a largura e o espaçamento; só precisamos de um breakpoint. */
+        @media (min-width: 700px) {
+            .informacoes, form { flex-direction: row; }
+        }
+    </style>
+</head>
+<body>
+    <header><strong>UniCursos | Cursos On-line</strong></header>
+    <main>
+        <section class="destaque">
+            <h1>Curso de Introdução à Programação</h1>
+            <p>Aprenda os conceitos básicos de programação com exercícios práticos e exemplos do dia a dia.</p>
+            <p><img src="https://images.pexels.com/photos/5223887/pexels-photo-5223887.jpeg" alt="Tela de computador com código de programação"></p>
+            <a class="botao" href="#inscricao">Quero me inscrever</a>
+        </section>
+        <section class="informacoes" aria-label="Informações do curso">
+            <article class="card">
+                <h2>Conteúdo</h2>
+                <p>Lógica, algoritmos e primeiros passos em Python.</p>
+            </article>
+            <article class="card">
+                <h2>Duração</h2>
+                <p>Quatro semanas com atividades on-line.</p>
+            </article>
+            <article class="card">
+                <h2>Formato</h2>
+                <p>Aulas gravadas e material para praticar.</p>
+            </article>
+        </section>
+        <section class="inscricao" id="inscricao">
+            <h2>Inscrição</h2>
+            <form id="formulario">
+                <div class="campo">
+                    <label for="nome">Nome</label>
+                    <input id="nome" type="text" required>
+                </div>
+                <div class="campo">
+                    <label for="email">E-mail</label>
+                    <input id="email" type="email" required>
+                </div>
+                <button class="botao" type="submit">Inscrever</button>
+            </form>
+            <p id="mensagem" role="status"></p>
+        </section>
+    </main>
+    <script>
+        const formulario = document.getElementById('formulario')
+        const mensagem = document.getElementById('mensagem')
+        formulario.addEventListener('submit', function(event) {
+            event.preventDefault()
+            mensagem.textContent = 'Inscrição enviada com sucesso!'
+            formulario.reset()
+        })
+    </script>
+</body>
+</html>

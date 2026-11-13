@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notícias de Tecnologia</title>
+    <style>
+        body { margin: 0; font-family: Arial; background: #f3f3f3; }
+        header { background: #193b67; color: white; padding: 15px; text-align: center; }
+        .pagina { width: 90%; max-width: 1100px; margin: auto; }
+        .area-noticias { container-type: inline-size; }
+        .noticia { background: white; border: 1px solid gray; margin-bottom: 15px; }
+        .noticia img { width: 100%; max-width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; }
+        .texto { padding: 15px; }
+        /* O card muda de acordo com a largura do seu contêiner. */
+        @container (min-width: 500px) {
+            .noticia { display: flex; }
+            .noticia img { width: 40%; }
+        }
+        @media (min-width: 850px) {
+            .pagina { display: grid; grid-template-columns: 2fr 1fr; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <header><h1>Notícias de Tecnologia</h1></header>
+    <main class="pagina">
+        <section class="principal">
+            <h2>Notícias principais</h2>
+            <div class="area-noticias">
+                <article class="noticia">
+                    <img src="https://images.pexels.com/photos/34803988/pexels-photo-34803988.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=480"
+                         srcset="https://images.pexels.com/photos/34803988/pexels-photo-34803988.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=480 480w,
+                                 https://images.pexels.com/photos/34803988/pexels-photo-34803988.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=960 960w"
+                         sizes="(min-width: 850px) 26vw, 92vw"
+                         alt="Fotografia de códigos de programação em uma tela">
+                    <div class="texto">
+                        <h3>Programação nas escolas</h3>
+                        <p>Alunos estão conhecendo conceitos de algoritmos por meio de atividades práticas.</p>
+                    </div>
+                </article>
+                <article class="noticia">
+                    <img src="https://images.pexels.com/photos/36692505/pexels-photo-36692505.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=480"
+                         srcset="https://images.pexels.com/photos/36692505/pexels-photo-36692505.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=480 480w,
+                                 https://images.pexels.com/photos/36692505/pexels-photo-36692505.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=960 960w"
+                         sizes="(min-width: 850px) 26vw, 92vw"
+                         alt="Fotografia de projeto com braço robótico">
+                    <div class="texto">
+                        <h3>Feira de robótica</h3>
+                        <p>Projetos desenvolvidos por estudantes mostram a aplicação da tecnologia no cotidiano.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <aside>
+            <h2>Outras notícias</h2>
+            <div class="area-noticias">
+                <article class="noticia">
+                    <img src="https://images.pexels.com/photos/5380667/pexels-photo-5380667.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=480"
+                         srcset="https://images.pexels.com/photos/5380667/pexels-photo-5380667.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=480 480w,
+                                 https://images.pexels.com/photos/5380667/pexels-photo-5380667.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=960 960w"
+                         sizes="(min-width: 850px) 30vw, 92vw"
+                         alt="Fotografia que representa segurança digital">
+                    <div class="texto">
+                        <h3>Segurança digital</h3>
+                        <p>Cuidados com senhas e autenticação ajudam a proteger contas pessoais.</p>
+                    </div>
+                </article>
+            </div>
+        </aside>
+    </main>
+</body>
+</html>

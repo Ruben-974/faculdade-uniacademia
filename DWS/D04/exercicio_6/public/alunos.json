@@ -1,0 +1,7 @@
+[
+    { "id": 1, "nome": "Ana Souza", "curso": "Engenharia de Software", "situacao": "Ativo" },
+    { "id": 2, "nome": "Bruno Lima", "curso": "Sistemas de Informação", "situacao": "Ativo" },
+    { "id": 3, "nome": "Carla Mendes", "curso": "Engenharia de Software", "situacao": "Inativo" },
+    { "id": 4, "nome": "Daniel Alves", "curso": "Administração", "situacao": "Ativo" },
+    { "id": 5, "nome": "Elisa Costa", "curso": "Sistemas de Informação", "situacao": "Inativo" }
+]
